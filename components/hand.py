@@ -54,12 +54,14 @@ class _HandMeta(type):
         return cls
 
     def _get_non_pairs(cls):
+        """Generator of all non-paired hands"""
         for rank1 in Rank:
             for rank2 in (rk for rk in Rank if rk < rank1):
                 yield cls(f"{rank1}{rank2}o")
                 yield cls(f"{rank1}{rank2}s")
 
     def _get_pairs(cls):
+        """Generator of all paired hands"""
         for rank in Rank:
             yield cls(rank.val * 2)
 
@@ -70,6 +72,8 @@ class _HandMeta(type):
 @total_ordering
 class Hand(_ReprMixin, metaclass=_HandMeta):
     """General hand without a precise suit. Only knows about two ranks and shape."""
+
+    _shape: Shape
 
     __slots__ = ("first", "second", "_shape")
 
@@ -90,7 +94,7 @@ class Hand(_ReprMixin, metaclass=_HandMeta):
                     f"{hand} is not a pair! Maybe you need to specify a suit?"
                 )
             self._shape = ""
-        elif len(hand) == 3:
+        else:
             shape = hand[2].lower()
             if first == second:
                 raise ValueError(f"{hand!r}; pairs can't have a suit: {shape!r}")
@@ -144,6 +148,9 @@ class Hand(_ReprMixin, metaclass=_HandMeta):
             return self.first < other.first
 
     def _set_ranks_in_order(self, first, second):
+        """
+        Orders the two ranks of the hand
+        """
         # set as Rank objects.
         self.first, self.second = Rank(first), Rank(second)
         if self.first < self.second:
@@ -151,6 +158,9 @@ class Hand(_ReprMixin, metaclass=_HandMeta):
 
     @classmethod
     def make_random(cls):
+        """
+        Creates a random Hand
+        """
         obj = object.__new__(cls)
         first = Rank.make_random()
         second = Rank.make_random()
@@ -162,6 +172,7 @@ class Hand(_ReprMixin, metaclass=_HandMeta):
         return obj
 
     def to_combos(self):
+        """Transforms a Hand into all its possible Combos"""
         first, second = self.first.val, self.second.val
         if self.is_pair:
             return tuple(
@@ -178,33 +189,37 @@ class Hand(_ReprMixin, metaclass=_HandMeta):
 
     @property
     def is_suited_connector(self):
+        """Indicates if the hand is a suited connector"""
         return self.is_suited and self.is_connector
 
     @property
     def is_suited(self):
+        """Indicates if the hand is suited"""
         return self._shape == "s"
 
     @property
     def is_offsuit(self):
+        """Indicates if the hand is offsuit"""
         return self._shape == "o"
 
     @property
     def is_connector(self):
+        """Indicates if the hand is a connector"""
         return self.rank_difference == 1
 
     @property
     def is_one_gapper(self):
+        """Indicates if the hand is a one gapper"""
         return self.rank_difference == 2
 
     @property
     def is_two_gapper(self):
+        """Indicates if the hand is a two gapper"""
         return self.rank_difference == 3
 
     @property
     def rank_difference(self):
         """The difference between the first and second rank of the Hand."""
-
-        # self.first >= self.second
         return Rank.difference(self.first, self.second)
 
     @property
@@ -237,6 +252,8 @@ SUITED_HANDS = tuple(hand for hand in Hand if hand.is_suited)
 @total_ordering
 class Combo(_ReprMixin):
     """Hand combination."""
+
+    _shape: Shape
 
     __slots__ = ("first", "second")
 
@@ -770,7 +787,8 @@ class HandRange:
 
         return pair_strs + suited_strs + offsuit_strs
 
-    def _get_pieces(self, combos, combos_in_hand):
+    @staticmethod
+    def _get_pieces(combos, combos_in_hand):
         if not combos:
             return []
 
