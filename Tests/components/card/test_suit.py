@@ -2,10 +2,20 @@ import unittest
 import components.card as card
 
 
-class MyTestCase(unittest.TestCase):
+class MySuitTestCase(unittest.TestCase):
 
     def setUp(self) -> None:
         self.all_suits = list(card.Suit)
+
+    def test_suits_length(self):
+        self.assertEqual(len(self.all_suits), 4)
+
+    def test_suits_contains(self):
+        all_suits = list(card.Suit)
+        self.assertIn(card.Suit("c"), all_suits)
+        self.assertIn(card.Suit("d"), all_suits)
+        self.assertIn(card.Suit("h"), all_suits)
+        self.assertIn(card.Suit("s"), all_suits)
 
     def test_suit_conversion(self):
         self.assertIsInstance(repr(self.all_suits[0]), str)

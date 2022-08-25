@@ -64,13 +64,6 @@ class _CardMeta(type):
         )
         return cls
 
-    def make_random(cls):
-        """Returns a random Card instance."""
-        self = object.__new__(cls)
-        self.rank = Rank.make_random()
-        self.suit = Suit.make_random()
-        return self
-
     def __iter__(cls):
         return iter(cls._all_cards)
 
@@ -123,3 +116,11 @@ class Card(_ReprMixin, metaclass=_CardMeta):
     @property
     def is_broadway(self):
         return self.rank in BROADWAY_RANKS
+
+    @classmethod
+    def make_random(cls):
+        """Returns a random Card instance."""
+        self = object.__new__(cls)
+        self.rank = Rank.make_random()
+        self.suit = Suit.make_random()
+        return self
