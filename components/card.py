@@ -111,10 +111,16 @@ class Card(_ReprMixin, metaclass=_CardMeta):
 
     @property
     def is_face(self):
+        """
+        Indicates if the card is a face
+        """
         return self.rank in FACE_RANKS
 
     @property
     def is_broadway(self):
+        """
+        Indicates if the card is a broadway
+        """
         return self.rank in BROADWAY_RANKS
 
     @classmethod
