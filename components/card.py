@@ -1,9 +1,12 @@
 import itertools
 from functools import total_ordering
+
+import numpy as np
+
 from components._common import PokerEnum, _ReprMixin
 
 
-__all__ = ["Suit", "Rank", "Card", "FACE_RANKS", "BROADWAY_RANKS"]
+__all__ = ["Suit", "Rank", "Card", "FACE_RANKS", "BROADWAY_RANKS", "Deck"]
 
 
 class Suit(PokerEnum):
@@ -130,3 +133,25 @@ class Card(_ReprMixin, metaclass=_CardMeta):
         self.rank = Rank.make_random()
         self.suit = Suit.make_random()
         return self
+
+
+class Deck:
+    """A deck of cards"""
+
+    def __init__(self):
+        self.cards = list(Card)
+
+    def shuffle(self):
+        np.random.shuffle(self.cards)
+
+    def reset(self):
+        self.cards = list(Card)
+        self.shuffle()
+
+    def draw(self, cd=None):
+        if not cd:
+            return self.cards.pop()
+        else:
+            cd = Card(cd)
+            idx = self.cards.index(cd)
+            return self.cards.pop(idx)
