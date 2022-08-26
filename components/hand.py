@@ -272,6 +272,10 @@ class Combo(_ReprMixin):
 
     @classmethod
     def from_cards(cls, first, second):
+        if not (isinstance(first, Card) and isinstance(second, Card)):
+            raise ValueError("This method implies Combos are made from two cards")
+        if first == second:
+            raise ValueError("We cannot have the same card twice in a Combo")
         self = super().__new__(cls)
         first = first.rank.val + first.suit.val
         second = second.rank.val + second.suit.val
