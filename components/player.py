@@ -4,11 +4,24 @@ from components.hand import Combo
 
 class Player:
     """"""
-    def __init__(self, name: str = None, seat: int = None, stack: float = None):
-        self._name = name
-        self._seat = seat
-        self._stack = stack
-        self.init_stack = stack
+
+    _name: str
+    _seat: int
+    _stack: float
+    init_stack: float
+    _combo: Combo or None
+    folded: bool
+    _hero: bool
+    _position: cst.Position or None
+
+    def __init__(self, name: str = "Villain", seat=0, stack: float = 0):
+        self.name = name
+        self.seat = seat
+        if stack < 0:
+            raise ValueError("Init stack cannot be negative")
+        else:
+            self._stack = stack
+            self.init_stack = stack
         self._combo = None
         self.folded = False
         self._hero = False
@@ -21,7 +34,6 @@ class Player:
             f"{cst.Street('River')}": []
         }
         self.played = False
-        #self.combos_range = CombosRange()
 
     def __str__(self):
         return f"Name: {self.name}\nSeat: {self.seat}\nStack: {self.stack}\nHero: {self.is_hero}\nCombo: {self.combo}"
@@ -33,7 +45,7 @@ class Player:
     @name.setter
     def name(self, name: str):
         if len(name) > 12:
-            raise ValueError
+            raise ValueError("Player name length should be between 3 and 12 characters")
         else:
             self._name = name
 
@@ -45,9 +57,9 @@ class Player:
             return None
 
     @seat.setter
-    def seat(self, seat: int):
-        if seat < 0 or seat > 10:
-            raise ValueError
+    def seat(self, seat):
+        if seat < 0 or seat > 10 or type(seat) != int:
+            raise ValueError("Seat should be an int between 0 and 10")
         else:
             self._seat = seat
 
@@ -68,6 +80,7 @@ class Player:
 
     @combo.setter
     def combo(self, combo: Combo):
+        combo = Combo(combo)
         self._combo = combo
 
     @property
@@ -83,7 +96,7 @@ class Player:
         self._hero = is_hero
 
     def shows(self, combo):
-        self._combo = combo
+        self.combo = combo
 
     @property
     def position(self):
@@ -91,6 +104,7 @@ class Player:
 
     @position.setter
     def position(self, position):
+        position = cst.Position(position)
         self._position = position
 
     @property
@@ -99,6 +113,7 @@ class Player:
 
     def fold(self):
         self.folded = True
+        self.played = True
 
     def reset(self):
         self.folded = False
