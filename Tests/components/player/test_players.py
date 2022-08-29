@@ -27,7 +27,5 @@ class MyPlayersTestCase(unittest.TestCase):
         self.assertEqual(self.players.seat_dict[0], self.p1)
 
 
-
-
 if __name__ == '__main__':
     unittest.main()
