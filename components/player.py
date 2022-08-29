@@ -117,6 +117,7 @@ class Player:
 
     def reset(self):
         self.folded = False
+        self.played = False
 
     def reset_street_status(self):
         self.played = False
@@ -137,3 +138,46 @@ class Player:
 
     def req_equity(self, table):
         return 1/(1+self.pot_odds(table))
+
+
+class Players:
+    """"""
+    preflop_starter = "BB"
+    postflop_starter = "BTN"
+
+    def __init__(self):
+        self.pl_list = []
+        self.name_dict = {}
+        self.seat_dict = {}
+        self.positions = {}
+
+    def append(self, player):
+        if type(player) != Player:
+            raise ValueError("Only Players can be added to Players")
+        self.pl_list.append(player)
+        self.name_dict[player.name] = player
+        self.seat_dict[player.seat] = player
+
+    def __getitem__(self, item):
+        try:
+            if type(item) == str:
+                return self.name_dict[item]
+            elif type(item) == int:
+                return self.seat_dict[item]
+        except KeyError:
+            raise KeyError
+
+    def __len__(self):
+        return self.name_dict.__len__()
+
+    def __contains__(self, item):
+        return self.pl_list.__contains__(item)
+
+    def __iter__(self):
+        return self.pl_list.__iter__()
+
+    def find(self, name: str):
+        try:
+            return self.name_dict[name]
+        except KeyError:
+            print(f"{name} is not currently on this table")
