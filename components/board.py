@@ -1,7 +1,9 @@
 from functools import cached_property
 from itertools import combinations
+
+import numpy as np
 import pandas as pd
-from components.card import Card
+from components.card import Card, Rank
 from components.hand import Combo
 
 
@@ -26,14 +28,53 @@ class Board(pd.Series):
     @cached_property
     def flop_combinations(self):
         try:
-            return [Combo.from_tuple(x) for x in combinations(self[:3], 2)]
+            return np.array([Combo.from_tuple(x) for x in combinations(self[:3], 2)])
         except IndexError:
             return None
 
     @cached_property
     def is_rainbow(self):
-        if len(self.board) == 0:
+        if len(self) == 0:
             return None
         return all(
-            first.suit != second.suit for first, second in self.flop_combinations
+            combo.first.suit != combo.second.suit for combo in self.flop_combinations
         )
+
+    def _get_differences(self):
+        return tuple(Rank.difference(combo.first.rank, combo.second.rank)for combo in self.flop_combinations)
+
+    @cached_property
+    def is_monotone(self):
+        if len(self) == 0:
+            return None
+        return all(combo.first.suit == combo.second.suit for combo in self.flop_combinations)
+
+    @cached_property
+    def is_triplet(self):
+        if len(self) == 0:
+            return None
+        return all(diff == 0 for diff in self._get_differences())
+
+    @cached_property
+    def has_pair(self):
+        if len(self) == 0:
+            return None
+        return any(diff == 0 for diff in self._get_differences())
+
+    @cached_property
+    def has_straightdraw(self):
+        if len(self) == 0:
+            return None
+        return any(1 <= diff <= 3 for diff in self._get_differences())
+
+    @cached_property
+    def has_gutshot(self):
+        if len(self) == 0:
+            return None
+        return any(1 <= diff <= 4 for diff in self._get_differences())
+
+    @cached_property
+    def has_flushdraw(self):
+        if len(self) == 0:
+            return None
+        return any(combo.first.suit == combo.second.suit for combo in self.flop_combinations)
