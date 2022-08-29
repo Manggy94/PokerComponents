@@ -1,9 +1,7 @@
-import re
 import random
-import itertools
-from decimal import Decimal
-from pathlib import Path
-from functools import cached_property, total_ordering
+import pandas as pd
+import numpy as np
+from functools import total_ordering
 from components._common import PokerEnum, _ReprMixin
 from components.card import Rank, Card, BROADWAY_RANKS
 
@@ -12,7 +10,7 @@ __all__ = [
     "Shape",
     "Hand",
     "Combo",
-    "HandRange",
+    "ComboRange",
     "PAIR_HANDS",
     "OFFSUIT_HANDS",
     "SUITED_HANDS",
@@ -254,7 +252,6 @@ class Combo(_ReprMixin):
     """Hand combination."""
 
     _shape: Shape
-
     __slots__ = ("first", "second")
 
     def __new__(cls, combo):
@@ -272,8 +269,7 @@ class Combo(_ReprMixin):
 
     @classmethod
     def from_cards(cls, first, second):
-        if not (isinstance(first, Card) and isinstance(second, Card)):
-            raise ValueError("This method implies Combos are made from two cards")
+        first, second = Card(first), Card(second)
         if first == second:
             raise ValueError("We cannot have the same card twice in a Combo")
         self = super().__new__(cls)
@@ -281,6 +277,15 @@ class Combo(_ReprMixin):
         second = second.rank.val + second.suit.val
         self._set_cards_in_order(first, second)
         return self
+
+    @classmethod
+    def from_tuple(cls, combo_tuple):
+        if not (isinstance(combo_tuple, tuple)):
+            raise ValueError("A tuple should be given")
+        if len(combo_tuple) != 2:
+            raise ValueError("Tuple should contain two cards")
+        first, second = combo_tuple[0], combo_tuple[1]
+        return cls.from_cards(first, second)
 
     def __str__(self):
         if self is None:
@@ -384,560 +389,21 @@ class Combo(_ReprMixin):
         self._shape = Shape(value).val
 
 
-class _RegexRangeLexer:
-    _separator_re = re.compile(r"[,;\s]+")
-    _rank = r"([2-9TJQKA])"
-    _suit = r"[cdhs♣♦♥♠]"
-    # the second card is not the same as the first
-    # (negative lookahead for the first matching group)
-    # this will not match pairs, but will match e.g. 86 or AK
-    _non_pair1 = rf"{_rank}(?!\1){_rank}"
-    _non_pair2 = rf"{_rank}(?!\2){_rank}"
-
-    rules = (
-        # NAME, REGEX, value extractor METHOD NAME
-        ("ALL", r"XX", "_get_value"),
-        ("PAIR", rf"{_rank}\1$", "_get_first"),
-        ("PAIR_PLUS", rf"{_rank}\1\+$", "_get_first"),
-        ("PAIR_MINUS", rf"{_rank}\1-$", "_get_first"),
-        ("PAIR_DASH", rf"{_rank}\1-{_rank}\2$", "_get_for_pair_dash"),
-        ("BOTH", rf"{_non_pair1}$", "_get_first_two"),
-        ("BOTH_PLUS", rf"{_non_pair1}\+$", "_get_first_two"),
-        ("BOTH_MINUS", rf"{_non_pair1}-$", "_get_first_two"),
-        ("BOTH_DASH", rf"{_non_pair1}-{_non_pair2}$", "_get_for_both_dash"),
-        ("SUITED", rf"{_non_pair1}s$", "_get_first_two"),
-        ("SUITED_PLUS", rf"{_non_pair1}s\+$", "_get_first_two"),
-        ("SUITED_MINUS", rf"{_non_pair1}s-$", "_get_first_two"),
-        ("SUITED_DASH", rf"{_non_pair1}s-{_non_pair2}s$", "_get_for_shaped_dash"),
-        ("OFFSUIT", rf"{_non_pair1}o$", "_get_first_two"),
-        ("OFFSUIT_PLUS", rf"{_non_pair1}o\+$", "_get_first_two"),
-        ("OFFSUIT_MINUS", rf"{_non_pair1}o-$", "_get_first_two"),
-        ("OFFSUIT_DASH", rf"{_non_pair1}o-{_non_pair2}o$", "_get_for_shaped_dash"),
-        ("X_SUITED", rf"{_rank}Xs$|X{_rank}s$", "_get_rank"),
-        ("X_SUITED_PLUS", rf"{_rank}Xs\+$|X{_rank}s\+$", "_get_rank"),
-        ("X_SUITED_MINUS", rf"{_rank}Xs-$|X{_rank}s-$", "_get_rank"),
-        ("X_OFFSUIT", rf"{_rank}Xo$|X{_rank}o$", "_get_rank"),
-        ("X_OFFSUIT_PLUS", rf"{_rank}Xo\+$|X{_rank}o\+$", "_get_rank"),
-        ("X_OFFSUIT_MINUS", rf"{_rank}Xo-$|X{_rank}o-$", "_get_rank"),
-        ("X_PLUS", rf"{_rank}X\+$|X{_rank}\+$", "_get_rank"),
-        ("X_MINUS", rf"{_rank}X-$|X{_rank}-$", "_get_rank"),
-        ("X_BOTH", rf"{_rank}X$|X{_rank}$", "_get_rank"),
-        # might be anything, even pair
-        # FIXME: 5s5s accepted
-        ("COMBO", rf"{_rank}{_suit}{_rank}{_suit}$", "_get_value"),
-    )
-    # compile regexes when initializing class, so every instance will have them precompiled
-    rules = [
-        (name, re.compile(regex, re.IGNORECASE), method)
-        for (name, regex, method) in rules
-    ]
-
-    def __init__(self, hand_range=""):
-        # filter out empty matches
-        self.tokens = [token for token in self._separator_re.split(hand_range) if token]
-
-    def __iter__(self):
-        """Goes through all the tokens and compare them with the regex rules. If it finds a match,
-        makes an appropriate value for the token and yields them.
-        """
-        for token in self.tokens:
-            for name, regex, method_name in self.rules:
-                if regex.match(token):
-                    val_method = getattr(self, method_name)
-                    yield name, val_method(token)
-                    break
-            else:
-                raise ValueError("Invalid token: %s" % token)
-
-    @staticmethod
-    def _get_value(token):
-        return token
-
-    @staticmethod
-    def _get_first(token):
-        return token[0]
-
-    @staticmethod
-    def _get_rank(token):
-        return token[0] if token[1].upper() == "X" else token[1]
-
-    @classmethod
-    def _get_in_order(cls, first_part, second_part, token):
-        smaller, bigger = cls._get_rank_in_order(token, first_part, second_part)
-        return smaller.val, bigger.val
-
-    @classmethod
-    def _get_first_two(cls, token):
-        return cls._get_in_order(0, 1, token)
-
-    @classmethod
-    def _get_for_pair_dash(cls, token):
-        return cls._get_in_order(0, 3, token)
-
-    @classmethod
-    def _get_first_smaller_bigger(cls, first_part, second_part, token):
-        smaller1, bigger1 = cls._get_rank_in_order(token[first_part], 0, 1)
-        smaller2, bigger2 = cls._get_rank_in_order(token[second_part], 0, 1)
-
-        if bigger1 != bigger2:
-            raise ValueError("Invalid token: %s" % token)
-
-        smaller, bigger = min(smaller1, smaller2), max(smaller1, smaller2)
-
-        return bigger1.val, smaller.val, bigger.val
-
-    @staticmethod
-    def _get_rank_in_order(token, first_part, second_part):
-        first, second = Rank(token[first_part]), Rank(token[second_part])
-        smaller, bigger = min(first, second), max(first, second)
-        return smaller, bigger
-
-    @classmethod
-    # for 'A5-AT'
-    def _get_for_both_dash(cls, token):
-        return cls._get_first_smaller_bigger(slice(0, 2), slice(3, 5), token)
-
-    @classmethod
-    # for 'A5o-ATo' and 'A5s-ATs'
-    def _get_for_shaped_dash(cls, token):
-        return cls._get_first_smaller_bigger(slice(0, 2), slice(4, 6), token)
-
-
-@total_ordering
-class HandRange:
-    """Parses a str range into tuple of Combos (or Hands)."""
-
-    slots = ("_hands", "_combos")
-
-    def __init__(self, hand_range=""):
-        self._hands = set()
-        self._combos = set()
-
-        for name, value in _RegexRangeLexer(hand_range):
-            if name == "ALL":
-                for card in itertools.combinations("AKQJT98765432", 2):
-                    self._add_offsuit(card)
-                    self._add_suited(card)
-                for rank in "AKQJT98765432":
-                    self._add_pair(rank)
-
-                # full hand range, no need to parse any more name
-                break
-
-            elif name == "PAIR":
-                self._add_pair(value)
-
-            elif name == "PAIR_PLUS":
-                smallest = Rank(value)
-                for rank in (rank.val for rank in Rank if rank >= smallest):
-                    self._add_pair(rank)
-
-            elif name == "PAIR_MINUS":
-                biggest = Rank(value)
-                for rank in (rank.val for rank in Rank if rank <= biggest):
-                    self._add_pair(rank)
-
-            elif name == "PAIR_DASH":
-                first, second = Rank(value[0]), Rank(value[1])
-                ranks = (rank.val for rank in Rank if first <= rank <= second)
-                for rank in ranks:
-                    self._add_pair(rank)
-
-            elif name == "BOTH":
-                self._add_offsuit(value[0] + value[1])
-                self._add_suited(value[0] + value[1])
-
-            elif name == "X_BOTH":
-                for rank in (rk.val for rk in Rank if rk < Rank(value)):
-                    self._add_suited(value + rank)
-                    self._add_offsuit(value + rank)
-
-            elif name == "OFFSUIT":
-                self._add_offsuit(value[0] + value[1])
-
-            elif name == "SUITED":
-                self._add_suited(value[0] + value[1])
-
-            elif name == "X_OFFSUIT":
-                biggest = Rank(value)
-                for rank in (rank.val for rank in Rank if rank < biggest):
-                    self._add_offsuit(value + rank)
-
-            elif name == "X_SUITED":
-                biggest = Rank(value)
-                for rank in (rank.val for rank in Rank if rank < biggest):
-                    self._add_suited(value + rank)
-
-            elif name == "BOTH_PLUS":
-                smaller, bigger = Rank(value[0]), Rank(value[1])
-                for rank in (rank.val for rank in Rank if smaller <= rank < bigger):
-                    self._add_suited(value[1] + rank)
-                    self._add_offsuit(value[1] + rank)
-
-            elif name == "BOTH_MINUS":
-                smaller, bigger = Rank(value[0]), Rank(value[1])
-                for rank in (rank.val for rank in Rank if rank <= smaller):
-                    self._add_suited(value[1] + rank)
-                    self._add_offsuit(value[1] + rank)
-
-            elif name in ("X_PLUS", "X_SUITED_PLUS", "X_OFFSUIT_PLUS"):
-                smallest = Rank(value)
-                first_ranks = (rank for rank in Rank if rank >= smallest)
-
-                for rank1 in first_ranks:
-                    second_ranks = (rank for rank in Rank if rank < rank1)
-                    for rank2 in second_ranks:
-                        if name != "X_OFFSUIT_PLUS":
-                            self._add_suited(rank1.val + rank2.val)
-                        if name != "X_SUITED_PLUS":
-                            self._add_offsuit(rank1.val + rank2.val)
-
-            elif name in ("X_MINUS", "X_SUITED_MINUS", "X_OFFSUIT_MINUS"):
-                biggest = Rank(value)
-                first_ranks = (rank for rank in Rank if rank <= biggest)
-
-                for rank1 in first_ranks:
-                    second_ranks = (rank for rank in Rank if rank < rank1)
-                    for rank2 in second_ranks:
-                        if name != "X_OFFSUIT_MINUS":
-                            self._add_suited(rank1.val + rank2.val)
-                        if name != "X_SUITED_MINUS":
-                            self._add_offsuit(rank1.val + rank2.val)
-
-            elif name == "COMBO":
-                self._combos.add(Combo(value))
-
-            elif name == "OFFSUIT_PLUS":
-                smaller, bigger = Rank(value[0]), Rank(value[1])
-                for rank in (rank.val for rank in Rank if smaller <= rank < bigger):
-                    self._add_offsuit(value[1] + rank)
-
-            elif name == "OFFSUIT_MINUS":
-                smaller, bigger = Rank(value[0]), Rank(value[1])
-                for rank in (rank.val for rank in Rank if rank <= smaller):
-                    self._add_offsuit(value[1] + rank)
-
-            elif name == "SUITED_PLUS":
-                smaller, bigger = Rank(value[0]), Rank(value[1])
-                for rank in (rank.val for rank in Rank if smaller <= rank < bigger):
-                    self._add_suited(value[1] + rank)
-
-            elif name == "SUITED_MINUS":
-                smaller, bigger = Rank(value[0]), Rank(value[1])
-                for rank in (rank.val for rank in Rank if rank <= smaller):
-                    self._add_suited(value[1] + rank)
-
-            elif name == "BOTH_DASH":
-                smaller, bigger = Rank(value[1]), Rank(value[2])
-                for rank in (rank.val for rank in Rank if smaller <= rank <= bigger):
-                    self._add_offsuit(value[0] + rank)
-                    self._add_suited(value[0] + rank)
-
-            elif name == "OFFSUIT_DASH":
-                smaller, bigger = Rank(value[1]), Rank(value[2])
-                for rank in (rank.val for rank in Rank if smaller <= rank <= bigger):
-                    self._add_offsuit(value[0] + rank)
-
-            elif name == "SUITED_DASH":
-                smaller, bigger = Rank(value[1]), Rank(value[2])
-                for rank in (rank.val for rank in Rank if smaller <= rank <= bigger):
-                    self._add_suited(value[0] + rank)
-
-    @classmethod
-    def from_file(cls, filename):
-        """Creates an instance from a given file, containing a hand range.
-        It can handle the PokerCruncher (.rng extension) format.
-        """
-        hand_range_string = Path(filename).open().read()
-        return cls(hand_range_string)
-
-    @classmethod
-    def from_objects(cls, iterable):
-        """Make an instance from an iterable of Combos, Hands or both."""
-        hand_range_string = " ".join(str(obj) for obj in iterable)
-        return cls(hand_range_string)
-
-    def __eq__(self, other):
-        if self.__class__ is other.__class__:
-            return self._all_combos == other._all_combos
-        return NotImplemented
-
-    def __lt__(self, other):
-        if self.__class__ is other.__class__:
-            return len(self._all_combos) < len(other._all_combos)
-        return NotImplemented
-
-    def __contains__(self, item):
-        if isinstance(item, Combo):
-            return item in self._combos or item.to_hand() in self._hands
-        elif isinstance(item, Hand):
-            return item in self._all_hands
-        elif isinstance(item, str):
-            if len(item) == 4:
-                combo = Combo(item)
-                return combo in self._combos or combo.to_hand() in self._hands
-            else:
-                return Hand(item) in self._all_hands
-
-    def __len__(self):
-        return self._count_combos()
-
-    def __str__(self):
-        return ", ".join(self.rep_pieces)
-
-    def __repr__(self):
-        hand_range = " ".join(self.rep_pieces)
-        return f"{self.__class__.__name__}('{hand_range}')"
-
-    def __hash__(self):
-        return hash(self.combos)
-
-    def to_html(self):
-        """Returns a 13x13 HTML table representing the hand range.
-
-        The table's CSS class is ``range``, pair cells (td element) are ``pair``, offsuit hands are
-        ``offsuit`` and suited hand cells has ``suited`` css class.
-        The HTML contains no extra whitespace at all.
-        Calculating it should not take more than 30ms (which takes calculating a 100% range).
-        """
-
-        # note about speed: I tried with functools.lru_cache, and the initial call was 3-4x slower
-        # than without it, and the need for calling this will usually be once, so no need to cache
-
-        html = ['<table class="range">']
-
-        for row in reversed(Rank):
-            html.append("<tr>")
-
-            for col in reversed(Rank):
-                if row > col:
-                    suit, css_class = "s", "suited"
-                elif row < col:
-                    suit, css_class = "o", "offsuit"
-                else:
-                    suit, css_class = "", "pair"
-
-                html.append('<td class="%s">' % css_class)
-                hand = Hand(row.val + col.val + suit)
-
-                if hand in self.hands:
-                    html.append(str(hand))
-
-                html.append("</td>")
-
-            html.append("</tr>")
-
-        html.append("</table>")
-        return "".join(html)
-
-    def to_ascii(self, border=False):
-        """Returns a nicely formatted ASCII table with optional borders."""
-
-        table = []
-
-        if border:
-            table.append("┌" + "─────┬" * 12 + "─────┐\n")
-            line = "├" + "─────┼" * 12 + "─────┤\n"
-            border = "│ "
-            last_line = "\n└" + "─────┴" * 12 + "─────┘"
-        else:
-            line = border = last_line = ""
-
-        for row in reversed(Rank):
-            for col in reversed(Rank):
-                if row > col:
-                    suit = "s"
-                elif row < col:
-                    suit = "o"
-                else:
-                    suit = ""
-
-                hand = Hand(row.val + col.val + suit)
-                hand = str(hand) if hand in self.hands else ""
-                table.append(border)
-                table.append(hand.ljust(4))
-
-            if row.val != "2":
-                table.append(border)
-                table.append("\n")
-                table.append(line)
-
-        table.append(border)
-        table.append(last_line)
-
-        return "".join(table)
-
-    @property
-    def rep_pieces(self):
-        """List of str pieces how the Hand Range is represented."""
-
-        if self._count_combos() == 1326:
-            return ["XX"]
-
-        all_combos = self._all_combos
-
-        pairs = [c for c in all_combos if c.is_pair]
-        pair_pieces = self._get_pieces(pairs, 6)
-
-        suiteds = [c for c in all_combos if c.is_suited]
-        suited_pieces = self._get_pieces(suiteds, 4)
-
-        offsuits = [c for c in all_combos if c.is_offsuit]
-        offsuit_pieces = self._get_pieces(offsuits, 12)
-
-        pair_strs = self._shorten_pieces(pair_pieces)
-        suited_strs = self._shorten_pieces(suited_pieces)
-        offsuit_strs = self._shorten_pieces(offsuit_pieces)
-
-        return pair_strs + suited_strs + offsuit_strs
-
-    @staticmethod
-    def _get_pieces(combos, combos_in_hand):
-        if not combos:
-            return []
-
-        sorted_combos = sorted(combos, reverse=True)
-        hands_and_combos = []
-        current_combos = []
-        last_combo = sorted_combos[0]
-
-        for combo in sorted_combos:
-            if (
-                last_combo.first.rank == combo.first.rank
-                and last_combo.second.rank == combo.second.rank
-            ):
-                current_combos.append(combo)
-                length = len(current_combos)
-
-                if length == combos_in_hand:
-                    hands_and_combos.append(combo.to_hand())
-                    current_combos = []
-            else:
-                hands_and_combos.extend(current_combos)
-                current_combos = [combo]
-
-            last_combo = combo
-
-        # add the remainder if any, current_combos might be empty
-        hands_and_combos.extend(current_combos)
-
-        return hands_and_combos
-
-    def _shorten_pieces(self, pieces):
-        if not pieces:
-            return []
-
-        str_pieces = []
-        first = last = pieces[0]
-        for current in pieces[1:]:
-            if isinstance(last, Combo):
-                str_pieces.append(str(last))
-                first = last = current
-            elif isinstance(current, Combo):
-                str_pieces.append(self._get_format(first, last))
-                first = last = current
-            elif (
-                current.is_pair and Rank.difference(last.first, current.first) == 1
-            ) or (
-                last.first == current.first
-                and Rank.difference(last.second, current.second) == 1
-            ):
-                last = current
-            else:
-                str_pieces.append(self._get_format(first, last))
-                first = last = current
-
-        # write out any remaining pieces
-        str_pieces.append(self._get_format(first, last))
-
-        return str_pieces
-
-    @staticmethod
-    def _get_format(first, last):
-        if first == last:
-            return str(first)
-        elif (
-            first.is_pair
-            and first.first.val == "A"
-            or Rank.difference(first.first, first.second) == 1
-        ):
-            return f"{last}+"
-        elif last.second.val == "2":
-            return f"{first}-"
-        else:
-            return f"{first}-{last}"
-
-    def _add_pair(self, rank):
-        self._hands.add(Hand(rank * 2))
-
-    def _add_offsuit(self, tok):
-        self._hands.add(Hand(tok[0] + tok[1] + "o"))
-
-    def _add_suited(self, tok):
-        self._hands.add(Hand(tok[0] + tok[1] + "s"))
-
-    @cached_property
-    def hands(self):
-        """Tuple of hands contained in this hand range. If only one combo of the same hand is present,
-        it will be shown here. e.g. ``Range('2s2c').hands == (Hand('22'),)``
-        """
-        return tuple(sorted(self._all_hands))
-
-    @cached_property
-    def combos(self):
-        return tuple(sorted(self._all_combos))
-
-    @cached_property
-    def percent(self):
-        """What percent of combos does this range have compared to all the possible combos.
-
-        There are 1326 total combos in Hold'em: 52 * 51 / 2 (because order doesn't matter)
-        Precision: 2 decimal point
-        """
-        dec_percent = Decimal(self._count_combos()) / 1326 * 100
-        # round to two decimal point
-        return float(dec_percent.quantize(Decimal("1.00")))
-
-    def _count_combos(self):
-        combo_count = len(self._combos)
-        for hand in self._hands:
-            if hand.is_pair:
-                combo_count += 6
-            elif hand.is_offsuit:
-                combo_count += 12
-            elif hand.is_suited:
-                combo_count += 4
-        return combo_count
-
-    @cached_property
-    def _all_combos(self):
-        hand_combos = {combo for hand in self._hands for combo in hand.to_combos()}
-        return hand_combos | self._combos
-
-    @cached_property
-    def _all_hands(self):
-        combo_hands = {combo.to_hand() for combo in self._combos}
-        return combo_hands | self._hands
-
-
-if __name__ == "__main__":
-    import cProfile
-
-    print("_all_COMBOS")
-    cProfile.run("Range('XX')._all_combos", sort="tottime")
-    print("COMBOS")
-    cProfile.run("Range('XX').combos", sort="tottime")
-    print("HANDS")
-    cProfile.run("Range('XX').hands", sort="tottime")
-
-    r = (
-        "KK-QQ, 88-77, A5s, A3s, K8s+, K3s, Q7s+, Q5s, Q3s, J9s-J5s, T4s+, 97s, 95s-93s, 87s, "
-        "85s-84s, 75s, 64s-63s, 53s, ATo+, K5o+, Q7o-Q5o, J9o-J7o, J4o-J3o, T8o-T3o, 96o+, "
-        "94o-93o, 86o+, 84o-83o, 76o, 74o, 63o, 54o, 22"
-    )
-    print("R _all_COMBOS")
-    cProfile.run("Range('%s')._all_combos" % r, sort="tottime")
-    print("R COMBOS")
-    cProfile.run("Range('%s').combos" % r, sort="tottime")
-    print("R HANDS")
-    cProfile.run("Range('%s').hands" % r, sort="tottime")
+class ComboRange(pd.DataFrame):
+
+    def __init__(self):
+        all_combos = np.hstack([hand.to_combos() for hand in list(Hand)])
+        str_combos = [f"{combo}" for combo in all_combos]
+        pd.DataFrame.__init__(self, index=str_combos, columns=["p"], data=1/1326)
+
+    def clean_range(self, dead_cards):
+        cop = self.copy()
+        indexes = self.index.to_numpy()
+        cop["c1"] = np.array([f"{Combo(x).first}" for x in indexes])
+        cop["c2"] = np.array([f"{Combo(x).second}" for x in indexes])
+        cop["dead"] = cop["c1"].isin(dead_cards) | cop["c2"].isin(dead_cards)
+        cop["p2"] = cop["p"] * ~cop["dead"]
+
+        cop["p3"] = cop["p2"] / cop["p2"].sum()
+        self["p"] = cop["p3"]
+        del(cop, indexes)

@@ -12,6 +12,5 @@ class MyStreetTestCase(unittest.TestCase):
         self.assertRaises(ValueError, lambda: street.Street("Coca-Cola"))
 
 
-
 if __name__ == '__main__':
     unittest.main()

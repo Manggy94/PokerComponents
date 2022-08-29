@@ -16,7 +16,18 @@ class MyComboTestCase(unittest.TestCase):
         c2 = hand.Card("Kh")
         self.assertIsInstance(hand.Combo.from_cards(c1, c2), hand.Combo)
         self.assertRaises(ValueError, lambda: hand.Combo.from_cards(c1, c1))
-        self.assertRaises(ValueError, lambda: hand.Combo.from_cards(c1, "As"))
+        self.assertRaises(ValueError, lambda: hand.Combo.from_cards(c1, "Ab"))
+        self.assertEqual(hand.Combo.from_cards(c1, "Ad"), hand.Combo("AsAd"))
+
+    def test_from_tuple(self):
+        c1 = hand.Card("As")
+        c2 = hand.Card("Kh")
+        self.assertIsInstance(hand.Combo.from_tuple((c1, c2)), hand.Combo)
+        self.assertRaises(ValueError, lambda: hand.Combo.from_tuple((c1, c1)))
+        self.assertRaises(TypeError, lambda: hand.Combo.from_tuple(c1, c1))
+        self.assertRaises(ValueError, lambda: hand.Combo.from_tuple([c1, c2]))
+        self.assertRaises(ValueError, lambda: hand.Combo.from_tuple((c1, "Ab")))
+        self.assertEqual(hand.Combo.from_tuple((c1, "Ad")), hand.Combo("AsAd"))
 
     def test_str(self):
         c1 = hand.Combo("KsAd")

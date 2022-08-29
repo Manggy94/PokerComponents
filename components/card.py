@@ -1,10 +1,9 @@
-import itertools
+from itertools import product
 from functools import total_ordering
 
 import numpy as np
 
 from components._common import PokerEnum, _ReprMixin
-
 
 __all__ = ["Suit", "Rank", "Card", "FACE_RANKS", "BROADWAY_RANKS", "Deck"]
 
@@ -63,7 +62,7 @@ class _CardMeta(type):
         """Cache all possible Card instances on the class itself."""
         cls = super(_CardMeta, mcs).__new__(mcs, clsname, bases, classdict)
         cls._all_cards = list(
-            cls(f"{rank}{suit}") for rank, suit in itertools.product(Rank, Suit)
+            cls(f"{rank}{suit}") for rank, suit in product(Rank, Suit)
         )
         return cls
 
