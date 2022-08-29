@@ -54,8 +54,8 @@ class TourSpeed(PokerEnum):
 
 
 class MoneyType(PokerEnum):
-    REAL = ("Real money",)
-    PLAY = ("Play money",)
+    REAL = "Real money", "Real", "real"
+    PLAY = "Play money", "Play", "play"
 
 
 class Action(PokerEnum):
@@ -67,7 +67,7 @@ class Action(PokerEnum):
     RETURN = "RETURN", "return", "returned", "uncalled"
     WIN = "WIN", "win", "won", "collected"
     SHOW = "SHOW", "show", "shows", "SHOWS", "Show", "Shows"
-    MUCK = "MUCK", "don't show", "didn't show", "did not show", "mucks"
+    MUCK = "MUCK", "MUCKS", "don't show", "didn't show", "did not show", "mucks", "does not show", "doesn't show"
     THINK = ("seconds left to act",)
 
 
