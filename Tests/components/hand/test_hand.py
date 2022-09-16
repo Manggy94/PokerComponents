@@ -10,8 +10,17 @@ class MyHandTestCase(unittest.TestCase):
         self.assertIsInstance(hd.shape, hand.Shape)
         self.assertRaises(ValueError, lambda: hand.Hand("AJt"))
         self.assertRaises(ValueError, lambda: hand.Hand("AAs"))
+        self.assertRaises(ValueError, lambda: hand.Hand("AT"))
+        self.assertRaises(ValueError, lambda: hand.Hand("AJTs"))
         self.assertEqual(hd.shape, hand.Shape.SUITED)
         self.assertIsInstance(hand.Hand(hd), hand.Hand)
+
+    def test_slots(self):
+        self.assertEqual(len(hand.Hand("AJo").__slots__), 3)
+
+    def test_hash(self):
+        hd = hand.Hand("AKo")
+        self.assertEqual(hd.__hash__(), hd.first.__hash__() + hd.second.__hash__() + hd.shape.__hash__())
 
     def test_all_hands_length(self):
         self.assertEqual(len(hand.Hand._all_hands), 169)
@@ -19,9 +28,6 @@ class MyHandTestCase(unittest.TestCase):
     def test_all_hands_shapes(self):
         for hd in hand.Hand._all_hands:
             self.assertIn(hd.shape, list(hand.Shape))
-
-    def test_make_random(self):
-        self.assertIsInstance(hand.Hand.make_random(), hand.Hand)
 
     def test_get_non_pairs(self):
         non_pairs = list(hand.Hand._get_non_pairs())
@@ -47,10 +53,12 @@ class MyHandTestCase(unittest.TestCase):
         self.assertNotEqual(f"{hd2}", 99)
 
     def test_equals(self):
+        self.assertRaises(ValueError, lambda: hand.Hand("T8s") == "T8s")
         self.assertTrue(hand.Hand("8Ts") == hand.Hand("T8s"))
         self.assertFalse(hand.Hand("KJo") == hand.Hand("KJs"))
 
     def test_lt(self):
+        self.assertRaises(ValueError, lambda: hand.Hand("T8s") < "T8s")
         self.assertLess(hand.Hand("AKo"), hand.Hand("AKs"))
         self.assertLess(hand.Hand("AJs"), hand.Hand("AKs"))
         self.assertLess(hand.Hand("AJs"), hand.Hand("AKo"))
@@ -121,6 +129,29 @@ class MyHandTestCase(unittest.TestCase):
         self.assertFalse(hand.Hand("58s").is_pair)
         self.assertTrue(hand.Hand("TT").is_pair)
         self.assertFalse(hand.Hand("JTo").is_pair)
+
+    def test_make_random(self):
+        shapes = []
+        while len(shapes) < 3:
+            hd = hand.Hand.make_random()
+            self.assertIsInstance(hd, hand.Hand)
+            if hd.is_pair and hand.Shape.PAIR not in shapes:
+                self.assertEqual(hd.shape, hand.Shape.PAIR)
+                shapes.append(hand.Shape.PAIR)
+            elif hd.is_offsuit and hand.Shape.OFFSUIT not in shapes:
+                self.assertEqual(hd.shape, hand.Shape.OFFSUIT)
+                shapes.append(hand.Shape.OFFSUIT)
+            elif hd.is_suited and hand.Shape.SUITED not in shapes:
+                self.assertEqual(hd.shape, hand.Shape.SUITED)
+                shapes.append(hand.Shape.SUITED)
+
+    def test_shape(self):
+        hd = hand.Hand("AKo")
+        self.assertEqual(hd.shape, hand.Shape.OFFSUIT)
+        hd.shape = "s"
+        self.assertEqual(hd.shape, hand.Shape.SUITED)
+        hd.shape = hand.Shape("o")
+        self.assertEqual(hd.shape, hand.Shape.OFFSUIT)
 
 
 if __name__ == '__main__':

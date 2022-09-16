@@ -112,7 +112,7 @@ class Hand(_ReprMixin, metaclass=_HandMeta):
 
     def __eq__(self, other):
         if self.__class__ is not other.__class__:
-            return NotImplemented
+            raise ValueError("You can only compare a Hand with another Hand")
 
         # AKs != AKo, because AKs is better
         return (
@@ -123,7 +123,7 @@ class Hand(_ReprMixin, metaclass=_HandMeta):
 
     def __lt__(self, other):
         if self.__class__ is not other.__class__:
-            return NotImplemented
+            raise ValueError("You can only compare a Hand with another Hand")
 
         # pairs are better than non-pairs
         if not self.is_pair and other.is_pair:
@@ -288,21 +288,19 @@ class Combo(_ReprMixin):
         return cls.from_cards(first, second)
 
     def __str__(self):
-        if self is None:
-            return "Unknown combo"
         return f"{self.first}{self.second}"
 
     def __hash__(self):
-        return hash(self.first) + hash(self.second)
+        return self.first.__hash__() + self.second.__hash__()
 
     def __eq__(self, other):
-        if self.__class__ is other.__class__:
-            return self.first == other.first and self.second == other.second
-        return NotImplemented
+        if self.__class__ is not other.__class__:
+            raise ValueError("You can only compare a Combo with another Combo")
+        return self.first == other.first and self.second == other.second
 
     def __lt__(self, other):
         if self.__class__ is not other.__class__:
-            return NotImplemented
+            raise ValueError("You can only compare a Combo with another Combo")
 
         # lookup optimization
         self_is_pair, other_is_pair = self.is_pair, other.is_pair
@@ -396,7 +394,7 @@ class ComboRange(pd.DataFrame):
         str_combos = [f"{combo}" for combo in all_combos]
         pd.DataFrame.__init__(self, index=str_combos, columns=["p"], data=1/1326)
 
-    def clean_range(self, dead_cards):
+    """def clean_range(self, dead_cards):
         cop = self.copy()
         indexes = self.index.to_numpy()
         cop["c1"] = np.array([f"{Combo(x).first}" for x in indexes])
@@ -406,4 +404,4 @@ class ComboRange(pd.DataFrame):
 
         cop["p3"] = cop["p2"] / cop["p2"].sum()
         self["p"] = cop["p3"]
-        del(cop, indexes)
+        del(cop, indexes)"""

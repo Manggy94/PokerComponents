@@ -22,11 +22,13 @@ class MyComboTestCase(unittest.TestCase):
     def test_from_tuple(self):
         c1 = hand.Card("As")
         c2 = hand.Card("Kh")
+        c3 = hand.Card("Js")
         self.assertIsInstance(hand.Combo.from_tuple((c1, c2)), hand.Combo)
         self.assertRaises(ValueError, lambda: hand.Combo.from_tuple((c1, c1)))
         self.assertRaises(TypeError, lambda: hand.Combo.from_tuple(c1, c1))
         self.assertRaises(ValueError, lambda: hand.Combo.from_tuple([c1, c2]))
         self.assertRaises(ValueError, lambda: hand.Combo.from_tuple((c1, "Ab")))
+        self.assertRaises(ValueError, lambda: hand.Combo.from_tuple((c1, c2, c3)))
         self.assertEqual(hand.Combo.from_tuple((c1, "Ad")), hand.Combo("AsAd"))
 
     def test_str(self):
@@ -37,11 +39,16 @@ class MyComboTestCase(unittest.TestCase):
         self.assertEqual(f"{c2}", "KsKd")
         self.assertEqual(f"{c3}", "KsKd")
 
+    def test_hash(self):
+        c1 = hand.Combo("AsAd")
+        self.assertEqual(c1.__hash__(), c1.first.__hash__() + c1.second.__hash__())
+
     def test_eq(self):
         c4 = hand.Combo("AsJs")
         c5 = hand.Combo("JsAs")
         c6 = hand.Combo("AsAh")
         c7 = hand.Combo("AhAs")
+        self.assertRaises(ValueError, lambda: c4 == "AsJs")
         self.assertEqual(c4, c5)
         self.assertTrue(c4 == c5)
         self.assertNotEqual(c4, c6)
@@ -54,11 +61,26 @@ class MyComboTestCase(unittest.TestCase):
         c3 = hand.Combo("KdKs")
         c4 = hand.Combo("AsJs")
         c5 = hand.Combo("JdAs")
+        c6 = hand.Combo("AsAd")
+        self.assertRaises(ValueError, lambda: c4 < "AsJs")
+
         self.assertTrue(c1 < c2)
         self.assertFalse(c3 < c2)
         self.assertTrue(c4 < c1)
         self.assertTrue(c1 < c2)
         self.assertTrue(c5 < c4)
+        self.assertTrue(c2 < c6)
+
+    def test_set_cards_in_order(self):
+        c1 = hand.Combo("AsJd")
+        self.assertEqual(c1.first, hand.Card("As"))
+        self.assertEqual(c1.second, hand.Card("Jd"))
+        c1.first, c1.second = c1.second, c1.first
+        self.assertNotEqual(c1.first, hand.Card("As"))
+        self.assertNotEqual(c1.second, hand.Card("Jd"))
+        c1._set_cards_in_order(c1.first, c1.second)
+        self.assertEqual(c1.first, hand.Card("As"))
+        self.assertEqual(c1.second, hand.Card("Jd"))
 
     def test_to_hand(self):
         c1 = hand.Combo("AsJs")
