@@ -66,6 +66,8 @@ class MyHandTestCase(unittest.TestCase):
         self.assertLess(hand.Hand("AKs"), hand.Hand("22"))
         self.assertGreater(hand.Hand("AA"), hand.Hand("AKs"))
         self.assertLess(hand.Hand("KJs"), hand.Hand("AQo"))
+        self.assertLess(hand.Hand("KJs"), hand.Hand("AJs"))
+        self.assertFalse(hand.Hand("AKo") < hand.Hand("AKo"))
 
     def test_to_combos(self):
         self.assertIsInstance(hand.Hand("AKs").to_combos(), tuple)
