@@ -69,10 +69,7 @@ class Player:
 
     @stack.setter
     def stack(self, stack):
-        if stack < 0:
-            self._stack = 0
-        else:
-            self._stack = stack
+        self._stack = max(0.0, float(stack))
 
     @property
     def combo(self):
@@ -181,3 +178,4 @@ class Players:
             return self.name_dict[name]
         except KeyError:
             print(f"{name} is not currently on this table")
+
