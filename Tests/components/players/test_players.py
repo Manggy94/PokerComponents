@@ -20,13 +20,6 @@ class MyPlayersTestCase(unittest.TestCase):
         self.assertIsInstance(plrs.name_dict, dict)
         self.assertIsInstance(plrs.seat_dict, dict)
 
-    def test_append(self):
-        self.assertRaises(ValueError, lambda: self.players.append("Toto"))
-        self.players.append(self.p1)
-        self.assertEqual(self.players.pl_list[0], self.p1)
-        self.assertEqual(self.players.name_dict["Villain"], self.p1)
-        self.assertEqual(self.players.seat_dict[0], self.p1)
-
 
 if __name__ == '__main__':
     unittest.main()
