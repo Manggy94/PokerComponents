@@ -17,6 +17,22 @@ class Board(pd.Series):
     def __len__(self):
         return 5 - self.isna().sum()
 
+    @property
+    def len(self):
+        return self.__len__()
+
+    @property
+    def flop(self):
+        return self.iloc[:3]
+
+    @property
+    def turn(self):
+        return self.iloc[3]
+
+    @property
+    def river(self):
+        return self.iloc[4]
+
     def add(self, card):
         if len(self) == 5:
             raise ValueError("Board is already full with 5 cards")
@@ -29,52 +45,54 @@ class Board(pd.Series):
     def flop_combinations(self):
         try:
             return np.array([Combo.from_tuple(x) for x in combinations(self[:3], 2)])
-        except IndexError:
+        except TypeError:
             return None
 
     @cached_property
     def is_rainbow(self):
-        if len(self) == 0:
+        if len(self) < 3:
             return None
         return all(
             combo.first.suit != combo.second.suit for combo in self.flop_combinations
         )
 
     def _get_differences(self):
+        if self.flop_combinations is None:
+            return None
         return tuple(Rank.difference(combo.first.rank, combo.second.rank)for combo in self.flop_combinations)
 
     @cached_property
     def is_monotone(self):
-        if len(self) == 0:
+        if len(self) < 3:
             return None
         return all(combo.first.suit == combo.second.suit for combo in self.flop_combinations)
 
     @cached_property
     def is_triplet(self):
-        if len(self) == 0:
+        if len(self) < 3:
             return None
         return all(diff == 0 for diff in self._get_differences())
 
     @cached_property
     def has_pair(self):
-        if len(self) == 0:
+        if len(self) < 3:
             return None
         return any(diff == 0 for diff in self._get_differences())
 
     @cached_property
     def has_straightdraw(self):
-        if len(self) == 0:
+        if len(self) < 3:
             return None
         return any(1 <= diff <= 3 for diff in self._get_differences())
 
     @cached_property
     def has_gutshot(self):
-        if len(self) == 0:
+        if len(self) < 3:
             return None
         return any(1 <= diff <= 4 for diff in self._get_differences())
 
     @cached_property
     def has_flushdraw(self):
-        if len(self) == 0:
+        if len(self) < 3:
             return None
         return any(combo.first.suit == combo.second.suit for combo in self.flop_combinations)

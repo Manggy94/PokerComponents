@@ -16,6 +16,7 @@ class MyBoardTestCase(unittest.TestCase):
         self.board4 = board.Board(("Qd", "5d", "Td", "Tc", card.Card("Ah")))
         self.board5 = board.Board(("As", "Ad", "Ah"))
         self.board6 = board.Board(("Ks", "Qs", "Js"))
+        self.incomplete_flop = board.Board(("As", "Ad"))
 
     def test_new_board(self):
         new_board = board.Board()
@@ -38,6 +39,7 @@ class MyBoardTestCase(unittest.TestCase):
         self.board["flop_2"] = "As"
         self.board["flop_1"] = "Ad"
         self.assertEqual(len(self.board), 2)
+        self.assertEqual(self.board.len, 2)
 
     def test_add(self):
         self.assertRaises(ValueError, lambda: self.board.add("AA"))
@@ -51,6 +53,9 @@ class MyBoardTestCase(unittest.TestCase):
     def test_indexing(self):
         self.assertEqual(len(self.board2), 5)
         self.assertEqual(len(self.board2[:3]), 3)
+        self.assertTrue((self.board2.flop == board.Board(("As", "Ad", "Tc"))[:3]).all())
+        self.assertEqual(self.board2.turn, "Td")
+        self.assertEqual(self.board2.river, "Ah")
 
     def test_flop_combination(self):
         self.assertEqual(len(self.board2.flop_combinations), 3)
@@ -58,8 +63,10 @@ class MyBoardTestCase(unittest.TestCase):
         combos = np.array([hand.Combo("AsAd"), hand.Combo("AsTc"), hand.Combo("AdTc")])
         for i in range(3):
             self.assertEqual(self.board2.flop_combinations[i], combos[i])
+        self.assertIsNone(self.incomplete_flop.flop_combinations)
 
     def test_is_rainbow(self):
+        self.assertIsNone(self.board.is_rainbow)
         self.assertTrue(self.board2.is_rainbow)
         self.assertFalse(self.board3.is_rainbow)
         self.assertFalse(self.board4.is_rainbow)
@@ -67,6 +74,7 @@ class MyBoardTestCase(unittest.TestCase):
         self.assertFalse(self.board6.is_rainbow)
 
     def test_is_monotone(self):
+        self.assertIsNone(self.board.is_monotone)
         self.assertFalse(self.board2.is_monotone)
         self.assertFalse(self.board3.is_monotone)
         self.assertTrue(self.board4.is_monotone)
@@ -74,6 +82,7 @@ class MyBoardTestCase(unittest.TestCase):
         self.assertTrue(self.board6.is_monotone)
 
     def test_is_triplet(self):
+        self.assertIsNone(self.board.is_triplet)
         self.assertFalse(self.board2.is_triplet)
         self.assertFalse(self.board3.is_triplet)
         self.assertFalse(self.board4.is_triplet)
@@ -81,6 +90,7 @@ class MyBoardTestCase(unittest.TestCase):
         self.assertFalse(self.board6.is_triplet)
 
     def test_has_pair(self):
+        self.assertIsNone(self.board.has_pair)
         self.assertTrue(self.board2.has_pair)
         self.assertFalse(self.board3.has_pair)
         self.assertFalse(self.board4.has_pair)
@@ -88,6 +98,7 @@ class MyBoardTestCase(unittest.TestCase):
         self.assertFalse(self.board6.has_pair)
 
     def test_has_straightdraw(self):
+        self.assertIsNone(self.board.has_straightdraw)
         self.assertFalse(self.board2.has_straightdraw)
         self.assertTrue(self.board3.has_straightdraw)
         self.assertTrue(self.board4.has_straightdraw)
@@ -95,6 +106,7 @@ class MyBoardTestCase(unittest.TestCase):
         self.assertTrue(self.board6.has_straightdraw)
 
     def test_has_gutshot(self):
+        self.assertIsNone(self.board.has_gutshot)
         self.assertTrue(self.board2.has_gutshot)
         self.assertTrue(self.board3.has_gutshot)
         self.assertTrue(self.board4.has_gutshot)
@@ -102,6 +114,7 @@ class MyBoardTestCase(unittest.TestCase):
         self.assertTrue(self.board6.has_gutshot)
 
     def test_has_flushdraw(self):
+        self.assertIsNone(self.board.has_flushdraw)
         self.assertFalse(self.board2.has_flushdraw)
         self.assertTrue(self.board3.has_flushdraw)
         self.assertTrue(self.board4.has_flushdraw)
@@ -109,6 +122,7 @@ class MyBoardTestCase(unittest.TestCase):
         self.assertTrue(self.board6.has_flushdraw)
 
     def test_get_differences(self):
+        self.assertIsNone(self.board._get_differences())
         self.assertEqual(self.board2._get_differences(), (0, 4, 4))
         self.assertEqual(self.board3._get_differences(), (2, 1, 3))
         self.assertEqual(self.board4._get_differences(), (7, 2, 5))
