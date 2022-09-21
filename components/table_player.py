@@ -141,7 +141,9 @@ class TablePlayer:
 
     def sit(self, table):
         self._table = table
-        self.table.players.append(player=self)
+        self.table.players.pl_list.append(self)
+        self.table.players.name_dict[self.name] = self
+        self.table.players.seat_dict[self.seat] = self
 
     def bet(self, amount):
         self.stack -= amount
