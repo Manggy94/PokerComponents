@@ -5,20 +5,20 @@ import components.action as action
 class MyActionTestCase(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.p1 = action.Player()
+        self.p1 = action.TablePlayer()
 
     def test_new_action(self):
         self.assertIsInstance(action.Action(self.p1), action.Action)  # add assertion here
 
     def test_action_player(self):
-        player = action.Player(name="Manggy", seat=4, stack=39000)
-        p2 = action.Player(name="Claude", seat=1, stack=3900)
+        player = action.TablePlayer(name="Manggy", seat=4, stack=39000)
+        p2 = action.TablePlayer(name="Claude", seat=1, stack=3900)
         act = action.Action(player=player)
-        self.assertIsInstance(act.player, action.Player)
+        self.assertIsInstance(act.player, action.TablePlayer)
         self.assertEqual(act.player.name, "Manggy")
         self.assertEqual(act.player.stack, 39000)
         act.player = p2
-        self.assertIsInstance(act.player, action.Player)
+        self.assertIsInstance(act.player, action.TablePlayer)
         self.assertEqual(act.player.name, "Claude")
         self.assertEqual(act.player.stack, 3900)
         with self.assertRaises(ValueError):
