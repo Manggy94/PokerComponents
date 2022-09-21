@@ -1,31 +1,31 @@
 import unittest
-import components.player as player
+import components.table_player as player
 import components.constants as cst
 
 
 class MyPlayerTestCase(unittest.TestCase):
     def setUp(self):
-        self.player = player.Player("Jean", 3, 2000)
+        self.player = player.TablePlayer("Jean", 3, 2000)
 
     def test_new_player(self):
-        self.assertIsInstance(self.player, player.Player)
+        self.assertIsInstance(self.player, player.TablePlayer)
 
     def test_player_name(self):
-        self.assertRaises(ValueError, lambda: player.Player("This is bullshit", 3, 3000))
+        self.assertRaises(ValueError, lambda: player.TablePlayer("This is bullshit", 3, 3000))
         self.assertGreater(len(self.player.name), 0)
         self.assertLess(len(self.player.name), 12)
         self.assertIsInstance(self.player.name, str)
         self.assertEqual(self.player.seat, 3)
 
     def test_player_seat(self):
-        self.assertRaises(ValueError, lambda: player.Player("Tom", 4.2, 3000))
-        self.assertRaises(ValueError, lambda: player.Player("Tom", 11, 3000))
-        self.assertRaises(ValueError, lambda: player.Player("Tom", -1, 3000))
+        self.assertRaises(ValueError, lambda: player.TablePlayer("Tom", 4.2, 3000))
+        self.assertRaises(ValueError, lambda: player.TablePlayer("Tom", 11, 3000))
+        self.assertRaises(ValueError, lambda: player.TablePlayer("Tom", -1, 3000))
         self.assertIsInstance(self.player.seat, int)
         self.assertEqual(self.player.seat, 3)
 
     def test_player_stack(self):
-        self.assertRaises(ValueError, lambda: player.Player("Tom", 4, -3000))
+        self.assertRaises(ValueError, lambda: player.TablePlayer("Tom", 4, -3000))
         self.assertIn(type(self.player.stack), [float, int])
         self.assertEqual(self.player.stack, 2000)
         self.player.stack += 0.5

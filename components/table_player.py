@@ -1,8 +1,9 @@
 import components.constants as cst
 from components.hand import Combo
+from components.table import Table
 
 
-class Player:
+class TablePlayer:
     """"""
 
     _name: str
@@ -13,6 +14,7 @@ class Player:
     folded: bool
     _hero: bool
     _position: cst.Position or None
+    _table: Table
 
     def __init__(self, name: str = "Villain", seat=0, stack: float = 0):
         self.name = name
@@ -35,9 +37,6 @@ class Player:
         }
         self.played = False
 
-    def __str__(self):
-        return f"Name: {self.name}\nSeat: {self.seat}\nStack: {self.stack}\nHero: {self.is_hero}\nCombo: {self.combo}"
-
     @property
     def name(self):
         return self._name
@@ -58,7 +57,7 @@ class Player:
 
     @seat.setter
     def seat(self, seat):
-        if seat < 0 or seat > 10 or type(seat) != int:
+        if seat not in range(11):
             raise ValueError("Seat should be an int between 0 and 10")
         else:
             self._seat = seat
@@ -136,46 +135,15 @@ class Player:
     def req_equity(self, table):
         return 1/(1+self.pot_odds(table))
 
+    @property
+    def table(self):
+        return self._table
 
-class Players:
-    """"""
-    preflop_starter = "BB"
-    postflop_starter = "BTN"
+    def sit(self, table):
+        self._table = table
+        self.table.players.append(player=self)
 
-    def __init__(self):
-        self.pl_list = []
-        self.name_dict = {}
-        self.seat_dict = {}
-        self.positions = {}
+    def bet(self, amount):
+        self.stack -= amount
 
-    def append(self, player):
-        if type(player) != Player:
-            raise ValueError("Only Players can be added to Players")
-        self.pl_list.append(player)
-        self.name_dict[player.name] = player
-        self.seat_dict[player.seat] = player
-
-    def __getitem__(self, item):
-        try:
-            if type(item) == str:
-                return self.name_dict[item]
-            elif type(item) == int:
-                return self.seat_dict[item]
-        except KeyError:
-            raise KeyError
-
-    def __len__(self):
-        return self.name_dict.__len__()
-
-    def __contains__(self, item):
-        return self.pl_list.__contains__(item)
-
-    def __iter__(self):
-        return self.pl_list.__iter__()
-
-    def find(self, name: str):
-        try:
-            return self.name_dict[name]
-        except KeyError:
-            print(f"{name} is not currently on this table")
 
