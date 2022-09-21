@@ -12,11 +12,15 @@ class MyActionTestCase(unittest.TestCase):
 
     def test_action_player(self):
         player = action.Player(name="Manggy", seat=4, stack=39000)
-        p2 = action.Player(name="Ckaude", seat=1, stack=3900)
+        p2 = action.Player(name="Claude", seat=1, stack=3900)
         act = action.Action(player=player)
         self.assertIsInstance(act.player, action.Player)
         self.assertEqual(act.player.name, "Manggy")
         self.assertEqual(act.player.stack, 39000)
+        act.player = p2
+        self.assertIsInstance(act.player, action.Player)
+        self.assertEqual(act.player.name, "Claude")
+        self.assertEqual(act.player.stack, 3900)
         with self.assertRaises(ValueError):
             act.player = "abc"
 
