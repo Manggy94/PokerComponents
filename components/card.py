@@ -142,6 +142,9 @@ class Deck:
     def __init__(self):
         self.cards = list(Card)
 
+    def __len__(self):
+        return self.cards.__len__()
+
     def shuffle(self):
         np.random.shuffle(self.cards)
 
@@ -156,3 +159,7 @@ class Deck:
             cd = Card(cd)
             idx = self.cards.index(cd)
             return self.cards.pop(idx)
+
+    @property
+    def len(self):
+        return self.__len__()
