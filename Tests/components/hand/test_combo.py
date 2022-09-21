@@ -70,6 +70,7 @@ class MyComboTestCase(unittest.TestCase):
         self.assertTrue(c1 < c2)
         self.assertTrue(c5 < c4)
         self.assertTrue(c2 < c6)
+        self.assertTrue(c1 > hand.Hand("ATo"))
 
     def test_set_cards_in_order(self):
         c1 = hand.Combo("AsJd")

@@ -295,36 +295,19 @@ class Combo(_ReprMixin):
 
     def __eq__(self, other):
         if self.__class__ is not other.__class__:
-            raise ValueError("You can only compare a Combo with another Combo")
+            if isinstance(other, Hand):
+                return self.to_hand() == other
+            else:
+                raise ValueError("You can only compare a Combo or a Hand with another Combo")
         return self.first == other.first and self.second == other.second
 
     def __lt__(self, other):
         if self.__class__ is not other.__class__:
-            raise ValueError("You can only compare a Combo with another Combo")
-
-        # lookup optimization
-        self_is_pair, other_is_pair = self.is_pair, other.is_pair
-        self_first, other_first = self.first, other.first
-
-        if self_is_pair and other_is_pair:
-            if self_first == other_first:
-                return self.second < other.second
-            return self_first < other_first
-
-        elif self_is_pair or other_is_pair:
-            # Pairs are better than non-pairs
-            return self_is_pair < other_is_pair
-
-        else:
-            if self_first.rank == other_first.rank:
-                if self.second.rank == other.second.rank:
-                    # same ranks, suited go first in order by Suit rank
-                    if self.is_suited or other.is_suited:
-                        return self.is_suited < other.is_suited
-                    # both are suited
-                    return self_first.suit < other_first.suit
-                return self.second < other.second
-            return self_first < other_first
+            if isinstance(other, Hand):
+                return self.to_hand() < other
+            else:
+                raise ValueError("You can only compare a Combo or a Hand with another Combo")
+        return self.to_hand() < other.to_hand()
 
     def _set_cards_in_order(self, first, second):
         self.first, self.second = Card(first), Card(second)
@@ -381,10 +364,6 @@ class Combo(_ReprMixin):
             return Shape.SUITED
         else:
             return Shape.OFFSUIT
-
-    @shape.setter
-    def shape(self, value):
-        self._shape = Shape(value).val
 
 
 class ComboRange(pd.DataFrame):
