@@ -43,4 +43,3 @@ class Action:
     @value.setter
     def value(self, value):
         self._value = max(0.0, float(value))
-
