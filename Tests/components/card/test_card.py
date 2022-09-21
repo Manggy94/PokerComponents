@@ -7,6 +7,10 @@ class MyCardTestCase(unittest.TestCase):
     def setUp(self) -> None:
         self.all_cards = list(card.Card)
 
+    def test_new(self):
+        with self.assertRaises(ValueError):
+            card.Card("As3")
+
     def test_cards_length(self):
         self.assertEqual(len(self.all_cards), 52)
 
@@ -36,6 +40,10 @@ class MyCardTestCase(unittest.TestCase):
         self.assertEqual(c3 - c1, 4)
         self.assertEqual(c1 - c4, 3)
         self.assertEqual(c3 - c4, 6)
+        with self.assertRaises(ValueError):
+            c1 == 3
+        with self.assertRaises(ValueError):
+            c1 < 3
 
     def test_is_face(self):
         self.assertTrue(card.Card("Ks").is_face)

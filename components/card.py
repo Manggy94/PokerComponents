@@ -79,14 +79,16 @@ class Card(_ReprMixin, metaclass=_CardMeta):
     def __new__(cls, card):
         if isinstance(card, cls):
             return card
+        elif isinstance(card, str):
+            if len(card) != 2:
+                raise ValueError(f"length should be two in {card}")
 
-        if len(card) != 2:
-            raise ValueError(f"length should be two in {card}")
-
-        self = object.__new__(cls)
-        self.rank = Rank(card[0])
-        self.suit = Suit(card[1])
-        return self
+            self = object.__new__(cls)
+            self.rank = Rank(card[0])
+            self.suit = Suit(card[1])
+            return self
+        else:
+            raise TypeError("A card or string must be given")
 
     def __hash__(self):
         return hash(self.rank) + hash(self.suit)
@@ -94,12 +96,12 @@ class Card(_ReprMixin, metaclass=_CardMeta):
     def __eq__(self, other):
         if self.__class__ is other.__class__:
             return self.rank == other.rank and self.suit == other.suit
-        return NotImplemented
+        else:
+            raise ValueError("Only a Card can be compared with another")
 
     def __lt__(self, other):
         if self.__class__ is not other.__class__:
-            return NotImplemented
-
+            raise ValueError("Only a Card can be compared with another")
         # with same ranks, suit counts
         if self.rank == other.rank:
             return self.suit < other.suit
