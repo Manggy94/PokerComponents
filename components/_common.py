@@ -43,13 +43,15 @@ class _OrderableMixin:
     def __eq__(self, other):
         if self.__class__ is other.__class__:
             return self._value_ == other._value_
-        return NotImplemented
+        else:
+            raise ValueError("Both elements must have the same type to be compared")
 
     def __lt__(self, other):
         if self.__class__ is other.__class__:
             names = self.__class__._member_names_
             return names.index(self._name_) < names.index(other._name_)
-        return NotImplemented
+        else:
+            raise ValueError("Both elements must have the same type to be compared")
 
 
 class PokerEnum(_OrderableMixin, enum.Enum, metaclass=_PokerEnumMeta):
@@ -74,10 +76,3 @@ class _ReprMixin:
     def __repr__(self):
         return f"{self.__class__.__name__}('{self}')"
 
-
-def _make_float(string):
-    return float(string.strip().replace(",", ""))
-
-
-def _make_int(string):
-    return int(string.strip().replace(",", ""))

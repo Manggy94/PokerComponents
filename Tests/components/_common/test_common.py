@@ -1,8 +1,14 @@
 import unittest
+import components._common as common
 
-class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        self.assertEqual(True, False)  # add assertion here
+
+class MyCommonTestCase(unittest.TestCase):
+    def test_new_class(self):
+        with self.assertRaises(TypeError):
+            class TOTO(common.PokerEnum):
+                VALID = 1, 2, 3
+                INVALID = 1
+
 
 if __name__ == '__main__':
     unittest.main()
