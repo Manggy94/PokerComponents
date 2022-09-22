@@ -285,6 +285,8 @@ class LookupTable:
             )
             yield lexo_next
 
+
+LOOKUP_TABLE = LookupTable()
 """
 The lookup table that is created when imported
 """
