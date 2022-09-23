@@ -1,8 +1,8 @@
 import itertools
 from components.bitcard import BitCard
-from components.lookup_table import LOOKUP_TABLE
+from components.lookup_table import LookupTable
 
-
+LOOKUP_TABLE = LookupTable()
 class Evaluator:
     """Evaluates hand strengths with optimizations in terms of speed and memory usage."""
 
