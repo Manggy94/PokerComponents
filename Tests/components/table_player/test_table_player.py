@@ -6,6 +6,7 @@ import components.constants as cst
 class MyPlayerTestCase(unittest.TestCase):
     def setUp(self):
         self.player = player.TablePlayer("Jean", 3, 2000)
+        self.toto = player.TablePlayer(name="Toto", seat=2, stack=25500)
 
     def test_new_player(self):
         self.assertIsInstance(self.player, player.TablePlayer)
@@ -69,6 +70,22 @@ class MyPlayerTestCase(unittest.TestCase):
         self.player.fold()
         self.assertTrue(self.player.folded)
         self.assertTrue(self.player.played)
+
+    def test_sit_and_play_at_table(self):
+        tab = player.Table()
+        self.toto.sit(tab)
+        self.assertFalse(self.toto.played)
+        self.assertFalse(self.toto.folded)
+        self.player.sit(tab)
+        self.assertEqual(self.toto.init_stack, 25500)
+        self.assertEqual(tab.players.seat_dict[2], self.toto)
+        self.assertEqual(tab.players.name_dict["Toto"], self.toto)
+        self.assertEqual(tab.players.pl_list[0], self.toto)
+        self.toto.init_stack = 22000
+        self.assertEqual(self.toto.init_stack, 22000)
+        self.assertEqual(self.toto.stack, 22000)
+        self.toto.distribute("AsAd")
+        self.assertRaises(ValueError, lambda: self.player.distribute("AsKs"))
 
 
 if __name__ == '__main__':
