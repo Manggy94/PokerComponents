@@ -1,3 +1,5 @@
+from components.constants import MoneyType
+
 class Level:
     """Level of the tournament"""
 
@@ -70,7 +72,7 @@ class Tournament:
         self._id = ident
         self._name = name
         self._buyin = buyin
-        self._money_type = money_type
+        self.money_type = money_type
         self._is_ko = is_ko
 
     @property
@@ -95,10 +97,7 @@ class Tournament:
 
     @buyin.setter
     def buyin(self, amount):
-        try:
-            self._buyin = float(amount)
-        except TypeError:
-            pass
+        self._buyin = max(0, float(amount))
 
     @property
     def money_type(self):
@@ -106,7 +105,7 @@ class Tournament:
 
     @money_type.setter
     def money_type(self, money_type):
-        self._money_type = money_type
+        self._money_type = MoneyType(money_type)
 
     def __str__(self):
         return f"Name: {self.name}\nId: {self.id}\nBuy-in: {self.buyin}\nMoney: {self.money_type}"
