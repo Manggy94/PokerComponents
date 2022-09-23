@@ -78,7 +78,7 @@ class Position(PokerEnum):
     UTG3 = "UTG3", "utg+3", "utg + 3"
     UTG4 = "UTG4", "LJ", "lojack", "lowjack", "utg+4", "utg + 4"
     HJ = "HJ", "hijack", "highjack", "utg+5", "utg + 5"
-    CO = "CO", "cutoff", "cut off"
+    CO = "CO", "cutoff", "cut off", "cut-off"
     BTN = "BTN", "bu", "button"
     SB = "SB", "small blind"
     BB = "BB", "big blind"
