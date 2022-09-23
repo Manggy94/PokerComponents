@@ -3,8 +3,6 @@ from components.listings import players_positions
 
 class Players:
     """"""
-    _preflop_starter = "BB"
-    _postflop_starter = "BTN"
     _BB: int
     pl_list: list
     name_dict: dict
@@ -55,7 +53,7 @@ class Players:
             self._BB = self.occupied_seats[0]
 
     @property
-    def ordered_seats(self):
+    def preflop_ordered_seats(self):
         cut = self.occupied_seats.index(self.bb) + 1
         return self.occupied_seats[cut:] + self.occupied_seats[:cut]
 
@@ -63,9 +61,13 @@ class Players:
     def positions_mapper(self):
         nb_players = self.len
         positions = players_positions[nb_players]
-        return dict(zip(self.ordered_seats, positions))
+        return dict(zip(self.preflop_ordered_seats, positions))
 
     def distribute_positions(self):
         for seat, pos in self.positions_mapper.items():
             pl = self.seat_dict[seat]
             pl.position = pos
+
+    @property
+    def postflop_ordered_seats(self):
+        return self.preflop_ordered_seats[-2:] + self.preflop_ordered_seats[:-2]

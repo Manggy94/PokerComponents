@@ -32,24 +32,25 @@ class MyPlayersTestCase(unittest.TestCase):
         tab.players.bb = 2
         self.assertIsInstance(tab.players.positions_mapper, dict)
         self.assertEqual(tab.players.bb, 2)
-        self.assertEqual(tab.players.ordered_seats, [4, 6, 1, 2])
+        self.assertEqual(tab.players.preflop_ordered_seats, [4, 6, 1, 2])
         self.assertEqual(tab.players.positions_mapper, {
             4: Position.CO,
             6: Position.BTN,
             1: Position.SB,
             2: Position.BB})
+        self.assertEqual(tab.players.postflop_ordered_seats, [1, 2, 4, 6])
         tab.players.bb = 3
         self.assertEqual(tab.players.bb, 1)
-        self.assertEqual(tab.players.ordered_seats, [2, 4, 6, 1])
+        self.assertEqual(tab.players.preflop_ordered_seats, [2, 4, 6, 1])
         self.assertIsInstance(tab.players.occupied_seats, list)
         tab.players.bb = 6
-        self.assertEqual(tab.players.ordered_seats, [1, 2, 4, 6])
+        self.assertEqual(tab.players.preflop_ordered_seats, [1, 2, 4, 6])
         self.assertFalse(self.p5 in tab.players)
         self.p5.sit(tab)
         self.assertTrue(self.p5 in tab.players)
         tab.players.bb = 4
         self.assertEqual(tab.players.occupied_seats, [1, 2, 4, 5, 6])
-        self.assertEqual(tab.players.ordered_seats, [5, 6, 1, 2, 4])
+        self.assertEqual(tab.players.preflop_ordered_seats, [5, 6, 1, 2, 4])
         self.assertEqual(tab.players.positions_mapper, {
             5: Position.HJ,
             6: Position.CO,
@@ -57,9 +58,11 @@ class MyPlayersTestCase(unittest.TestCase):
             2: Position.SB,
             4: Position.BB})
         tab.players.distribute_positions()
+        self.assertEqual(tab.players.postflop_ordered_seats, [2, 4, 5, 6, 1])
         self.assertEqual(tab.players["Titi"].position, Position("cutoff"))
         self.assertEqual(tab.players[5].position, Position.HJ)
         self.assertRaises(ValueError, lambda: tab.players[0.5])
+        print(tab.players.postflop_ordered_seats)
 
 
 
