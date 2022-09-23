@@ -1,3 +1,3 @@
 #!/bin/sh
-test_compo.sh
-test_cov_compo.sh
+sh scripts/test_compo.sh
+sh scripts/test_cov_compo.sh
