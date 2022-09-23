@@ -1,5 +1,6 @@
 from components.constants import MoneyType
 
+
 class Level:
     """Level of the tournament"""
 
@@ -66,14 +67,16 @@ class Tournament:
     _buyin: float
     _is_ko: bool = True
     _money_type: str = "real"
+    _level: Level
 
     def __init__(self, ident: str = '0000', name: str = 'Kill The Fish', is_ko=True, buyin: float = 5.0,
-                 money_type: str = 'real'):
+                 money_type: str = 'real', level: Level = Level()):
         self._id = ident
         self._name = name
         self._buyin = buyin
         self.money_type = money_type
         self._is_ko = is_ko
+        self._level = level
 
     @property
     def id(self):
@@ -97,7 +100,7 @@ class Tournament:
 
     @buyin.setter
     def buyin(self, amount):
-        self._buyin = max(0, float(amount))
+        self._buyin = max(0.0, float(amount))
 
     @property
     def money_type(self):
@@ -106,6 +109,14 @@ class Tournament:
     @money_type.setter
     def money_type(self, money_type):
         self._money_type = MoneyType(money_type)
+
+    @property
+    def level(self):
+        return self._level
+
+    @level.setter
+    def level(self, level):
+        self._level = level
 
     def __str__(self):
         return f"Name: {self.name}\nId: {self.id}\nBuy-in: {self.buyin}\nMoney: {self.money_type}"

@@ -7,12 +7,16 @@ class MyTournamentTestCase(unittest.TestCase):
 
     def setUp(self):
         self.tour = tournament.Tournament("tour_id", name="PLD", money_type="real", buyin=9.5)
+        self.level = tournament.Level()
+        self.level2 = tournament.Level(level=4, bb=600)
 
     def test_new_tournament(self):
-        tour = tournament.Tournament()
+        tour = tournament.Tournament(level=self.level)
         self.assertIsInstance(tour, tournament.Tournament)
+        self.assertIsInstance(tour.level, tournament.Level)
         self.assertEqual(tour.id, "0000")
         self.assertEqual(tour.name, "Kill The Fish")
+        tour.level = self.level2
 
     def test_str(self):
         self.assertIsInstance(self.tour.__str__(), str)
