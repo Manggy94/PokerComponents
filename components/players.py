@@ -13,6 +13,7 @@ class Players:
         self.pl_list = []
         self.name_dict = {}
         self.seat_dict = {}
+        self._BB = 1
 
     def __getitem__(self, item):
         if type(item) == str:
@@ -62,6 +63,12 @@ class Players:
         nb_players = self.len
         positions = players_positions[nb_players]
         return dict(zip(self.preflop_ordered_seats, positions))
+
+    @property
+    def seats_mapper(self):
+        nb_players = self.len
+        positions = tuple(f"{pos}" for pos in players_positions[nb_players])
+        return dict(zip(positions, self.preflop_ordered_seats))
 
     def distribute_positions(self):
         for seat, pos in self.positions_mapper.items():
