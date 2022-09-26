@@ -7,8 +7,5 @@ function git_add_component()
     git add ~/projects/PokerParser/components/$1.py ~/projects/PokerParser/Tests/components/$1
     git status
     echo "Updates of component $1 and its tests are ready to be commited"
-    
-
-    
 }
 git_add_component $component
