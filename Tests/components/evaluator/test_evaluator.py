@@ -23,8 +23,8 @@ class MyEvaluatorTestCase(unittest.TestCase):
         self.assertIsInstance(evaluator.Evaluator.get_rank_class(487), int)
         self.assertEqual(evaluator.Evaluator.get_rank_class(487), 4)
         self.assertEqual(evaluator.Evaluator.get_rank_class(11), 2)
-        self.assertIsInstance(evaluator.Evaluator.rank_to_string(487), str)
-        self.assertEqual(evaluator.Evaluator.rank_to_string(487), "Flush")
+        self.assertIsInstance(evaluator.Evaluator.score_to_string(487), str)
+        self.assertEqual(evaluator.Evaluator.score_to_string(487), "Flush")
         self.assertIsInstance(evaluator.Evaluator.get_five_card_rank_percentage(487), float)
         self.assertEqual(evaluator.Evaluator.get_five_card_rank_percentage(487), 1-487 / 7462)
 

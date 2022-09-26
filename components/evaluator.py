@@ -52,7 +52,7 @@ class Evaluator:
         return LOOKUP_TABLE.MAX_TO_RANK_CLASS[max_rank]
 
     @classmethod
-    def rank_to_string(cls, hand_rank: int) -> str:
+    def score_to_string(cls, hand_rank: int) -> str:
         """
         Returns a string describing the hand of the hand_rank.
 
