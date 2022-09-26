@@ -5,6 +5,8 @@ from components.players import Players
 from components.pot import Pot
 from components.tournament import Level, Tournament
 from components.evaluator import Evaluator
+from random import sample
+import numpy as np
 
 
 class Table:
@@ -95,6 +97,10 @@ class Table:
         else:
             return self.players.postflop_ordered_seats
 
+    @property
+    def players_waiting(self):
+        return [self.players[i] for i in self.playing_order if self.players[i].can_play]
+
     def draw_flop(self, c1=None, c2=None, c3=None):
         if len(self._board) > 0:
             raise ValueError("Board must be empty before we can draw a flop")
@@ -151,3 +157,6 @@ class Table:
         self.post_antes()
         self.post_sb()
         self.post_bb()
+
+
+
