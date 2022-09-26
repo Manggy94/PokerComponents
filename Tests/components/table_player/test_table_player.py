@@ -77,6 +77,7 @@ class MyPlayerTestCase(unittest.TestCase):
         self.assertFalse(self.toto.played)
         self.assertFalse(self.toto.folded)
         self.player.sit(tab)
+        self.assertTrue(self.player.can_play)
         self.assertEqual(self.toto.init_stack, 25500)
         self.assertEqual(tab.players.seat_dict[2], self.toto)
         self.assertEqual(tab.players.name_dict["Toto"], self.toto)
@@ -84,6 +85,8 @@ class MyPlayerTestCase(unittest.TestCase):
         self.toto.init_stack = 22000
         self.assertEqual(self.toto.init_stack, 22000)
         self.assertEqual(self.toto.stack, 22000)
+        self.assertEqual(self.toto.max_bet(1000), 1000)
+        self.assertEqual(self.toto.max_bet(100000), 22000)
         self.toto.distribute("AsAd")
         self.assertRaises(ValueError, lambda: self.player.distribute("AsKs"))
 

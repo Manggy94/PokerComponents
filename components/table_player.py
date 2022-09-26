@@ -123,9 +123,6 @@ class TablePlayer:
         self.folded = False
         self.played = False
 
-    def reset_street_status(self):
-        self.played = False
-
     @property
     def to_call(self):
         return min(self.table.current_pot.highest_bet-self.current_bet, self.stack)
@@ -155,6 +152,9 @@ class TablePlayer:
     def table(self):
         return self._table
 
+    def max_bet(self, value):
+        return min(self.stack, value)
+
     def sit(self, table):
         self._table = table
         self.table.players.pl_list.append(self)
@@ -163,14 +163,13 @@ class TablePlayer:
         self.reset()
 
     def pay(self, value):
-        print(self.table.current_pot.max_bet)
-        amount = min(self.stack, value)
+        amount = self.max_bet(value)
         self.stack -= amount
         self.table.current_pot.add(amount)
 
     def bet(self, value):
+        self.current_bet += self.max_bet(value)
         self.pay(value)
-        self.current_bet += min(self.stack, value)
         if self.current_bet > self.table.current_pot.highest_bet:
             self.table.current_pot.highest_bet = self.current_bet
         self.played = True
@@ -183,14 +182,17 @@ class TablePlayer:
         if value > self.table.current_pot.highest_bet:
             self.table.current_pot.highest_bet = value
 
-    def score_hand(self):
-        cards = tuple(card for card in self.combo)
-        board = tuple(card for card in self.table.board[:self.table.board.size])
+    @property
+    def hand_score(self):
+        cards = (self.combo.first, self.combo.second)
+        board = tuple(card for card in self.table.board[:self.table.board.len])
         score = self.table.evaluator.evaluate(cards=cards, board=board)
         return score
 
-    def evaluate_hand(self):
-        score = self.score_hand()
-        rank_class = self.table.evaluator.get_rank_class(score)
-        class_str = self.table.evaluator.rank_to_string(rank_class)
-        return {"score": score, "rank": rank_class, "class": class_str}
+    @property
+    def rank_class(self):
+        return self.table.evaluator.get_rank_class(self.hand_score)
+
+    @property
+    def class_str(self):
+        return self.table.evaluator.score_to_string(self.hand_score)
