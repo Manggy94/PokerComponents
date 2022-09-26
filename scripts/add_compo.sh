@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "Which component do you want to add, BITCH???"
+echo "Which component do you want to add?"
 read component
 function git_add_component()
 {
