@@ -19,6 +19,7 @@ class Table:
     _level: Level
     _street: Street
     _seat_playing: int
+    _min_bet: float
     evaluator: Evaluator
 
     def __init__(self):
@@ -105,12 +106,20 @@ class Table:
         return [self.players[i] for i in self.playing_order if self.players[i].in_game]
 
     @property
+    def players_involved(self):
+        return [self.players[i] for i in self.playing_order if not self.players[i].folded]
+
+    @property
     def seats_playing(self):
         return [pl.seat for pl in self.players_waiting]
 
     @property
     def nb_waiting(self):
         return len(self.players_waiting)
+
+    @property
+    def nb_involved(self):
+        return len(self.players_involved)
 
     def draw_flop(self, c1=None, c2=None, c3=None):
         if len(self._board) > 0:
@@ -121,27 +130,33 @@ class Table:
         self._board.add(c1)
         self._board.add(c2)
         self._board.add(c3)
+
+    def flop(self, c1=None, c2=None, c3=None):
+        self.draw_flop(c1=c1, c2=c2, c3=c3)
+        self.street_reset()
         self.street = "flop"
-        print(f"Flop: {c1}, {c2}, {c3}")
-        print(f"Board: {[x for x in self._board[:3]]}")
 
     def draw_turn(self, card=None):
         if len(self._board) != 3:
             raise ValueError("Board size must be 3 before we can draw a turn")
         card = self._deck.draw(card)
         self._board.add(card)
+
+    def turn(self, card=None):
+        self.draw_turn(card)
         self.street = "turn"
-        print(f"Turn: {card}")
-        print(f"Board: {[x for x in self._board[:4]]}")
+        self.street_reset()
 
     def draw_river(self, card=None):
         if len(self._board) != 4:
             raise ValueError("Board size must be 4 before we can draw a turn")
         card = self._deck.draw(card)
         self._board.add(card)
+
+    def river(self, card=None):
+        self.draw_river(card)
         self.street = "river"
-        print(f"River: {card}")
-        print(f"Board: {[x for x in self._board[:5]]}")
+        self.street_reset()
 
     def add_tournament(self, tournament):
         self.tournament = tournament
@@ -156,14 +171,14 @@ class Table:
         seat = self.players.seats_mapper["SB"]
         player = self.players.seat_dict[seat]
         if player.can_play:
-            player.bet(self.level.sb)
+            player.do_bet(self.level.sb)
             player.played = False
 
     def post_bb(self):
         seat = self.players.seats_mapper["BB"]
         player = self.players.seat_dict[seat]
         if player.can_play:
-            player.bet(self.level.bb)
+            player.do_bet(self.level.bb)
             player.played = False
 
     def post_pregame(self):
@@ -177,9 +192,19 @@ class Table:
             self._seat_playing = self.playing_order[0]
         return self._seat_playing
 
+    @property
+    def min_bet(self):
+        if not hasattr(self, "_min_bet"):
+            self._min_bet = self.level.bb*2
+        return self._min_bet
+
+    @min_bet.setter
+    def min_bet(self, value):
+        self._min_bet = value
+
     def advance_seat_playing(self):
         player = self.current_player
-        while not player.can_play:
+        while not player.can_play and self.nb_waiting > 0:
             idx = self.playing_order.index(player.seat) + 1
             try:
                 new_seat = self.playing_order[idx]
@@ -188,11 +213,12 @@ class Table:
             player = self.players[new_seat]
         self._seat_playing = player.seat
 
-
+    def street_reset(self):
+        self.current_pot.highest_bet = 0
+        self.min_bet = self.level.bb
+        for player in self.players_in_game:
+            player.reset()
 
     @property
     def current_player(self):
         return self.players[self.seat_playing]
-
-
-
