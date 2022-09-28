@@ -115,13 +115,10 @@ class TablePlayer:
         self.table.deck.draw(combo.second)
         self.combo = combo
 
-    def fold(self):
-        self.folded = True
-        self.played = True
-
     def reset(self):
         self.folded = False
         self.played = False
+        self.current_bet = 0
 
     @property
     def to_call(self):
@@ -171,15 +168,44 @@ class TablePlayer:
         self.stack -= amount
         self.table.current_pot.add(amount)
 
-    def bet(self, value):
+    def do_bet(self, value):
         self.current_bet += self.max_bet(value)
         self.pay(value)
         if self.current_bet > self.table.current_pot.highest_bet:
             self.table.current_pot.highest_bet = self.current_bet
         self.played = True
 
+    def bet(self, value):
+        self.do_bet(value)
+        self.table.advance_seat_playing()
+
+    def do_raise(self, add_value):
+        self.bet(self.to_call + add_value)
+
+    def do_call(self):
+        self.do_bet(self.to_call)
+
     def call(self):
-        self.bet(self.to_call)
+        self.do_call()
+        self.table.advance_seat_playing()
+
+    def do_check(self):
+        if self.to_call != 0:
+            raise ValueError("A player cannot check if somebody bet before")
+        else:
+            self.played = True
+
+    def check(self):
+        self.do_check()
+        self.table.advance_seat_playing()
+
+    def do_fold(self):
+        self.folded = True
+        self.played = True
+
+    def fold(self):
+        self.do_fold()
+        self.table.advance_seat_playing()
 
     def post(self, value):
         self.pay(value)

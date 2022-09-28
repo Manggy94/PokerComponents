@@ -67,7 +67,7 @@ class MyPlayerTestCase(unittest.TestCase):
     def test_in_game(self):
         self.assertFalse(self.player.folded)
         self.assertFalse(self.player.played)
-        self.player.fold()
+        self.player.do_fold()
         self.assertTrue(self.player.folded)
         self.assertTrue(self.player.played)
 
