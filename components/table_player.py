@@ -133,7 +133,11 @@ class TablePlayer:
 
     @property
     def can_play(self):
-        return not (self.is_all_in or (self.to_call == 0 and self.played))
+        return not (self.is_all_in or (self.to_call == 0 and self.played) or self.folded)
+
+    @property
+    def in_game(self):
+        return not (self.is_all_in or self.folded)
 
     @property
     def pot_odds(self) -> float:
