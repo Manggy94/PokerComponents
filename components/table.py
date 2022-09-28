@@ -5,8 +5,6 @@ from components.players import Players
 from components.pot import Pot
 from components.tournament import Level, Tournament
 from components.evaluator import Evaluator
-from random import sample
-import numpy as np
 
 
 class Table:
@@ -20,6 +18,7 @@ class Table:
     _tournament: Tournament
     _level: Level
     _street: Street
+    _seat_playing: int
     evaluator: Evaluator
 
     def __init__(self):
@@ -101,6 +100,18 @@ class Table:
     def players_waiting(self):
         return [self.players[i] for i in self.playing_order if self.players[i].can_play]
 
+    @property
+    def players_in_game(self):
+        return [self.players[i] for i in self.playing_order if self.players[i].in_game]
+
+    @property
+    def seats_playing(self):
+        return [pl.seat for pl in self.players_waiting]
+
+    @property
+    def nb_waiting(self):
+        return len(self.players_waiting)
+
     def draw_flop(self, c1=None, c2=None, c3=None):
         if len(self._board) > 0:
             raise ValueError("Board must be empty before we can draw a flop")
@@ -146,17 +157,42 @@ class Table:
         player = self.players.seat_dict[seat]
         if player.can_play:
             player.bet(self.level.sb)
+            player.played = False
 
     def post_bb(self):
         seat = self.players.seats_mapper["BB"]
         player = self.players.seat_dict[seat]
         if player.can_play:
             player.bet(self.level.bb)
+            player.played = False
 
     def post_pregame(self):
         self.post_antes()
         self.post_sb()
         self.post_bb()
+
+    @property
+    def seat_playing(self):
+        if not hasattr(self, "_seat_playing"):
+            self._seat_playing = self.playing_order[0]
+        return self._seat_playing
+
+    def advance_seat_playing(self):
+        player = self.current_player
+        while not player.can_play:
+            idx = self.playing_order.index(player.seat) + 1
+            try:
+                new_seat = self.playing_order[idx]
+            except IndexError:
+                new_seat = self.playing_order[0]
+            player = self.players[new_seat]
+        self._seat_playing = player.seat
+
+
+
+    @property
+    def current_player(self):
+        return self.players[self.seat_playing]
 
 
 
