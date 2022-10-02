@@ -27,7 +27,7 @@ class Table:
         self._deck = Deck()
         self._deck.shuffle()
         self._players = Players()
-        self._pots = [Pot()]
+        self._pot = Pot()
         self.evaluator = Evaluator()
         self._is_mtt = False
         self._street = Street.PREFLOP
@@ -45,10 +45,6 @@ class Table:
         return self._players
 
     @property
-    def current_pot(self):
-        return self._pots[len(self._pots)-1]
-
-    @property
     def max_players(self):
         return self._max_players
 
@@ -60,8 +56,8 @@ class Table:
             self._max_players = max_value
 
     @property
-    def pot(self) -> float:
-        return sum((pot.value for pot in self._pots))
+    def pot(self):
+        return self._pot
 
     @property
     def tournament(self):
@@ -214,7 +210,7 @@ class Table:
         self._seat_playing = player.seat
 
     def street_reset(self):
-        self.current_pot.highest_bet = 0
+        self.pot.highest_bet = 0
         self.min_bet = self.level.bb
         for player in self.players_in_game:
             player.reset()
@@ -222,3 +218,33 @@ class Table:
     @property
     def current_player(self):
         return self.players[self.seat_playing]
+
+    @property
+    def winners(self):
+        winners = {}
+        for player in self.players_involved:
+            pl_score = player.hand_score
+            if not winners.get(pl_score):
+                winners[pl_score] = [player]
+            else:
+                winners[pl_score].append(player)
+        return winners
+
+    def split_pot(self, players):
+        while len(players) > 0 and self.pot.value > 0:
+            min_reward = min([pl.max_reward for pl in players])
+            reward = min(min_reward, self.pot.value/len(players))
+            for player in players:
+                if not hasattr(player, "reward"):
+                    player.reward = 0
+                player.reward += reward
+                if player.reward >= player.max_reward:
+                    players.remove(player)
+                    player.win(reward)
+
+    def distribute_rewards(self):
+        scores = [score for score in self.winners.keys()]
+        scores.sort()
+        for score in scores:
+            players = self.winners[score]
+            self.split_pot(players)
