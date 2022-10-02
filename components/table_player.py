@@ -15,6 +15,7 @@ class TablePlayer:
     _hero: bool
     _position: Position or None
     _table: Table
+    _max_reward: float
 
     def __init__(self, name: str = "Villain", seat=0, stack: float = 0):
         self.name = name
@@ -77,6 +78,14 @@ class TablePlayer:
         self.stack = self.init_stack
 
     @property
+    def invested(self):
+        return self.init_stack - self.stack
+
+    @property
+    def max_reward(self):
+        return (not self.folded) * sum([min(self.invested, pl.invested) for pl in self.table.players])
+
+    @property
     def combo(self):
         return self._combo
 
@@ -122,7 +131,7 @@ class TablePlayer:
 
     @property
     def to_call(self):
-        return min(self.table.current_pot.highest_bet-self.current_bet, self.stack)
+        return min(self.table.pot.highest_bet-self.current_bet, self.stack)
 
     @property
     def is_all_in(self):
@@ -140,7 +149,7 @@ class TablePlayer:
     def pot_odds(self) -> float:
         to_call = self.to_call
         if to_call != 0:
-            pot_odds = float(self.table.pot/to_call)
+            pot_odds = float(self.table.pot.value/to_call)
         else:
             pot_odds = float("inf")
         return pot_odds
@@ -148,6 +157,7 @@ class TablePlayer:
     @property
     def req_equity(self):
         return 1.0/(1.0+self.pot_odds)
+
 
     @property
     def table(self):
@@ -166,21 +176,18 @@ class TablePlayer:
     def pay(self, value):
         amount = self.max_bet(value)
         self.stack -= amount
-        self.table.current_pot.add(amount)
+        self.table.pot.add(amount)
 
     def do_bet(self, value):
         self.current_bet += self.max_bet(value)
         self.pay(value)
-        if self.current_bet > self.table.current_pot.highest_bet:
-            self.table.current_pot.highest_bet = self.current_bet
+        if self.current_bet > self.table.pot.highest_bet:
+            self.table.pot.highest_bet = self.current_bet
         self.played = True
 
     def bet(self, value):
         self.do_bet(value)
         self.table.advance_seat_playing()
-
-    def do_raise(self, add_value):
-        self.bet(self.to_call + add_value)
 
     def do_call(self):
         self.do_bet(self.to_call)
@@ -209,8 +216,8 @@ class TablePlayer:
 
     def post(self, value):
         self.pay(value)
-        if value > self.table.current_pot.highest_bet:
-            self.table.current_pot.highest_bet = value
+        if value > self.table.pot.highest_bet:
+            self.table.pot.highest_bet = value
 
     @property
     def hand_score(self):
@@ -226,3 +233,7 @@ class TablePlayer:
     @property
     def class_str(self):
         return self.table.evaluator.score_to_string(self.hand_score)
+
+    def win(self, amount):
+        self.table.pot.value -= amount
+        self.stack += amount
