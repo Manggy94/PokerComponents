@@ -45,7 +45,7 @@ class MyActionTestCase(unittest.TestCase):
     def test_action_str(self):
         act = action.Action(player=self.p1, move="call", value=33.000)
         self.assertIsInstance(f"{act}", str)
-        self.assertEqual(f"{act}", "Villain CALL for 33.0")
+        self.assertEqual(f"{act}", "Villain does a CALL for 33.0")
 
 
 if __name__ == '__main__':
