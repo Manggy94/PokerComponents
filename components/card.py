@@ -9,6 +9,9 @@ __all__ = ["Suit", "Rank", "Card", "FACE_RANKS", "BROADWAY_RANKS", "Deck"]
 
 
 class Suit(PokerEnum):
+    """
+    Suit of a card
+    """
     CLUBS = "c", "clubs", "♣", "C"
     DIAMONDS = "d", "diamonds", "♦", "D"
     HEARTS = "h", "hearts", "♥", "H"
@@ -19,6 +22,9 @@ class Suit(PokerEnum):
 
 
 class Rank(PokerEnum):
+    """
+    Rank of a card
+    """
     DEUCE = "2", 2
     THREE = "3", 3
     FOUR = "4", 4
@@ -146,13 +152,21 @@ class Deck:
         return self.cards.__len__()
 
     def shuffle(self):
+        """
+        Randomly shuffles the deck
+        """
         np.random.shuffle(self.cards)
 
     def reset(self):
+        """Re-initializes the deck and shuffles it"""
         self.cards = list(Card)
         self.shuffle()
 
     def draw(self, cd=None):
+        """
+        Returns a card from the deck
+        If the parameter card is given, it returns the card at stake and pops it from the deck
+        """
         if not cd:
             return self.cards.pop()
         else:
@@ -162,4 +176,7 @@ class Deck:
 
     @property
     def len(self):
+        """
+        Returns the number of cards currently in the deck
+        """
         return self.__len__()
