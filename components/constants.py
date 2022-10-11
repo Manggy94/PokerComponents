@@ -2,6 +2,7 @@ from components._common import PokerEnum
 
 
 class PokerRoom(PokerEnum):
+    """Class describing famous online poker rooms"""
     STARS = "POKERSTARS", "PokerStars", "STARS", "PS"
     FTP = "Full Tilt Poker", "FTP", "FULL TILT"
     PKR = "PKR", "PKR POKER"
@@ -10,6 +11,7 @@ class PokerRoom(PokerEnum):
 
 
 class Currency(PokerEnum):
+    """Class describing used currency"""
     USD = "USD", "$"
     EUR = "EUR", "€"
     GBP = "GBP", "£"
@@ -17,12 +19,14 @@ class Currency(PokerEnum):
 
 
 class GameType(PokerEnum):
+    """Class describing the format of game"""
     TOUR = "Tournament", "TOUR"
     CASH = "Cash game", "CASH", "RING"
     SNG = "Sit & Go", "SNG", "SIT AND GO", "Sit&go"
 
 
 class Game(PokerEnum):
+    """Class describing the variety of poker played"""
     HOLDEM = "Hold'em", "HOLDEM", "Holdem", "Holdem no limit"
     OMAHA = ("Omaha",)
     OHILO = ("Omaha Hi/Lo",)
@@ -31,21 +35,22 @@ class Game(PokerEnum):
 
 
 class Limit(PokerEnum):
+    """Class describing pot format"""
     NL = "NL", "No limit"
     PL = "PL", "Pot limit"
     FL = "FL", "Fixed limit", "Limit"
 
 
 class TourFormat(PokerEnum):
+    """Class describing the tournament format"""
     ONEREB = ("1R1A",)
     REBUY = "Rebuy", "+R"
-    SECOND = ("2x Chance",)  # Second chance tournament, can rebuy twice
+    SECOND = ("2x Chance",)
     ACTION = ("Action Hour",)
-    # '2nd Chance' is a regular tournament on sunday evening,
-    # after Sunday million (name), NOT a tournament format
 
 
 class TourSpeed(PokerEnum):
+    """Class describing the tournament speed"""
     SLOW = ("Slow",)
     REGULAR = ("Regular",)
     TURBO = ("Turbo",)
@@ -54,11 +59,13 @@ class TourSpeed(PokerEnum):
 
 
 class MoneyType(PokerEnum):
+    """Class describing money type"""
     REAL = "Real money", "Real", "real"
     PLAY = "Play money", "Play", "play"
 
 
 class Action(PokerEnum):
+    """Class describing an action done"""
     BET = "BET", "bet", "bets", "BETS", "Bet", "Bets"
     RAISE = "RAISE", "raise", "raises",  "RAISES", "Raise", "Raises"
     CHECK = "CHECK", "check", "checks", "CHECKS", "Check", "Checks"
@@ -72,6 +79,7 @@ class Action(PokerEnum):
 
 
 class Position(PokerEnum):
+    """Class describing the table position"""
     UTG = "UTG", "under the gun"
     UTG1 = "UTG1", "utg+1", "utg + 1"
     UTG2 = "UTG2", "utg+2", "utg + 2"
@@ -85,6 +93,7 @@ class Position(PokerEnum):
 
 
 class Street(PokerEnum):
+    """Class describing the street"""
     PREFLOP = "PF", "Pf", "pf", "PREFLOP", "Preflop", "preflop", "Préflop", "préflop", "PreFlop"
     FLOP = "F", "f", "FLOP", "Flop", "flop"
     TURN = "T", "t", "TURN", "Turn", "turn"
