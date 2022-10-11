@@ -5,6 +5,9 @@ import enum
 
 
 class _PokerEnumMeta(enum.EnumMeta):
+    """
+    Meta Class for PokerEnum
+    """
     def __init__(self, clsname, bases, classdict):
         # make sure we only have tuple values, not single values
         for member in self.__members__.values():
@@ -20,17 +23,21 @@ class _PokerEnumMeta(enum.EnumMeta):
 
     def __call__(cls, value):
         """Return the appropriate instance with any of the values listed. If values contains
-        text types, those will be looked up in a case insensitive manner."""
+        text types, those will be looked up in an insensitive case manner."""
         if isinstance(value, str):
             value = value.upper()
         return super().__call__(value)
 
     def make_random(cls):
+        """Make a random instance of an enumerable"""
         return random.choice(list(cls))
 
 
 @functools.total_ordering
 class _OrderableMixin:
+    """
+    Class for objects that can be ordered
+    """
     # I couldn't inline this to PokerEnum because Enum do some magic which don't like it.
 
     # From Python manual:
@@ -55,6 +62,9 @@ class _OrderableMixin:
 
 
 class PokerEnum(_OrderableMixin, enum.Enum, metaclass=_PokerEnumMeta):
+    """
+    Class describing enumerable categories that can be stored in db
+    """
     def __str__(self):
         return str(self._value_[0])
 
