@@ -56,6 +56,7 @@ class Table:
 
     @max_players.setter
     def max_players(self, max_value):
+        """Setter for max players property"""
         if max_value not in range(1, 11):
             raise ValueError("Number of players should be between 1 and 10")
         else:
@@ -63,26 +64,32 @@ class Table:
 
     @property
     def pot(self):
+        """Returns the associated pot """
         return self._pot
 
     @property
     def tournament(self):
+        """Returns the associated tournament """
         return self._tournament
 
     @tournament.setter
     def tournament(self, tournament):
+        """Setter for tournament property"""
         self._tournament = tournament
 
     @property
     def street(self):
+        """Returns table's current street"""
         return self._street
 
     @street.setter
     def street(self, street):
+        """Setter for street property"""
         self._street = Street(street)
 
     @property
     def level(self):
+        """Returns current level"""
         if self._is_mtt:
             return self._tournament.level
         else:
@@ -90,10 +97,12 @@ class Table:
 
     @level.setter
     def level(self, level):
+        """Setter for level property"""
         self._level = level
 
     @property
     def playing_order(self):
+        """Returns the list of the indexes of players on the table, with order depending on current street"""
         if self._street == Street.PREFLOP:
             return self.players.preflop_ordered_seats
         else:
@@ -101,29 +110,36 @@ class Table:
 
     @property
     def players_waiting(self):
+        """Returns the list of players on the table that are waiting to play"""
         return [self.players[i] for i in self.playing_order if self.players[i].can_play]
 
     @property
     def players_in_game(self):
+        """Returns the list of players on the table that are still in the game (they can make an action)"""
         return [self.players[i] for i in self.playing_order if self.players[i].in_game]
 
     @property
     def players_involved(self):
+        """Returns the list of players on the table that didn't fold yet"""
         return [self.players[i] for i in self.playing_order if not self.players[i].folded]
 
     @property
     def seats_playing(self):
+        """Returns the list of seats of players waiting to play"""
         return [pl.seat for pl in self.players_waiting]
 
     @property
     def nb_waiting(self):
+        """Returns the number of players waiting to play"""
         return len(self.players_waiting)
 
     @property
     def nb_involved(self):
+        """Returns the number of players who didn't fold yet"""
         return len(self.players_involved)
 
     def draw_flop(self, c1=None, c2=None, c3=None):
+        """For the flop, draws 3 cards in the deck and adds them on the board as flop cards"""
         if len(self._board) > 0:
             raise ValueError("Board must be empty before we can draw a flop")
         c1 = self._deck.draw(c1)
@@ -134,42 +150,50 @@ class Table:
         self._board.add(c3)
 
     def flop(self, c1=None, c2=None, c3=None):
+        """Draw a flop and steps to this new street"""
         self.draw_flop(c1=c1, c2=c2, c3=c3)
-        self.street_reset()
         self.street = "flop"
+        self.street_reset()
 
     def draw_turn(self, card=None):
+        """For the turn, draws a card in the deck and adds it on the board as turn card"""
         if len(self._board) != 3:
             raise ValueError("Board size must be 3 before we can draw a turn")
         card = self._deck.draw(card)
         self._board.add(card)
 
     def turn(self, card=None):
+        """Draw a turn and steps to this new street"""
         self.draw_turn(card)
         self.street = "turn"
         self.street_reset()
 
     def draw_river(self, card=None):
+        """For the river, draws a card in the deck and adds it on the board as river card"""
         if len(self._board) != 4:
             raise ValueError("Board size must be 4 before we can draw a turn")
         card = self._deck.draw(card)
         self._board.add(card)
 
     def river(self, card=None):
+        """Draw a river and steps to this new street"""
         self.draw_river(card)
         self.street = "river"
         self.street_reset()
 
     def add_tournament(self, tournament):
+        """Associates table with a tournament"""
         self.tournament = tournament
         self._is_mtt = True
 
     def post_antes(self):
+        """Preflop Ante posting for players on the table"""
         for i in self.players.preflop_ordered_seats:
             player = self.players.seat_dict[i]
             player.post(self.level.ante)
 
     def post_sb(self):
+        """Preflop small blind posting"""
         seat = self.players.seats_mapper["SB"]
         player = self.players.seat_dict[seat]
         if player.can_play:
@@ -177,6 +201,7 @@ class Table:
             player.played = False
 
     def post_bb(self):
+        """Preflop big blind posting"""
         seat = self.players.seats_mapper["BB"]
         player = self.players.seat_dict[seat]
         if player.can_play:
@@ -184,27 +209,32 @@ class Table:
             player.played = False
 
     def post_pregame(self):
+        """Preflop posting antes and blinds"""
         self.post_antes()
         self.post_sb()
         self.post_bb()
 
     @property
     def seat_playing(self):
+        """Returns the seat of the player currently playing"""
         if not hasattr(self, "_seat_playing"):
             self._seat_playing = self.playing_order[0]
         return self._seat_playing
 
     @property
     def min_bet(self):
+        """Returns table current minimum bet a player can make"""
         if not hasattr(self, "_min_bet"):
             self._min_bet = self.level.bb*2
         return self._min_bet
 
     @min_bet.setter
     def min_bet(self, value):
+        """Setter for min bet property"""
         self._min_bet = value
 
     def advance_seat_playing(self):
+        """Advances seat playing to next available player"""
         player = self.current_player
         while not player.can_play and self.nb_waiting > 0:
             idx = self.playing_order.index(player.seat) + 1
@@ -216,17 +246,20 @@ class Table:
         self._seat_playing = player.seat
 
     def street_reset(self):
+        """Reset status of players in game and betting status for a new street"""
         self.pot.highest_bet = 0
         self.min_bet = self.level.bb
         for player in self.players_in_game:
-            player.reset()
+            player.reset_street_status()
 
     @property
     def current_player(self):
+        """Returns the player currently playing"""
         return self.players[self.seat_playing]
 
     @property
     def winners(self):
+        """Current status of winners with associated scores"""
         winners = {}
         for player in self.players_involved:
             pl_score = player.hand_score
@@ -237,6 +270,7 @@ class Table:
         return winners
 
     def split_pot(self, players):
+        """Split pot between players"""
         while len(players) > 0 and self.pot.value > 0:
             min_reward = min([pl.max_reward for pl in players])
             reward = min(min_reward, self.pot.value/len(players))
@@ -249,6 +283,7 @@ class Table:
                     player.win(reward)
 
     def distribute_rewards(self):
+        """Distribute rewards between players"""
         scores = [score for score in self.winners.keys()]
         scores.sort()
         for score in scores:
