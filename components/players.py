@@ -2,7 +2,9 @@ from components.listings import players_positions
 
 
 class Players:
-    """"""
+    """
+    Class representing many players on a table
+    """
     _BB: int
     pl_list: list
     name_dict: dict
@@ -34,20 +36,24 @@ class Players:
 
     @property
     def len(self):
+        """Returns the number of players on the table"""
         return self.__len__()
 
     @property
     def occupied_seats(self):
+        """returns an ordered list of the number of every occupied seat on the table"""
         tab = list(self.seat_dict.keys())
         tab.sort()
         return tab
 
     @property
     def bb(self):
+        """Returns the seat of table's Big Blind"""
         return self._BB
 
     @bb.setter
     def bb(self, seat):
+        """ Setter for bb property"""
         if seat in self.occupied_seats:
             self._BB = seat
         else:
@@ -55,26 +61,31 @@ class Players:
 
     @property
     def preflop_ordered_seats(self):
+        """Returns the list of the indexes of players on the table, with preflop playing order"""
         cut = self.occupied_seats.index(self.bb) + 1
         return self.occupied_seats[cut:] + self.occupied_seats[:cut]
 
     @property
     def positions_mapper(self):
+        """Returns a dict {seat: position} """
         nb_players = self.len
         positions = players_positions[nb_players]
         return dict(zip(self.preflop_ordered_seats, positions))
 
     @property
     def seats_mapper(self):
+        """Returns a dict {position: seat} """
         nb_players = self.len
         positions = tuple(f"{pos}" for pos in players_positions[nb_players])
         return dict(zip(positions, self.preflop_ordered_seats))
 
     def distribute_positions(self):
+        """When  players are on the table and bb is set, distributes a position to each player on the table"""
         for seat, pos in self.positions_mapper.items():
             pl = self.seat_dict[seat]
             pl.position = pos
 
     @property
     def postflop_ordered_seats(self):
+        """Returns the list of the indexes of players on the table, with postflop playing order"""
         return self.preflop_ordered_seats[-2:] + self.preflop_ordered_seats[:-2]
