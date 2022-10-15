@@ -167,11 +167,12 @@ class TablePlayer:
         return min(self.stack, value)
 
     def sit(self, table):
-        self._table = table
-        self.table.players.pl_list.append(self)
-        self.table.players.name_dict[self.name] = self
-        self.table.players.seat_dict[self.seat] = self
-        self.reset()
+        if table.players.len < table.max_players:
+            self._table = table
+            self.table.players.pl_list.append(self)
+            self.table.players.name_dict[self.name] = self
+            self.table.players.seat_dict[self.seat] = self
+            self.reset()
 
     def pay(self, value):
         amount = self.max_bet(value)
