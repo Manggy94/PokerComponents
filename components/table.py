@@ -8,6 +8,7 @@ from components.evaluator import Evaluator
 
 
 class Table:
+    """Class representing a poker table"""
     _ident: str
     _board: Board
     _deck: Deck
@@ -22,7 +23,7 @@ class Table:
     _min_bet: float
     evaluator: Evaluator
 
-    def __init__(self):
+    def __init__(self, max_players=6):
         self._board = Board()
         self._deck = Deck()
         self._deck.shuffle()
@@ -31,21 +32,26 @@ class Table:
         self.evaluator = Evaluator()
         self._is_mtt = False
         self._street = Street.PREFLOP
+        self.max_players = max_players
 
     @property
     def board(self):
+        """Returns the associated board """
         return self._board
 
     @property
     def deck(self):
+        """Returns the associated deck """
         return self._deck
 
     @property
     def players(self):
+        """Returns the associated players """
         return self._players
 
     @property
     def max_players(self):
+        """Returns the maximum players that can be added on this table"""
         return self._max_players
 
     @max_players.setter
