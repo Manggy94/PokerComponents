@@ -237,7 +237,14 @@ class TablePlayer:
 
     def bet(self, value):
         """Bet and step to next player"""
-        self.do_bet(value)
+        if value >= self.table.min_bet:
+            self.table.min_bet = 2*value - self.table.pot.highest_bet
+            self.do_bet(value)
+        elif self.table.min_bet > self.stack:
+            self.bet(self.table.min_bet)
+        else:
+            raise ValueError(f"You cannot bet {value} if the minimum bet is {self.table.min_bet} "
+                             f"and your stack is {self.stack}")
         self.table.advance_seat_playing()
 
     def do_call(self):
