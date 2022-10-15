@@ -21,7 +21,7 @@ class Table:
     _street: Street
     _seat_playing: int
     _min_bet: float
-    evaluator: Evaluator
+    _evaluator: Evaluator
 
     def __init__(self, max_players=6):
         self._board = Board()
@@ -29,7 +29,7 @@ class Table:
         self._deck.shuffle()
         self._players = Players()
         self._pot = Pot()
-        self.evaluator = Evaluator()
+        self._evaluator = Evaluator()
         self._is_mtt = False
         self._street = Street.PREFLOP
         self.max_players = max_players
@@ -71,6 +71,11 @@ class Table:
     def tournament(self):
         """Returns the associated tournament """
         return self._tournament
+
+    @property
+    def evaluator(self):
+        """Returns the associated evaluator"""
+        return self._evaluator
 
     @tournament.setter
     def tournament(self, tournament):
