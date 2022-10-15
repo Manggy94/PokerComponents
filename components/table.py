@@ -236,7 +236,8 @@ class Table:
     @min_bet.setter
     def min_bet(self, value):
         """Setter for min bet property"""
-        self._min_bet = value
+        if value > self.min_bet:
+            self._min_bet = value
 
     def advance_seat_playing(self):
         """Advances seat playing to next available player"""
