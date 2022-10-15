@@ -65,6 +65,5 @@ class MyPlayersTestCase(unittest.TestCase):
         print(tab.players.postflop_ordered_seats)
 
 
-
 if __name__ == '__main__':
     unittest.main()
