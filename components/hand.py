@@ -37,6 +37,9 @@ _SUITED_SUIT_COMBINATIONS = ("cc", "dd", "hh", "ss")
 
 
 class Shape(PokerEnum):
+    """
+    Shape of a Hand
+    """
     OFFSUIT = "o", "offsuit", "off"
     SUITED = "s", "suited"
     PAIR = ("",)
@@ -222,18 +225,26 @@ class Hand(_ReprMixin, metaclass=_HandMeta):
 
     @property
     def is_broadway(self):
+        """Indicates if the hand is composed of 2 broadways"""
         return self.first in BROADWAY_RANKS and self.second in BROADWAY_RANKS
 
     @property
     def is_pair(self):
+        """Indicates if the hand is a pair"""
         return self.first == self.second
 
     @property
     def shape(self):
+        """
+        Returns hand shape
+        """
         return Shape(self._shape)
 
     @shape.setter
     def shape(self, value):
+        """
+        Setter for shape property
+        """
         self._shape = Shape(value).val
 
 
@@ -249,7 +260,7 @@ SUITED_HANDS = tuple(hand for hand in Hand if hand.is_suited)
 
 @total_ordering
 class Combo(_ReprMixin):
-    """Hand combination."""
+    """Hand combination, made of two cards"""
 
     _shape: Shape
     __slots__ = ("first", "second")
@@ -269,6 +280,7 @@ class Combo(_ReprMixin):
 
     @classmethod
     def from_cards(cls, first, second):
+        """Creates a Combo from two cards"""
         first, second = Card(first), Card(second)
         if first == second:
             raise ValueError("We cannot have the same card twice in a Combo")
@@ -280,6 +292,9 @@ class Combo(_ReprMixin):
 
     @classmethod
     def from_tuple(cls, combo_tuple):
+        """
+        Creates a combo from a tuple of cards
+        """
         if not (isinstance(combo_tuple, tuple)):
             raise ValueError("A tuple should be given")
         if len(combo_tuple) != 2:
@@ -310,6 +325,7 @@ class Combo(_ReprMixin):
         return self.to_hand() < other.to_hand()
 
     def _set_cards_in_order(self, first, second):
+        """Private method to order cards in a combo and prevent redundancies"""
         self.first, self.second = Card(first), Card(second)
         if self.first < self.second:
             self.first, self.second = self.second, self.first
@@ -320,26 +336,32 @@ class Combo(_ReprMixin):
 
     @property
     def is_suited_connector(self):
+        """Indicates if the combo is a suited connector"""
         return self.is_suited and self.is_connector
 
     @property
     def is_suited(self):
+        """Indicates if the combo is suited"""
         return self.first.suit == self.second.suit
 
     @property
     def is_offsuit(self):
+        """Indicates if the combo is offsuit"""
         return not self.is_suited and not self.is_pair
 
     @property
     def is_connector(self):
+        """Indicates if the combo is a connector"""
         return self.rank_difference == 1
 
     @property
     def is_one_gapper(self):
+        """Indicates if the combo is a one gapper"""
         return self.rank_difference == 2
 
     @property
     def is_two_gapper(self):
+        """Indicates if the combo is a two gapper"""
         return self.rank_difference == 3
 
     @property
@@ -350,14 +372,17 @@ class Combo(_ReprMixin):
 
     @property
     def is_pair(self):
+        """Indicates if the combo is a pair"""
         return self.first.rank == self.second.rank
 
     @property
     def is_broadway(self):
+        """Indicates if the combo is a broadway"""
         return self.first.is_broadway and self.second.is_broadway
 
     @property
     def shape(self):
+        """Returns the shape of the combo"""
         if self.is_pair:
             return Shape.PAIR
         elif self.is_suited:
@@ -367,7 +392,9 @@ class Combo(_ReprMixin):
 
 
 class ComboRange(pd.DataFrame):
-
+    """
+    Class defining a Combo range, associating each combo possibility with a probability
+    """
     def __init__(self):
         all_combos = np.hstack([hand.to_combos() for hand in list(Hand)])
         str_combos = [f"{combo}" for combo in all_combos]
