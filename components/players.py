@@ -6,10 +6,10 @@ class Players:
     Class representing many players on a table
     """
     _BB: int
-    pl_list: list
-    name_dict: dict
-    seat_dict: dict
-    positions_mapper: dict
+    _pl_list: list
+    _name_dict: dict
+    _seat_dict: dict
+    _positions_mapper: dict
 
     def __init__(self):
         self.pl_list = []
@@ -33,6 +33,36 @@ class Players:
 
     def __iter__(self):
         return self.pl_list.__iter__()
+
+    @property
+    def pl_list(self):
+        """List of all the players on the table in appearance order"""
+        return self._pl_list
+
+    @pl_list.setter
+    def pl_list(self, listing):
+        """Setter for players list property"""
+        self._pl_list = listing
+
+    @property
+    def name_dict(self):
+        """A dict {name: player}"""
+        return self._name_dict
+
+    @name_dict.setter
+    def name_dict(self, dico):
+        """Setter for name dict property"""
+        self._name_dict = dico
+
+    @property
+    def seat_dict(self):
+        """A dict {seat: player}"""
+        return self._seat_dict
+
+    @seat_dict.setter
+    def seat_dict(self, dico):
+        """Setter for seat dict property"""
+        self._seat_dict = dico
 
     @property
     def len(self):
