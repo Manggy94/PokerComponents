@@ -8,3 +8,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 RUN bash scripts/test_cov_compo.sh
+CMD exec /bin/bash -c "trap : TERM INT; sleep infinity & wait"
