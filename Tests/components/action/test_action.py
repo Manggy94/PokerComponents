@@ -28,6 +28,7 @@ class MyActionTestCase(unittest.TestCase):
         act = action.Action(player=self.p1, move="raise")
         self.assertIsInstance(act.move, action.cst.Action)
         self.assertEqual(act.move, action.cst.Action.RAISE)
+        self.assertEqual(act.move.symbol, "R")
         act2 = action.Action(player=self.p1, move=action.cst.Action("folds"))
         self.assertIsInstance(act2.move, action.cst.Action)
         self.assertNotEqual(act2.move, action.cst.Action.RAISE)
