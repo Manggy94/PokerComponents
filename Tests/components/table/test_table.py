@@ -126,7 +126,7 @@ class MyTableTestCase(unittest.TestCase):
         tab.players[3].distribute("7h7c")
         tab.players[4].distribute("8d9d")
         tab.players[5].distribute("AsKs")
-        tab.players[6].distribute("9h8h")
+        tab.players[6].shows("9h8h")
         tab.players.bb = 2
         tab.players.distribute_positions()
         self.assertEqual(tab.pot.value, 0)
@@ -249,6 +249,29 @@ class MyTableTestCase(unittest.TestCase):
         self.assertEqual(tab.players[4].stack, 108293.5)
         self.assertEqual(tab.players[5].stack, 1385)
         self.assertEqual(tab.players[6].stack, 33033.5)
+
+    def test_game2(self):
+        tab = table.Table()
+        tab.max_players = 6
+        tab.add_tournament(self.tour)
+        self.assertEqual(tab.min_bet, 800)
+        for pl in self.pl_list2:
+            pl.sit(tab)
+        tab.players[1].distribute("TdTh")
+        tab.players[2].distribute("KdJd")
+        tab.players[3].distribute("7h7c")
+        tab.players[4].distribute("8d9d")
+        tab.players[5].distribute("AsKs")
+        tab.players[6].shows("9h8h")
+        tab.players.bb = 2
+        tab.players.distribute_positions()
+        self.assertEqual(tab.pot.value, 0)
+        tab.post_pregame()
+        self.assertEqual(tab.min_bet, 2 * tab.level.bb)
+        self.assertEqual(tab.current_player, self.p6)
+        self.assertEqual(tab.pot.value, 900)
+        tab.players[5].bet(400)
+        self.assertEqual(tab.pot.value, 900+217)
 
 
 if __name__ == '__main__':
