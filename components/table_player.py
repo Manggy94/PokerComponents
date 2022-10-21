@@ -147,8 +147,8 @@ class TablePlayer:
         """The player shows a combo at showdown"""
         self.combo = combo
         if self.has_table:
-            self.table.deck.draw(combo.first)
-            self.table.deck.draw(combo.second)
+            self.table.deck.draw(self.combo.first)
+            self.table.deck.draw(self.combo.second)
 
     @property
     def position(self):
