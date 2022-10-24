@@ -25,12 +25,12 @@ classifiers = [
 ]
 
 setup(
-    name="poker-components",
+    name="pkrcomponents",
     version="0.0.1",
     description="A Poker Package",
     long_description=Path("README.rst").read_text(),
     classifiers=classifiers,
-    keywords="poker package",
+    keywords="poker pkrcomponents pkr",
     author="Alexandre MANGWA",
     author_email="alex.mangwa@gmail.com",
     url="https://github.com/manggy94/PokerComponents",
