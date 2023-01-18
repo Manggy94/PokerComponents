@@ -132,3 +132,6 @@ class Board(pd.Series):
         if len(self) < 3:
             return None
         return any(combo.first.suit == combo.second.suit for combo in self.flop_combinations)
+
+    def to_json(self):
+        return self.astype(str).to_dict()

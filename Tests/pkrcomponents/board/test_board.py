@@ -129,6 +129,23 @@ class MyBoardTestCase(unittest.TestCase):
         self.assertEqual(self.board5._get_differences(), (0, 0, 0))
         self.assertEqual(self.board6._get_differences(), (1, 2, 1))
 
+    def test_to_json(self):
+        self.assertIsInstance(self.board.to_json(), dict)
+        self.assertEqual(self.board.to_json(), {
+            'flop_1': 'nan',
+            'flop_2': 'nan',
+            'flop_3': 'nan',
+            'turn': 'nan',
+            'river': 'nan'
+        })
+        self.assertEqual(self.board2.to_json(), {
+            'flop_1': 'As',
+            'flop_2': 'Ad',
+            'flop_3': 'Tc',
+            'turn': 'Td',
+            'river': 'Ah'
+        })
+
 
 if __name__ == '__main__':
     unittest.main()
