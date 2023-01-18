@@ -180,3 +180,9 @@ class Deck:
         Returns the number of cards currently in the deck
         """
         return self.__len__()
+
+    def to_json(self):
+        return {
+            "cards": [f"{card}" for card in self.cards],
+            "len": self.len
+        }

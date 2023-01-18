@@ -35,6 +35,11 @@ class MyDeckTestCase(unittest.TestCase):
         self.assertNotIn(c2, deck.cards)
         self.assertEqual(len(deck.cards), 51)
 
+    def test_to_json(self):
+        self.assertIsInstance(card.Deck().to_json(), dict)
+        self.assertIsInstance(card.Deck().to_json()["cards"], list)
+        self.assertIsInstance(card.Deck().to_json()["len"], int)
+
 
 if __name__ == '__main__':
     unittest.main()
