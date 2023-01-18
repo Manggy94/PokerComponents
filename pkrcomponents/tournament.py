@@ -9,7 +9,7 @@ class Level:
     _bb: float
     _ante: float
 
-    def __init__(self, level: int = 0,  bb: float = 0.0, ante=None):
+    def __init__(self, level: int = 1,  bb: float = 200.0, ante=None):
         self._level = level
         self.bb = float(bb)
         if ante is None:
