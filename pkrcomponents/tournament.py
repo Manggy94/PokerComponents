@@ -59,6 +59,14 @@ class Level:
         else:
             self._level = level
 
+    def to_json(self):
+        return {
+            "level": self.level,
+            "ante": self.ante,
+            "sb": self.sb,
+            "bb": self.bb
+        }
+
 
 class Tournament:
     """Class for played tournaments"""
@@ -118,5 +126,23 @@ class Tournament:
     def level(self, level):
         self._level = level
 
+    @property
+    def is_ko(self):
+        return self._is_ko
+
+    @is_ko.setter
+    def is_ko(self, is_ko):
+        self._is_ko = bool(is_ko)
+
     def __str__(self):
         return f"Name: {self.name}\nId: {self.id}\nBuy-in: {self.buyin}\nMoney: {self.money_type}"
+
+    def to_json(self):
+        return {
+            "level": self.level.to_json(),
+            "id": self.id,
+            "name": self.name,
+            "buy_in": self.buyin,
+            "is_ko": self.is_ko,
+            "money_type": self.money_type
+        }

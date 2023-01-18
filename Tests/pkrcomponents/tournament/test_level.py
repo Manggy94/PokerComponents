@@ -41,6 +41,13 @@ class MyLevelTestCase(unittest.TestCase):
         self.level.level = 11
         self.assertEqual(self.level.level, 11)
 
+    def test_json(self):
+        self.assertIsInstance(self.level.to_json(), dict)
+        self.assertEqual(self.level.to_json()["level"], 8)
+        self.assertEqual(self.level.to_json()["ante"], 200)
+        self.assertEqual(self.level.to_json()["sb"], 800)
+        self.assertEqual(self.level.to_json()["bb"], 1600)
+
 
 if __name__ == '__main__':
     unittest.main()

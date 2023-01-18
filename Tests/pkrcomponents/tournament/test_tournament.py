@@ -16,6 +16,9 @@ class MyTournamentTestCase(unittest.TestCase):
         self.assertIsInstance(tour.level, tournament.Level)
         self.assertEqual(tour.id, "0000")
         self.assertEqual(tour.name, "Kill The Fish")
+        self.assertEqual(tour.is_ko, True)
+        tour.is_ko = False
+        self.assertEqual(tour.is_ko, False)
         tour.level = self.level2
 
     def test_str(self):
@@ -42,6 +45,21 @@ class MyTournamentTestCase(unittest.TestCase):
         self.assertEqual(self.tour.buyin, 9.5)
         self.tour.buyin = 10.0
         self.assertEqual(self.tour.buyin, 10)
+
+    def test_to_json(self):
+        self.assertIsInstance(self.tour.to_json(), dict)
+        self.assertEqual(self.tour.to_json(), {
+            'level': {
+                'level': 1,
+                'ante': 25.0,
+                'sb': 100.0,
+                'bb': 200.0
+            },
+            'id': 'tour_id',
+            'name': 'PLD',
+            'buy_in': 9.5,
+            'is_ko': True,
+            'money_type': cst.MoneyType('Real money')})
 
 
 if __name__ == '__main__':
