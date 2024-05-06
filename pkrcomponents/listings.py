@@ -28,3 +28,5 @@ players_positions = {
 
 
 }
+
+print(all_hands)

@@ -1,7 +1,7 @@
 from itertools import product
 from functools import total_ordering
 
-import numpy as np
+import random
 
 from pkrcomponents._common import PokerEnum, _ReprMixin
 
@@ -155,7 +155,7 @@ class Deck:
         """
         Randomly shuffles the deck
         """
-        np.random.shuffle(self.cards)
+        random.shuffle(self.cards)
 
     def reset(self):
         """Re-initializes the deck and shuffles it"""

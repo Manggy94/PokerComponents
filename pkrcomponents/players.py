@@ -18,9 +18,9 @@ class Players:
         self._BB = 1
 
     def __getitem__(self, item):
-        if type(item) == str:
+        if isinstance(item, str):
             return self.name_dict[item]
-        elif type(item) == int:
+        elif isinstance(item, int):
             return self.seat_dict[item]
         else:
             raise ValueError("To get a player, call it by its name or seat")

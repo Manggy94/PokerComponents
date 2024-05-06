@@ -1,5 +1,6 @@
 from pathlib import Path
 from setuptools import setup, find_packages
+import json
 
 
 install_requires = [        
@@ -24,11 +25,18 @@ classifiers = [
     "Topic :: Games/Entertainment :: Board Games"
 ]
 
+
+def get_version():
+    with open("config/version.json", "r") as f:
+        version = json.load(f)
+        return f"{version['major']}.{version['minor']}.{version['patch']}"
+
+
 setup(
     name="pkrcomponents",
-    version="0.0.1",
+    version=get_version(),
     description="A Poker Package",
-    long_description=Path("README.rst").read_text(),
+    long_description=Path("README.md").read_text(),
     classifiers=classifiers,
     keywords="poker pkrcomponents pkr",
     author="Alexandre MANGWA",
