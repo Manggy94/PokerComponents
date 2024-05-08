@@ -214,7 +214,7 @@ class TablePlayer:
 
     def sit(self, table):
         """Sits a player on a table"""
-        if table.players.len < table.max_players and table.players.seat_dict[self.seat] is None:
+        if table.players.len < table.max_players and table.players.seat_dict.get(self.seat) is None:
             self._table = table
             self.table.players.pl_list.append(self)
             self.table.players.name_dict[self.name] = self

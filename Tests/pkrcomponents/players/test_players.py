@@ -23,7 +23,7 @@ class MyPlayersTestCase(unittest.TestCase):
         self.assertIsInstance(plrs.name_dict, dict)
         self.assertIsInstance(plrs.seat_dict, dict)
 
-    def test_occupied_abd_distribute_positions(self):
+    def test_occupied_and_distribute_positions(self):
         tab = table.Table()
         for pl in self.list:
             pl.sit(tab)

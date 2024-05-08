@@ -73,3 +73,5 @@ R
 "pkrcomponents/models/cards/card.py,9\f\9f61ee41bc6ae1e2d00b8562374b72116c53dfcd
 S
 #Tests/pkrcomponents/pot/test_pot.py,1\1\11d9e9213fc0e949c9b4b3ad2f8c797f46aff139
+[
++Tests/pkrcomponents/players/test_players.py,8\0\80f6b5effa1059bca6be0ecd9cfb8e62878dde29
