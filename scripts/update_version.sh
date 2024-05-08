@@ -3,7 +3,7 @@
 source venv/bin/activate
 
 # Définir le chemin du fichier de version
-VERSION_FILE="version.json"
+VERSION_FILE="config/version.json"
 
 # Vérifier si le fichier de version existe
 if [ ! -f "$VERSION_FILE" ]; then
