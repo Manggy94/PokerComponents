@@ -75,3 +75,5 @@ S
 #Tests/pkrcomponents/pot/test_pot.py,1\1\11d9e9213fc0e949c9b4b3ad2f8c797f46aff139
 [
 +Tests/pkrcomponents/players/test_players.py,8\0\80f6b5effa1059bca6be0ecd9cfb8e62878dde29
+<
+version.json,4\5\45c6c184d662f906f410c90c242b4c6f53c7b9d4
