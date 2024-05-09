@@ -77,6 +77,26 @@ class TablePlayer:
         self._stack = max(0.0, float(stack))
 
     @property
+    def stack_bb(self):
+        """Player's stack in big blinds"""
+        return self.stack/self.table.level.bb
+
+    @property
+    def stack_to_pot_ratio(self):
+        """Player's stack to pot ratio"""
+        return self.stack/self.table.pot_value
+
+    @property
+    def m_factor(self):
+        """Player's M factor"""
+        return self.stack/self.table.cost_per_round
+
+    @property
+    def m_factor_eff(self):
+        """Player's effective M factor"""
+        return self.m_factor * (self.table.players.len / 10)
+
+    @property
     def folded(self):
         """Boolean indicating if player folded"""
         return self._folded
@@ -179,9 +199,19 @@ class TablePlayer:
         return min(self.table.pot.highest_bet-self.current_bet, self.stack)
 
     @property
+    def to_call_bb(self):
+        """float indicating the amount to call to continue on the table in big blinds"""
+        return self.to_call/self.table.level.bb
+
+    @property
     def is_all_in(self):
         """Boolean indicating if the player is all-in"""
         return self.stack == 0
+
+    @property
+    def is_current_player(self):
+        """Boolean indicating if the player is the current player"""
+        return self.table.current_player == self
 
     @property
     def can_play(self):

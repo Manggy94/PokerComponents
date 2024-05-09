@@ -33,6 +33,7 @@ class Table:
         self._is_mtt = False
         self._street = Street.PREFLOP
         self.max_players = max_players
+        self._hand_has_started = False
 
     @property
     def board(self):
@@ -53,6 +54,16 @@ class Table:
     def max_players(self):
         """Returns the maximum players that can be added on this table"""
         return self._max_players
+
+    @property
+    def is_full(self):
+        """Returns True if the table is full"""
+        return self.players.len == self.max_players
+
+    @property
+    def is_empty(self):
+        """Returns True if the table is empty"""
+        return self.players.len == 0
 
     @max_players.setter
     def max_players(self, max_value):
@@ -119,6 +130,11 @@ class Table:
         return [self.players[i] for i in self.playing_order if self.players[i].can_play]
 
     @property
+    def street_ended(self):
+        """Returns True if the street has ended"""
+        return len(self.players_waiting) == 0
+
+    @property
     def players_in_game(self):
         """Returns the list of players on the table that are still in the game (they can make an action)"""
         return [self.players[i] for i in self.playing_order if self.players[i].in_game]
@@ -127,6 +143,11 @@ class Table:
     def players_involved(self):
         """Returns the list of players on the table that didn't fold yet"""
         return [self.players[i] for i in self.playing_order if not self.players[i].folded]
+
+    @property
+    def hand_ended(self):
+        """Returns True if the hand has ended"""
+        return len(self.players_involved) == 1 or (self.street == Street.RIVER and self.street_ended)
 
     @property
     def seats_playing(self):
@@ -142,6 +163,23 @@ class Table:
     def nb_involved(self):
         """Returns the number of players who didn't fold yet"""
         return len(self.players_involved)
+
+    @property
+    def hand_has_started(self):
+        """Returns True if the hand has started"""
+        return self._hand_has_started
+
+    @property
+    def hand_can_start(self):
+        """Returns True if the hand can start"""
+        return self.players.len >= 2 and not self.hand_has_started
+
+    def start_hand(self):
+        """Starts a new hand"""
+        self._hand_has_started = True
+        self.street = Street.PREFLOP
+        self.street_reset()
+        self.post_pregame()
 
     def draw_flop(self, c1=None, c2=None, c3=None):
         """For the flop, draws 3 cards in the deck and adds them on the board as flop cards"""
@@ -191,6 +229,11 @@ class Table:
         self.tournament = tournament
         self._is_mtt = True
 
+    def change_bb_seat(self, seat: int):
+        """Change the big blind seat and redistribute positions"""
+        self.players.bb = seat
+        self.players.distribute_positions()
+
     def post_antes(self):
         """Preflop Ante posting for players on the table"""
         for i in self.players.preflop_ordered_seats:
@@ -227,6 +270,11 @@ class Table:
         return self._seat_playing
 
     @property
+    def cost_per_round(self):
+        """Returns the cost of a round for a player"""
+        return self.level.bb * 1.5 + self.level.ante * self.players.len
+
+    @property
     def min_bet(self):
         """Returns table current minimum bet a player can make"""
         if not hasattr(self, "_min_bet"):
@@ -238,6 +286,21 @@ class Table:
         """Setter for min bet property"""
         if value > self.min_bet:
             self._min_bet = value
+
+    @property
+    def min_bet_bb(self):
+        """Returns the minimum bet in big blinds"""
+        return self.min_bet/self.level.bb
+
+    @property
+    def pot_value(self):
+        """Returns the pot's value"""
+        return self.pot.value
+
+    @property
+    def pot_value_bb(self):
+        """Returns the pot's value in big blinds"""
+        return self.pot.value/self.level.bb
 
     def advance_seat_playing(self):
         """Advances seat playing to next available player"""
