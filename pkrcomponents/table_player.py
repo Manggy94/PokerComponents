@@ -211,6 +211,9 @@ class TablePlayer:
     @property
     def is_current_player(self):
         """Boolean indicating if the player is the current player"""
+        if not self.can_play and self.table.current_player == self:
+            self.table.advance_seat_playing()
+            return False
         return self.table.current_player == self
 
     @property

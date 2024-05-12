@@ -75,16 +75,12 @@ S
 #Tests/pkrcomponents/pot/test_pot.py,1\1\11d9e9213fc0e949c9b4b3ad2f8c797f46aff139
 [
 +Tests/pkrcomponents/players/test_players.py,8\0\80f6b5effa1059bca6be0ecd9cfb8e62878dde29
-<
-version.json,4\5\45c6c184d662f906f410c90c242b4c6f53c7b9d4
-K
-scripts/config/version.json,f\a\fa3ab78581dcc46241f93a94c12b4b02edd683fc
 C
 config/version.json,d\3\d36c48db54c6f38e0d16b79836996d399d0dde64
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
-P
- build/lib/pkrcomponents/table.py,f\5\f5474697daef739a6dab298332b31e492458f0fc
 8
 setup.py,8\e\8e2edce0d507e1297474f25c00cae94258db38d8
+@
+.venv/.gitignore,6\6\662a180439d3fc561d8b5872c4032c6494df06c4
