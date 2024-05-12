@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# source venv/bin/activate
+source venv/bin/activate
 
 # Définir le chemin du fichier de version
 VERSION_FILE="config/version.json"
@@ -85,7 +85,6 @@ git push --tags
 
 git push
 
-rm -rf venv
 rm -rf dist
 rm -rf build
 
@@ -95,6 +94,5 @@ twine check dist/*
 
 twine upload dist/*
 
-python3 -m venv venv
 
 echo "Le script s'est terminé avec succès."
