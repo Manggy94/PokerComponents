@@ -133,7 +133,7 @@ class Table:
     @property
     def street_ended(self):
         """Returns True if the street has ended"""
-        return len(self.players_waiting) == 0 or (self.nb_waiting == 1 and self.nb_in_game == 1)
+        return len(self.players_waiting) == 0
 
     @property
     def players_in_game(self):

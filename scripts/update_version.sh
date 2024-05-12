@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source venv/bin/activate
+# source venv/bin/activate
 
 # Définir le chemin du fichier de version
 VERSION_FILE="config/version.json"
