@@ -85,6 +85,7 @@ git push --tags
 
 git push
 
+rm -rf venv
 rm -rf dist
 rm -rf build
 
@@ -93,5 +94,7 @@ python setup.py sdist bdist_wheel
 twine check dist/*
 
 twine upload dist/*
+
+python3 -m venv venv
 
 echo "Le script s'est terminé avec succès."
