@@ -84,3 +84,7 @@ C
 setup.py,8\e\8e2edce0d507e1297474f25c00cae94258db38d8
 @
 .venv/.gitignore,6\6\662a180439d3fc561d8b5872c4032c6494df06c4
+I
+scripts/update_scripts.sh,f\0\f0e765bb9c69c56a203172699fa5f1277df6714e
+G
+scripts/update_compo.sh,5\2\52d403f3c9eb31fc45421e072943300d7bbbcaa5
