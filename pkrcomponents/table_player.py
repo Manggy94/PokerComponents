@@ -271,6 +271,7 @@ class TablePlayer:
         self.pay(value)
         if self.current_bet > self.table.pot.highest_bet:
             self.table.pot.highest_bet = self.current_bet
+            self.table.cnt_bets += 1
         self.played = True
 
     def bet(self, value):

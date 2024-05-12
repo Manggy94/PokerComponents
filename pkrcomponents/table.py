@@ -21,6 +21,7 @@ class Table:
     _street: Street
     _seat_playing: int
     _min_bet: float
+    _cnt_bets: int
     _evaluator: Evaluator
 
     def __init__(self, max_players=6):
@@ -150,6 +151,11 @@ class Table:
         return len(self.players_involved) == 1 or (self.street == Street.RIVER and self.street_ended)
 
     @property
+    def next_street_ready(self):
+        """Returns True if the next street is ready to be played"""
+        return self.street_ended and not self.hand_ended
+
+    @property
     def seats_playing(self):
         """Returns the list of seats of players waiting to play"""
         return [pl.seat for pl in self.players_waiting]
@@ -234,6 +240,49 @@ class Table:
         self.players.bb = seat
         self.players.distribute_positions()
 
+    def add_player(self, player):
+        """
+        Add a player to the table
+        """
+        player.sit(self)
+        if self.players.len > 1:
+            self.players.distribute_positions()
+        else:
+            self.players.bb = player.seat
+
+    def remove_player(self, player):
+        """
+        Remove a player from the table
+        """
+        player.sit_out()
+        if self.players.len > 1:
+            self.players.distribute_positions()
+
+    def set_hero(self, player):
+        """
+        Set a player as the hero
+        """
+        for p in self.players:
+            p.is_hero = False
+        player.is_hero = True
+
+    def set_bb_seat(self, player):
+        """
+        Set the seat of the big blind
+        """
+        seat = player.seat
+        self.players.bb = seat
+        if self.players.len > 1:
+            self.players.distribute_positions()
+
+    def set_max_players(self, max_players):
+        """
+        Set the maximum number of players
+        """
+        self.max_players = max_players
+        if self.players.len > 1:
+            self.players.distribute_positions()
+
     def post_antes(self):
         """Preflop Ante posting for players on the table"""
         for i in self.players.preflop_ordered_seats:
@@ -317,6 +366,7 @@ class Table:
     def street_reset(self):
         """Reset status of players in game and betting status for a new street"""
         self.pot.highest_bet = 0
+        self.cnt_bets = 0
         self.min_bet = self.level.bb
         for player in self.players_in_game:
             player.reset_street_status()
@@ -358,3 +408,13 @@ class Table:
         for score in scores:
             players = self.winners[score]
             self.split_pot(players)
+
+    @property
+    def cnt_bets(self):
+        """Returns the number of bets made on the table"""
+        return self._cnt_bets
+
+    @cnt_bets.setter
+    def cnt_bets(self, value):
+        """Setter for cnt bets property"""
+        self._cnt_bets = value

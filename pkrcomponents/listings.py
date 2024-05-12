@@ -16,6 +16,7 @@ str_hands = all_hands.astype(str)
 str_streets = all_streets.astype(str)
 
 players_positions = {
+    1: [Position.BB],
     2: [Position.SB, Position.BB],
     3: [Position.BTN, Position.SB, Position.BB],
     4: [Position.CO, Position.BTN, Position.SB, Position.BB],
@@ -28,5 +29,3 @@ players_positions = {
 
 
 }
-
-print(all_hands)
