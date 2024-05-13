@@ -133,6 +133,8 @@ class Table:
     @property
     def street_ended(self):
         """Returns True if the street has ended"""
+        # First case: there is no player left in waiting_list
+        # Second case: there is only one player left in waiting_list that can still play and he has nothing to call
         return len(self.players_waiting) == 0 or (
                 self.nb_waiting == 1
                 and self.nb_in_game == 1
@@ -375,7 +377,7 @@ class Table:
         """Reset status of players in game and betting status for a new street"""
         self.pot.highest_bet = 0
         self.cnt_bets = 0
-        self.min_bet = self.level.bb
+        self._min_bet = self.level.bb
         for player in self.players_in_game:
             player.reset_street_status()
 
