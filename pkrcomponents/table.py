@@ -379,6 +379,7 @@ class Table:
         self.pot.highest_bet = 0
         self.cnt_bets = 0
         self._min_bet = self.level.bb
+        self._seat_playing = self.playing_order[0]
         for player in self.players_in_game:
             player.reset_street_status()
 
