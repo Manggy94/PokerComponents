@@ -153,7 +153,7 @@ class Table:
     @property
     def hand_ended(self):
         """Returns True if the hand has ended"""
-        return len(self.players_involved) == 1 or (self.street == Street.RIVER and self.street_ended)
+        return len(self.players_involved) == 1 or self.street == Street.SHOWDOWN
 
     @property
     def next_street_ready(self):
@@ -398,6 +398,13 @@ class Table:
             else:
                 winners[pl_score].append(player)
         return winners
+
+    @property
+    def winner_is_known(self):
+        """
+        Returns True if the winner is known
+        """
+
 
     def split_pot(self, players):
         """Split pot between players"""
