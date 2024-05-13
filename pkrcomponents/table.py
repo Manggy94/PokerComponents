@@ -314,6 +314,7 @@ class Table:
         if player.can_play:
             player.do_bet(self.level.bb)
             player.played = False
+        self.min_bet = self.level.bb*2
 
     def post_pregame(self):
         """Preflop posting antes and blinds"""
