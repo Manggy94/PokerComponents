@@ -1,3 +1,4 @@
+from functools import cached_property
 from pkrcomponents.board import Board
 from pkrcomponents.card import Deck
 from pkrcomponents.constants import Street
@@ -23,8 +24,8 @@ class Table:
     _min_bet: float
     _cnt_bets: int
     _evaluator: Evaluator
-    preflop_bet_factors = [1, 1.1, 1.25, 1.5, 2, 3.5, 5]
-    postflop_bet_factors = [
+    _preflop_bet_factors = [1, 1.1, 1.25, 1.5, 2, 3.5, 5]
+    _postflop_bet_factors = [
         {"text": "1/4 Pot", "value": 1 / 4},
         {"text": "1/3 Pot", "value": 1 / 3},
         {"text": "1/2 Pot", "value": 1 / 2},
@@ -398,17 +399,17 @@ class Table:
         return self.players[self.seat_playing]
 
     @property
-    def unrevealed_players(self):
+    def unrevealed_players(self) -> list:
         """Returns the list of players that have not revealed their cards"""
         return [pl for pl in self.players_involved if not pl.has_combo]
 
     @property
-    def can_parse_winners(self):
+    def can_parse_winners(self) -> bool:
         """Returns True if the winners can be parsed"""
         return self.hand_ended and len(self.unrevealed_players) == 0
 
-    @property
-    def winners(self):
+    @cached_property
+    def winners(self) -> dict[str, list]:
         """Current status of winners with associated scores"""
         winners = {}
         for player in self.players_involved:
@@ -424,7 +425,6 @@ class Table:
         """
         Returns True if the winner is known
         """
-
 
     def split_pot(self, players):
         """Split pot between players"""
@@ -456,3 +456,13 @@ class Table:
     def cnt_bets(self, value):
         """Setter for cnt bets property"""
         self._cnt_bets = value
+
+    @property
+    def preflop_bet_factors(self):
+        """Returns the preflop bet factors"""
+        return self._preflop_bet_factors
+
+    @property
+    def postflop_bet_factors(self):
+        """Returns the postflop bet factors"""
+        return self._postflop_bet_factors

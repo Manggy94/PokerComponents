@@ -119,3 +119,14 @@ class Players:
     def postflop_ordered_seats(self):
         """Returns the list of the indexes of players on the table, with postflop playing order"""
         return self.preflop_ordered_seats[-2:] + self.preflop_ordered_seats[:-2]
+
+    def add_player(self, player):
+        """Adds a player to the table"""
+        self.pl_list.append(player)
+        self.name_dict[player.name] = player
+        self.seat_dict[player.seat] = player
+
+    def remove_player(self, player):
+        self.pl_list.remove(player)
+        self.name_dict.pop(player.name)
+        self.seat_dict.pop(player.seat)
