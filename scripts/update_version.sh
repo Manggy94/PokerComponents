@@ -85,14 +85,15 @@ git push --tags
 
 git push
 
+echo "Création de la distribution et envoi sur PyPI..."
+echo "Suppression des anciennes distributions..."
 rm -rf dist
 rm -rf build
-
+echo "Création de la distribution..."
 python3 setup.py sdist bdist_wheel
-
+echo "Envoi de la distribution sur PyPI..."
+echo "Vérification de la distribution..."
 twine check dist/*
-
+echo "Envoi de la distribution..."
 twine upload dist/*
-
-
 echo "Le script s'est terminé avec succès."

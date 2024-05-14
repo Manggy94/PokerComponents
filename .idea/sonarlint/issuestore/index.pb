@@ -88,3 +88,5 @@ G
 scripts/update_compo.sh,5\2\52d403f3c9eb31fc45421e072943300d7bbbcaa5
 P
  build/lib/pkrcomponents/table.py,f\5\f5474697daef739a6dab298332b31e492458f0fc
+;
+MANIFEST.in,8\8\8875df48c18030126ef5ef5a6f5c93b23451fb9f
