@@ -348,3 +348,24 @@ class TablePlayer:
         """gives player a certain amount from the pot"""
         self.table.pot.value -= amount
         self.stack += amount
+
+    @property
+    def preflop_bet_amounts(self):
+        bet_amounts = [round(self.table.min_bet * factor) for factor in self.table.preflop_bet_factors]
+        bet_amounts = [amt for amt in bet_amounts if amt < self.stack]
+        bet_amounts.append(self.stack)
+        return bet_amounts
+
+    @property
+    def postflop_bets(self):
+        postflop_bets = [
+            {"text": factor.get("text"), "value": round(self.table.pot.value * factor.get("value"))}
+            for factor in self.table.postflop_bet_factors
+        ]
+        postflop_bets = [bet for bet in postflop_bets
+                         if self.table.min_bet < bet.get("value") < self.stack]
+        postflop_bets.append({"text": "All-in", "value": self.stack})
+        if self.table.min_bet < self.stack:
+            postflop_bets.append({"text": "Min Bet", "value": self.table.min_bet})
+        postflop_bets = sorted(postflop_bets, key=lambda x: x.get("value"))
+        return postflop_bets

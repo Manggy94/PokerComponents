@@ -23,6 +23,15 @@ class Table:
     _min_bet: float
     _cnt_bets: int
     _evaluator: Evaluator
+    preflop_bet_factors = [1, 1.1, 1.25, 1.5, 2, 3.5, 5]
+    postflop_bet_factors = [
+        {"text": "1/4 Pot", "value": 1 / 4},
+        {"text": "1/3 Pot", "value": 1 / 3},
+        {"text": "1/2 Pot", "value": 1 / 2},
+        {"text": "2/3 Pot", "value": 2 / 3},
+        {"text": "3/4 Pot", "value": 3 / 4},
+        {"text": "Pot", "value": 1}
+    ]
 
     def __init__(self, max_players=6):
         self._board = Board()
@@ -379,7 +388,7 @@ class Table:
         self.pot.highest_bet = 0
         self.cnt_bets = 0
         self._min_bet = self.level.bb
-        self._seat_playing = self.playing_order[0]
+        self._seat_playing = self.players_in_game[0].seat
         for player in self.players_in_game:
             player.reset_street_status()
 
@@ -387,6 +396,16 @@ class Table:
     def current_player(self):
         """Returns the player currently playing"""
         return self.players[self.seat_playing]
+
+    @property
+    def unrevealed_players(self):
+        """Returns the list of players that have not revealed their cards"""
+        return [pl for pl in self.players_involved if not pl.has_combo]
+
+    @property
+    def can_parse_winners(self):
+        """Returns True if the winners can be parsed"""
+        return self.hand_ended and len(self.unrevealed_players) == 0
 
     @property
     def winners(self):
