@@ -198,6 +198,7 @@ class TablePlayer:
     def reset_street_status(self):
         """Reset street status"""
         self.played = False
+        self.folded = False
         self.current_bet = 0
 
     @property
