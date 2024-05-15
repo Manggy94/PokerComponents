@@ -191,9 +191,10 @@ class TablePlayer:
 
     def delete_combo(self):
         """Deletes a player's combo"""
-        self.table.deck.replace(self.combo.first)
-        self.table.deck.replace(self.combo.second)
-        self._combo = None
+        if self.has_combo:
+            self.table.deck.replace(self.combo.first)
+            self.table.deck.replace(self.combo.second)
+            self._combo = None
 
     def reset_street_status(self):
         """Reset street status"""
