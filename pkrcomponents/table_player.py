@@ -189,6 +189,12 @@ class TablePlayer:
         self.table.deck.draw(combo.second)
         self.combo = combo
 
+    def delete_combo(self):
+        """Deletes a player's combo"""
+        for card in self.combo:
+            self.table.deck.replace(card)
+        self._combo = None
+
     def reset_street_status(self):
         """Reset street status"""
         self.played = False

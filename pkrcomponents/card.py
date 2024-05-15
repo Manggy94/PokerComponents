@@ -174,6 +174,13 @@ class Deck:
             idx = self.cards.index(cd)
             return self.cards.pop(idx)
 
+    def replace(self, card):
+        """
+        Replaces a card in the deck
+        """
+        if card not in self.cards:
+            self.cards.append(card)
+
     @property
     def len(self):
         """

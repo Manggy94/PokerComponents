@@ -418,8 +418,10 @@ class Table:
         return self.hand_ended and len(self.unrevealed_players) == 0
 
     @cached_property
-    def winners(self) -> dict[str, list]:
+    def winners(self) -> dict[int, list]:
         """Current status of winners with associated scores"""
+        if self.nb_involved == 1:
+            return {1: [self.players_involved[0]]}
         winners = {}
         for player in self.players_involved:
             pl_score = player.hand_score
