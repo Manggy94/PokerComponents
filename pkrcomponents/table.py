@@ -472,13 +472,20 @@ class Table:
         """Returns the postflop bet factors"""
         return self._postflop_bet_factors
 
+    def hand_reset(self):
+        """
+        Reset the hand
+        """
+        self.street = Street.PREFLOP
+        self.pot.reset()
+        self.deck.reset()
+        self.board.reset()
+        self.players.hand_reset()
+        self._hand_has_started = False
+
     def advance_to_next_hand(self):
         """Advance to the next hand"""
-        self.street = Street.PREFLOP
-        self.street_reset()
+        self.hand_reset()
         self.players.advance_bb_seat()
-        self.pot.reset()
-        self.board.reset()
-        self.deck.reset()
-        self._hand_has_started = False
+
 

@@ -138,3 +138,8 @@ class Players:
         except IndexError:
             self.bb = self.occupied_seats[0]
         self.distribute_positions()
+
+    def hand_reset(self):
+        """Reset all players for a new hand"""
+        for player in self:
+            player.reset_hand_status()

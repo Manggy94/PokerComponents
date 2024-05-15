@@ -198,8 +198,13 @@ class TablePlayer:
     def reset_street_status(self):
         """Reset street status"""
         self.played = False
-        self.folded = False
         self.current_bet = 0
+
+    def reset_hand_status(self):
+        """Reset hand status"""
+        self.reset_street_status()
+        self.folded = False
+        self.delete_combo()
 
     @property
     def to_call(self):
