@@ -148,7 +148,10 @@ class Table:
         return len(self.players_waiting) == 0 or (
                 self.nb_waiting == 1
                 and self.nb_in_game == 1
-                and self.players_waiting[0].to_call == 0)
+                and self.players_waiting[0].to_call == 0) or (
+                self.street == Street.SHOWDOWN and len(self.unrevealed_players) == 0
+        )
+
 
     @property
     def players_in_game(self):
@@ -419,12 +422,6 @@ class Table:
             else:
                 winners[pl_score].append(player)
         return winners
-
-    @property
-    def winner_is_known(self):
-        """
-        Returns True if the winner is known
-        """
 
     def split_pot(self, players):
         """Split pot between players"""

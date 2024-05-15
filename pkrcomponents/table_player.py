@@ -18,6 +18,7 @@ class TablePlayer:
     _position: Position or None
     _table: Table
     _max_reward: float
+    _ko: float
 
     def __init__(self, name: str = "Villain", seat=0, stack: float = 0):
         self.name = name
@@ -360,3 +361,13 @@ class TablePlayer:
             postflop_bets.append({"text": "Min Bet", "value": self.table.min_bet})
         postflop_bets = sorted(postflop_bets, key=lambda x: x.get("value"))
         return postflop_bets
+
+    @property
+    def ko(self):
+        """Returns the knockout value"""
+        return self._ko
+
+    @ko.setter
+    def ko(self, value):
+        """Setter for knockout value"""
+        self._ko = value

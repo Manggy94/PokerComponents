@@ -130,3 +130,11 @@ class Players:
         self.pl_list.remove(player)
         self.name_dict.pop(player.name)
         self.seat_dict.pop(player.seat)
+
+    def advance_bb_seat(self):
+        """Advances the Big Blind seat"""
+        try:
+            self.bb = self.occupied_seats[self.occupied_seats.index(self.bb) + 1]
+        except IndexError:
+            self.bb = self.occupied_seats[0]
+        self.distribute_positions()
