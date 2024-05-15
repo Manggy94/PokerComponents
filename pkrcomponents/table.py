@@ -148,7 +148,8 @@ class Table:
         return len(self.players_waiting) == 0 or (
                 self.nb_waiting == 1
                 and self.nb_in_game == 1
-                and self.players_waiting[0].to_call == 0) or (
+                and self.players_waiting[0].to_call == 0
+                and self.street != Street.SHOWDOWN) or (
                 self.street == Street.SHOWDOWN and len(self.unrevealed_players) == 0
         )
 
@@ -172,6 +173,11 @@ class Table:
     def next_street_ready(self):
         """Returns True if the next street is ready to be played"""
         return self.street_ended and not self.hand_ended
+
+    @property
+    def next_hand_ready(self):
+        """Returns True if the next hand is ready to be played"""
+        return self.hand_ended and self.street_ended
 
     @property
     def seats_playing(self):
