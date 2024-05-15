@@ -1,2 +1,20 @@
 global-include *.txt *.md *.py
+prune build
+prune dist
+prune pkrcomponents.egg-info
 prune venv
+prune docs
+prune Tests
+prune scripts
+
+global-exclude *.py[cod]  # Exclure les fichiers de bytecode Python
+global-exclude *.swp      # Exclure les fichiers swap de Vim
+global-exclude *.bak      # Exclure les fichiers de sauvegarde
+global-exclude *.tmp      # Exclure les fichiers temporaires
+global-exclude .DS_Store  # Exclure les fichiers système spécifiques à MacOS
+global-exclude *.log      # Exclure les fichiers log
+global-exclude *~         # Exclure les fichiers temporaires créés par d'autres éditeurs
+global-exclude .git       # Exclure le répertoire .git
+global-exclude .github    # Exclure les configurations GitHub spécifiques
+global-exclude .gitignore # Exclure le fichier .gitignore
+

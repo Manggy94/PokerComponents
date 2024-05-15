@@ -259,21 +259,13 @@ class TablePlayer:
         self.stack -= amount
         self.table.pot.add(amount)
 
-    # def do_bet(self, value):
-    #     """Action of betting a certain value"""
-    #     self.current_bet += self.max_bet(value)
-    #     self.pay(value)
-    #     if self.current_bet > self.table.pot.highest_bet:
-    #         self.table.pot.highest_bet = self.current_bet
-    #         self.table.cnt_bets += 1
-    #     self.played = True
-
     def do_bet(self, value):
         """Action of betting a certain value"""
-        self.current_bet += min(self.stack, value)
-        self.stack -= min(self.stack, value)
-        self.table.pot.highest_bet = max(self.current_bet, self.table.pot.highest_bet)
-        self.table.cnt_bets += self.current_bet > self.table.pot.highest_bet
+        self.current_bet += self.max_bet(value)
+        self.pay(value)
+        if self.current_bet > self.table.pot.highest_bet:
+            self.table.pot.highest_bet = self.current_bet
+            self.table.cnt_bets += 1
         self.played = True
 
     def bet(self, value):
@@ -282,7 +274,7 @@ class TablePlayer:
             self.table.min_bet = 2*value - self.table.pot.highest_bet
             self.do_bet(value)
         elif self.table.min_bet > self.stack:
-            self.bet(self.stack)
+            self.bet(self.table.min_bet)
         else:
             raise ValueError(f"You cannot bet {value} if the minimum bet is {self.table.min_bet} "
                              f"and your stack is {self.stack}")
