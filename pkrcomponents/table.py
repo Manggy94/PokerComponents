@@ -476,7 +476,7 @@ class Table:
         """Advance to the next hand"""
         self.street = Street.PREFLOP
         self.street_reset()
-        self.start_hand()
+        self.players.advance_bb_seat()
         self.pot.reset()
         self.board.reset()
         self.deck.reset()
