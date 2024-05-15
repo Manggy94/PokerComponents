@@ -417,7 +417,7 @@ class Table:
         """Returns True if the winners can be parsed"""
         return self.hand_ended and len(self.unrevealed_players) == 0
 
-    @cached_property
+    @property
     def winners(self) -> dict[int, list]:
         """Current status of winners with associated scores"""
         if self.nb_involved == 1:
