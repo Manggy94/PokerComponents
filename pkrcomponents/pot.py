@@ -33,3 +33,8 @@ class Pot:
         """Setter for highest bet property"""
         self._highest_bet = bet
 
+    def reset(self):
+        """Reset the pot"""
+        self.value = 0
+        self.highest_bet = 0
+

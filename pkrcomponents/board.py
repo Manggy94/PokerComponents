@@ -133,5 +133,12 @@ class Board(pd.Series):
             return None
         return any(combo.first.suit == combo.second.suit for combo in self.flop_combinations)
 
+    def reset(self):
+        """
+        Reset the board
+        """
+        self.iloc[:] = np.nan
+
     def to_json(self):
         return self.astype(str).to_dict()
+

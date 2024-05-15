@@ -471,3 +471,14 @@ class Table:
     def postflop_bet_factors(self):
         """Returns the postflop bet factors"""
         return self._postflop_bet_factors
+
+    def advance_to_next_hand(self):
+        """Advance to the next hand"""
+        self.street = Street.PREFLOP
+        self.street_reset()
+        self.start_hand()
+        self.pot.reset()
+        self.board.reset()
+        self.deck.reset()
+        self._hand_has_started = False
+
