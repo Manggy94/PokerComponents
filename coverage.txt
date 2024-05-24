@@ -15,6 +15,6 @@ pkrcomponents/players.py           96      7    93%
 pkrcomponents/pot.py               25      2    92%
 pkrcomponents/table.py            317     49    85%
 pkrcomponents/table_player.py     248     30    88%
-pkrcomponents/tournament.py       254      0   100%
+pkrcomponents/tournament.py       256      1    99%
 ---------------------------------------------------
-TOTAL                            1734     91    95%
+TOTAL                            1736     92    95%

@@ -4,7 +4,7 @@ prune dist
 prune pkrcomponents.egg-info
 prune venv
 prune docs
-prune Tests
+prune tests
 prune scripts
 
 global-exclude *.py[cod]  # Exclure les fichiers de bytecode Python

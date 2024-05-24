@@ -58,6 +58,9 @@ class Buyin:
     def __str__(self):
         return f"Buy-in: {self.total}"
 
+    def __eq__(self, other):
+        return self.freeze_part == other.freeze_part and self.ko_part == other.ko_part and self.rake == other.rake
+
     def to_json(self):
         return {
             "freeze": self.freeze_part,

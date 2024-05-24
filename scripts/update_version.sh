@@ -1,6 +1,18 @@
 #!/bin/bash
-
 source venv/bin/activate
+
+sh scripts/test_code.sh
+
+if [ $? -ne 0 ]; then
+    echo "Tests failed. Aborting the update process."
+    exit 1
+fi
+
+echo "Tests passed. Proceeding with the update."
+
+# Update code documentation
+echo "Building the documentation..."
+mkdocs build
 
 # Définir le chemin du fichier de version
 VERSION_FILE="config/version.json"
@@ -12,20 +24,21 @@ if [ ! -f "$VERSION_FILE" ]; then
 fi
 
 # Vérifier si le paquet 'wheel' est installé
-if  ! pip list | grep -q wheel ; then
-    echo "Le paquet 'wheel' n'est pas installé. Installation en cours..."
+if ! pip show wheel > /dev/null 2&1 ; then
+    echo "Installing wheel..."
     pip install wheel
 else
-    echo "Le paquet 'wheel' est déjà installé."
+    echo "wheel is already installed."
 fi
 
-# Vérifier si le paquet 'twine' est installé
-if  ! pip list | grep -q twine ; then
-    echo "Le paquet 'twine' n'est pas installé. Installation en cours..."
+if ! pip show twine > /dev/null 2&1 ; then
+    echo "Installing twine..."
     pip install twine
 else
-    echo "Le paquet 'twine' est déjà installé."
+    echo "twine is already installed."
 fi
+
+
 
 # Lire le fichier de version
 VERSION=$(cat "$VERSION_FILE")
@@ -85,15 +98,39 @@ git push --tags
 
 git push
 
-echo "Création de la distribution et envoi sur PyPI..."
-echo "Suppression des anciennes distributions..."
-rm -rf dist
-rm -rf build
-echo "Création de la distribution..."
+echo "Creating a new distribution and uploading it to PyPI.."
+echo ""
+echo "Suppressing the previous distribution files..."
+if [ -d "dist" ]; then
+  rm -rf dist
+fi
+if [ -d "build" ]; then
+  rm -rf build
+fi
+echo "Creating the distribution..."
 python3 setup.py sdist bdist_wheel
-echo "Envoi de la distribution sur PyPI..."
-echo "Vérification de la distribution..."
+
+if [ $? -ne 0 ]; then
+  echo "An error occurred while creating the distribution. Aborting the update process."
+  exit 1
+fi
+echo "Checking  the distribution..."
+if [ ! -d "dist" ]; then
+  echo "The distribution directory does not exist. Aborting the update process."
+  exit 1
+fi
 twine check dist/*
-echo "Envoi de la distribution..."
+if [ $? -ne 0 ]; then
+  echo "The distribution is not valid. Aborting the update process."
+  exit 1
+fi
+echo "Uploading the distribution to PyPI..."
 twine upload dist/*
+if [ $? -ne 0 ]; then
+  echo "An error occurred while uploading the distribution to PyPI. Aborting the update process."
+  exit 1
+else
+  echo "The distribution has been successfully uploaded to PyPI."
+  echo ""
+fi
 echo "Le script s'est terminé avec succès."
