@@ -45,6 +45,7 @@ class Table:
         self._street = Street.PREFLOP
         self.max_players = max_players
         self._hand_has_started = False
+        self._cnt_bets = 0
 
     @property
     def board(self):

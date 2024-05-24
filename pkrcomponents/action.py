@@ -21,6 +21,9 @@ class Action:
     def player(self):
         """
         Player involved in an action
+
+        Returns:
+            TablePlayer: The table_player involved in the action
         """
         return self._player
 

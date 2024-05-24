@@ -18,7 +18,7 @@ class TablePlayer:
     _position: Position or None
     _table: Table
     _max_reward: float
-    _ko: float
+    _bounty: float
 
     def __init__(self, name: str = "Villain", seat=0, stack: float = 0):
         self.name = name
@@ -264,7 +264,7 @@ class TablePlayer:
     def sit_out(self):
         """Removes player from the table"""
         self.reset_street_status()
-        self.table.remove_player(self)
+        self.table.players.remove_player(self)
         delattr(self, "_table")
 
     def pay(self, value):
@@ -376,11 +376,11 @@ class TablePlayer:
         return postflop_bets
 
     @property
-    def ko(self):
-        """Returns the knockout value"""
-        return self._ko
+    def bounty(self):
+        """Returns the bounty value"""
+        return self._bounty
 
-    @ko.setter
-    def ko(self, value):
-        """Setter for knockout value"""
-        self._ko = value
+    @bounty.setter
+    def bounty(self, value):
+        """Setter for bounty value"""
+        self._bounty = value

@@ -56,8 +56,7 @@ class BitCard(int):
     @classmethod
     def from_card(cls, card: Card) -> BitCard:
         """
-        Converts Card  to binary integer representation of card
-        example:
+        Converts Card to binary integer representation of card
         """
         rank_int = BitCard.char_to_int_rank[f"{card.rank}"]
         suit_int = BitCard.char_to_int_suit[f"{Card(card).suit}"]
@@ -71,7 +70,13 @@ class BitCard(int):
     @classmethod
     def from_string(cls, str_card) -> BitCard:
         """
-
+        Converts a string representation of a card to a 32-bit integer representation
+        Example:
+            "Kd" --> 134236965
+        Args:
+            str_card (str): A string representation of a card
+        Returns:
+            BitCard: The 32-bit int representing the card as described above
         """
         card = Card(str_card)
         return BitCard.from_card(card)

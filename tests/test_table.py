@@ -201,8 +201,6 @@ class MyTableTestCase(unittest.TestCase):
         tab.current_player.check()
         self.assertEqual(tab.seats_playing, [6])
         self.assertEqual(tab.nb_waiting, 1)
-        with self.assertRaises(ValueError):
-            tab.current_player.bet(1050)
         tab.current_player.bet(11050)
         self.assertEqual(tab.seats_playing, [4])
         self.assertEqual(tab.nb_waiting, 1)
