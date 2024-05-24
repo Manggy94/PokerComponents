@@ -72,13 +72,13 @@ class Buyin:
 class Level:
     """Level of the tournament"""
 
-    _level: int
+    _value: int
     _sb: float
     _bb: float
     _ante: float
 
-    def __init__(self, level: int = 1,  bb: float = 200.0, ante=None):
-        self._level = level
+    def __init__(self, value: int = 1,  bb: float = 200.0, ante=None):
+        self._value = value
         self.bb = float(bb)
         if ante is None:
             self._ante = bb*0.125
@@ -86,7 +86,7 @@ class Level:
             self._ante = ante
 
     def __str__(self):
-        return f"Current level: {self.level}\nAnte={self.ante}\nSB={self.sb}\nBB={self.bb}"
+        return f"Current level: {self.value}\nAnte={self.ante}\nSB={self.sb}\nBB={self.bb}"
 
     @property
     def bb(self) -> float:
@@ -117,19 +117,19 @@ class Level:
             self._ante = ante
 
     @property
-    def level(self) -> int:
-        return self._level
+    def value(self) -> int:
+        return self._value
 
-    @level.setter
-    def level(self, level):
-        if level < 0 or not isinstance(level, int):
+    @value.setter
+    def value(self, value):
+        if value < 0 or not isinstance(value, int):
             raise ValueError("Level must be a positive int")
         else:
-            self._level = level
+            self._value = value
 
     def to_json(self):
         return {
-            "level": self.level,
+            "value": self.value,
             "ante": self.ante,
             "sb": self.sb,
             "bb": self.bb

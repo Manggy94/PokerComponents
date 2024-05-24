@@ -9,7 +9,7 @@ class MyTournamentTestCase(unittest.TestCase):
         self.buyin = Buyin(freeze=9, ko=0, rake=1)
         self.tour = Tournament("tour_id", name="PLD", money_type="real", buyin=self.buyin)
         self.level = Level()
-        self.level2 = Level(level=4, bb=600)
+        self.level2 = Level(value=4, bb=600)
 
     def test_new_tournament(self):
         tour = Tournament(level=self.level)
@@ -56,7 +56,7 @@ class MyTournamentTestCase(unittest.TestCase):
         self.assertIsInstance(self.tour.to_json(), dict)
         self.assertEqual(self.tour.to_json(), {
             'level': {
-                'level': 1,
+                'value': 1,
                 'ante': 25.0,
                 'sb': 100.0,
                 'bb': 200.0
@@ -72,7 +72,7 @@ class TestTournament(unittest.TestCase):
 
     def setUp(self):
         self.buyin = Buyin(freeze=9, ko=0, rake=1)
-        self.level = Level(level=4, bb=600)
+        self.level = Level(value=4, bb=600)
         self.tour = Tournament("tour_id", name="PLD", money_type="real", buyin=self.buyin, level=self.level)
 
     def test_invalid_money_type_raises_error(self):
@@ -99,7 +99,7 @@ class TestTournament(unittest.TestCase):
         self.assertEqual(self.tour.buyin.total, 11)
 
     def test_valid_level_sets_correctly(self):
-        self.tour.level = Level(level=5, bb=800)
+        self.tour.level = Level(value=5, bb=800)
         self.assertEqual(self.tour.level.bb, 800)
 
     def test_valid_money_type_sets_correctly(self):

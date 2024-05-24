@@ -125,3 +125,5 @@ C
 tests/test_buyin.py,7\3\731ae4bea0e8ec3d615d6dd58bf1a7df70ff3794
 E
 tests/test_payouts.py,8\5\854e2df627dfa2067cdcfe773ff81b7a5827385c
+C
+tests/test_level.py,3\d\3d122020b162416c4d728b5d8d0f8d8bc74892f8
