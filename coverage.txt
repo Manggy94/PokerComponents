@@ -12,9 +12,9 @@ pkrcomponents/hand.py             226      0   100%
 pkrcomponents/listings.py          16      0   100%
 pkrcomponents/lookup_table.py     112      0   100%
 pkrcomponents/players.py           96      7    93%
-pkrcomponents/pot.py               25      2    92%
+pkrcomponents/pot.py               25      0   100%
 pkrcomponents/table.py            322     51    84%
 pkrcomponents/table_player.py     253     34    87%
-pkrcomponents/tournament.py       258      2    99%
+pkrcomponents/tournament.py       258      0   100%
 ---------------------------------------------------
-TOTAL                            1748     99    94%
+TOTAL                            1748     95    95%

@@ -40,5 +40,9 @@ class BuyinTestCase(unittest.TestCase):
         self.assertEqual(new_buyin.ko_part, 9)
         self.assertEqual(new_buyin.rake, 2)
 
+    def test_buy_in_eq(self):
+        new_buyin = Buyin(freeze=9, ko=0, rake=1)
+        self.assertEqual(self.buyin, new_buyin)
+
     def test_to_json_returns_correct_dict(self):
         self.assertEqual(self.buyin.to_json(), {"freeze": 9, "ko": 0, "rake": 1})

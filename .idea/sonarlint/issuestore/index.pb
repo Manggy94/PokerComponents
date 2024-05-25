@@ -129,3 +129,5 @@ C
 tests/test_level.py,3\d\3d122020b162416c4d728b5d8d0f8d8bc74892f8
 A
 tests/test_pot.py,0\8\08aeacb411a078f3c8399660f735c8abfba8e024
+C
+tests/test_board.py,0\6\0638d6ced9ef96963d8452f544f65776f4368ac1
