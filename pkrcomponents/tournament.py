@@ -386,6 +386,12 @@ class Tournament:
     def players_to_next_tier(self):
         return self.players_remaining - self.payouts.closest_payout(self.players_remaining).tier
 
+    def estimated_players_remaining(self, average_stack: float) -> int:
+        """
+        Estimate the number of players remaining in the tournament based on the average stack of the remaining players
+        """
+        return min(round(self.total_chips / average_stack), self.total_players)
+
     def __str__(self):
         return f"Name: {self.name}\nId: {self.id}\nBuy-in: {self.buyin}\nMoney: {self.money_type}"
 
@@ -398,5 +404,3 @@ class Tournament:
             "is_ko": self.is_ko,
             "money_type": self.money_type
         }
-
-

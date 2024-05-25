@@ -127,3 +127,5 @@ E
 tests/test_payouts.py,8\5\854e2df627dfa2067cdcfe773ff81b7a5827385c
 C
 tests/test_level.py,3\d\3d122020b162416c4d728b5d8d0f8d8bc74892f8
+A
+tests/test_pot.py,0\8\08aeacb411a078f3c8399660f735c8abfba8e024

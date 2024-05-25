@@ -118,6 +118,12 @@ class TablePlayer:
         self._init_stack = max(0.0, float(stack))
         self.stack = self.init_stack
 
+    def reset_init_stack(self):
+        """Reset player's initial stack"""
+        if self.stack == 0:
+            self.table.remove_player(self)
+        self.init_stack = self.stack
+
     @property
     def table(self):
         """Returns associated table"""
@@ -205,6 +211,7 @@ class TablePlayer:
         """Reset hand status"""
         self.reset_street_status()
         self.folded = False
+        self.reset_init_stack()
         self.delete_combo()
 
     @property

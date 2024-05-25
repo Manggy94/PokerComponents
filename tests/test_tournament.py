@@ -158,6 +158,13 @@ class TestTournament(unittest.TestCase):
         self.tour.payouts = Payouts([Payout(1, 300.0), Payout(2, 200.0), Payout(3, 100.0)])
         self.assertEqual(self.tour.players_to_next_tier, 47)
 
+    def test_estimated_players_remaining_calculated_correctly(self):
+        self.tour.total_players = 100
+        self.tour.starting_stack = 20000
+        average_stack = 199990
+        estimated_players_remaining = self.tour.estimated_players_remaining(average_stack)
+        self.assertEqual(estimated_players_remaining, 10)
+
 
 if __name__ == '__main__':
     unittest.main()

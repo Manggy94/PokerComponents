@@ -144,8 +144,6 @@ class Table:
     @property
     def street_ended(self):
         """Returns True if the street has ended"""
-        # First case: there is no player left in waiting_list
-        # Second case: there is only one player left in waiting_list that can still play and he has nothing to call
         return len(self.players_waiting) == 0 or (
                 self.nb_waiting == 1
                 and self.nb_in_game == 1
@@ -153,7 +151,6 @@ class Table:
                 and self.street != Street.SHOWDOWN) or (
                 self.street == Street.SHOWDOWN and len(self.unrevealed_players) == 0
         )
-
 
     @property
     def players_in_game(self):
@@ -382,6 +379,15 @@ class Table:
         """Returns the pot's value in big blinds"""
         return self.pot.value/self.level.bb
 
+    @property
+    def average_stack(self):
+        """Returns the average stack of players on the table"""
+        return sum(pl.init_stack for pl in self.players) / self.players.len
+
+    def estimated_players_remaining(self):
+        """Returns the estimated number of players remaining in the tournament"""
+        return self.tournament.estimated_players_remaining(average_stack=self.average_stack)
+
     def advance_seat_playing(self):
         """Advances seat playing to next available player"""
         player = self.current_player
@@ -488,5 +494,3 @@ class Table:
         """Advance to the next hand"""
         self.hand_reset()
         self.players.advance_bb_seat()
-
-
