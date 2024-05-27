@@ -10,12 +10,12 @@ class TableTest(unittest.TestCase):
         self.level = Level(4, 400)
         self.level2 = Level(5, 600)
         self.tournament = Tournament(level=self.level)
-        self.p1 = TablePlayer(name="Toto", seat=1, stack=2000)
-        self.p2 = TablePlayer(name="Tata", seat=2, stack=2500)
-        self.p3 = TablePlayer(name="Titi", seat=6, stack=25000)
-        self.p4 = TablePlayer(name="Tété", seat=4, stack=120327)
-        self.p5 = TablePlayer(name="Tutu", seat=5, stack=267)
-        self.p6 = TablePlayer(name="Tonton", seat=3, stack=11500)
+        self.p1 = TablePlayer(name="Toto", seat=1, init_stack=2000)
+        self.p2 = TablePlayer(name="Tata", seat=2, init_stack=2500)
+        self.p3 = TablePlayer(name="Titi", seat=6, init_stack=25000)
+        self.p4 = TablePlayer(name="Tété", seat=4, init_stack=120327)
+        self.p5 = TablePlayer(name="Tutu", seat=5, init_stack=267)
+        self.p6 = TablePlayer(name="Tonton", seat=3, init_stack=11500)
         self.pl_list = [self.p1, self.p2, self.p3, self.p4]
         self.pl_list2 = [self.p1, self.p2, self.p3, self.p4, self.p5, self.p6]
 
@@ -192,7 +192,8 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.nb_waiting, 0)
         self.assertEqual(table.seats_playing, [])
         self.assertEqual(table.pot.value, 8867)
-        self.assertEqual(table.players_involved, [table.players[4], table.players[5], table.players[6], table.players[1]])
+        self.assertEqual(table.players_involved,
+                         [table.players[4], table.players[5], table.players[6], table.players[1]])
         self.assertEqual(table.nb_involved, 4)
         table.flop("Qs", "Js", "Tc")
         self.assertEqual(table.pot.highest_bet, 0)
@@ -248,7 +249,8 @@ class TableTest(unittest.TestCase):
         table.current_player.bet(1e6)
         table.current_player.bet(1e7)
         self.assertEqual(table.nb_waiting, 0)
-        self.assertEqual(table.players_involved, [table.players[1], table.players[4], table.players[5], table.players[6]])
+        self.assertEqual(table.players_involved,
+                         [table.players[1], table.players[4], table.players[5], table.players[6]])
         self.assertEqual(table.players[1].hand_score, 61)
         self.assertEqual(table.players[4].hand_score, 1602)
         self.assertEqual(table.players[5].hand_score, 1)
@@ -377,13 +379,33 @@ class TableTest(unittest.TestCase):
         table.add_tournament(self.tournament)
         for pl in self.pl_list:
             table.add_player(pl)
-        
+        self.assertTrue(table.hand_can_start)
         self.assertFalse(table.hand_has_started)
         table.start_hand()
         self.assertTrue(table.hand_has_started)
+        self.assertFalse(table.hand_can_start)
         self.assertEqual(table.street, Street.PREFLOP)
         self.assertEqual(table.pot.value, 800)
         self.assertEqual(table.players.bb, 1)
+
+    def test_set_max_players(self):
+        table = Table()
+        for pl in self.pl_list2:
+            pl.sit(table)
+        self.assertEqual(table.max_players, 6)
+        table.set_max_players(9)
+        self.assertEqual(table.max_players, 9)
+
+    def test_estimated_players_remaining(self):
+        table = Table()
+        tournament = Tournament(
+            level=Level(1, 1000), total_players=200, starting_stack=20000
+
+        )
+        table.add_tournament(tournament)
+        for pl in self.pl_list2:
+            pl.sit(table)
+        self.assertEqual(table.estimated_players_remaining, 149)
 
 
 if __name__ == '__main__':

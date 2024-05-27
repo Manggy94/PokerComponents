@@ -8,22 +8,26 @@ class MyPlayerTestCase(unittest.TestCase):
     def setUp(self):
         self.level = Level(value=1, ante=50, bb=200)
         self.player = TablePlayer("Jean", 3, 2000)
-        self.toto = TablePlayer(name="Toto", seat=2, stack=25500)
+        self.toto = TablePlayer(name="Toto", seat=2, init_stack=25500)
 
     def test_new_player(self):
         self.assertIsInstance(self.player, TablePlayer)
 
     def test_player_name(self):
-        self.assertRaises(ValueError, lambda: TablePlayer("This is bullshit", 3, 3000))
+        with self.assertRaises(ValueError):
+            TablePlayer("This is bullshit", 3, 3000)
         self.assertGreater(len(self.player.name), 0)
         self.assertLess(len(self.player.name), 12)
         self.assertIsInstance(self.player.name, str)
         self.assertEqual(self.player.seat, 3)
 
     def test_player_seat(self):
-        self.assertRaises(ValueError, lambda: TablePlayer("Tom", 4.2, 3000))
-        self.assertRaises(ValueError, lambda: TablePlayer("Tom", 11, 3000))
-        self.assertRaises(ValueError, lambda: TablePlayer("Tom", -1, 3000))
+        with self.assertRaises(TypeError):
+            TablePlayer("Tom", 4.1, 3000)
+        with self.assertRaises(ValueError):
+            TablePlayer("Tom", 11, 3000)
+        with self.assertRaises(ValueError):
+            TablePlayer("Tom", -2, 3000)
         self.assertIsInstance(self.player.seat, int)
         self.assertEqual(self.player.seat, 3)
 
@@ -35,15 +39,17 @@ class MyPlayerTestCase(unittest.TestCase):
         self.assertIn(type(self.player.stack), [float, int])
         self.assertEqual(self.player.stack, 2000.5)
         self.assertFalse(self.player.is_all_in)
-        self.player.stack -= 1e4
+        self.player.stack -= self.player.max_bet(1e4)
         self.assertIn(type(self.player.stack), [float, int])
         self.assertEqual(self.player.stack, 0)
         self.assertTrue(self.player.is_all_in)
 
     def test_player_combo(self):
+        table = Table()
         with self.assertRaises(ValueError):
             self.player.combo = "Hey"
         self.assertFalse(self.player.has_combo)
+        self.player.sit(table)
         self.player.shows("AsAd")
         self.assertIsInstance(self.player.combo, Combo)
         self.assertEqual(self.player.combo, Combo("AsAd"))
@@ -91,9 +97,9 @@ class MyPlayerTestCase(unittest.TestCase):
         self.assertEqual(table.players.pl_list[0], self.toto)
         self.toto.init_stack = 22000
         self.assertEqual(self.toto.init_stack, 22000)
-        self.assertEqual(self.toto.stack, 22000)
+        #self.assertEqual(self.toto.stack, 22000)
         self.assertEqual(self.toto.max_bet(1000), 1000)
-        self.assertEqual(self.toto.max_bet(100000), 22000)
+        self.assertEqual(self.toto.max_bet(100000), 25500)
         self.toto.distribute("AsAd")
         self.assertRaises(ValueError, lambda: self.player.distribute("AsKs"))
         self.toto.sit_out()

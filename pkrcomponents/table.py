@@ -392,6 +392,7 @@ class Table:
         """Returns the average stack in big blinds"""
         return round(self.average_stack/self.level.bb, 2)
 
+    @property
     def estimated_players_remaining(self):
         """Returns the estimated number of players remaining in the tournament"""
         return self.tournament.estimated_players_remaining(average_stack=self.average_stack)

@@ -151,3 +151,7 @@ F
 pkrcomponents/utils.py,b\5\b53df539bde25ff847c3a570c0e98a8b908a08af
 Q
 !pkrcomponents/utils/validators.py,d\9\d925a5e1a0078c38c8dc554d22d5d2a70a0eef5c
+W
+'build/lib/pkrcomponents/lookup_table.py,7\5\7556461b4ae256ad5c085e28600bc4c8cf038c9b
+Q
+!pkrcomponents/utils/converters.py,b\d\bda0a06fa9b7ee286cf32fa6531e934ca7f12c60

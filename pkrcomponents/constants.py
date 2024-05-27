@@ -64,7 +64,7 @@ class MoneyType(PokerEnum):
     PLAY = "Play money", "Play", "play"
 
 
-class Action(PokerEnum):
+class ActionMove(PokerEnum):
     """Class describing an action done"""
     BET = "BET", "bet", "bets", "BETS", "Bet", "Bets", "R"
     RAISE = "RAISE", "raise", "raises",  "RAISES", "Raise", "Raises", "R"

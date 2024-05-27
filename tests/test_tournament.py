@@ -90,6 +90,8 @@ class TestTournament(unittest.TestCase):
             self.tour.players_remaining = -1
         with self.assertRaises(ValueError):
             self.tour.players_remaining = 101
+        with self.assertRaises(TypeError):
+            self.tour.players_remaining = 0.1
 
     def test_valid_buyin_sets_correctly(self):
         self.tour.buyin = BuyIn(prize_pool=10, bounty=0, rake=1)

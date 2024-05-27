@@ -1,9 +1,9 @@
 import numpy as np
-from pkrcomponents.constants import Action, Street, Position
+from pkrcomponents.constants import ActionMove, Street, Position
 from pkrcomponents.card import Card
 from pkrcomponents.hand import Hand
 
-all_actions = np.hstack(list(Action))
+all_actions = np.hstack(list(ActionMove))
 all_cards = np.hstack(list(Card))
 all_combos = np.hstack([hand.to_combos() for hand in list(Hand)])
 all_hands = np.hstack(list(Hand))

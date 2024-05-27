@@ -268,7 +268,8 @@ class Combo(_ReprMixin):
     def __new__(cls, combo):
         if isinstance(combo, Combo):
             return combo
-
+        if not combo:
+            return None
         if len(combo) != 4:
             raise ValueError(f"{combo}, should have a length of 4")
         elif combo[0] == combo[2] and combo[1] == combo[3]:

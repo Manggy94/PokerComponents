@@ -5,3 +5,5 @@ def validate_players_remaining(instance, attribute, value):
         raise ValueError(f"{attribute.name} must be at least 1")
     if value > instance.total_players:
         raise ValueError(f"{attribute.name} cannot be greater than total_players")
+
+

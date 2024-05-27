@@ -1,133 +1,63 @@
+from attrs import define, field, Factory
+from attrs.validators import instance_of, ge, le, optional, max_len, min_len
+
 from pkrcomponents.constants import Position, Street
 from pkrcomponents.hand import Combo
 from pkrcomponents.table import Table
+from pkrcomponents.utils.converters import convert_to_position
 
 
+@define
 class TablePlayer:
-    """
-    Class Representing a player that sits to play poker on a table
-    """
+    """Class Representing a player that sits to play poker on a table"""
 
-    _name: str
-    _seat: int
-    _stack: float
-    _init_stack: float
-    _combo: Combo or None
-    _folded: bool
-    _hero: bool
-    _position: Position or None
-    _table: Table
-    _max_reward: float
-    _bounty: float
+    name = field(default="Villain", validator=[instance_of(str), max_len(12), min_len(3)])
+    seat = field(default=0, validator=[instance_of(int), ge(0), le(10)])
+    init_stack = field(default=0, validator=[ge(0), instance_of(float)], converter=float)
+    stack = field(default=Factory(lambda self: self.init_stack, takes_self=True),
+                  validator=[ge(0), instance_of(float)], converter=float)
 
-    def __init__(self, name: str = "Villain", seat=0, stack: float = 0):
-        self.name = name
-        self.seat = seat
-        if stack < 0:
-            raise ValueError("Init stack cannot be negative")
-        else:
-            self.stack = stack
-            self.init_stack = stack
-        self._combo = None
-        self.folded = False
-        self._hero = False
-        self.current_bet = 0
-        self._position = None
-        self.actions = {
-            f"{Street('Preflop')}": [],
-            f"{Street('Flop')}": [],
-            f"{Street('Turn')}": [],
-            f"{Street('River')}": []
-        }
-        self.played = False
-
-    @property
-    def name(self):
-        """Player's name"""
-        return self._name
-
-    @name.setter
-    def name(self, name: str):
-        """Setter for player's name"""
-        if len(name) > 12:
-            raise ValueError("Player name length should be between 3 and 12 characters")
-        else:
-            self._name = name
-
-    @property
-    def seat(self):
-        """Player's seat"""
-        return self._seat
-
-    @seat.setter
-    def seat(self, seat):
-        """Setter for player's seat"""
-        if seat not in range(11):
-            raise ValueError("Seat should be an int between 0 and 10")
-        else:
-            self._seat = seat
-
-    @property
-    def stack(self):
-        """Player's stack"""
-        return self._stack
-
-    @stack.setter
-    def stack(self, stack):
-        """Setter for player's stack"""
-        self._stack = max(0.0, float(stack))
+    combo = field(default=None, validator=optional(instance_of(Combo)), converter=Combo)
+    folded = field(default=False, validator=instance_of(bool))
+    hero = field(default=False, validator=instance_of(bool))
+    position = field(default=None, validator=optional(instance_of(Position)), converter=convert_to_position)
+    table = field(default=None, validator=optional(instance_of(Table)))
+    bounty = field(default=0, validator=[ge(0), instance_of(float)], converter=float)
+    played = field(default=False, validator=instance_of(bool))
+    is_hero = field(default=False, validator=instance_of(bool))
+    current_bet = field(default=0, validator=[ge(0), instance_of(float)], converter=float)
+    reward = field(default=0, validator=optional([ge(0), instance_of((int, float))]))
+    actions = field(default={
+        f"{Street('Preflop')}": [],
+        f"{Street('Flop')}": [],
+        f"{Street('Turn')}": [],
+        f"{Street('River')}": []
+    }, validator=instance_of(dict))
 
     @property
     def stack_bb(self):
         """Player's stack in big blinds"""
-        return self.stack/self.table.level.bb
+        return self.stack / self.table.level.bb
 
     @property
     def stack_to_pot_ratio(self):
         """Player's stack to pot ratio"""
-        return float("inf") if self.table.pot.value == 0 else self.stack/self.table.pot.value
+        return float("inf") if self.table.pot.value == 0 else self.stack / self.table.pot.value
+
+    @property
+    def is_all_in(self):
+        """Boolean indicating if the player is all-in"""
+        return self.stack == 0
 
     @property
     def m_factor(self) -> float:
         """Player's M factor"""
-        return round(self.stack/self.table.cost_per_round, 2)
+        return round(self.stack / self.table.cost_per_round, 2)
 
     @property
     def m_factor_eff(self) -> float:
         """Player's effective M factor"""
         return round(self.m_factor * (self.table.players.len / 10), 2)
-
-    @property
-    def folded(self) -> bool:
-        """Boolean indicating if player folded"""
-        return self._folded
-
-    @folded.setter
-    def folded(self, folded):
-        """Setter for Boolean indicating if player folded"""
-        self._folded = folded
-
-    @property
-    def init_stack(self) -> float:
-        """Returns player's stack at the beginning of the hand"""
-        return self._init_stack
-
-    @init_stack.setter
-    def init_stack(self, stack):
-        """Setter for player's stack at the beginning of the hand"""
-        self._init_stack = max(0.0, float(stack))
-        self.stack = self.init_stack
-
-    def reset_init_stack(self):
-        """Reset player's initial stack"""
-        if self.stack == 0:
-            self.table.remove_player(self)
-        self.init_stack = self.stack
-
-    @property
-    def table(self):
-        """Returns associated table"""
-        return self._table
 
     @property
     def has_table(self):
@@ -140,94 +70,14 @@ class TablePlayer:
         return self.init_stack - self.stack
 
     @property
-    def max_reward(self):
-        """Float indicating the maximum amount that can be won by the player"""
-        return (not self.folded) * sum([min(self.invested, pl.invested) for pl in self.table.players])
-
-    @property
-    def combo(self):
-        """PLayer's Combo"""
-        return self._combo
-
-    @combo.setter
-    def combo(self, combo: Combo):
-        """Setter for Player's combo"""
-        combo = Combo(combo)
-        self._combo = combo
-
-    @property
-    def has_combo(self) -> bool:
-        """Boolean indicating if the player has a known combo"""
-        return self._combo is not None
-
-    @property
-    def is_hero(self) -> bool:
-        """Returns if the player is the hero"""
-        return self._hero
-
-    @is_hero.setter
-    def is_hero(self, is_hero):
-        """Setter to (un)make the player a hero"""
-        self._hero = is_hero
-
-    def shows(self, combo):
-        """The player shows a combo at showdown"""
-        self.combo = combo
-        if self.has_table:
-            self.table.deck.draw(self.combo.first)
-            self.table.deck.draw(self.combo.second)
-
-    @property
-    def position(self):
-        """Returns player's position (ex: UTG, BTN, BB)"""
-        return self._position
-
-    @position.setter
-    def position(self, position):
-        """Setter for player's position"""
-        position = Position(position)
-        self._position = position
-
-    def distribute(self, combo):
-        """Distributes a combo to a player"""
-        combo = Combo(combo)
-        self.table.deck.draw(combo.first)
-        self.table.deck.draw(combo.second)
-        self.combo = combo
-
-    def delete_combo(self):
-        """Deletes a player's combo"""
-        if self.has_combo:
-            self.table.deck.replace(self.combo.first)
-            self.table.deck.replace(self.combo.second)
-            self._combo = None
-
-    def reset_street_status(self):
-        """Reset street status"""
-        self.played = False
-        self.current_bet = 0
-
-    def reset_hand_status(self):
-        """Reset hand status"""
-        self.reset_street_status()
-        self.folded = False
-        self.reset_init_stack()
-        self.delete_combo()
-
-    @property
     def to_call(self):
         """float indicating the amount to call to continue on the table"""
-        return min(self.table.pot.highest_bet-self.current_bet, self.stack)
+        return min(self.table.pot.highest_bet - self.current_bet, self.stack)
 
     @property
     def to_call_bb(self):
         """float indicating the amount to call to continue on the table in big blinds"""
-        return self.to_call/self.table.level.bb
-
-    @property
-    def is_all_in(self):
-        """Boolean indicating if the player is all-in"""
-        return self.stack == 0
+        return self.to_call / self.table.level.bb
 
     @property
     def is_current_player(self):
@@ -250,21 +100,49 @@ class TablePlayer:
     @property
     def pot_odds(self) -> float:
         """Float indicating pot odds"""
-        return float("inf") if self.to_call == 0 else float(self.table.pot.value/self.to_call)
+        return float("inf") if self.to_call == 0 else float(self.table.pot.value / self.to_call)
 
     @property
     def req_equity(self):
         """Float indicating minimum required equity for an EV+ call"""
-        return 1.0/(1.0+self.pot_odds)
+        return 1.0 / (1.0 + self.pot_odds)
 
     def max_bet(self, value):
         """Returns the real amount in a bet"""
         return min(self.stack, value)
 
+    @property
+    def max_reward(self):
+        """Float indicating the maximum amount that can be won by the player"""
+        return (not self.folded) * sum([min(self.invested, pl.invested) for pl in self.table.players])
+
+    @property
+    def has_combo(self) -> bool:
+        """Boolean indicating if the player has a known combo"""
+        return self.combo is not None
+
+    @property
+    def hand_score(self):
+        """Returns player's current hand score on the table"""
+        cards = (self.combo.first, self.combo.second)
+        board = tuple(card for card in self.table.board[:self.table.board.len])
+        score = self.table.evaluator.evaluate(cards=cards, board=board)
+        return score
+
+    @property
+    def rank_class(self):
+        """Returns player's current hand rank class on the table"""
+        return self.table.evaluator.get_rank_class(self.hand_score)
+
+    @property
+    def class_str(self):
+        """Returns player's current hand rank class on the table"""
+        return self.table.evaluator.score_to_string(self.hand_score)
+
     def sit(self, table):
         """Sits a player on a table"""
         if table.players.len < table.max_players and table.players.seat_dict.get(self.seat) is None:
-            self._table = table
+            self.table = table
             table.players.add_player(self)
             self.reset_street_status()
 
@@ -272,7 +150,46 @@ class TablePlayer:
         """Removes player from the table"""
         self.reset_street_status()
         self.table.players.remove_player(self)
-        delattr(self, "_table")
+        delattr(self, "table")
+
+    def reset_init_stack(self):
+        """Reset player's initial stack"""
+        if self.stack == 0:
+            self.table.remove_player(self)
+        self.init_stack = self.stack
+
+    def distribute(self, combo):
+        """Distributes a combo to a player"""
+        combo = Combo(combo)
+        self.table.deck.draw(combo.first)
+        self.table.deck.draw(combo.second)
+        self.combo = combo
+
+    def shows(self, combo: (Combo, str)):
+        """The player shows a combo at showdown"""
+        self.combo = Combo(combo)
+        if self.has_table:
+            self.table.deck.draw(self.combo.first)
+            self.table.deck.draw(self.combo.second)
+
+    def delete_combo(self):
+        """Deletes a player's combo"""
+        if self.has_combo:
+            self.table.deck.replace(self.combo.first)
+            self.table.deck.replace(self.combo.second)
+            self.combo = None
+
+    def reset_street_status(self):
+        """Reset street status"""
+        self.played = False
+        self.current_bet = 0
+
+    def reset_hand_status(self):
+        """Reset hand status"""
+        self.reset_street_status()
+        self.folded = False
+        self.reset_init_stack()
+        self.delete_combo()
 
     def pay(self, value):
         """Action of paying a value"""
@@ -338,24 +255,6 @@ class TablePlayer:
         if value > self.table.pot.highest_bet:
             self.table.pot.highest_bet = value
 
-    @property
-    def hand_score(self):
-        """Returns player's current hand score on the table"""
-        cards = (self.combo.first, self.combo.second)
-        board = tuple(card for card in self.table.board[:self.table.board.len])
-        score = self.table.evaluator.evaluate(cards=cards, board=board)
-        return score
-
-    @property
-    def rank_class(self):
-        """Returns player's current hand rank class on the table"""
-        return self.table.evaluator.get_rank_class(self.hand_score)
-
-    @property
-    def class_str(self):
-        """Returns player's current hand rank class on the table"""
-        return self.table.evaluator.score_to_string(self.hand_score)
-
     def win(self, amount):
         """gives player a certain amount from the pot"""
         self.table.pot.value -= amount
@@ -381,13 +280,3 @@ class TablePlayer:
             postflop_bets.append({"text": "Min Bet", "value": self.table.min_bet})
         postflop_bets = sorted(postflop_bets, key=lambda x: x.get("value"))
         return postflop_bets
-
-    @property
-    def bounty(self):
-        """Returns the bounty value"""
-        return self._bounty
-
-    @bounty.setter
-    def bounty(self, value):
-        """Setter for bounty value"""
-        self._bounty = value

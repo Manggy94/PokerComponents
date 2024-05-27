@@ -1,53 +1,51 @@
 
 import unittest
-import pkrcomponents.action as action
+from pkrcomponents.action import Action, TablePlayer, ActionMove
 
-
-class MyActionTestCase(unittest.TestCase):
+class ActionTest(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.p1 = action.TablePlayer()
+        self.p1 = TablePlayer()
 
     def test_new_action(self):
-        self.assertIsInstance(action.Action(self.p1), action.Action)  # add assertion here
+        self.assertIsInstance(Action(self.p1), Action)  # add assertion here
 
     def test_action_player(self):
-        player = action.TablePlayer(name="Manggy", seat=4, stack=39000)
-        p2 = action.TablePlayer(name="Claude", seat=1, stack=3900)
-        act = action.Action(player=player)
-        self.assertIsInstance(act.player, action.TablePlayer)
-        self.assertEqual(act.player.name, "Manggy")
-        self.assertEqual(act.player.stack, 39000)
-        act.player = p2
-        self.assertIsInstance(act.player, action.TablePlayer)
-        self.assertEqual(act.player.name, "Claude")
-        self.assertEqual(act.player.stack, 3900)
-        with self.assertRaises(ValueError):
-            act.player = "abc"
+        player = TablePlayer(name="Manggy", seat=4, stack=39000)
+        p2 = TablePlayer(name="Claude", seat=1, stack=3900)
+        action = Action(player=player)
+        self.assertIsInstance(action.player, TablePlayer)
+        self.assertEqual(action.player.name, "Manggy")
+        self.assertEqual(action.player.stack, 39000)
+        action.player = p2
+        self.assertIsInstance(action.player, TablePlayer)
+        self.assertEqual(action.player.name, "Claude")
+        self.assertEqual(action.player.stack, 3900)
+        with self.assertRaises(TypeError):
+            action.player = "abc"
 
     def test_action_move(self):
-        act = action.Action(player=self.p1, move="raise")
-        self.assertIsInstance(act.move, action.cst.Action)
-        self.assertEqual(act.move, action.cst.Action.RAISE)
-        self.assertEqual(act.move.symbol, "R")
-        act2 = action.Action(player=self.p1, move=action.cst.Action("folds"))
-        self.assertIsInstance(act2.move, action.cst.Action)
-        self.assertNotEqual(act2.move, action.cst.Action.RAISE)
-        self.assertEqual(act2.move, action.cst.Action.FOLD)
+        action = Action(player=self.p1, move=ActionMove("raise"))
+        self.assertIsInstance(action.move, ActionMove)
+        self.assertEqual(action.move, ActionMove.RAISE)
+        self.assertEqual(action.move.symbol, "R")
+        act2 = Action(player=self.p1, move=ActionMove("folds"))
+        self.assertIsInstance(act2.move, ActionMove)
+        self.assertNotEqual(act2.move, ActionMove.RAISE)
+        self.assertEqual(act2.move, ActionMove.FOLD)
 
     def test_action_value(self):
-        act = action.Action(player=self.p1, value=-20)
-        self.assertIsInstance(act.value, float)
-        self.assertEqual(act.value, 0)
-        act2 = action.Action(player=self.p1, value=150)
-        self.assertIsInstance(act2.value, float)
+        with self.assertRaises(ValueError):
+            Action(player=self.p1, value=-20)
+        act2 = Action(player=self.p1, value=150)
+        self.assertIsInstance(act2.value, (float, int))
         self.assertNotEqual(act2.value, 200)
         self.assertEqual(act2.value, 150)
 
     def test_action_str(self):
-        act = action.Action(player=self.p1, move="call", value=33.000)
-        self.assertIsInstance(f"{act}", str)
-        self.assertEqual(f"{act}", "Villain does a CALL for 33.0")
+        action = Action(player=self.p1, move=ActionMove("call"), value=33.000)
+        self.assertIsInstance(f"{action}", str)
+        self.assertEqual(f"{action}", "Villain does a CALL for 33.0")
 
 
 if __name__ == '__main__':
