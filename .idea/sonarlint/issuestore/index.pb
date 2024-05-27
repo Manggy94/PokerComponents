@@ -131,3 +131,9 @@ A
 tests/test_pot.py,0\8\08aeacb411a078f3c8399660f735c8abfba8e024
 C
 tests/test_board.py,0\6\0638d6ced9ef96963d8452f544f65776f4368ac1
+C
+tests/test_table.py,1\f\1ffe7463bc5567ec44dab5a6342aaed644d6bdd3
+E
+tests/test_players.py,7\a\7a07ea7fe03f03558905c8f9cce0bb65c3544d14
+J
+tests/test_table_player.py,e\b\ebc6682056f161ba8a348658058d98d66c41e827

@@ -88,17 +88,17 @@ class TablePlayer:
         return float("inf") if self.table.pot.value == 0 else self.stack/self.table.pot.value
 
     @property
-    def m_factor(self):
+    def m_factor(self) -> float:
         """Player's M factor"""
-        return self.stack/self.table.cost_per_round
+        return round(self.stack/self.table.cost_per_round, 2)
 
     @property
-    def m_factor_eff(self):
+    def m_factor_eff(self) -> float:
         """Player's effective M factor"""
-        return self.m_factor * (self.table.players.len / 10)
+        return round(self.m_factor * (self.table.players.len / 10), 2)
 
     @property
-    def folded(self):
+    def folded(self) -> bool:
         """Boolean indicating if player folded"""
         return self._folded
 
@@ -108,7 +108,7 @@ class TablePlayer:
         self._folded = folded
 
     @property
-    def init_stack(self):
+    def init_stack(self) -> float:
         """Returns player's stack at the beginning of the hand"""
         return self._init_stack
 

@@ -17,7 +17,7 @@ fi
 
 # Generate coverage report
 coverage report > coverage.txt
-
+coverage html
 
 # Extraire le pourcentage total de couverture
 total_coverage=$(grep 'TOTAL' coverage.txt | awk '{print $4}' | sed 's/%//')
@@ -29,6 +29,5 @@ if [ $(echo "$total_coverage >= 98" | bc -l) -eq 1 ]  ; then
 else
     echo "Test coverage is insufficient: ${total_coverage}%"
     # Afficher le rapport de couverture en html
-    coverage html
     exit 1
 fi

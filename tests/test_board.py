@@ -146,6 +146,17 @@ class MyBoardTestCase(unittest.TestCase):
             'river': 'Ah'
         })
 
+    def test_reset(self):
+        self.board2.reset()
+        self.assertEqual(len(self.board2), 0)
+        self.assertEqual(self.board2.to_json(), {
+            'flop_1': 'nan',
+            'flop_2': 'nan',
+            'flop_3': 'nan',
+            'turn': 'nan',
+            'river': 'nan'
+        })
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -48,34 +48,24 @@ class Table:
         self._cnt_bets = 0
 
     @property
-    def board(self):
+    def board(self) -> Board:
         """Returns the associated board """
         return self._board
 
     @property
-    def deck(self):
+    def deck(self) -> Deck:
         """Returns the associated deck """
         return self._deck
 
     @property
-    def players(self):
+    def players(self) -> Players:
         """Returns the associated players """
         return self._players
 
     @property
-    def max_players(self):
+    def max_players(self) -> int:
         """Returns the maximum players that can be added on this table"""
         return self._max_players
-
-    @property
-    def is_full(self):
-        """Returns True if the table is full"""
-        return self.players.len == self.max_players
-
-    @property
-    def is_empty(self):
-        """Returns True if the table is empty"""
-        return self.players.len == 0
 
     @max_players.setter
     def max_players(self, max_value):
@@ -86,17 +76,27 @@ class Table:
             self._max_players = max_value
 
     @property
+    def is_full(self) -> bool:
+        """Returns True if the table is full"""
+        return self.players.len == self.max_players
+
+    @property
+    def is_empty(self) -> bool:
+        """Returns True if the table is empty"""
+        return self.players.len == 0
+
+    @property
     def pot(self):
         """Returns the associated pot """
         return self._pot
 
     @property
-    def tournament(self):
+    def tournament(self) -> Tournament or None:
         """Returns the associated tournament """
         return self._tournament
 
     @property
-    def evaluator(self):
+    def evaluator(self) -> Evaluator:
         """Returns the associated evaluator"""
         return self._evaluator
 
@@ -106,7 +106,7 @@ class Table:
         self._tournament = tournament
 
     @property
-    def street(self):
+    def street(self) -> Street:
         """Returns table's current street"""
         return self._street
 
@@ -116,7 +116,7 @@ class Table:
         self._street = Street(street)
 
     @property
-    def level(self):
+    def level(self) -> Level:
         """Returns current level"""
         if self._is_mtt:
             return self._tournament.level
@@ -129,7 +129,7 @@ class Table:
         self._level = level
 
     @property
-    def playing_order(self):
+    def playing_order(self) -> list[int]:
         """Returns the list of the indexes of players on the table, with order depending on current street"""
         if self._street == Street.PREFLOP:
             return self.players.preflop_ordered_seats
@@ -137,12 +137,12 @@ class Table:
             return self.players.postflop_ordered_seats
 
     @property
-    def players_waiting(self):
+    def players_waiting(self) -> list:
         """Returns the list of players on the table that are waiting to play"""
         return [self.players[i] for i in self.playing_order if self.players[i].can_play]
 
     @property
-    def street_ended(self):
+    def street_ended(self) -> bool:
         """Returns True if the street has ended"""
         return len(self.players_waiting) == 0 or (
                 self.nb_waiting == 1
@@ -153,57 +153,57 @@ class Table:
         )
 
     @property
-    def players_in_game(self):
+    def players_in_game(self) -> list:
         """Returns the list of players on the table that are still in the game (they can make an action)"""
         return [self.players[i] for i in self.playing_order if self.players[i].in_game]
 
     @property
-    def players_involved(self):
+    def players_involved(self) -> list:
         """Returns the list of players on the table that didn't fold yet"""
         return [self.players[i] for i in self.playing_order if not self.players[i].folded]
 
     @property
-    def hand_ended(self):
+    def hand_ended(self) -> bool:
         """Returns True if the hand has ended"""
         return len(self.players_involved) == 1 or self.street == Street.SHOWDOWN
 
     @property
-    def next_street_ready(self):
+    def next_street_ready(self) -> bool:
         """Returns True if the next street is ready to be played"""
         return self.street_ended and not self.hand_ended
 
     @property
-    def next_hand_ready(self):
+    def next_hand_ready(self) -> bool:
         """Returns True if the next hand is ready to be played"""
         return self.hand_ended and self.street_ended
 
     @property
-    def seats_playing(self):
+    def seats_playing(self) -> list[int]:
         """Returns the list of seats of players waiting to play"""
         return [pl.seat for pl in self.players_waiting]
 
     @property
-    def nb_waiting(self):
+    def nb_waiting(self) -> int:
         """Returns the number of players waiting to play"""
         return len(self.players_waiting)
 
     @property
-    def nb_in_game(self):
+    def nb_in_game(self) -> int:
         """Returns the number of players still in the game"""
         return len(self.players_in_game)
 
     @property
-    def nb_involved(self):
+    def nb_involved(self) -> int:
         """Returns the number of players who didn't fold yet"""
         return len(self.players_involved)
 
     @property
-    def hand_has_started(self):
+    def hand_has_started(self) -> bool:
         """Returns True if the hand has started"""
         return self._hand_has_started
 
     @property
-    def hand_can_start(self):
+    def hand_can_start(self) -> bool:
         """Returns True if the hand can start"""
         return self.players.len >= 2 and not self.hand_has_started
 
@@ -257,15 +257,15 @@ class Table:
         self.street = "river"
         self.street_reset()
 
+    def advance_to_showdown(self):
+        """Advance to showdown"""
+        self.street = Street.SHOWDOWN
+        self.street_reset()
+
     def add_tournament(self, tournament):
         """Associates table with a tournament"""
         self.tournament = tournament
         self._is_mtt = True
-
-    def change_bb_seat(self, seat: int):
-        """Change the big blind seat and redistribute positions"""
-        self.players.bb = seat
-        self.players.distribute_positions()
 
     def add_player(self, player):
         """
@@ -293,18 +293,21 @@ class Table:
             p.is_hero = False
         player.is_hero = True
 
-    def set_bb_seat(self, player):
+    def set_bb_seat(self, player_seat: int):
         """
-        Set the seat of the big blind
+        Set the seat of the big blind player and redistribute positions
         """
-        seat = player.seat
-        self.players.bb = seat
+        self.players.bb = player_seat
         if self.players.len > 1:
             self.players.distribute_positions()
 
-    def set_max_players(self, max_players):
+    def advance_bb_seat(self):
+        """Advances the Big Blind seat"""
+        self.players.advance_bb_seat()
+
+    def set_max_players(self, max_players: int):
         """
-        Set the maximum number of players
+        Set the maximum number of players on the table
         """
         self.max_players = max_players
         if self.players.len > 1:
@@ -359,7 +362,7 @@ class Table:
         return self._min_bet
 
     @min_bet.setter
-    def min_bet(self, value):
+    def min_bet(self, value: float):
         """Setter for min bet property"""
         if value > self.min_bet:
             self._min_bet = value
@@ -377,12 +380,17 @@ class Table:
     @property
     def pot_value_bb(self):
         """Returns the pot's value in big blinds"""
-        return self.pot.value/self.level.bb
+        return self.pot_value/self.level.bb
 
     @property
     def average_stack(self):
         """Returns the average stack of players on the table"""
         return sum(pl.init_stack for pl in self.players) / self.players.len
+
+    @property
+    def average_stack_bb(self):
+        """Returns the average stack in big blinds"""
+        return round(self.average_stack/self.level.bb, 2)
 
     def estimated_players_remaining(self):
         """Returns the estimated number of players remaining in the tournament"""
@@ -460,7 +468,7 @@ class Table:
             self.split_pot(players)
 
     @property
-    def cnt_bets(self):
+    def cnt_bets(self) -> int:
         """Returns the number of bets made on the table"""
         return self._cnt_bets
 
@@ -470,12 +478,12 @@ class Table:
         self._cnt_bets = value
 
     @property
-    def preflop_bet_factors(self):
+    def preflop_bet_factors(self) -> list:
         """Returns the preflop bet factors"""
         return self._preflop_bet_factors
 
     @property
-    def postflop_bet_factors(self):
+    def postflop_bet_factors(self) -> list:
         """Returns the postflop bet factors"""
         return self._postflop_bet_factors
 
