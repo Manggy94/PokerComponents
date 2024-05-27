@@ -1,23 +1,26 @@
 import unittest
-import pkrcomponents.pot as pot
+from pkrcomponents.pot import Pot
 
 
 class MyPotTestCase(unittest.TestCase):
     def test_new_pot(self):
-        p = pot.Pot()
-        self.assertIsInstance(p, pot.Pot)
+        p = Pot()
+        self.assertIsInstance(p, Pot)
+        with self.assertRaises(ValueError):
+            p.value = -10
         self.assertEqual(p.value, 0)
 
     def test_add(self):
-        p = pot.Pot()
-        self.assertRaises(ValueError, lambda: p.add(-10))
+        p = Pot()
+        with self.assertRaises(ValueError):
+            p.add(-10)
         p.add(2500)
         self.assertEqual(p.value, 2500)
         p.add(500)
         self.assertEqual(p.value, 3000)
 
     def test_reset(self):
-        p = pot.Pot()
+        p = Pot()
         p.add(2500)
         p.reset()
         self.assertEqual(p.value, 0)

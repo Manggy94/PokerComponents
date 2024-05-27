@@ -1,20 +1,25 @@
-Name                            Stmts   Miss  Cover
----------------------------------------------------
-pkrcomponents/__init__.py           0      0   100%
-pkrcomponents/_common.py           48      0   100%
-pkrcomponents/action.py            32      0   100%
-pkrcomponents/bitcard.py           68      0   100%
-pkrcomponents/board.py             81      0   100%
-pkrcomponents/card.py             112      1    99%
-pkrcomponents/constants.py         71      0   100%
-pkrcomponents/evaluator.py         28      0   100%
-pkrcomponents/hand.py             226      0   100%
-pkrcomponents/listings.py          16      0   100%
-pkrcomponents/lookup_table.py     112      0   100%
-pkrcomponents/players.py           96      0   100%
-pkrcomponents/pot.py               25      0   100%
-pkrcomponents/table.py            326      8    98%
-pkrcomponents/table_player.py     253      4    98%
-pkrcomponents/tournament.py       258      0   100%
----------------------------------------------------
-TOTAL                            1752     13    99%
+Name                                Stmts   Miss  Cover
+-------------------------------------------------------
+pkrcomponents/__init__.py               0      0   100%
+pkrcomponents/_common.py               48      0   100%
+pkrcomponents/action.py                32      0   100%
+pkrcomponents/bitcard.py               68      0   100%
+pkrcomponents/board.py                 81      0   100%
+pkrcomponents/buy_in.py                14      0   100%
+pkrcomponents/card.py                 112      1    99%
+pkrcomponents/constants.py             71      0   100%
+pkrcomponents/evaluator.py             28      0   100%
+pkrcomponents/hand.py                 226      0   100%
+pkrcomponents/level.py                 17      0   100%
+pkrcomponents/listings.py              16      0   100%
+pkrcomponents/lookup_table.py         112      0   100%
+pkrcomponents/payout.py                39      0   100%
+pkrcomponents/players.py               96      0   100%
+pkrcomponents/pot.py                   13      0   100%
+pkrcomponents/table.py                326      8    98%
+pkrcomponents/table_player.py         253      4    98%
+pkrcomponents/tournament.py            46      0   100%
+pkrcomponents/utils/__init__.py         0      0   100%
+pkrcomponents/utils/validators.py       7      1    86%
+-------------------------------------------------------
+TOTAL                                1605     14    99%

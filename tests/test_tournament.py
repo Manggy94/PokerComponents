@@ -1,13 +1,14 @@
 import unittest
-from pkrcomponents.tournament import Tournament, Buyin, Level, Payout, Payouts
+from pkrcomponents.payout import Payout, Payouts
+from pkrcomponents.tournament import Tournament, BuyIn, Level
 from pkrcomponents.constants import MoneyType
 
 
 class MyTournamentTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.buyin = Buyin(freeze=9, ko=0, rake=1)
-        self.tour = Tournament("tour_id", name="PLD", money_type="real", buyin=self.buyin)
+        self.buyin = BuyIn(prize_pool=9, bounty=0, rake=1)
+        self.tour = Tournament("tour_id", name="PLD", money_type=MoneyType.REAL, buyin=self.buyin)
         self.level = Level()
         self.level2 = Level(value=4, bb=600)
 
@@ -32,7 +33,7 @@ class MyTournamentTestCase(unittest.TestCase):
         self.assertEqual(self.tour.id, "None")
         self.assertIsInstance(self.tour.money_type, MoneyType)
         self.assertEqual(self.tour.money_type, MoneyType.REAL)
-        self.tour.money_type = "play"
+        self.tour.money_type = MoneyType("play")
         self.assertEqual(self.tour.money_type, MoneyType.PLAY)
 
     def test_name(self):
@@ -42,15 +43,11 @@ class MyTournamentTestCase(unittest.TestCase):
         self.assertEqual(self.tour.name, "Name")
 
     def test_buyin(self):
-        self.assertIsInstance(self.tour.buyin, Buyin)
-        self.assertEqual(self.tour.buyin.freeze_part, 9)
-        self.assertEqual(self.tour.buyin.ko_part, 0)
+        self.assertIsInstance(self.tour.buyin, BuyIn)
+        self.assertEqual(self.tour.buyin.prize_pool, 9)
+        self.assertEqual(self.tour.buyin.bounty, 0)
         self.assertEqual(self.tour.buyin.rake, 1)
         self.assertEqual(self.tour.buyin.total, 10)
-        self.tour.buyin = Buyin.from_total(20)
-        self.assertEqual(self.tour.buyin.freeze_part, 9)
-        self.assertEqual(self.tour.buyin.ko_part, 9)
-        self.assertEqual(self.tour.buyin.rake, 2)
 
     def test_to_json(self):
         self.assertIsInstance(self.tour.to_json(), dict)
@@ -63,7 +60,7 @@ class MyTournamentTestCase(unittest.TestCase):
             },
             'id': 'tour_id',
             'name': 'PLD',
-            'buy_in': {'freeze': 9, 'ko': 0, 'rake': 1},
+            'buy_in': {'prize_pool': 9, 'bounty': 0, 'rake': 1},
             'is_ko': True,
             'money_type': MoneyType('Real money')})
 
@@ -71,12 +68,12 @@ class MyTournamentTestCase(unittest.TestCase):
 class TestTournament(unittest.TestCase):
 
     def setUp(self):
-        self.buyin = Buyin(freeze=9, ko=0, rake=1)
+        self.buyin = BuyIn(prize_pool=9, bounty=0, rake=1)
         self.level = Level(value=4, bb=600)
-        self.tour = Tournament("tour_id", name="PLD", money_type="real", buyin=self.buyin, level=self.level)
+        self.tour = Tournament("tour_id", name="PLD", money_type=MoneyType("real"), buyin=self.buyin, level=self.level)
 
     def test_invalid_money_type_raises_error(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             self.tour.money_type = "invalid"
 
     def test_invalid_starting_stack_raises_error(self):
@@ -95,7 +92,7 @@ class TestTournament(unittest.TestCase):
             self.tour.players_remaining = 101
 
     def test_valid_buyin_sets_correctly(self):
-        self.tour.buyin = Buyin(freeze=10, ko=0, rake=1)
+        self.tour.buyin = BuyIn(prize_pool=10, bounty=0, rake=1)
         self.assertEqual(self.tour.buyin.total, 11)
 
     def test_valid_level_sets_correctly(self):
@@ -103,7 +100,7 @@ class TestTournament(unittest.TestCase):
         self.assertEqual(self.tour.level.bb, 800)
 
     def test_valid_money_type_sets_correctly(self):
-        self.tour.money_type = "play"
+        self.tour.money_type = MoneyType("play")
         self.assertEqual(self.tour.money_type, MoneyType.PLAY)
 
     def test_valid_starting_stack_sets_correctly(self):

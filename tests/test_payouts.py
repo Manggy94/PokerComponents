@@ -1,8 +1,8 @@
 import unittest
-from pkrcomponents.tournament import Payout, Payouts
+from pkrcomponents.payout import Payout, Payouts
 
 
-class PayoutTestCase(unittest.TestCase):
+class PayoutTest(unittest.TestCase):
 
     def setUp(self):
         self.payout = Payout(1, 100.0)
@@ -14,6 +14,8 @@ class PayoutTestCase(unittest.TestCase):
     def test_test_invalid_reward_raises_error(self):
         with self.assertRaises(ValueError):
             self.payout.reward = -1
+        with self.assertRaises(TypeError):
+            self.payout.reward = "text"
 
     def test_test_valid_tier_sets_correctly(self):
         self.payout.tier = 2
@@ -27,8 +29,12 @@ class PayoutTestCase(unittest.TestCase):
         self.assertIsInstance(self.payout.__str__(), str)
         self.assertEqual(self.payout.__str__(), "Tier: 1 - Reward: 100.0")
 
+    def test_test_to_json(self):
+        self.assertIsInstance(self.payout.to_json(), dict)
+        self.assertEqual(self.payout.to_json(), {"tier": 1, "reward": 100.0})
 
-class PayoutsTestCase(unittest.TestCase):
+
+class PayoutsTest(unittest.TestCase):
 
     def setUp(self):
         self.payouts = Payouts([Payout(1, 300.0), Payout(2, 200.0), Payout(3, 100.0)])

@@ -1,11 +1,18 @@
+"""The Pot class represents the pot of a table. It has two attributes: value and highest_bet.
+The value attribute represents the total amount of money in the pot,
+while the highest_bet attribute represents the highest bet made by a player in the current round.
+The Pot class has two methods: add and reset.
+The add method adds an amount to the pot, while the reset method resets the pot to its initial state."""
+
+from attrs import define, field
+from attrs.validators import instance_of, ge
+
+
+@define
 class Pot:
     """Class representing the pot of a table"""
-    _highest_bet: float
-    _value: float
-
-    def __init__(self):
-        self.value = 0
-        self.highest_bet = 0
+    value = field(default=0.0, validator=[ge(0), instance_of((float, int))])
+    highest_bet = field(default=0.0, validator=[ge(0), instance_of((float, int))])
 
     def add(self, amount):
         """Add an amount to the pot"""
@@ -13,28 +20,7 @@ class Pot:
             raise ValueError("amount added to pot can only be positive")
         self.value += amount
 
-    @property
-    def value(self):
-        """Returns pot's numerical value"""
-        return self._value
-
-    @value.setter
-    def value(self, value):
-        """Setter for value property"""
-        self._value = value
-
-    @property
-    def highest_bet(self):
-        """Returns current highest bet in this pot"""
-        return self._highest_bet
-
-    @highest_bet.setter
-    def highest_bet(self, bet):
-        """Setter for highest bet property"""
-        self._highest_bet = bet
-
     def reset(self):
         """Reset the pot"""
         self.value = 0
         self.highest_bet = 0
-
