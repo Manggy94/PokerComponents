@@ -10,7 +10,8 @@ install_requires = [
     "pandas",
     "pytest",
     "coverage",
-    "pytest-cov"
+    "pytest-cov",
+    "attrs",
 ]
 
 classifiers = [

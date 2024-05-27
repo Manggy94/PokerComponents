@@ -155,3 +155,5 @@ W
 'build/lib/pkrcomponents/lookup_table.py,7\5\7556461b4ae256ad5c085e28600bc4c8cf038c9b
 Q
 !pkrcomponents/utils/converters.py,b\d\bda0a06fa9b7ee286cf32fa6531e934ca7f12c60
+@
+requirements.txt,1\9\19359a61ae2446b51b549167b014da2fcf265768
