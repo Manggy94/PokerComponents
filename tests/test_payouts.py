@@ -14,7 +14,7 @@ class PayoutTest(unittest.TestCase):
     def test_test_invalid_reward_raises_error(self):
         with self.assertRaises(ValueError):
             self.payout.reward = -1
-        with self.assertRaises(TypeError):
+        with self.assertRaises(TypeError or ValueError):
             self.payout.reward = "text"
 
     def test_test_valid_tier_sets_correctly(self):

@@ -1,6 +1,6 @@
 from functools import cached_property
 from pkrcomponents.board import Board
-from pkrcomponents.card import Deck
+from pkrcomponents.deck import Deck
 from pkrcomponents.constants import Street
 from pkrcomponents.players import Players
 from pkrcomponents.pot import Pot
@@ -86,7 +86,7 @@ class Table:
         return self.players.len == 0
 
     @property
-    def pot(self):
+    def pot(self) -> Pot:
         """Returns the associated pot """
         return self._pot
 
@@ -101,7 +101,7 @@ class Table:
         return self._evaluator
 
     @tournament.setter
-    def tournament(self, tournament):
+    def tournament(self, tournament: Tournament):
         """Setter for tournament property"""
         self._tournament = tournament
 
@@ -111,7 +111,7 @@ class Table:
         return self._street
 
     @street.setter
-    def street(self, street):
+    def street(self, street: (str, Street)):
         """Setter for street property"""
         self._street = Street(street)
 
@@ -124,7 +124,7 @@ class Table:
             return self._level
 
     @level.setter
-    def level(self, level):
+    def level(self, level: Level):
         """Setter for level property"""
         self._level = level
 

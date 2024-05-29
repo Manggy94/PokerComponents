@@ -1,29 +1,29 @@
+"""This module contains the Card class, which represents a playing card.
+It also contains the Rank and Suit classes, which are used to define the rank and suit of a card."""
 from itertools import product
 from functools import total_ordering
 
-import random
-
 from pkrcomponents._common import PokerEnum, _ReprMixin
 
-__all__ = ["Suit", "Rank", "Card", "FACE_RANKS", "BROADWAY_RANKS", "Deck"]
+__all__ = ["Suit", "Rank", "Card", "FACE_RANKS", "BROADWAY_RANKS"]
 
 
 class Suit(PokerEnum):
     """
-    Suit of a card
+    Suit of a card: Clubs, Diamonds, Hearts, Spades
     """
     CLUBS = "c", "clubs", "♣", "C"
     DIAMONDS = "d", "diamonds", "♦", "D"
     HEARTS = "h", "hearts", "♥", "H"
     SPADES = "s", "spades", "♠", "S"
-    # Can't make alias with redefined value property
-    # because of a bug in stdlib enum module (line 162)
-    # C = '♣', 'c', 'C', 'clubs'
 
 
 class Rank(PokerEnum):
     """
-    Rank of a card
+    Rank of a card in a deck, from 2 to Ace.
+
+    Methods:
+        difference: tells the numerical difference between two ranks
     """
     DEUCE = "2", 2
     THREE = "3", 3
@@ -40,8 +40,17 @@ class Rank(PokerEnum):
     ACE = "A", 1
 
     @classmethod
-    def difference(cls, first, second):
-        """Tells the numerical difference between two ranks."""
+    def difference(cls, first, second) -> int:
+        """
+        Tells the numerical difference between two ranks.
+
+        Args:
+            first (Rank): the first rank
+            second (Rank): the second rank
+
+        Returns:
+            int: the difference between the two ranks
+        """
 
         # so we always get a Rank instance even if string were passed in
         first, second = cls(first), cls(second)
@@ -120,14 +129,14 @@ class Card(_ReprMixin, metaclass=_CardMeta):
         return self.rank - other.rank
 
     @property
-    def is_face(self):
+    def is_face(self) -> bool:
         """
         Indicates if the card is a face
         """
         return self.rank in FACE_RANKS
 
     @property
-    def is_broadway(self):
+    def is_broadway(self) -> bool:
         """
         Indicates if the card is a broadway
         """
@@ -142,54 +151,3 @@ class Card(_ReprMixin, metaclass=_CardMeta):
         return self
 
 
-class Deck:
-    """A deck of cards"""
-
-    def __init__(self):
-        self.cards = list(Card)
-
-    def __len__(self):
-        return self.cards.__len__()
-
-    def shuffle(self):
-        """
-        Randomly shuffles the deck
-        """
-        random.shuffle(self.cards)
-
-    def reset(self):
-        """Re-initializes the deck and shuffles it"""
-        self.cards = list(Card)
-        self.shuffle()
-
-    def draw(self, cd=None):
-        """
-        Returns a card from the deck
-        If the parameter card is given, it returns the card at stake and pops it from the deck
-        """
-        if not cd:
-            return self.cards.pop()
-        else:
-            cd = Card(cd)
-            idx = self.cards.index(cd)
-            return self.cards.pop(idx)
-
-    def replace(self, card):
-        """
-        Replaces a card in the deck
-        """
-        if card not in self.cards:
-            self.cards.append(card)
-
-    @property
-    def len(self):
-        """
-        Returns the number of cards currently in the deck
-        """
-        return self.__len__()
-
-    def to_json(self):
-        return {
-            "cards": [f"{card}" for card in self.cards],
-            "len": self.len
-        }

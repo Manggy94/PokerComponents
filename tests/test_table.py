@@ -1,6 +1,7 @@
 import unittest
 import numpy as np
-from pkrcomponents.table import Table, Deck, Board, Players, Pot, Tournament, Level, Street
+from pkrcomponents.table import Table, Board, Players, Pot, Tournament, Level, Street
+from pkrcomponents.deck import Deck
 from pkrcomponents.table_player import TablePlayer
 
 

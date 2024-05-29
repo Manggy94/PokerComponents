@@ -9,14 +9,76 @@ from pkrcomponents.utils.converters import convert_to_position
 
 @define
 class TablePlayer:
-    """Class Representing a player that sits to play poker on a table"""
+    """
+    This class represents a player on a poker table
+
+    Attributes:
+        name(str): The name of the player
+        seat(int): The seat number of the player
+        init_stack(float): The initial stack of the player at the beginning of the hand
+        stack(float): The current stack of the player
+        combo(Combo): The combo of the player
+        folded(bool): Whether the player has folded
+        hero(bool): Whether the player is the hero
+        position(Position): The position of the player
+        table(Table): The table the player is on
+        bounty(float): The bounty of the player
+        played(bool): Whether the player has played
+        is_hero(bool): Whether the player is the hero
+        current_bet(float): The current bet of the player
+        reward(int): The reward of the player
+        actions(dict): The actions of the player on each street
+
+    Methods:
+        stack_bb(): Returns the player's stack in big blinds
+        stack_to_pot_ratio(): Returns the player's stack to pot ratio
+        is_all_in(): Returns whether the player is all-in
+        m_factor(): Returns the player's M factor
+        m_factor_eff(): Returns the player's effective M factor
+        has_table(): Returns whether the player has a table
+        invested(): Returns the amount already invested by the player in the pot
+        to_call(): Returns the amount to call to continue on the table
+        to_call_bb(): Returns the amount to call to continue on the table in big blinds
+        is_current_player(): Returns whether the player is the current player
+        can_play(): Returns whether the player can still play in this hand
+        in_game(): Returns whether the player can still make actions in this hand
+        pot_odds(): Returns the pot odds
+        req_equity(): Returns the minimum required equity for an EV+ call
+        max_bet(value): Returns the real amount in a bet
+        max_reward(): Returns the maximum amount that can be won by the player
+        has_combo(): Returns whether the player has a known combo
+        hand_score(): Returns the player's current hand score on the table
+        rank_class(): Returns the player's current hand rank class on the table
+        class_str(): Returns the player's current hand rank class on the table
+        sit(table): Sits the player on a table
+        sit_out(): Removes the player from the table
+        reset_init_stack(): Resets the player's initial stack
+        distribute(combo): Distributes a combo to the player
+        shows(combo): The player shows a combo at showdown
+        delete_combo(): Deletes the player's combo
+        reset_street_status(): Resets street status
+        reset_hand_status(): Resets hand status
+        pay(value): Action of paying a value
+        do_bet(value): Action of betting a certain value
+        bet(value): Bet and step to next player
+        do_call(): Action of calling
+        call(): Call and step to next player
+        do_check(): Action of checking
+        check(): Check and step to next player
+        do_fold(): Action of folding
+        fold(): Fold and step to next player
+        post(value): Action of posting
+        win(amount): Gives the player a certain amount from the pot
+        preflop_bet_amounts(): Returns preflop bet amounts
+        postflop_bets(): Returns postflop bets
+
+    """
 
     name = field(default="Villain", validator=[instance_of(str), max_len(12), min_len(3)])
     seat = field(default=0, validator=[instance_of(int), ge(0), le(10)])
     init_stack = field(default=0, validator=[ge(0), instance_of(float)], converter=float)
     stack = field(default=Factory(lambda self: self.init_stack, takes_self=True),
                   validator=[ge(0), instance_of(float)], converter=float)
-
     combo = field(default=None, validator=optional(instance_of(Combo)), converter=Combo)
     folded = field(default=False, validator=instance_of(bool))
     hero = field(default=False, validator=instance_of(bool))
@@ -35,8 +97,10 @@ class TablePlayer:
     }, validator=instance_of(dict))
 
     @property
-    def stack_bb(self):
-        """Player's stack in big blinds"""
+    def stack_bb(self) -> float:
+        """
+        Player's stack in big blinds
+        """
         return self.stack / self.table.level.bb
 
     @property
@@ -60,27 +124,27 @@ class TablePlayer:
         return round(self.m_factor * (self.table.players.len / 10), 2)
 
     @property
-    def has_table(self):
+    def has_table(self) -> bool:
         """Boolean indicating if player has a table"""
         return hasattr(self, "table")
 
     @property
-    def invested(self):
-        """Float indicating the amount already invested by a player in pot"""
+    def invested(self) -> float:
+        """The total amount already invested by a player in pot"""
         return self.init_stack - self.stack
 
     @property
-    def to_call(self):
-        """float indicating the amount to call to continue on the table"""
+    def to_call(self) -> float:
+        """The amount to call to continue on the table"""
         return min(self.table.pot.highest_bet - self.current_bet, self.stack)
 
     @property
     def to_call_bb(self):
-        """float indicating the amount to call to continue on the table in big blinds"""
+        """The amount to call to continue on the table in big blinds"""
         return self.to_call / self.table.level.bb
 
     @property
-    def is_current_player(self):
+    def is_current_player(self) -> bool:
         """Boolean indicating if the player is the current player"""
         if not self.can_play and self.table.current_player == self:
             self.table.advance_seat_playing()
@@ -107,12 +171,17 @@ class TablePlayer:
         """Float indicating minimum required equity for an EV+ call"""
         return 1.0 / (1.0 + self.pot_odds)
 
-    def max_bet(self, value):
-        """Returns the real amount in a bet"""
+    def max_bet(self, value: float) -> float:
+        """
+        Returns the real amount in a bet
+
+        Args:
+            value (float): The amount to bet
+        """
         return min(self.stack, value)
 
     @property
-    def max_reward(self):
+    def max_reward(self) -> float:
         """Float indicating the maximum amount that can be won by the player"""
         return (not self.folded) * sum([min(self.invested, pl.invested) for pl in self.table.players])
 
@@ -122,7 +191,7 @@ class TablePlayer:
         return self.combo is not None
 
     @property
-    def hand_score(self):
+    def hand_score(self) -> int:
         """Returns player's current hand score on the table"""
         cards = (self.combo.first, self.combo.second)
         board = tuple(card for card in self.table.board[:self.table.board.len])
@@ -130,17 +199,22 @@ class TablePlayer:
         return score
 
     @property
-    def rank_class(self):
+    def rank_class(self) -> int:
         """Returns player's current hand rank class on the table"""
         return self.table.evaluator.get_rank_class(self.hand_score)
 
     @property
-    def class_str(self):
+    def class_str(self) -> str:
         """Returns player's current hand rank class on the table"""
         return self.table.evaluator.score_to_string(self.hand_score)
 
-    def sit(self, table):
-        """Sits a player on a table"""
+    def sit(self, table: Table):
+        """
+        Sits a player on a table
+
+        Args:
+            table (Table): The table to sit the player on
+        """
         if table.players.len < table.max_players and table.players.seat_dict.get(self.seat) is None:
             self.table = table
             table.players.add_player(self)
@@ -158,15 +232,25 @@ class TablePlayer:
             self.table.remove_player(self)
         self.init_stack = self.stack
 
-    def distribute(self, combo):
-        """Distributes a combo to a player"""
+    def distribute(self, combo: (Combo, str)):
+        """
+        Distributes a combo to a player
+
+        Args:
+            combo (Combo, str): The combo to distribute
+        """
         combo = Combo(combo)
         self.table.deck.draw(combo.first)
         self.table.deck.draw(combo.second)
         self.combo = combo
 
     def shows(self, combo: (Combo, str)):
-        """The player shows a combo at showdown"""
+        """
+        The player shows a combo at showdown
+
+        Args:
+            combo (Combo, str): The combo to show
+        """
         self.combo = Combo(combo)
         if self.has_table:
             self.table.deck.draw(self.combo.first)
@@ -191,14 +275,24 @@ class TablePlayer:
         self.reset_init_stack()
         self.delete_combo()
 
-    def pay(self, value):
-        """Action of paying a value"""
+    def pay(self, value: float):
+        """
+        Action of paying a value
+
+        Args:
+            value (float): The amount to pay
+        """
         amount = self.max_bet(value)
         self.stack -= amount
         self.table.pot.add(amount)
 
-    def do_bet(self, value):
-        """Action of betting a certain value"""
+    def do_bet(self, value: float):
+        """
+        Action of betting a certain value
+
+        Args:
+            value (float): The amount to bet
+        """
         self.current_bet += self.max_bet(value)
         self.pay(value)
         if self.current_bet > self.table.pot.highest_bet:
@@ -206,8 +300,13 @@ class TablePlayer:
             self.table.cnt_bets += 1
         self.played = True
 
-    def bet(self, value):
-        """Bet and step to next player"""
+    def bet(self, value: float):
+        """
+        Bet and step to next player
+
+        Args:
+            value (float): The amount to bet
+        """
         if value >= self.table.min_bet:
             self.table.min_bet = 2*value - self.table.pot.highest_bet
             self.do_bet(value)
@@ -249,26 +348,41 @@ class TablePlayer:
         self.do_fold()
         self.table.advance_seat_playing()
 
-    def post(self, value):
-        """Action of posting"""
+    def post(self, value: float):
+        """
+        Action of posting
+
+        Args:
+            value (float): The amount to post
+        """
         self.pay(value)
         if value > self.table.pot.highest_bet:
             self.table.pot.highest_bet = value
 
-    def win(self, amount):
-        """gives player a certain amount from the pot"""
+    def win(self, amount: float) -> None:
+        """
+        Gives player a certain amount from the pot
+
+        Args:
+            amount (float): The amount to win
+        """
         self.table.pot.value -= amount
         self.stack += amount
 
     @property
-    def preflop_bet_amounts(self):
-        bet_amounts = [round(self.table.min_bet * factor) for factor in self.table.preflop_bet_factors]
-        bet_amounts = [amt for amt in bet_amounts if amt < self.stack]
+    def preflop_bet_amounts(self) -> list:
+        """Returns preflop bet amounts for the player"""
+        bet_amounts = [round(self.table.min_bet * factor)
+                       for factor in self.table.preflop_bet_factors
+                       if round(self.table.min_bet * factor) < self.stack]
         bet_amounts.append(self.stack)
         return bet_amounts
 
     @property
-    def postflop_bets(self):
+    def postflop_bets(self) -> list:
+        """
+        Returns postflop bets for the player
+        """
         postflop_bets = [
             {"text": factor.get("text"), "value": round(self.table.pot.value * factor.get("value"))}
             for factor in self.table.postflop_bet_factors

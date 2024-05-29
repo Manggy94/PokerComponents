@@ -8,7 +8,7 @@ class MyTournamentTestCase(unittest.TestCase):
 
     def setUp(self):
         self.buyin = BuyIn(prize_pool=9, bounty=0, rake=1)
-        self.tour = Tournament("tour_id", name="PLD", money_type=MoneyType.REAL, buyin=self.buyin)
+        self.tour = Tournament("tour_id", name="PLD", money_type=MoneyType.REAL, buy_in=self.buyin)
         self.level = Level()
         self.level2 = Level(value=4, bb=600)
 
@@ -43,11 +43,11 @@ class MyTournamentTestCase(unittest.TestCase):
         self.assertEqual(self.tour.name, "Name")
 
     def test_buyin(self):
-        self.assertIsInstance(self.tour.buyin, BuyIn)
-        self.assertEqual(self.tour.buyin.prize_pool, 9)
-        self.assertEqual(self.tour.buyin.bounty, 0)
-        self.assertEqual(self.tour.buyin.rake, 1)
-        self.assertEqual(self.tour.buyin.total, 10)
+        self.assertIsInstance(self.tour.buy_in, BuyIn)
+        self.assertEqual(self.tour.buy_in.prize_pool, 9)
+        self.assertEqual(self.tour.buy_in.bounty, 0)
+        self.assertEqual(self.tour.buy_in.rake, 1)
+        self.assertEqual(self.tour.buy_in.total, 10)
 
     def test_to_json(self):
         self.assertIsInstance(self.tour.to_json(), dict)
@@ -70,10 +70,10 @@ class TestTournament(unittest.TestCase):
     def setUp(self):
         self.buyin = BuyIn(prize_pool=9, bounty=0, rake=1)
         self.level = Level(value=4, bb=600)
-        self.tour = Tournament("tour_id", name="PLD", money_type=MoneyType("real"), buyin=self.buyin, level=self.level)
+        self.tour = Tournament("tour_id", name="PLD", money_type=MoneyType("real"), buy_in=self.buyin, level=self.level)
 
     def test_invalid_money_type_raises_error(self):
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValueError):
             self.tour.money_type = "invalid"
 
     def test_invalid_starting_stack_raises_error(self):
@@ -94,8 +94,8 @@ class TestTournament(unittest.TestCase):
             self.tour.players_remaining = 0.1
 
     def test_valid_buyin_sets_correctly(self):
-        self.tour.buyin = BuyIn(prize_pool=10, bounty=0, rake=1)
-        self.assertEqual(self.tour.buyin.total, 11)
+        self.tour.buy_in = BuyIn(prize_pool=10, bounty=0, rake=1)
+        self.assertEqual(self.tour.buy_in.total, 11)
 
     def test_valid_level_sets_correctly(self):
         self.tour.level = Level(value=5, bb=800)

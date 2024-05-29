@@ -10,20 +10,34 @@ from pkrcomponents.utils.validators import validate_players_remaining
 
 @define
 class Tournament:
-    """Class for played tournaments"""
+    """
+    This class represents a poker tournament
+
+    Attributes:
+        id(str): The id of the tournament
+        name(str): The name of the tournament
+        buy_in(BuyIn): The buy-in of the tournament
+        is_ko(bool): Whether the tournament is a knockout tournament
+        money_type(MoneyType): The type of money used in the tournament
+        level(Level): The current level of the tournament
+        payouts(Payouts): The payouts of the tournament
+        total_players(int): The total number of players in the tournament
+        players_remaining(int): The number of players remaining in the tournament
+        starting_stack(float): The starting stack for each player in the tournament
+    """
     id = field(default='0000', validator=[instance_of(str)])
     name = field(default='Kill The Fish', validator=[instance_of(str)])
-    buyin = field(default=Factory(BuyIn), validator=[instance_of(BuyIn)])
+    buy_in = field(default=Factory(BuyIn), validator=[instance_of(BuyIn)])
     is_ko = field(default=True, validator=[instance_of(bool)])
-    money_type = field(default=MoneyType.REAL, validator=[instance_of(MoneyType)])
+    money_type = field(default=MoneyType.REAL, validator=[instance_of(MoneyType)], converter=MoneyType)
     level = field(default=Factory(Level), validator=[instance_of(Level)])
     payouts = field(default=Factory(Payouts), validator=[instance_of(Payouts)])
     total_players = field(default=2, validator=[gt(1), instance_of(int)])
     players_remaining = field(default=2, validator=validate_players_remaining)
-    starting_stack = field(default=20000.0, validator=[gt(0), instance_of((float, int))])
+    starting_stack = field(default=20000.0, validator=[gt(0), instance_of(float)], converter=float)
 
     def __str__(self):
-        return f"Name: {self.name}\nId: {self.id}\nBuy-in: {self.buyin}\nMoney: {self.money_type}"
+        return f"Name: {self.name}\nId: {self.id}\nBuy-in: {self.buy_in}\nMoney: {self.money_type}"
 
     @property
     def total_chips(self):
@@ -64,7 +78,7 @@ class Tournament:
             "level": self.level.to_json(),
             "id": self.id,
             "name": self.name,
-            "buy_in": self.buyin.to_json(),
+            "buy_in": self.buy_in.to_json(),
             "is_ko": self.is_ko,
             "money_type": self.money_type
         }
