@@ -139,6 +139,30 @@ class Players:
             self.bb = self.occupied_seats[0]
         self.distribute_positions()
 
+    def get_bb_seat_from_button(self, button_seat: int) -> int:
+        """
+        Returns the Big Blind seat based on the button seat
+
+        Args:
+            button_seat (int): The seat of the button
+
+        Returns:
+            bb_seat (int): The seat of the Big Blind
+        """
+        if len(self.occupied_seats) < 3:
+            advance = 1
+        else:
+            advance = 2
+        button_index = self.occupied_seats.index(button_seat)
+        bb_index = button_index
+        for _ in range(advance):
+            bb_index += 1
+            try:
+                self.occupied_seats[bb_index]
+            except IndexError:
+                bb_index = 0
+        return self.occupied_seats[bb_index]
+
     def hand_reset(self):
         """Reset all players for a new hand"""
         for player in self:

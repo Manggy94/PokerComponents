@@ -69,6 +69,34 @@ class PlayersTest(unittest.TestCase):
             pl.sit(table)
         table.players.bb = 2
 
+    def test_get_bb_from_button(self):
+        table = Table()
+        for pl in self.list:
+            pl.sit(table)
+        button_seat = 1
+        bb_seat = table.players.get_bb_seat_from_button(button_seat)
+        self.assertEqual(bb_seat, 4)
+        table3 = Table()
+        list3 = [self.p1, self.p2, self.p3, self.p4, self.p5]
+        for pl in list3:
+            pl.sit(table3)
+        button_seat3 = 5
+        bb_seat3 = table3.players.get_bb_seat_from_button(button_seat3)
+        self.assertEqual(bb_seat3, 1)
+        button_seat3 = 6
+        bb_seat3 = table3.players.get_bb_seat_from_button(button_seat3)
+        self.assertEqual(bb_seat3, 2)
+        table2 = Table()
+        list2 = [self.p1, self.p4]
+        for pl in list2:
+            pl.sit(table2)
+        button_seat2 = 1
+        bb_seat2 = table2.players.get_bb_seat_from_button(button_seat2)
+        self.assertEqual(bb_seat2, 4)
+        button_seat2 = 4
+        bb_seat2 = table2.players.get_bb_seat_from_button(button_seat2)
+        self.assertEqual(bb_seat2, 1)
+
 
 if __name__ == '__main__':
     unittest.main()
