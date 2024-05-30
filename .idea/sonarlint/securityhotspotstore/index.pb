@@ -33,48 +33,13 @@ J
 pkrcomponents/evaluator.py,7\e\7ec0d9f5da454b5ffb7346d9696b8026d98467c2
 F
 pkrcomponents/board.py,9\b\9b53b796a43d581d85128a4b6be52ab2c4b9d88a
->
-structure.html,b\6\b6a3570150dc3c017a1de5ab99cb7174464a9087
 ;
 LICENSE.txt,7\9\79b82ce9b64a924266619555502f890dd80c83b9
-:
-
-README.rst,5\6\561b88e19de321ca62c7590bbb350765fb110905
 :
 
 Dockerfile,6\6\6651ddff6eb82c840ced7c1dddee15c6e1913dd4
 I
 scripts/update_version.sh,1\4\143ad98d8e95857542e293d77c465cfa83a3f2e2
-X
-(pkrcomponents/models/actions/sequence.py,d\2\d29ea9338acd7e57156a4cd6511cd80956ac99ae
-Y
-)Tests/pkrcomponents/action/test_action.py,e\9\e9ca3904b110c96ffb5bc7d6d7818e8f17f9372a
-W
-'Tests/pkrcomponents/table/test_table.py,3\e\3ea3ac7aaf3f88a8e548c8d938b9692d9e978f5f
-e
-5Tests/pkrcomponents/table_player/test_table_player.py,e\f\ef850a6f9609adf397602743a94fd4a08901138b
-P
- pkrcomponents/models/pots/pot.py,d\c\dc36aa56d6c61aa666671d34713a366514eacd76
-V
-&pkrcomponents/models/actions/street.py,7\2\7225ca5ecf6471e721aae665113789bc435edaea
-Z
-*pkrcomponents/tests/actions/test_street.py,c\3\c361243e044031c9542fd4a21d59ff47e1e558f7
-X
-(pkrcomponents/tests/actions/test_move.py,b\0\b0b42fe8d2cc12c4a0b4e5b108b8766287e5e7c3
-T
-$pkrcomponents/models/actions/move.py,e\7\e7383be561bbbe0b99abe5d310e0a0f4f7c3f48c
-N
-pkrcomponents/models/amount.py,b\7\b717f6f96a864bb734b6742270acc465131f838e
-R
-"pkrcomponents/models/cards/suit.py,3\6\36efe98514ac68ce312c66ed001550290f00cf78
-R
-"pkrcomponents/models/cards/rank.py,8\2\82849b56442fb74f329e21bcb0e9f3526dd427c7
-R
-"pkrcomponents/models/cards/card.py,9\f\9f61ee41bc6ae1e2d00b8562374b72116c53dfcd
-S
-#Tests/pkrcomponents/pot/test_pot.py,1\1\11d9e9213fc0e949c9b4b3ad2f8c797f46aff139
-[
-+Tests/pkrcomponents/players/test_players.py,8\0\80f6b5effa1059bca6be0ecd9cfb8e62878dde29
 C
 config/version.json,d\3\d36c48db54c6f38e0d16b79836996d399d0dde64
 :
@@ -90,8 +55,6 @@ P
  build/lib/pkrcomponents/table.py,f\5\f5474697daef739a6dab298332b31e492458f0fc
 ;
 MANIFEST.in,8\8\8875df48c18030126ef5ef5a6f5c93b23451fb9f
-a
-1Tests/pkrcomponents/tournament/test_tournament.py,a\7\a7edf5f673a2dc020a5b2de7fe588d6602add111
 D
 scripts/test_code.sh,a\3\a342caa52c07f435a99f210466dd60640148f6b2
 E
@@ -102,27 +65,17 @@ I
 scripts/test_cov_compo.sh,6\c\6cfdc8201e70c539146ebef6890965558a6023fb
 <
 coverage.txt,7\f\7fdf79859c08d5abb5c25747edcf2d4a333a524b
-a
-1tests/pkrcomponents/tournament/test_tournament.py,0\0\00e175422169a81e866d6268f8c14365c7a62e9a
 :
 
 mkdocs.yml,e\0\e06ae62d2bf20523432731a2d6fa671c79156f34
 =
 docs/index.md,0\b\0b3e33619677413fe8f879987c9e0357046fe604
-W
-'tests/pkrcomponents/table/test_table.py,7\1\715f073543e0b0111154d58d79e54eedd9878021
-e
-5tests/pkrcomponents/table_player/test_table_player.py,8\5\859a469adb8a3839299a3862e19ab135d7c134e0
-_
-/tests/pkrcomponents/evaluator/test_evaluator.py,9\2\92f1ed3820938778dd2a5b5a27e688aa59c595bb
 B
 htmlcov/index.html,7\f\7fbfaf5b961834621de8df2ce80982f6d3c260b5
 D
 tests/test_action.py,7\e\7e79cc411ccb559a48f027077f7820d79ce3af87
 H
 tests/test_tournament.py,4\e\4eadfcd7fe37a56b7fc822cde46e51d6d1f89d21
-C
-tests/test_buyin.py,7\3\731ae4bea0e8ec3d615d6dd58bf1a7df70ff3794
 E
 tests/test_payouts.py,8\5\854e2df627dfa2067cdcfe773ff81b7a5827385c
 C
@@ -145,10 +98,6 @@ G
 pkrcomponents/buy_in.py,3\5\351372aba553762785e22a35e099f588aa2dc386
 D
 tests/test_buy_in.py,6\e\6ebada57601163b218ca14cf7e1015f55d884adb
-H
-pkrcomponents/payouts.py,0\2\02d3beb7956ab421db8530530f1409b387027b2c
-F
-pkrcomponents/utils.py,b\5\b53df539bde25ff847c3a570c0e98a8b908a08af
 Q
 !pkrcomponents/utils/validators.py,d\9\d925a5e1a0078c38c8dc554d22d5d2a70a0eef5c
 W
@@ -163,8 +112,6 @@ E
 scripts/build_docs.sh,5\9\59717e466b9e20068fd5122429e6e5bf577902eb
 >
 docs/action.md,b\3\b33f7976e49735552bad17c8e73c2eae18592d6b
-E
-docs/models/amount.md,4\3\437bf42a480e3a1982b52439266d8896457dbc2a
 ?
 site/index.html,f\8\f8b5f3ae1c096b53afb265d4a56fc2955bfc7607
 E
@@ -173,3 +120,5 @@ E
 docs/card.md,e\9\e93ed0645c2acdf853025e3abf6156db231320f2
 <
 docs/deck.md,6\2\62f960b61e8d6a654295e095ef7362d9f283e34c
+n
+>venv/lib/python3.10/site-packages/watchdog/observers/winapi.py,e\c\ecd1d93b0167a1b56b1c4ff70b21554af3c05a7b

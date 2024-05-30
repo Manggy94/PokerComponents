@@ -4,7 +4,7 @@ pkrcomponents/__init__.py               0      0   100%
 pkrcomponents/_common.py               48      0   100%
 pkrcomponents/action.py                11      0   100%
 pkrcomponents/bitcard.py               68      0   100%
-pkrcomponents/board.py                 81      0   100%
+pkrcomponents/board.py                 83      0   100%
 pkrcomponents/buy_in.py                14      0   100%
 pkrcomponents/card.py                  87      0   100%
 pkrcomponents/constants.py             71      0   100%
@@ -18,10 +18,10 @@ pkrcomponents/payout.py                37      0   100%
 pkrcomponents/players.py              109      0   100%
 pkrcomponents/pot.py                   13      0   100%
 pkrcomponents/table.py                327      4    99%
-pkrcomponents/table_player.py         182      2    99%
+pkrcomponents/table_player.py         181      2    99%
 pkrcomponents/tournament.py            46      0   100%
 pkrcomponents/utils/__init__.py         0      0   100%
 pkrcomponents/utils/converters.py       6      1    83%
 pkrcomponents/utils/validators.py       7      0   100%
 -------------------------------------------------------
-TOTAL                                1534      8    99%
+TOTAL                                1535      8    99%

@@ -19,7 +19,6 @@ class TablePlayer:
         stack(float): The current stack of the player
         combo(Combo): The combo of the player
         folded(bool): Whether the player has folded
-        hero(bool): Whether the player is the hero
         position(Position): The position of the player
         table(Table): The table the player is on
         bounty(float): The bounty of the player
@@ -81,7 +80,6 @@ class TablePlayer:
                   validator=[ge(0), instance_of(float)], converter=float)
     combo = field(default=None, validator=optional(instance_of(Combo)), converter=Combo)
     folded = field(default=False, validator=instance_of(bool))
-    hero = field(default=False, validator=instance_of(bool))
     position = field(default=None, validator=optional(instance_of(Position)), converter=convert_to_position)
     table = field(default=None, validator=optional(instance_of(Table)))
     bounty = field(default=0, validator=[ge(0), instance_of(float)], converter=float)

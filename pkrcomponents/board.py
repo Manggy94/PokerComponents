@@ -17,6 +17,9 @@ class Board(pd.Series):
     def __len__(self):
         return 5 - self.isna().sum()
 
+    def __eq__(self, other):
+        return self.to_json() == other.to_json()
+
     @property
     def len(self):
         """

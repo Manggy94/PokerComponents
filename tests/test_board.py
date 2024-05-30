@@ -157,6 +157,10 @@ class MyBoardTestCase(unittest.TestCase):
             'river': 'nan'
         })
 
+    def test_eq(self):
+        self.assertTrue(self.board2 == board.Board(("As", "Ad", "Tc", "Td", card.Card("Ah"))))
+        self.assertFalse(self.board2 == board.Board(("As", "Ad", "Tc", "Td", card.Card("Ac"))))
+
 
 if __name__ == '__main__':
     unittest.main()
