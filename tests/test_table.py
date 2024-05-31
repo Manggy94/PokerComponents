@@ -29,8 +29,9 @@ class TableTest(unittest.TestCase):
         self.assertIsInstance(table.board, Board)
         self.assertIsInstance(table.players, Players)
         self.assertIsInstance(table.pot, Pot)
-        self.assertIsInstance(table.street, Street)
-        self.assertEqual(table.street, Street.PREFLOP)
+        self.assertIsNone(table.tournament)
+        self.assertIsNone(table.street)
+        #self.assertEqual(table.street, Street.PREFLOP)
         self.assertEqual(table.pot.value, 0)
         self.assertEqual(table.deck.len, 52)
         self.assertEqual(table.board.len, 0)
@@ -43,30 +44,31 @@ class TableTest(unittest.TestCase):
         table.add_tournament(self.tournament)
         self.assertEqual(table.level.sb, 200)
         self.assertIsInstance(table.tournament, Tournament)
-        self.assertIsInstance(table._tournament, Tournament)
         self.assertEqual(self.level.bb, 400)
+        self.assertFalse(table.hand_has_started)
 
     def test_playing_order(self):
         table = Table()
         for pl in self.pl_list:
             pl.sit(table)
         table.level = self.level
+        table.start_hand()
         self.p1.distribute("AcKc")
         self.assertEqual(table.playing_order, [2, 4, 6, 1])
         self.assertIsInstance(table.players_waiting, list)
         self.assertEqual(table.players_waiting, [self.p2, self.p4, self.p3, self.p1])
-        table._street = Street.FLOP
+        table.street = Street.FLOP
         self.assertEqual(table.playing_order, [6, 1, 2, 4])
         self.assertEqual(table.players_waiting, [self.p3, self.p1, self.p2, self.p4])
-        self.assertEqual(self.p1.stack, 2000)
+        self.assertEqual(self.p1.stack, 1550)
         self.p2.do_bet(4000)
         self.assertEqual(self.p2.stack, 0)
         self.assertTrue(self.p2.is_all_in)
         self.assertFalse(self.p2.can_play)
         self.assertEqual(table.players_waiting, [self.p3, self.p1, self.p4])
-        self.assertEqual(self.p1.to_call, 2000)
-        self.assertEqual(self.p1.pot_odds, 1.25)
-        self.assertEqual(self.p1.to_call_bb, 5)
+        self.assertEqual(self.p1.to_call, 1550)
+        self.assertAlmostEqual(self.p1.pot_odds, 2.10, 2)
+        self.assertAlmostEqual(self.p1.to_call_bb, 3.875, 3)
         action = CallAction(self.p1)
         action.execute()
         self.assertEqual(table.players_waiting, [self.p3, self.p4])
@@ -100,7 +102,7 @@ class TableTest(unittest.TestCase):
         table.add_tournament(self.tournament)
         for pl in self.pl_list:
             pl.sit(table)
-        table.bb = 2
+        table.players.bb = 1
         table.players.distribute_positions()
         table.post_pregame()
         self.assertEqual(table.pot.value, 800)
@@ -384,6 +386,8 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.current_player.preflop_bet_amounts, [400, 440, 500, 600, 800, 1400, 2000, 19550.0])
         action = FoldAction(table.current_player)
         action.play()
+        with self.assertRaises(ValueError):
+            table.current_player.shows("AsAd")
         self.assertEqual(table.pot_value, 450)
         self.assertEqual(table.pot.highest_bet, 200)
         self.assertEqual(table.current_player.name, "daifwa")

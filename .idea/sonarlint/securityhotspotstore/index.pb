@@ -122,3 +122,11 @@ E
 docs/deck.md,6\2\62f960b61e8d6a654295e095ef7362d9f283e34c
 n
 >venv/lib/python3.10/site-packages/watchdog/observers/winapi.py,e\c\ecd1d93b0167a1b56b1c4ff70b21554af3c05a7b
+B
+tests/test_hand.py,9\8\98bce1c4952c72754081b896a3ba59391b9cd2ed
+O
+pkrcomponents/utils/__init__.py,5\9\59d6b2a9227cb28cd7db3787a19177873d9b6f5a
+?
+readthedocs.yml,8\5\8588181436eab3b6648db1f743c775276ab3a8b8
+E
+docs/requirements.txt,2\7\271b54d579b58b0097c7c56b8ab060c6e3a67b4f

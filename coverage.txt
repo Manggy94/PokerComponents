@@ -17,11 +17,11 @@ pkrcomponents/lookup_table.py         112      0   100%
 pkrcomponents/payout.py                37      0   100%
 pkrcomponents/players.py              109      0   100%
 pkrcomponents/pot.py                   13      0   100%
-pkrcomponents/table.py                345      2    99%
+pkrcomponents/table.py                270      1    99%
 pkrcomponents/table_player.py         157      1    99%
 pkrcomponents/tournament.py            46      0   100%
 pkrcomponents/utils/__init__.py         0      0   100%
-pkrcomponents/utils/converters.py       3      0   100%
+pkrcomponents/utils/converters.py       5      0   100%
 pkrcomponents/utils/validators.py       7      0   100%
 -------------------------------------------------------
-TOTAL                                1571      4    99%
+TOTAL                                1498      3    99%

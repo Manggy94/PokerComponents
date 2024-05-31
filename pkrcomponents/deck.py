@@ -23,7 +23,7 @@ class Deck:
         self.cards = list(Card)
         self.shuffle()
 
-    def draw(self, card=None):
+    def draw(self, card: (str, Card) = None):
         """
         Returns a card from the deck
         If the parameter card is given, it returns the card at stake and pops it from the deck
