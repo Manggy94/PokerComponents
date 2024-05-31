@@ -94,6 +94,13 @@ class TablePlayer:
         f"{Street('River')}": []
     }, validator=instance_of(dict))
 
+    def __repr__(self):
+        return (f"\n Name: {self.name}\n "
+                f"Seat: {self.seat}\n "
+                f"Stack: {self.stack}\n "
+                f"Position: {self.position}\n Table: {self.table}\n "
+                f"Bounty: {self.bounty}\n")
+
     @property
     def stack_bb(self) -> float:
         """

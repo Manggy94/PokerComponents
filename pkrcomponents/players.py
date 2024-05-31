@@ -34,6 +34,9 @@ class Players:
     def __iter__(self):
         return self.pl_list.__iter__()
 
+    def __repr__(self):
+        return f"Players({self.pl_list})"
+
     @property
     def pl_list(self):
         """List of all the players on the table in appearance order"""

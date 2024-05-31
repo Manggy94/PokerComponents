@@ -64,6 +64,9 @@ class Table:
     def __attrs_post_init__(self):
         self.deck.shuffle()
 
+    def __repr__(self):
+        return f"Table(max_players={self.max_players}), Tournament={self.tournament})"
+
     @property
     def is_full(self) -> bool:
         """Returns True if the table is full"""

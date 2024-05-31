@@ -15,13 +15,13 @@ pkrcomponents/level.py                 17      0   100%
 pkrcomponents/listings.py              16      0   100%
 pkrcomponents/lookup_table.py         112      0   100%
 pkrcomponents/payout.py                37      0   100%
-pkrcomponents/players.py              109      0   100%
+pkrcomponents/players.py              111      1    99%
 pkrcomponents/pot.py                   13      0   100%
-pkrcomponents/table.py                270      1    99%
-pkrcomponents/table_player.py         157      1    99%
+pkrcomponents/table.py                272      2    99%
+pkrcomponents/table_player.py         159      2    99%
 pkrcomponents/tournament.py            46      0   100%
 pkrcomponents/utils/__init__.py         0      0   100%
 pkrcomponents/utils/converters.py       5      0   100%
 pkrcomponents/utils/validators.py       7      0   100%
 -------------------------------------------------------
-TOTAL                                1498      3    99%
+TOTAL                                1504      6    99%
