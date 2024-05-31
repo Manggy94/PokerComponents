@@ -134,7 +134,7 @@ class TablePlayer:
     @property
     def to_call(self) -> float:
         """The amount to call to continue on the table"""
-        return min(self.table.pot.highest_bet - self.current_bet, self.stack)
+        return self.max_bet(self.table.pot.highest_bet - self.current_bet)
 
     @property
     def to_call_bb(self):
@@ -249,6 +249,8 @@ class TablePlayer:
         Args:
             combo (Combo, str): The combo to show
         """
+        if self.table.street != Street.SHOWDOWN:
+            raise ValueError("Player cannot show combo if it is not showdown")
         self.combo = Combo(combo)
         if self.has_table:
             self.table.deck.draw(self.combo.first)
@@ -297,54 +299,6 @@ class TablePlayer:
             self.table.pot.highest_bet = self.current_bet
             self.table.cnt_bets += 1
         self.played = True
-
-    def bet(self, value: float):
-        """
-        Bet and step to next player
-
-        Args:
-            value (float): The amount to bet
-        """
-        if value >= self.table.min_bet:
-            self.table.min_bet = 2*value - self.table.pot.highest_bet
-            self.do_bet(value)
-        elif self.table.min_bet > self.stack:
-            self.bet(self.table.min_bet)
-        else:
-            raise ValueError(f"You cannot bet {value} if the minimum bet is {self.table.min_bet} "
-                             f"and your stack is {self.stack}")
-        self.table.advance_seat_playing()
-
-    def do_call(self):
-        """Action of calling"""
-        self.do_bet(self.to_call)
-
-    def call(self):
-        """Call and step to next player"""
-        self.do_call()
-        self.table.advance_seat_playing()
-
-    def do_check(self):
-        """Action of checking"""
-        if self.to_call != 0:
-            raise ValueError("A player cannot check if somebody bet before")
-        else:
-            self.played = True
-
-    def check(self):
-        """Check and step to next player"""
-        self.do_check()
-        self.table.advance_seat_playing()
-
-    def do_fold(self):
-        """Action of folding"""
-        self.folded = True
-        self.played = True
-
-    def fold(self):
-        """Fold and step to next player"""
-        self.do_fold()
-        self.table.advance_seat_playing()
 
     def post(self, value: float):
         """

@@ -1,6 +1,6 @@
 import unittest
 from pkrcomponents.table_player import TablePlayer, Combo, Table
-from pkrcomponents.tournament import Level, Tournament
+from pkrcomponents.tournament import Level
 from pkrcomponents.constants import Position
 
 
@@ -50,7 +50,9 @@ class MyPlayerTestCase(unittest.TestCase):
             self.player.combo = "Hey"
         self.assertFalse(self.player.has_combo)
         self.player.sit(table)
-        self.player.shows("AsAd")
+        with self.assertRaises(ValueError):
+            self.player.shows("AsAd")
+        self.player.distribute("AsAd")
         self.assertIsInstance(self.player.combo, Combo)
         self.assertEqual(self.player.combo, Combo("AsAd"))
         self.player.combo = Combo("JdAh")
@@ -75,9 +77,9 @@ class MyPlayerTestCase(unittest.TestCase):
     def test_in_game(self):
         self.assertFalse(self.player.folded)
         self.assertFalse(self.player.played)
-        self.player.do_fold()
-        self.assertTrue(self.player.folded)
-        self.assertTrue(self.player.played)
+        self.assertTrue(self.player.in_game)
+        self.player.folded = True
+        self.assertFalse(self.player.in_game)
 
     def test_sit_and_play_at_table(self):
         table = Table()
@@ -97,7 +99,6 @@ class MyPlayerTestCase(unittest.TestCase):
         self.assertEqual(table.players.pl_list[0], self.toto)
         self.toto.init_stack = 22000
         self.assertEqual(self.toto.init_stack, 22000)
-        #self.assertEqual(self.toto.stack, 22000)
         self.assertEqual(self.toto.max_bet(1000), 1000)
         self.assertEqual(self.toto.max_bet(100000), 25500)
         self.toto.distribute("AsAd")

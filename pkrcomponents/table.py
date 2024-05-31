@@ -1,4 +1,3 @@
-from functools import cached_property
 from pkrcomponents.board import Board
 from pkrcomponents.deck import Deck
 from pkrcomponents.constants import Street
@@ -10,7 +9,6 @@ from pkrcomponents.evaluator import Evaluator
 
 class Table:
     """Class representing a poker table"""
-    _ident: str
     _board: Board
     _deck: Deck
     _players: Players
@@ -137,9 +135,14 @@ class Table:
             return self.players.postflop_ordered_seats
 
     @property
-    def players_waiting(self) -> list:
+    def players_order(self):
+        """Returns the players in playing order"""
+        return [self.players[i] for i in self.playing_order]
+
+    @property
+    def players_waiting(self):
         """Returns the list of players on the table that are waiting to play"""
-        return [self.players[i] for i in self.playing_order if self.players[i].can_play]
+        return [player for player in self.players_order if player.can_play]
 
     @property
     def street_ended(self) -> bool:
@@ -155,17 +158,17 @@ class Table:
     @property
     def players_in_game(self) -> list:
         """Returns the list of players on the table that are still in the game (they can make an action)"""
-        return [self.players[i] for i in self.playing_order if self.players[i].in_game]
+        return [player for player in self.players_order if player.in_game]
 
     @property
     def players_involved(self) -> list:
         """Returns the list of players on the table that didn't fold yet"""
-        return [self.players[i] for i in self.playing_order if not self.players[i].folded]
+        return [player for player in self.players_order if not player.folded]
 
     @property
     def hand_ended(self) -> bool:
         """Returns True if the hand has ended"""
-        return len(self.players_involved) == 1 or self.street == Street.SHOWDOWN
+        return self.nb_involved == 1 or self.street == Street.SHOWDOWN
 
     @property
     def next_street_ready(self) -> bool:
@@ -227,6 +230,8 @@ class Table:
 
     def flop(self, c1=None, c2=None, c3=None):
         """Draw a flop and steps to this new street"""
+        if not (self.next_street_ready and self.street == Street.PREFLOP):
+            raise ValueError("The PREFLOP must be ended before we can draw a flop")
         self.draw_flop(c1=c1, c2=c2, c3=c3)
         self.street = "flop"
         self.street_reset()
@@ -240,6 +245,8 @@ class Table:
 
     def turn(self, card=None):
         """Draw a turn and steps to this new street"""
+        if not (self.next_street_ready and self.street == Street.FLOP):
+            raise ValueError("The FLOP must be ended before we can draw a turn")
         self.draw_turn(card)
         self.street = "turn"
         self.street_reset()
@@ -253,12 +260,16 @@ class Table:
 
     def river(self, card=None):
         """Draw a river and steps to this new street"""
+        if not (self.next_street_ready and self.street == Street.TURN):
+            raise ValueError("The TURN must be ended before we can draw a river")
         self.draw_river(card)
         self.street = "river"
         self.street_reset()
 
     def advance_to_showdown(self):
         """Advance to showdown"""
+        if not (self.next_street_ready and self.street == Street.RIVER):
+            raise ValueError("The RIVER must be ended before we can advance to showdown")
         self.street = Street.SHOWDOWN
         self.street_reset()
 
@@ -292,6 +303,14 @@ class Table:
         for p in self.players:
             p.is_hero = False
         player.is_hero = True
+
+    def distribute_hero_cards(self, player_name, c1, c2):
+        """
+        Distribute hero cards
+        """
+        player = self.players[player_name]
+        self.set_hero(player)
+        player.distribute(f"{c1}{c2}")
 
     def set_bb_seat(self, player_seat: int):
         """
@@ -380,7 +399,7 @@ class Table:
     @property
     def pot_value_bb(self):
         """Returns the pot's value in big blinds"""
-        return self.pot_value/self.level.bb
+        return round(self.pot_value/self.level.bb, 2)
 
     @property
     def average_stack(self):
@@ -399,15 +418,21 @@ class Table:
 
     def advance_seat_playing(self):
         """Advances seat playing to next available player"""
-        player = self.current_player
-        while not player.can_play and self.nb_waiting > 0:
-            idx = self.playing_order.index(player.seat) + 1
-            try:
-                new_seat = self.playing_order[idx]
-            except IndexError:
-                new_seat = self.playing_order[0]
-            player = self.players[new_seat]
-        self._seat_playing = player.seat
+        self._seat_playing = self.next_seat
+        if not self.current_player.can_play and self.nb_waiting > 0:
+            self.advance_seat_playing()
+
+    @property
+    def next_player(self):
+        """ Returns the next player after the current player"""
+        current_player_index = self.players_order.index(self.current_player)
+        next_index = current_player_index + 1 if current_player_index < len(self.players_order) - 1 else 0
+        return self.players_order[next_index]
+
+    @property
+    def next_seat(self):
+        """ Returns the next seat to play after the current player"""
+        return self.next_player.seat
 
     def street_reset(self):
         """Reset status of players in game and betting status for a new street"""
@@ -429,13 +454,20 @@ class Table:
         return [pl for pl in self.players_involved if not pl.has_combo]
 
     @property
+    def nb_unrevealed(self) -> int:
+        """Returns the number of players that have not revealed their cards"""
+        return len(self.unrevealed_players)
+
+    @property
     def can_parse_winners(self) -> bool:
         """Returns True if the winners can be parsed"""
-        return self.hand_ended and len(self.unrevealed_players) == 0
+        return self.hand_ended and self.nb_unrevealed == 0 or self.nb_involved == 1
 
     @property
     def winners(self) -> dict[int, list]:
         """Current status of winners with associated scores"""
+        if not self.can_parse_winners:
+            raise ValueError("Winners can't be parsed yet")
         if self.nb_involved == 1:
             return {1: [self.players_involved[0]]}
         winners = {}
@@ -453,8 +485,6 @@ class Table:
             min_reward = min([pl.max_reward for pl in players])
             reward = min(min_reward, self.pot.value/len(players))
             for player in players:
-                if not hasattr(player, "reward"):
-                    player.reward = 0
                 player.reward += reward
                 if player.reward >= player.max_reward:
                     players.remove(player)

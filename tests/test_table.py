@@ -1,5 +1,7 @@
 import unittest
 import numpy as np
+from pkrcomponents.action import FoldAction, CheckAction, CallAction, BetAction, RaiseAction
+from pkrcomponents.buy_in import BuyIn
 from pkrcomponents.table import Table, Board, Players, Pot, Tournament, Level, Street
 from pkrcomponents.deck import Deck
 from pkrcomponents.table_player import TablePlayer
@@ -65,7 +67,8 @@ class TableTest(unittest.TestCase):
         self.assertEqual(self.p1.to_call, 2000)
         self.assertEqual(self.p1.pot_odds, 1.25)
         self.assertEqual(self.p1.to_call_bb, 5)
-        self.p1.do_call()
+        action = CallAction(self.p1)
+        action.execute()
         self.assertEqual(table.players_waiting, [self.p3, self.p4])
         table.draw_flop("As", "Ad", "Ah")
         self.assertEqual(self.p1.hand_score, 11)
@@ -115,194 +118,6 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.players[6].pot_odds, 4)
         self.assertEqual(table.players[6].req_equity, 1/5)
         self.assertEqual(table.players[6].current_bet, 200)
-
-    def test_game(self):
-        table = Table()
-        table.max_players = 6
-        table.add_tournament(self.tournament)
-        self.assertEqual(table.min_bet, 800)
-        for pl in self.pl_list2:
-            pl.sit(table)
-        table.players[1].distribute("TdTh")
-        table.players[2].distribute("KdJd")
-        table.players[3].distribute("7h7c")
-        table.players[4].distribute("8d9d")
-        table.players[5].distribute("AsKs")
-        table.players.bb = 2
-        table.players.distribute_positions()
-        self.assertEqual(table.pot.value, 0)
-        table.post_pregame()
-        self.assertEqual(table.min_bet, 2 * table.level.bb)
-        self.assertEqual(table.current_player, self.p6)
-        self.assertEqual(table.pot.value, 900)
-        self.assertEqual(table.nb_waiting, 6)
-        self.assertEqual(table.seat_playing, 3)
-        self.assertEqual(table.nb_in_game, 6)
-        table.advance_seat_playing()
-        self.assertEqual(table.nb_waiting, 6)
-        self.assertEqual(table.seat_playing, 3)
-        self.assertEqual(table.seats_playing, [3, 4, 5, 6, 1, 2])
-        self.assertEqual(table.players_in_game, table.players_waiting)
-        self.assertEqual(table.current_player.preflop_bet_amounts, [800, 880, 1000, 1200, 1600, 2800, 4000, 11450.0])
-        table.current_player.do_fold()
-        self.assertEqual(table.nb_waiting, 5)
-        self.assertEqual(table.seat_playing, 3)
-        self.assertEqual(table.seats_playing, [4, 5, 6, 1, 2])
-        table.advance_seat_playing()
-        self.assertEqual(table.seat_playing, 4)
-        self.assertEqual(table.seats_playing, [4, 5, 6, 1, 2])
-        table.current_player.do_call()
-        self.assertEqual(table.nb_waiting, 4)
-        self.assertEqual(table.seats_playing, [5, 6, 1, 2])
-        self.assertFalse(table.current_player.is_all_in)
-        self.assertFalse(table.players[4].can_play)
-        table.advance_seat_playing()
-        self.assertEqual(table.seat_playing, 5)
-        table.current_player.do_call()
-        self.assertEqual(table.nb_waiting, 3)
-        self.assertEqual(table.seats_playing, [6, 1, 2])
-        self.assertTrue(table.current_player.is_all_in)
-        self.assertFalse(table.players[5].is_current_player)
-        self.assertEqual(table.seat_playing, 6)
-        table.current_player.do_bet(3000)
-        self.assertEqual(table.min_bet, 800)
-        self.assertTrue(table.players[4].can_play)
-        self.assertEqual(table.nb_waiting, 3)
-        self.assertEqual(table.seats_playing, [4, 1, 2])
-        self.assertFalse(table.current_player.can_play)
-        table.advance_seat_playing()
-        table.min_bet = 5200
-        self.assertEqual(table.seat_playing, 1)
-        self.assertEqual(table.nb_waiting, 3)
-        self.assertTrue(table.players[1].can_play)
-        self.assertFalse(table.players[1].is_all_in)
-        table.current_player.do_call()
-        self.assertTrue(table.players[1].is_all_in)
-        self.assertEqual(table.nb_waiting, 2)
-        self.assertEqual(table.seats_playing, [4, 2])
-        table.advance_seat_playing()
-        self.assertFalse(table.players[1].is_current_player)
-        self.assertTrue(table.players[2].is_current_player)
-        self.assertEqual(table.seat_playing, 2)
-        table.current_player.fold()
-        self.assertEqual(table.nb_waiting, 1)
-        self.assertEqual(table.seats_playing, [4])
-        self.assertEqual(table.seat_playing, 4)
-        self.assertEqual(table.players_in_game, [table.players[4], table.players[6]])
-        table.current_player.do_call()
-        self.assertEqual(table.nb_waiting, 0)
-        self.assertEqual(table.seats_playing, [])
-        self.assertEqual(table.pot.value, 8867)
-        self.assertEqual(table.players_involved,
-                         [table.players[4], table.players[5], table.players[6], table.players[1]])
-        self.assertEqual(table.nb_involved, 4)
-        table.flop("Qs", "Js", "Tc")
-        self.assertEqual(table.pot.highest_bet, 0)
-        for pl in table.players_in_game:
-            self.assertEqual(pl.current_bet, 0)
-        self.assertEqual(table.playing_order, [1, 2, 3, 4, 5, 6])
-        self.assertEqual(table.players_in_game, [table.players[4], table.players[6]])
-        self.assertEqual(table.seats_playing, [4, 6])
-        self.assertEqual(table.nb_waiting, 2)
-        self.assertEqual(
-            table.current_player.postflop_bets, [
-                {'text': 'Min Bet', 'value': 400.0},
-                {'text': '1/4 Pot', 'value': 2217},
-                {'text': '1/3 Pot', 'value': 2956},
-                {'text': '1/2 Pot', 'value': 4434},
-                {'text': '2/3 Pot', 'value': 5911},
-                {'text': '3/4 Pot', 'value': 6650},
-                {'text': 'Pot', 'value': 8867},
-                {'text': 'All-in', 'value': 117277.0}])
-        table.current_player.check()
-        self.assertEqual(table.seats_playing, [6])
-        self.assertEqual(table.nb_waiting, 1)
-        table.current_player.bet(11050)
-        self.assertEqual(table.seats_playing, [4])
-        self.assertEqual(table.nb_waiting, 1)
-        self.assertEqual(table.current_player.to_call, 11050)
-        self.assertRaises(ValueError, lambda: table.current_player.do_check())
-        self.assertRaises(ValueError, lambda: table.current_player.check())
-        self.assertEqual(table.pot.value, 19917)
-        table.current_player.call()
-        self.assertEqual(table.current_player.to_call, 0)
-        self.assertEqual(table.pot.value, 30967)
-        self.assertTrue(table.next_street_ready)
-        self.assertFalse(table.next_hand_ready)
-        table.turn("Ts")
-        self.assertEqual(table.pot.value, sum([pl.invested for pl in table.players]))
-        self.assertEqual(table.players[1].invested, 2000)
-        self.assertEqual(table.players[1].max_reward, 6767)
-        self.assertEqual(table.players[2].invested, 450)
-        self.assertEqual(table.players[2].max_reward, 0)
-        self.assertEqual(table.players[3].invested, 50)
-        self.assertEqual(table.players[3].max_reward, 0)
-        self.assertEqual(table.players[4].invested, 14100)
-        self.assertEqual(table.players[4].max_reward, 30967)
-        self.assertEqual(table.players[5].invested, 267)
-        self.assertEqual(table.players[5].max_reward, 1385)
-        self.assertEqual(table.players[6].invested, 14100)
-        self.assertEqual(table.players[6].max_reward, 30967)
-        table.current_player.bet(table.pot.value)
-        self.assertEqual(table.pot.value, 61934)
-        self.assertEqual(table.current_player, table.players[6])
-        self.assertEqual(table.players_waiting, [table.players[6]])
-        table.current_player.bet(1e6)
-        table.current_player.bet(1e7)
-        self.assertEqual(table.nb_waiting, 0)
-        self.assertEqual(table.players_involved,
-                         [table.players[1], table.players[4], table.players[5], table.players[6]])
-        self.assertEqual(table.players[1].hand_score, 61)
-        self.assertEqual(table.players[4].hand_score, 1602)
-        self.assertEqual(table.players[5].hand_score, 1)
-        table.river("Ah")
-        self.assertEqual(table.players[1].hand_score, 59)
-        self.assertEqual(table.players[4].hand_score, 1602)
-        self.assertEqual(table.players[5].hand_score, 1)
-        self.assertEqual(table.unrevealed_players, [table.players[6]])
-        self.assertFalse(table.can_parse_winners)
-        table.advance_to_showdown()
-        self.assertFalse(table.can_parse_winners)
-        table.players[6].shows("9h8h")
-        self.assertTrue(table.can_parse_winners)
-        table.distribute_rewards()
-        self.assertEqual(table.players[1].stack, 5382)
-        self.assertEqual(table.players[4].stack, 108293.5)
-        self.assertEqual(table.players[5].stack, 1385)
-        self.assertEqual(table.players[6].stack, 33033.5)
-        table.hand_reset()
-        self.assertFalse(table.hand_has_started)
-        self.assertEqual(table.pot.value, 0)
-        self.assertEqual(table.players[1].stack, 5382)
-        self.assertIsNone(table.players[1].combo)
-        self.assertFalse(table.players[1].folded)
-        self.assertFalse(table.players[1].played)
-
-    def test_game2(self):
-        table = Table()
-        table.max_players = 6
-        table.add_tournament(self.tournament)
-        self.assertEqual(table.min_bet, 800)
-        for pl in self.pl_list2:
-            pl.sit(table)
-        table.players[1].distribute("TdTh")
-        table.players[2].distribute("KdJd")
-        table.players[3].distribute("7h7c")
-        table.players[4].distribute("8d9d")
-        table.players[5].distribute("AsKs")
-
-        table.players[6].shows("9h8h")
-        table.players.bb = 2
-        table.players.distribute_positions()
-        self.assertEqual(table.pot.value, 0)
-        table.post_pregame()
-        self.assertEqual(table.min_bet_bb, 2)
-        self.assertEqual(table.unrevealed_players, [])
-        self.assertEqual(table.current_player, self.p6)
-        self.assertEqual(table.pot_value_bb, 2.25)
-        self.assertEqual(table.average_stack_bb, 67.33)
-        table.players[5].bet(400)
-        self.assertEqual(table.pot.value, 900+217)
 
     def test_is_full_or_empty(self):
         table = Table()
@@ -407,6 +222,413 @@ class TableTest(unittest.TestCase):
         for pl in self.pl_list2:
             pl.sit(table)
         self.assertEqual(table.estimated_players_remaining, 149)
+
+    def test_action_fold(self):
+        table = Table()
+        table.add_tournament(self.tournament)
+        for player in self.pl_list2:
+            table.add_player(player)
+        table.set_bb_seat(2)
+        table.start_hand()
+        self.assertFalse(table.players[3].played)
+        self.assertFalse(table.players[3].folded)
+        self.assertEqual(table.players[3].stack, 11450)
+        self.assertEqual(table.players[3].to_call, 400)
+        self.assertEqual(table.players[3].current_bet, 0)
+        self.assertEqual(table.pot.value, 900)
+        self.assertEqual(table.pot.highest_bet, 400)
+        self.assertTrue(table.players[3].is_current_player)
+        action = FoldAction(table.current_player)
+        action.play()
+        self.assertTrue(table.players[3].played)
+        self.assertTrue(table.players[3].folded)
+        self.assertEqual(table.players[3].stack, 11450)
+        self.assertEqual(table.players[3].to_call, 400)
+        self.assertEqual(table.players[3].current_bet, 0)
+        self.assertEqual(table.pot.value, 900)
+        self.assertEqual(table.pot.highest_bet, 400)
+        self.assertFalse(table.players[3].is_current_player)
+
+    def test_action_call(self):
+        table = Table()
+        table.add_tournament(self.tournament)
+        for player in self.pl_list2:
+            table.add_player(player)
+        table.set_bb_seat(2)
+        table.start_hand()
+        self.assertFalse(table.players[3].played)
+        self.assertFalse(table.players[3].folded)
+        self.assertEqual(table.players[3].stack, 11450)
+        self.assertEqual(table.players[3].to_call, 400)
+        self.assertEqual(table.players[3].current_bet, 0)
+        self.assertEqual(table.pot.value, 900)
+        self.assertEqual(table.pot.highest_bet, 400)
+        self.assertTrue(table.players[3].is_current_player)
+
+        action = CallAction(table.current_player)
+        action.play()
+        self.assertTrue(table.players[3].played)
+        self.assertFalse(table.players[3].folded)
+        self.assertEqual(table.players[3].stack, 11050)
+        self.assertEqual(table.players[3].to_call, 0)
+        self.assertEqual(table.players[3].current_bet, 400)
+        self.assertEqual(table.pot.value, 1300)
+        self.assertEqual(table.pot.highest_bet, 400)
+        self.assertFalse(table.players[3].is_current_player)
+
+    def test_action_raise(self):
+        table = Table()
+        table.add_tournament(self.tournament)
+        for player in self.pl_list2:
+            table.add_player(player)
+        table.set_bb_seat(2)
+        table.start_hand()
+        self.assertFalse(table.players[3].played)
+        self.assertFalse(table.players[3].folded)
+        self.assertEqual(table.players[3].stack, 11450)
+        self.assertEqual(table.players[3].to_call, 400)
+        self.assertEqual(table.players[3].current_bet, 0)
+        self.assertEqual(table.pot.value, 900)
+        self.assertEqual(table.pot.highest_bet, 400)
+        self.assertTrue(table.players[3].is_current_player)
+        with self.assertRaises(ValueError):
+            action = RaiseAction(table.current_player, 300)
+            action.play()
+        action = RaiseAction(table.current_player, 1050)
+        action.play()
+
+        self.assertTrue(table.players[3].played)
+        self.assertFalse(table.players[3].folded)
+        self.assertEqual(table.players[3].stack, 10000)
+        self.assertEqual(table.players[3].to_call, 0)
+        self.assertEqual(table.players[3].current_bet, 1450)
+        self.assertEqual(table.pot.value, 2350)
+        self.assertEqual(table.pot.highest_bet, 1450)
+        self.assertFalse(table.players[3].is_current_player)
+
+    def test_action_check(self):
+        table = Table()
+        table.add_tournament(self.tournament)
+        for player in self.pl_list2:
+            table.add_player(player)
+        table.set_bb_seat(2)
+        table.start_hand()
+        action = CallAction(table.current_player)
+        action.play()
+
+        action = FoldAction(table.current_player)
+        action.play()
+        action = FoldAction(table.current_player)
+        action.play()
+        action = FoldAction(table.current_player)
+        action.play()
+        action = FoldAction(table.current_player)
+        action.play()
+        self.assertFalse(table.players[2].played)
+        self.assertFalse(table.players[2].folded)
+        self.assertEqual(table.players[2].stack, 2050.0)
+        self.assertEqual(table.players[2].to_call, 0)
+        self.assertEqual(table.players[2].current_bet, 400)
+        self.assertEqual(table.pot.value, 1300)
+        self.assertEqual(table.pot.highest_bet, 400)
+        self.assertTrue(table.players[2].is_current_player)
+        action = CheckAction(table.current_player)
+        action.play()
+        self.assertTrue(table.players[2].played)
+        self.assertFalse(table.players[2].folded)
+        self.assertEqual(table.players[2].stack, 2050.0)
+        self.assertEqual(table.players[2].to_call, 0)
+        self.assertEqual(table.players[3].current_bet, 400)
+        self.assertEqual(table.pot.value, 1300)
+        self.assertEqual(table.pot.highest_bet, 400)
+        self.assertFalse(table.players[2].is_current_player)
+
+    def test_hand_example(self):
+        hand_id = "2612804708405870609-6-1672853787"
+        datetime = "04-01-2023 17:36:27"
+        game_type = "Tournament"
+        buy_in = BuyIn(prize_pool=4.5, bounty=0.0, rake=0.5)
+        level = Level(value=1, bb=200)
+        tournament_name = "GUERILLA"
+        tournament_id = "608341002"
+        table_number = "016"
+        total_players = 2525
+        max_players = 6
+        button_seat = 4
+        p1 = TablePlayer(name="FrenchAAAA", seat=1, init_stack=19575.0, bounty=2.25)
+        p2 = TablePlayer(name="daifwa", seat=2, init_stack=21830.0, bounty=2.25)
+        p3 = TablePlayer(name="Roomxx", seat=3, init_stack=34263.0, bounty=3.37)
+        p4 = TablePlayer(name="SB Warrior34", seat=4, init_stack=18548.0, bounty=2.25)
+        p5 = TablePlayer(name="GoToVG", seat=5, init_stack=26609.0, bounty=2.25)
+        p6 = TablePlayer(name="manggy94", seat=6, init_stack=19175.0, bounty=2.25)
+        players_list = [p1, p2, p3, p4, p5, p6]
+        tournament = Tournament(
+            level=level, name=tournament_name, id=tournament_id, buy_in=buy_in, total_players=total_players
+        )
+        table = Table(max_players=max_players)
+        table.add_tournament(tournament)
+        for player in players_list:
+            table.add_player(player)
+        bb_seat = table.players.get_bb_seat_from_button(button_seat)
+        table.set_bb_seat(bb_seat)
+        table.distribute_hero_cards("manggy94", "2c", "5h")
+        table.start_hand()
+        self.assertEqual(table.estimated_players_remaining, 2164)
+        self.assertEqual(table.average_stack_bb, 116.67)
+
+        self.assertEqual(table.min_bet, 400)
+        self.assertEqual(table.min_bet_bb, 2)
+        self.assertEqual(table.pot_value, 450)
+        self.assertEqual(table.pot.highest_bet, 200)
+        self.assertEqual(table.current_player.name, "FrenchAAAA")
+        self.assertEqual(table.current_player.preflop_bet_amounts, [400, 440, 500, 600, 800, 1400, 2000, 19550.0])
+        action = FoldAction(table.current_player)
+        action.play()
+        self.assertEqual(table.pot_value, 450)
+        self.assertEqual(table.pot.highest_bet, 200)
+        self.assertEqual(table.current_player.name, "daifwa")
+        action = CallAction(table.current_player)
+        action.play()
+        self.assertEqual(table.pot_value, 650)
+        self.assertEqual(table.pot.highest_bet, 200)
+        self.assertEqual(table.current_player.name, "Roomxx")
+        action = FoldAction(table.current_player)
+        action.play()
+        self.assertEqual(table.pot_value, 650)
+        self.assertEqual(table.pot.highest_bet, 200)
+        self.assertEqual(table.current_player.name, "SB Warrior34")
+        action = CallAction(table.current_player)
+        action.play()
+        self.assertEqual(table.pot_value, 850)
+        self.assertEqual(table.pot.highest_bet, 200)
+        self.assertEqual(table.current_player.name, "GoToVG")
+        self.assertEqual(table.min_bet, 400)
+        action = RaiseAction(table.current_player, 700)
+        action.play()
+        self.assertEqual(table.min_bet, 1400)
+        self.assertEqual(table.pot_value, 1650)
+        self.assertEqual(table.pot.highest_bet, 900)
+        self.assertEqual(table.current_player.name, "manggy94")
+        self.assertEqual(table.current_player.preflop_bet_amounts, [1400, 1540, 1750, 2100, 2800, 4900, 7000, 18950.0])
+        action = FoldAction(table.current_player)
+        action.play()
+        self.assertEqual(table.pot_value, 1650)
+        self.assertEqual(table.pot.highest_bet, 900)
+        self.assertEqual(table.current_player.name, "daifwa")
+        self.assertEqual(table.current_player.to_call, 700)
+        action = CallAction(table.current_player)
+        action.play()
+        self.assertFalse(table.street_ended)
+        self.assertFalse(table.hand_ended)
+        self.assertFalse(table.next_hand_ready)
+        self.assertEqual(table.pot_value, 2350)
+        self.assertEqual(table.pot.highest_bet, 900)
+        self.assertEqual(table.current_player.name, "SB Warrior34")
+        action = CallAction(table.current_player)
+        action.play()
+        self.assertEqual(table.pot_value, 3050)
+        self.assertEqual(table.pot.highest_bet, 900)
+        self.assertTrue(table.street_ended)
+        self.assertFalse(table.hand_ended)
+        table.flop("7h", "2d", "5c")
+        self.assertEqual(table.board.len, 3)
+        self.assertEqual(table.street, Street.FLOP)
+        self.assertEqual(table.current_player.name, "GoToVG")
+        self.assertEqual(table.current_player.postflop_bets,
+                         [{'text': 'Min Bet', 'value': 200},
+                          {'text': '1/4 Pot', 'value': 762},
+                          {'text': '1/3 Pot', 'value': 1017},
+                          {'text': '1/2 Pot', 'value': 1525},
+                          {'text': '2/3 Pot', 'value': 2033},
+                          {'text': '3/4 Pot', 'value': 2288},
+                          {'text': 'Pot', 'value': 3050},
+                          {'text': 'All-in', 'value': 25684.0}]
+                         )
+        self.assertEqual(table.nb_in_game, 3)
+        self.assertEqual(table.seats_playing, [5, 2, 4])
+        action = CheckAction(table.current_player)
+        action.play()
+        action = CheckAction(table.current_player)
+        action.play()
+        action = CheckAction(table.current_player)
+        action.play()
+        self.assertTrue(table.next_street_ready)
+        with self.assertRaises(ValueError):
+            table.flop("7h", "2d", "5c")
+        with self.assertRaises(ValueError):
+            table.river("8c")
+        table.turn("2h")
+        self.assertEqual(table.board.len, 4)
+        self.assertEqual(table.street, Street.TURN)
+        self.assertEqual(table.current_player.name, "GoToVG")
+        self.assertEqual(table.nb_in_game, 3)
+        self.assertEqual(table.min_bet, 200)
+        self.assertEqual(table.current_player.postflop_bets,
+                         [{'text': 'Min Bet', 'value': 200},
+                          {'text': '1/4 Pot', 'value': 762},
+                          {'text': '1/3 Pot', 'value': 1017},
+                          {'text': '1/2 Pot', 'value': 1525},
+                          {'text': '2/3 Pot', 'value': 2033},
+                          {'text': '3/4 Pot', 'value': 2288},
+                          {'text': 'Pot', 'value': 3050},
+                          {'text': 'All-in', 'value': 25684.0}]
+                         )
+        action = BetAction(table.current_player, 1000)
+        action.play()
+        self.assertEqual(table.min_bet, 2000)
+        self.assertEqual(table.current_player.postflop_bets,
+                         [{'text': 'Min Bet', 'value': 2000.0},
+                          {'text': '1/2 Pot', 'value': 2025},
+                          {'text': '2/3 Pot', 'value': 2700},
+                          {'text': '3/4 Pot', 'value': 3038},
+                          {'text': 'Pot', 'value': 4050},
+                          {'text': 'All-in', 'value': 20905.0}]
+                         )
+        action = FoldAction(table.current_player)
+        action.play()
+        action = CallAction(table.current_player)
+        action.play()
+        self.assertTrue(table.street_ended)
+        self.assertEqual(table.pot_value, 5050)
+        self.assertEqual(table.pot.highest_bet, 1000)
+        with self.assertRaises(ValueError):
+            table.turn("2h")
+        table.river("8c")
+        self.assertEqual(table.board.len, 5)
+        self.assertEqual(table.street, Street.RIVER)
+        self.assertEqual(table.current_player.name, "GoToVG")
+        self.assertEqual(table.nb_in_game, 2)
+        self.assertEqual(table.current_player.postflop_bets,
+                         [{'text': 'Min Bet', 'value': 200},
+                          {'text': '1/4 Pot', 'value': 1262},
+                          {'text': '1/3 Pot', 'value': 1683},
+                          {'text': '1/2 Pot', 'value': 2525},
+                          {'text': '2/3 Pot', 'value': 3367},
+                          {'text': '3/4 Pot', 'value': 3788},
+                          {'text': 'Pot', 'value': 5050},
+                          {'text': 'All-in', 'value': 24684.0}]
+                         )
+        with self.assertRaises(ValueError):
+            action = BetAction(table.current_player, 100)
+            action.play()
+        action = BetAction(table.current_player, 2525)
+        action.play()
+        self.assertFalse(table.street_ended)
+        with self.assertRaises(ValueError):
+            table.distribute_rewards()
+        self.assertEqual(table.current_player.postflop_bets,
+                         [{'text': 'Min Bet', 'value': 5050.0},
+                          {'text': '3/4 Pot', 'value': 5681},
+                          {'text': 'Pot', 'value': 7575},
+                          {'text': 'All-in', 'value': 16623.0}]
+                         )
+        action = FoldAction(table.current_player)
+        action.play()
+        self.assertEqual(table.pot_value, 7575)
+        self.assertEqual(table.pot_value_bb, 37.88)
+
+        self.assertTrue(table.street_ended)
+        self.assertTrue(table.hand_ended)
+        self.assertFalse(table.next_street_ready)
+        self.assertTrue(table.next_hand_ready)
+        self.assertEqual(table.players[5].init_stack - table.players[5].invested + table.pot_value, 29734.0)
+        self.assertEqual(sum(pl.invested for pl in table.players), 7575)
+        with self.assertRaises(ValueError):
+            table.advance_to_showdown()
+        table.distribute_rewards()
+        self.assertEqual(table.pot_value, 0)
+        self.assertEqual(table.players[1].stack, 19550.0)
+        self.assertEqual(table.players[2].stack, 20905.0)
+        self.assertEqual(table.players[3].stack, 34238.0)
+        self.assertEqual(table.players[4].stack, 16623.0)
+        self.assertEqual(table.players[5].stack, 29734.0)
+        self.assertEqual(table.players[6].stack, 18950.0)
+        table.advance_to_next_hand()
+        self.assertEqual(table.pot_value, 0)
+        self.assertEqual(table.pot_value_bb, 0)
+        self.assertFalse(table.hand_has_started)
+        self.assertTrue(table.hand_can_start)
+
+    def test_hand_example_PLD(self):
+        hand_id = "2113338189845364845-10-1634495793"
+        datetime = "17-10-2021 18:36:33"
+        game_type = "Tournament"
+        total_players =3137
+        buy_in = BuyIn(prize_pool=4.5, bounty=0.0, rake=0.5)
+        level = Level(value=1, bb=200)
+        tournament_name = "POUR LA DARONNE"
+        tournament_id = "492049891"
+        table_number = "0108"
+        max_players = 6
+        button_seat = 2
+        p1 = TablePlayer(name="LASYLVE34", seat=1, init_stack=19625.0)
+        p2 = TablePlayer(name="NotBadRiverr", seat=2, init_stack=17358.0)
+        p3 = TablePlayer(name="Sofia1712", seat=3, init_stack=20175.0)
+        p4 = TablePlayer(name="KassRM", seat=4, init_stack=12554.0)
+        p5 = TablePlayer(name="Romain miklo", seat=5, init_stack=21200.0)
+        p6 = TablePlayer(name="manggy94", seat=6, init_stack=29538.0)
+        players_list = [p1, p2, p3, p4, p5, p6]
+        tournament = Tournament(
+            level=level,
+            name=tournament_name,
+            id=tournament_id,
+            buy_in=buy_in,
+            total_players=total_players
+        )
+        table = Table(max_players=max_players)
+        table.add_tournament(tournament)
+        for player in players_list:
+            table.add_player(player)
+        bb_seat = table.players.get_bb_seat_from_button(button_seat)
+        table.set_bb_seat(bb_seat)
+        table.distribute_hero_cards("manggy94", "2c", "Qd")
+        table.start_hand()
+        self.assertEqual(table.estimated_players_remaining, 3125)
+        action = RaiseAction(table.current_player, 300)
+        action.play()
+        action = FoldAction(table.current_player)
+        action.play()
+        action = FoldAction(table.current_player)
+        action.play()
+        action = CallAction(table.current_player)
+        action.play()
+        action = FoldAction(table.current_player)
+        action.play()
+        action = CallAction(table.current_player)
+        action.play()
+        table.flop("Jh", "5h", "2d")
+        action = CheckAction(table.current_player)
+        action.play()
+        action = CheckAction(table.current_player)
+        action.play()
+        action = CheckAction(table.current_player)
+        action.play()
+        table.turn("Tc")
+        action = CheckAction(table.current_player)
+        action.play()
+        action = CheckAction(table.current_player)
+        action.play()
+        action = CheckAction(table.current_player)
+        action.play()
+        table.river("8c")
+        action = CheckAction(table.current_player)
+        action.play()
+        action = CheckAction(table.current_player)
+        action.play()
+        action = CheckAction(table.current_player)
+        action.play()
+        self.assertTrue(table.street_ended)
+        table.advance_to_showdown()
+        self.assertFalse(table.street_ended)
+        self.assertTrue(table.hand_ended)
+        self.assertFalse(table.can_parse_winners)
+        table.players["NotBadRiverr"].shows("KcQh")
+        self.assertFalse(table.can_parse_winners)
+        table.players["KassRM"].shows("Ad8d")
+        self.assertFalse(table.can_parse_winners)
+        table.players["Romain miklo"].shows("4c4h")
+        self.assertTrue(table.can_parse_winners)
+        table.distribute_rewards()
 
 
 if __name__ == '__main__':
