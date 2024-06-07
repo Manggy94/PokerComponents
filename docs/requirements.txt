@@ -1,4 +1,5 @@
 mkdocs
 mkdocstrings
+mkdocstrings_handlers
 mkdocs-material
 mkdocs-material-extensions
