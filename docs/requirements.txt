@@ -1,5 +1,4 @@
 mkdocs
-mkdocstrings
-mkdocstrings_handlers
+mkdocstrings[python]
 mkdocs-material
 mkdocs-material-extensions
