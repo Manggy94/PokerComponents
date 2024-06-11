@@ -42,7 +42,15 @@ class Shape(PokerEnum):
     """
     OFFSUIT = "o", "offsuit", "off"
     SUITED = "s", "suited"
-    PAIR = ("",)
+    PAIR = "", "paired"
+
+    @property
+    def name(self):
+        return self._name_
+
+    @property
+    def symbol(self):
+        return self._value_[0]
 
 
 class _HandMeta(type):

@@ -1,6 +1,6 @@
 from attrs import define, field, Factory
 from attrs.validators import instance_of, optional, ge, gt, le
-
+from datetime import datetime
 from pkrcomponents.board import Board
 from pkrcomponents.card import Card
 from pkrcomponents.deck import Deck
@@ -23,6 +23,7 @@ class Table:
         deck(Deck): The deck of the table
         evaluator(Evaluator): The evaluator of the table
         hand_has_started(bool): Whether the hand has started
+        hand_id(str): The ID of the hand
         is_mtt(bool): Whether the table is a tournament
         level(Level): The level of the table
         max_players(int): The maximum number of players on the table
@@ -51,6 +52,7 @@ class Table:
     deck = field(default=Factory(Deck), validator=instance_of(Deck))
     evaluator = field(default=Factory(Evaluator), validator=instance_of(Evaluator))
     hand_has_started = field(default=False, validator=instance_of(bool))
+    hand_id = field(default=None, validator=optional(instance_of(str)))
     is_mtt = field(default=False, validator=instance_of(bool))
     level = field(default=Factory(Level), validator=instance_of(Level))
     max_players = field(default=6, validator=[instance_of(int), gt(2), le(10)])
@@ -58,6 +60,7 @@ class Table:
     players = field(default=Factory(Players), validator=instance_of(Players))
     pot = field(default=Factory(Pot), validator=instance_of(Pot))
     seat_playing = field(default=0, validator=[instance_of(int), ge(0)])
+    start_date = field(default=None, validator=optional(instance_of(datetime)))
     street = field(default=None, validator=optional(instance_of(Street)), converter=convert_to_street)
     tournament = field(default=None, validator=optional(instance_of(Tournament)))
 

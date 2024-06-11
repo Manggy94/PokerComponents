@@ -4,7 +4,20 @@ from pkrcomponents.card import Card
 
 
 class Deck:
-    """A deck of cards"""
+    """
+    A class that represents a deck of cards
+
+    Attributes:
+        cards (list): the list of cards in the deck
+
+    Methods:
+        shuffle: randomly shuffles the deck
+        reset: re-initializes the deck and shuffles it
+        draw: returns a card from the deck
+        replace: replaces a card in the deck
+        to_json: returns the deck as a json object
+
+    """
 
     def __init__(self):
         self.cards = list(Card)
@@ -27,6 +40,9 @@ class Deck:
         """
         Returns a card from the deck
         If the parameter card is given, it returns the card at stake and pops it from the deck
+
+        Args:
+            card(Card): the card to be drawn
         """
         if not card:
             return self.cards.pop()
@@ -35,7 +51,7 @@ class Deck:
             idx = self.cards.index(card)
             return self.cards.pop(idx)
 
-    def replace(self, card):
+    def replace(self, card: Card):
         """
         Replaces a card in the deck
         """

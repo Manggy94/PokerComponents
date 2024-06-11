@@ -17,6 +17,18 @@ class Suit(PokerEnum):
     HEARTS = "h", "hearts", "♥", "H"
     SPADES = "s", "spades", "♠", "S"
 
+    @property
+    def symbol(self):
+        return self._value_[2]
+
+    @property
+    def short_name(self):
+        return self._value_[0]
+
+    @property
+    def name(self):
+        return self._name_
+
 
 class Rank(PokerEnum):
     """
@@ -38,6 +50,17 @@ class Rank(PokerEnum):
     QUEEN = ("Q",)
     KING = ("K",)
     ACE = "A", 1
+
+    @property
+    def symbol(self):
+        return self.value[0]
+
+    def __str__(self):
+        return self.symbol
+
+    @property
+    def name(self):
+        return self._name_
 
     @classmethod
     def difference(cls, first, second) -> int:
@@ -87,7 +110,19 @@ class _CardMeta(type):
 
 @total_ordering
 class Card(_ReprMixin, metaclass=_CardMeta):
-    """Represents a Card, which consists a Rank and a Suit."""
+    """
+    Represents a Card, which consists a Rank and a Suit.
+
+    Attributes:
+        rank (Rank): the rank of the card
+        suit (Suit): the suit of the card
+
+    Methods:
+        is_face: indicates if the card is a face
+        is_broadway: indicates if the card is a broadway
+        make_random: returns a random Card instance
+
+    """
 
     __slots__ = ("rank", "suit")
 
