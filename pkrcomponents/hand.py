@@ -52,6 +52,10 @@ class Shape(PokerEnum):
     def symbol(self):
         return self._value_[0]
 
+    @property
+    def adjective(self):
+        return self._value_[1]
+
 
 class _HandMeta(type):
     """Makes Hand class iterable. __iter__ goes through all hands in ascending order."""
