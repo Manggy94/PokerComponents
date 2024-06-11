@@ -164,6 +164,14 @@ class Card(_ReprMixin, metaclass=_CardMeta):
         return self.rank - other.rank
 
     @property
+    def symbol(self) -> str:
+        return f"{self.rank.symbol}{self.suit.symbol}"
+
+    @property
+    def short_name(self) -> str:
+        return f"{self.rank.short_name}{self.suit.short_name}"
+
+    @property
     def is_face(self) -> bool:
         """
         Indicates if the card is a face
