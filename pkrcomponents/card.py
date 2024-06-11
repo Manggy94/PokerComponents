@@ -169,7 +169,7 @@ class Card(_ReprMixin, metaclass=_CardMeta):
 
     @property
     def short_name(self) -> str:
-        return f"{self.rank.short_name}{self.suit.short_name}"
+        return f"{self.rank.symbol}{self.suit.short_name}"
 
     @property
     def is_face(self) -> bool:
@@ -192,5 +192,3 @@ class Card(_ReprMixin, metaclass=_CardMeta):
         self.rank = Rank.make_random()
         self.suit = Suit.make_random()
         return self
-
-

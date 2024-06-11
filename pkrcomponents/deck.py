@@ -42,7 +42,7 @@ class Deck:
         If the parameter card is given, it returns the card at stake and pops it from the deck
 
         Args:
-            card(Card): the card to be drawn
+            card (Card): the card to be drawn
         """
         if not card:
             return self.cards.pop()
