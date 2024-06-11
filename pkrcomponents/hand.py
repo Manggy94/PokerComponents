@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from functools import total_ordering
 from pkrcomponents._common import PokerEnum, _ReprMixin
-from pkrcomponents.card import Rank, Card, BROADWAY_RANKS
+from pkrcomponents.card import Rank, Card, BROADWAY_RANKS, FACE_RANKS
 
 
 __all__ = [
@@ -201,6 +201,16 @@ class Hand(_ReprMixin, metaclass=_HandMeta):
             )
 
     @property
+    def short_name(self):
+        """Returns the short name of the hand"""
+        return f"{self}"
+
+    @property
+    def symbol(self):
+        """Returns the symbol of the hand"""
+        return f"{self}"
+
+    @property
     def is_suited_connector(self):
         """Indicates if the hand is a suited connector"""
         return self.is_suited and self.is_connector
@@ -239,6 +249,11 @@ class Hand(_ReprMixin, metaclass=_HandMeta):
     def is_broadway(self):
         """Indicates if the hand is composed of 2 broadways"""
         return self.first in BROADWAY_RANKS and self.second in BROADWAY_RANKS
+
+    @property
+    def is_face(self):
+        """Indicates if the hand is composed of 2 face cards"""
+        return self.first in FACE_RANKS and self.second in FACE_RANKS
 
     @property
     def is_pair(self):
