@@ -23,6 +23,10 @@ class Flop:
         return f"{self.first_card.short_name}{self.second_card.short_name}{self.third_card.short_name}"
 
     @property
+    def symbol(self):
+        return f"{self.first_card.symbol}{self.second_card.symbol}{self.third_card.symbol}"
+
+    @property
     def cards(self):
         return [self.first_card, self.second_card, self.third_card]
 
