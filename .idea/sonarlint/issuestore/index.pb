@@ -130,3 +130,13 @@ O
 readthedocs.yml,8\5\8588181436eab3b6648db1f743c775276ab3a8b8
 E
 docs/requirements.txt,2\7\271b54d579b58b0097c7c56b8ab060c6e3a67b4f
+B
+tests/test_flop.py,e\c\ecbdc3a5d7e13211fe6419af74ae2faf54eefdcf
+C
+tests/test_shape.py,8\d\8dc99ded4f7239721db17d5998bef9fcf2786e73
+B
+tests/test_card.py,6\4\642e7863c97d6bd117d9a75c07a29b19429f5e13
+B
+tests/test_suit.py,4\2\428313eb06142699f45d92d447660e31a4d7c816
+B
+tests/test_rank.py,8\1\81cb434c4819c14c06ee18c840ccf117663cbd35

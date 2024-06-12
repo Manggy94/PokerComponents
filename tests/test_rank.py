@@ -10,6 +10,21 @@ class MyRankTestCase(unittest.TestCase):
     def test_ranks_length(self):
         self.assertEqual(len(self.all_ranks), 13)
 
+    def test_symbol(self):
+        self.assertEqual(card.Rank.ACE.symbol, "A")
+        self.assertEqual(card.Rank.DEUCE.symbol, "2")
+        self.assertEqual(card.Rank.THREE.symbol, "3")
+        self.assertEqual(card.Rank.FOUR.symbol, "4")
+        self.assertEqual(card.Rank.FIVE.symbol, "5")
+        self.assertEqual(card.Rank.SIX.symbol, "6")
+        self.assertEqual(card.Rank.SEVEN.symbol, "7")
+        self.assertEqual(card.Rank.EIGHT.symbol, "8")
+        self.assertEqual(card.Rank.NINE.symbol, "9")
+        self.assertEqual(card.Rank.TEN.symbol, "T")
+        self.assertEqual(card.Rank.JACK.symbol, "J")
+        self.assertEqual(card.Rank.QUEEN.symbol, "Q")
+        self.assertEqual(card.Rank.KING.symbol, "K")
+
     def test_ranks_contains(self):
         self.assertIn(card.Rank.ACE, self.all_ranks)
         self.assertIn(card.Rank.DEUCE, self.all_ranks)

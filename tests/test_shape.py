@@ -21,6 +21,21 @@ class MyShapeTestCase(unittest.TestCase):
         self.assertEqual(hand.Shape.SUITED, hand.Shape("s"))
         self.assertNotEqual(hand.Shape.PAIR, hand.Shape("s"))
 
+    def test_name(self):
+        self.assertEqual(hand.Shape.PAIR.name, "PAIR")
+        self.assertEqual(hand.Shape.OFFSUIT.name, "OFFSUIT")
+        self.assertEqual(hand.Shape.SUITED.name, "SUITED")
+
+    def test_symbol(self):
+        self.assertEqual(hand.Shape.PAIR.symbol, "")
+        self.assertEqual(hand.Shape.OFFSUIT.symbol, "o")
+        self.assertEqual(hand.Shape.SUITED.symbol, "s")
+
+    def test_adjective(self):
+        self.assertEqual(hand.Shape.PAIR.adjective, "paired")
+        self.assertEqual(hand.Shape.OFFSUIT.adjective, "offsuit")
+        self.assertEqual(hand.Shape.SUITED.adjective, "suited")
+
 
 if __name__ == '__main__':
     unittest.main()

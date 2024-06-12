@@ -7,6 +7,18 @@ class MyCardTestCase(unittest.TestCase):
     def setUp(self) -> None:
         self.all_cards = list(card.Card)
 
+    def test_name(self):
+        self.assertEqual(card.Card("As").name, "ACE of SPADES")
+        self.assertEqual(card.Card("Th").name, "TEN of HEARTS")
+        self.assertEqual(card.Card("4d").name, "FOUR of DIAMONDS")
+        self.assertEqual(card.Card("Kc").name, "KING of CLUBS")
+
+    def test_symbol(self):
+        self.assertEqual(card.Card("As").symbol, "A♠")
+        self.assertEqual(card.Card("Th").symbol, "T♥")
+        self.assertEqual(card.Card("4d").symbol, "4♦")
+        self.assertEqual(card.Card("Kc").symbol, "K♣")
+
     def test_new(self):
         with self.assertRaises(ValueError):
             card.Card("As3")

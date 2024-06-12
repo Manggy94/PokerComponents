@@ -155,6 +155,22 @@ class MyHandTestCase(unittest.TestCase):
         hd.shape = hand.Shape("o")
         self.assertEqual(hd.shape, hand.Shape.OFFSUIT)
 
+    def test_short_name(self):
+        self.assertEqual(hand.Hand("AKs").short_name, "AKs")
+        self.assertEqual(hand.Hand("AKo").short_name, "AKo")
+        self.assertEqual(hand.Hand("TT").short_name, "TT")
+
+    def test_symbol(self):
+        self.assertEqual(hand.Hand("AKs").symbol, "AKs")
+        self.assertEqual(hand.Hand("AKo").symbol, "AKo")
+        self.assertEqual(hand.Hand("TT").symbol, "TT")
+
+    def test_is_face(self):
+        self.assertFalse(hand.Hand("AKs").is_face)
+        self.assertFalse(hand.Hand("56s").is_face)
+        self.assertTrue(hand.Hand("KQo").is_face)
+        self.assertFalse(hand.Hand("JTo").is_face)
+
 
 if __name__ == '__main__':
     unittest.main()

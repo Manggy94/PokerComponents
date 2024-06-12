@@ -199,7 +199,7 @@ class TablePlayer:
     def hand_score(self) -> int:
         """Returns player's current hand score on the table"""
         cards = (self.combo.first, self.combo.second)
-        board = tuple(card for card in self.table.board[:self.table.board.len])
+        board = tuple(card for card in self.table.board.cards[:self.table.board.len])
         score = self.table.evaluator.evaluate(cards=cards, board=board)
         return score
 

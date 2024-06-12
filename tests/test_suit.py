@@ -7,6 +7,18 @@ class MySuitTestCase(unittest.TestCase):
     def setUp(self) -> None:
         self.all_suits = list(card.Suit)
 
+    def test_name(self):
+        self.assertEqual(card.Suit("c").name, "CLUBS")
+        self.assertEqual(card.Suit("d").name, "DIAMONDS")
+        self.assertEqual(card.Suit("h").name, "HEARTS")
+        self.assertEqual(card.Suit("s").name, "SPADES")
+
+    def test_symbol(self):
+        self.assertEqual(card.Suit("c").symbol, "♣")
+        self.assertEqual(card.Suit("d").symbol, "♦")
+        self.assertEqual(card.Suit("h").symbol, "♥")
+        self.assertEqual(card.Suit("s").symbol, "♠")
+
     def test_suits_length(self):
         self.assertEqual(len(self.all_suits), 4)
 

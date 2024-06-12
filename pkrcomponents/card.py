@@ -168,6 +168,10 @@ class Card(_ReprMixin, metaclass=_CardMeta):
         return f"{self.rank.symbol}{self.suit.symbol}"
 
     @property
+    def name(self) -> str:
+        return f"{self.rank.name} of {self.suit.name}"
+
+    @property
     def short_name(self) -> str:
         return f"{self.rank.symbol}{self.suit.short_name}"
 
