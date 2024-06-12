@@ -140,3 +140,5 @@ B
 tests/test_suit.py,4\2\428313eb06142699f45d92d447660e31a4d7c816
 B
 tests/test_rank.py,8\1\81cb434c4819c14c06ee18c840ccf117663cbd35
+D
+tests/test_street.py,a\b\abf8ee9948b807472d27f32377417c7a6964d078

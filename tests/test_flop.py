@@ -2,7 +2,8 @@ import unittest
 from pkrcomponents.card import Card, Rank
 from pkrcomponents.board import Flop
 
-class FlopTes(unittest.TestCase):
+
+class FlopTest(unittest.TestCase):
 
     def setUp(self):
         self.flop = Flop(Card("As"), Card("Ad"), Card("Tc"))
