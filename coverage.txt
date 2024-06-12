@@ -12,7 +12,7 @@ pkrcomponents/deck.py                  26      1    96%
 pkrcomponents/evaluator.py             28      0   100%
 pkrcomponents/hand.py                 246      0   100%
 pkrcomponents/level.py                 17      0   100%
-pkrcomponents/listings.py              16      0   100%
+pkrcomponents/listings.py              19      0   100%
 pkrcomponents/lookup_table.py         112      0   100%
 pkrcomponents/payout.py                37      0   100%
 pkrcomponents/players.py              111      1    99%
@@ -24,4 +24,4 @@ pkrcomponents/utils/__init__.py         0      0   100%
 pkrcomponents/utils/converters.py       8      0   100%
 pkrcomponents/utils/validators.py       7      0   100%
 -------------------------------------------------------
-TOTAL                                1589     10    99%
+TOTAL                                1592     10    99%

@@ -1,7 +1,10 @@
+from itertools import combinations
+
 import numpy as np
 from pkrcomponents.constants import ActionMove, Street, Position
 from pkrcomponents.card import Card
 from pkrcomponents.hand import Hand
+from pkrcomponents.board import Flop
 
 all_actions = np.hstack(list(ActionMove))
 all_cards = np.hstack(list(Card))
@@ -14,6 +17,14 @@ str_positions = all_positions.astype(str)
 str_combos = all_combos.astype(str)
 str_hands = all_hands.astype(str)
 str_streets = all_streets.astype(str)
+all_flops = list(
+    Flop(
+        first_card=flop_cards[0],
+        second_card=flop_cards[1],
+        third_card=flop_cards[2]
+    )
+    for flop_cards in list(combinations(all_cards, 3))
+)
 
 players_positions = {
     1: [Position.BB],
@@ -29,3 +40,4 @@ players_positions = {
 
 
 }
+
