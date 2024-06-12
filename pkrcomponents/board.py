@@ -75,7 +75,7 @@ class Flop:
         return max(self.differences)
 
     @property
-    def has_straightdraw(self):
+    def has_straight_draw(self):
         return any(1 <= diff <= 3 for diff in self.differences)
 
     @property

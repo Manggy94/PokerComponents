@@ -59,12 +59,12 @@ class FlopTes(unittest.TestCase):
         flop = Flop(Card("As"), Card("Ks"), Card("Ts"))
         self.assertEqual(flop.max_distance, 4)
 
-    def test_has_straightdraw(self):
-        self.assertFalse(self.flop.has_straightdraw)
+    def test_has_straight_draw(self):
+        self.assertFalse(self.flop.has_straight_draw)
         flop = Flop(Card("As"), Card("Ks"), Card("Ts"))
-        self.assertTrue(flop.has_straightdraw)
+        self.assertTrue(flop.has_straight_draw)
         flop2 = Flop(Card("Ks"), Card("2s"), Card("7s"))
-        self.assertFalse(flop2.has_straightdraw)
+        self.assertFalse(flop2.has_straight_draw)
 
     def test_has_gutshot(self):
         self.assertTrue(self.flop.has_gutshot)
