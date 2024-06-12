@@ -66,7 +66,7 @@ class MoneyType(PokerEnum):
 
 class ActionMove(PokerEnum):
     """Class describing an action done"""
-    FOLD = "F", "fold", "folded", "folds", "FOLDS", "Fold", "Folds"
+    FOLD = "F", "fold", "folds", "FOLDS", "Fold", "Folds", "folded",
     CHECK = "X", "check", "checks", "CHECKS", "Check", "Checks"
     CALL = "C", "call", "calls", "CALLS", "Call", "Calls"
     BET = "B", "bet", "bets", "BETS", "Bet", "Bets"
@@ -85,6 +85,22 @@ class ActionMove(PokerEnum):
     @property
     def symbol(self):
         return self._value_[0]
+
+    @property
+    def is_call_move(self):
+        return self.symbol in ["C", "X"]
+
+    @property
+    def is_bet_move(self):
+        return self.symbol in ["B", "R"]
+
+    @property
+    def is_vpip_move(self):
+        return self.is_bet_move or self.is_call_move
+
+    @property
+    def verb(self):
+        return self._value_[2]
 
     def __str__(self):
         return self.symbol

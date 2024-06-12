@@ -2,6 +2,7 @@
 import unittest
 from pkrcomponents.action import Action, TablePlayer, ActionMove
 
+
 class ActionTest(unittest.TestCase):
 
     def setUp(self) -> None:
