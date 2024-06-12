@@ -66,20 +66,28 @@ class MoneyType(PokerEnum):
 
 class ActionMove(PokerEnum):
     """Class describing an action done"""
-    BET = "BET", "bet", "bets", "BETS", "Bet", "Bets", "R"
-    RAISE = "RAISE", "raise", "raises",  "RAISES", "Raise", "Raises", "R"
-    CHECK = "CHECK", "check", "checks", "CHECKS", "Check", "Checks", "X"
-    FOLD = "FOLD", "fold", "folded", "folds", "FOLDS", "Fold", "Folds", "F"
-    CALL = "CALL", "call", "calls", "CALLS", "Call", "Calls", "C"
-    RETURN = "RETURN", "return", "returned", "uncalled", "O"
-    WIN = "WIN", "win", "won", "collected", "W"
-    SHOW = "SHOW", "show", "shows", "SHOWS", "Show", "Shows", "S"
-    MUCK = "MUCK", "MUCKS", "don't show", "didn't show", "did not show", "mucks", "does not show", "doesn't show", "M"
-    THINK = "seconds left to act", "T"
+    FOLD = "F", "fold", "folded", "folds", "FOLDS", "Fold", "Folds"
+    CHECK = "X", "check", "checks", "CHECKS", "Check", "Checks"
+    CALL = "C", "call", "calls", "CALLS", "Call", "Calls"
+    BET = "B", "bet", "bets", "BETS", "Bet", "Bets"
+    RAISE = "R", "raise", "raises",  "RAISES", "Raise", "Raises"
+
+    RETURN = "O", "return", "returned", "uncalled"
+    WIN = "W", "win", "won", "collected"
+    SHOW = "S", "show", "shows", "SHOWS", "Show", "Shows"
+    MUCK = "M", "MUCKS", "don't show", "didn't show", "did not show", "mucks", "does not show", "doesn't show"
+    THINK = "T", "seconds left to act"
+
+    @property
+    def name(self):
+        return self._name_
 
     @property
     def symbol(self):
-        return self._value_[len(self._value_)-1]
+        return self._value_[0]
+
+    def __str__(self):
+        return self.symbol
 
 
 class Position(PokerEnum):

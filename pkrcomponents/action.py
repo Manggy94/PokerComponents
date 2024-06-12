@@ -34,7 +34,7 @@ class Action:
         Returns:
             str: A string representation of the action
         """
-        return f"{self.player.name} does a {self.move} for {self.value}"
+        return f"{self.player.name} does a {self.move.name} for {self.value}"
 
     def execute(self):
         """
