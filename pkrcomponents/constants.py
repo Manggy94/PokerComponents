@@ -96,7 +96,7 @@ class ActionMove(PokerEnum):
 
     @property
     def is_vpip_move(self):
-        return self.is_bet_move or self.is_call_move
+        return self.symbol in ["C", "B", "R"]
 
     @property
     def verb(self):
