@@ -62,7 +62,7 @@ class Combo(_ReprMixin, metaclass=ComboMeta):
     def __eq__(self, other):
         if self.__class__ is not other.__class__:
             if isinstance(other, Hand):
-                return self.to_hand() == other
+                return self.hand == other
             else:
                 raise ValueError("You can only compare a Combo or a Hand with another Combo")
         return self.first == other.first and self.second == other.second
@@ -70,10 +70,10 @@ class Combo(_ReprMixin, metaclass=ComboMeta):
     def __lt__(self, other):
         if self.__class__ is not other.__class__:
             if isinstance(other, Hand):
-                return self.to_hand() < other
+                return self.hand < other
             else:
                 raise ValueError("You can only compare a Combo or a Hand with another Combo")
-        return self.to_hand() < other.to_hand()
+        return self.hand < other.hand
 
     def _set_cards_in_order(self, first, second):
         """Private method to order cards in a combo and prevent redundancies"""
@@ -81,7 +81,8 @@ class Combo(_ReprMixin, metaclass=ComboMeta):
         if self.first < self.second:
             self.first, self.second = self.second, self.first
 
-    def to_hand(self):
+    @property
+    def hand(self):
         """Convert combo to :class:`Hand` object, losing suit information."""
         return Hand(f"{self.first.rank}{self.second.rank}{self.shape}")
 

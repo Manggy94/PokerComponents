@@ -88,10 +88,10 @@ class MyComboTestCase(unittest.TestCase):
         c1 = Combo("AsJs")
         c2 = Combo("KsKd")
         c3 = Combo("JdAs")
-        self.assertIsInstance(c1.to_hand(), Hand)
-        self.assertEqual(c1.to_hand(), Hand("AJs"))
-        self.assertEqual(c2.to_hand(), Hand("KK"))
-        self.assertEqual(c3.to_hand(), Hand("AJo"))
+        self.assertIsInstance(c1.hand, Hand)
+        self.assertEqual(c1.hand, Hand("AJs"))
+        self.assertEqual(c2.hand, Hand("KK"))
+        self.assertEqual(c3.hand, Hand("AJo"))
 
     def test_is_suited_connector(self):
         self.assertTrue(Combo("AsKs").is_suited_connector)
