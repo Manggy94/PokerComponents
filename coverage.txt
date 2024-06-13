@@ -30,8 +30,8 @@ pkrcomponents/utils/converters.py           12      0   100%
 pkrcomponents/utils/meta/__init__.py         0      0   100%
 pkrcomponents/utils/meta/card_meta.py       10      0   100%
 pkrcomponents/utils/meta/combo_meta.py      10      0   100%
-pkrcomponents/utils/meta/flop_meta.py        9      0   100%
+pkrcomponents/utils/meta/flop_meta.py       11      1    91%
 pkrcomponents/utils/meta/hand_meta.py       24      0   100%
 pkrcomponents/utils/validators.py            7      0   100%
 ------------------------------------------------------------
-TOTAL                                     1700      9    99%
+TOTAL                                     1702     10    99%

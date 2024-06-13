@@ -18,3 +18,11 @@ class FlopMeta(type):
 
     def __iter__(cls):
         return iter(cls.all_flops)
+
+    def from_string(cls, string):
+        """Create a Flop instance from a string."""
+        return cls(
+            first_card=string[0:2],
+            second_card=string[2:4],
+            third_card=string[4:6]
+        )
