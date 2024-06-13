@@ -6,7 +6,7 @@ pkrcomponents/action.py                56      0   100%
 pkrcomponents/bitcard.py               68      0   100%
 pkrcomponents/board.py                121      3    98%
 pkrcomponents/buy_in.py                14      0   100%
-pkrcomponents/card.py                 113      2    98%
+pkrcomponents/card.py                 119      2    98%
 pkrcomponents/constants.py            103      9    91%
 pkrcomponents/deck.py                  26      1    96%
 pkrcomponents/evaluator.py             28      0   100%
@@ -24,4 +24,4 @@ pkrcomponents/utils/__init__.py         0      0   100%
 pkrcomponents/utils/converters.py       8      0   100%
 pkrcomponents/utils/validators.py       7      0   100%
 -------------------------------------------------------
-TOTAL                                1627     20    99%
+TOTAL                                1633     20    99%

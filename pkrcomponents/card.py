@@ -62,6 +62,14 @@ class Rank(PokerEnum):
     def name(self):
         return self._name_
 
+    @property
+    def is_broadway(self):
+        return self in BROADWAY_RANKS
+
+    @property
+    def is_face(self):
+        return self in FACE_RANKS
+
     @classmethod
     def difference(cls, first, second) -> int:
         """
@@ -180,14 +188,14 @@ class Card(_ReprMixin, metaclass=_CardMeta):
         """
         Indicates if the card is a face
         """
-        return self.rank in FACE_RANKS
+        return self.rank.is_face
 
     @property
     def is_broadway(self) -> bool:
         """
         Indicates if the card is a broadway
         """
-        return self.rank in BROADWAY_RANKS
+        return self.rank.is_broadway
 
     @classmethod
     def make_random(cls):

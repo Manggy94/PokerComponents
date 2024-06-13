@@ -83,6 +83,36 @@ class MyRankTestCase(unittest.TestCase):
         self.assertIn(card.Rank.JACK, card.BROADWAY_RANKS)
         self.assertIn(card.Rank.ACE, card.BROADWAY_RANKS)
 
+    def test_is_broadway(self):
+        self.assertTrue(card.Rank.ACE.is_broadway)
+        self.assertTrue(card.Rank.KING.is_broadway)
+        self.assertTrue(card.Rank.QUEEN.is_broadway)
+        self.assertTrue(card.Rank.JACK.is_broadway)
+        self.assertTrue(card.Rank.TEN.is_broadway)
+        self.assertFalse(card.Rank.NINE.is_broadway)
+        self.assertFalse(card.Rank.EIGHT.is_broadway)
+        self.assertFalse(card.Rank.SEVEN.is_broadway)
+        self.assertFalse(card.Rank.SIX.is_broadway)
+        self.assertFalse(card.Rank.FIVE.is_broadway)
+        self.assertFalse(card.Rank.FOUR.is_broadway)
+        self.assertFalse(card.Rank.THREE.is_broadway)
+        self.assertFalse(card.Rank.DEUCE.is_broadway)
+
+    def test_is_face(self):
+        self.assertTrue(card.Rank.KING.is_face)
+        self.assertTrue(card.Rank.QUEEN.is_face)
+        self.assertTrue(card.Rank.JACK.is_face)
+        self.assertFalse(card.Rank.ACE.is_face)
+        self.assertFalse(card.Rank.TEN.is_face)
+        self.assertFalse(card.Rank.NINE.is_face)
+        self.assertFalse(card.Rank.EIGHT.is_face)
+        self.assertFalse(card.Rank.SEVEN.is_face)
+        self.assertFalse(card.Rank.SIX.is_face)
+        self.assertFalse(card.Rank.FIVE.is_face)
+        self.assertFalse(card.Rank.FOUR.is_face)
+        self.assertFalse(card.Rank.THREE.is_face)
+        self.assertFalse(card.Rank.DEUCE.is_face)
+
 
 if __name__ == '__main__':
     unittest.main()
