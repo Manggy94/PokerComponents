@@ -63,6 +63,10 @@ class Rank(PokerEnum):
         return self._name_
 
     @property
+    def short_name(self):
+        return self.symbol
+
+    @property
     def is_broadway(self):
         return self in BROADWAY_RANKS
 
