@@ -2,7 +2,7 @@ from attrs import define, field, Factory
 from attrs.validators import instance_of, ge, le, optional, max_len, min_len
 
 from pkrcomponents.constants import Position, Street
-from pkrcomponents.hand import Combo
+from pkrcomponents.combo import Combo
 from pkrcomponents.table import Table
 from pkrcomponents.utils.converters import convert_to_position
 

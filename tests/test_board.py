@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 import pandas as pd
-from pkrcomponents.hand import Combo
+from pkrcomponents.combo import Combo
 from pkrcomponents.board import Board
 from pkrcomponents import card
 
@@ -83,8 +83,10 @@ class MyBoardTestCase(unittest.TestCase):
         })
 
     def test_eq(self):
-        self.assertTrue(self.board2 == Board.from_cards(("As", "Ad", "Tc", "Td", card.Card("Ah"))))
-        self.assertFalse(self.board2 == Board.from_cards(("As", "Ad", "Tc", "Td", card.Card("Ac"))))
+        self.assertEqual(self.board2, Board.from_cards(("As", "Ad", "Tc", "Td", card.Card("Ah"))))
+        self.assertEqual(self.board2, Board.from_cards(("As","Tc", "Ad", "Td", "Ah")))
+        self.assertNotEqual(self.board2, Board.from_cards(("As", "Tc", "Ad", "Ah", "Td")))
+        self.assertNotEqual(self.board2, Board.from_cards(("As", "Ad", "Tc", "Td", card.Card("Ac"))))
 
 
 if __name__ == '__main__':

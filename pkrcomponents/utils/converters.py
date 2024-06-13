@@ -10,5 +10,10 @@ def convert_to_street(value: (str, Street)) -> Street:
     return Street(value) if isinstance(value, str) else value
 
 
-def convert_to_card(value: (str, Card, None)) -> Card:
-    return Card(value) if isinstance(value, str) else value if isinstance(value, Card) else None
+def convert_to_card(value: (str, Card, None)) -> (Card, None):
+    if isinstance(value, str):
+        return Card(value)
+    elif isinstance(value, Card):
+        return value
+    else:
+        return None

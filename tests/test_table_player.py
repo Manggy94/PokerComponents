@@ -1,5 +1,6 @@
 import unittest
-from pkrcomponents.table_player import TablePlayer, Combo, Table
+from pkrcomponents.table_player import TablePlayer, Table
+from pkrcomponents.combo import Combo
 from pkrcomponents.tournament import Level
 from pkrcomponents.constants import Position
 
