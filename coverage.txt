@@ -8,7 +8,7 @@ pkrcomponents/board.py                      59      2    97%
 pkrcomponents/buy_in.py                     14      0   100%
 pkrcomponents/card.py                       59      0   100%
 pkrcomponents/combo.py                     107      0   100%
-pkrcomponents/constants.py                 103      0   100%
+pkrcomponents/constants.py                 130      8    94%
 pkrcomponents/deck.py                       26      1    96%
 pkrcomponents/evaluator.py                  28      0   100%
 pkrcomponents/flop.py                       73      1    99%
@@ -34,4 +34,4 @@ pkrcomponents/utils/meta/flop_meta.py       11      1    91%
 pkrcomponents/utils/meta/hand_meta.py       24      0   100%
 pkrcomponents/utils/validators.py            7      0   100%
 ------------------------------------------------------------
-TOTAL                                     1702     10    99%
+TOTAL                                     1729     18    99%

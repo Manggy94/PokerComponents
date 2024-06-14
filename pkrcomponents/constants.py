@@ -108,16 +108,52 @@ class ActionMove(PokerEnum):
 
 class Position(PokerEnum):
     """Class describing the table position"""
-    UTG = "UTG", "under the gun"
-    UTG1 = "UTG1", "utg+1", "utg + 1"
-    UTG2 = "UTG2", "utg+2", "utg + 2"
-    UTG3 = "UTG3", "utg+3", "utg + 3"
-    UTG4 = "UTG4", "LJ", "lojack", "lowjack", "utg+4", "utg + 4"
-    HJ = "HJ", "hijack", "highjack", "utg+5", "utg + 5"
-    CO = "CO", "cutoff", "cut off", "cut-off"
-    BTN = "BTN", "bu", "button"
-    SB = "SB", "small blind"
-    BB = "BB", "big blind"
+    UTG = "UTG", 1, 3, "under the gun"
+    UTG1 = "UTG1", 2, 4, "utg+1", "utg + 1"
+    UTG2 = "UTG2", 3, 5, "utg+2", "utg + 2"
+    UTG3 = "UTG3", 4, 6, "utg+3", "utg + 3"
+    LJ = "LJ", 5, 7, "UTG4", "lojack", "lowjack", "utg+4", "utg + 4"
+    HJ = "HJ", 6, 8, "hijack", "highjack", "utg+5", "utg + 5"
+    CO = "CO", 7, 9, "cutoff", "cut off", "cut-off"
+    BTN = "BTN", 8, 10, "bu", "button"
+    SB = "SB", 9, 1, "small blind"
+    BB = "BB", 10, 2, "big blind"
+
+    @property
+    def name(self):
+        return self._name_
+
+    @property
+    def short_name(self):
+        return self.name
+
+    @property
+    def symbol(self):
+        return self.name
+
+    @property
+    def is_early(self):
+        return self.name in ["UTG", "UTG1", "UTG2", "UTG3"]
+
+    @property
+    def is_middle(self):
+        return self.name in ["LJ", "HJ"]
+
+    @property
+    def is_late(self):
+        return self.name in ["CO", "BTN"]
+
+    @property
+    def is_blind(self):
+        return self.name in ["SB", "BB"]
+
+    @property
+    def preflop_order(self):
+        return self._value_[1]
+
+    @property
+    def postflop_order(self):
+        return self._value_[2]
 
 
 class Street(PokerEnum):

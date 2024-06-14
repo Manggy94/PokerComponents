@@ -109,7 +109,7 @@ class Players:
     def seats_mapper(self):
         """Returns a dict {position: seat} """
         nb_players = self.len
-        positions = tuple(f"{pos}" for pos in players_positions[nb_players])
+        positions = tuple(position.name for position in players_positions[nb_players])
         return dict(zip(positions, self.preflop_ordered_seats))
 
     def distribute_positions(self):

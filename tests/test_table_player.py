@@ -72,7 +72,7 @@ class MyPlayerTestCase(unittest.TestCase):
         self.assertIsInstance(self.player.position, Position)
         with self.assertRaises(ValueError):
             self.player.position = "ABC"
-        self.player.position = "BB"
+        self.player.position = Position("BB")
         self.assertEqual(self.player.position, Position.BB)
 
     def test_in_game(self):

@@ -174,3 +174,7 @@ U
 %pkrcomponents/utils/meta/suit_meta.py,6\1\610756f20a729953df2876fae9bdbf045f56da8f
 I
 tests/test_action_move.py,0\3\0378a1ba13334f9c42022f5958ee55a818cba600
+F
+tests/test_position.py,6\1\6158d75b436a728a2c37456a78557d6379227c74
+?
+docs/players.md,d\a\da1198dd5bf7f21dd85803c74db45d7f7b2420e4
