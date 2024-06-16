@@ -95,11 +95,11 @@ class TablePlayer:
     }, validator=instance_of(dict))
 
     def __repr__(self):
-        return (f"\n Name: {self.name}\n "
-                f"Seat: {self.seat}\n "
-                f"Stack: {self.stack}\n "
-                f"Position: {self.position}\n Table: {self.table}\n "
-                f"Bounty: {self.bounty}\n")
+        return (f"TablePlayer(name: '{self.name}', "
+                f"seat: {self.seat}, "
+                f"stack: {self.stack}, "
+                f"position: {self.position}, "
+                f"bounty: {self.bounty}")
 
     @property
     def stack_bb(self) -> float:
@@ -275,12 +275,22 @@ class TablePlayer:
         self.played = False
         self.current_bet = 0
 
+    def reset_actions(self):
+        """Reset actions"""
+        self.actions = {
+            f"{Street('Preflop')}": [],
+            f"{Street('Flop')}": [],
+            f"{Street('Turn')}": [],
+            f"{Street('River')}": []
+        }
+
     def reset_hand_status(self):
         """Reset hand status"""
         self.reset_street_status()
         self.folded = False
         self.reset_init_stack()
         self.delete_combo()
+        self.reset_actions()
 
     def pay(self, value: float):
         """
@@ -292,31 +302,6 @@ class TablePlayer:
         amount = self.max_bet(value)
         self.stack -= amount
         self.table.pot.add(amount)
-
-    def do_bet(self, value: float):
-        """
-        Action of betting a certain value
-
-        Args:
-            value (float): The amount to bet
-        """
-        self.current_bet += self.max_bet(value)
-        self.pay(value)
-        if self.current_bet > self.table.pot.highest_bet:
-            self.table.pot.highest_bet = self.current_bet
-            self.table.cnt_bets += 1
-        self.played = True
-
-    def post(self, value: float):
-        """
-        Action of posting
-
-        Args:
-            value (float): The amount to post
-        """
-        self.pay(value)
-        if value > self.table.pot.highest_bet:
-            self.table.pot.highest_bet = value
 
     def win(self, amount: float) -> None:
         """

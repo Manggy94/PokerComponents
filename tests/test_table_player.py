@@ -108,6 +108,12 @@ class MyPlayerTestCase(unittest.TestCase):
         self.assertFalse(hasattr(self.toto, "_table"))
         self.assertRaises(KeyError, lambda: table.players.name_dict["Toto"])
 
+    def test_repr(self):
+        self.assertEqual(repr(self.player),
+                         "TablePlayer(name: 'Jean', seat: 3, stack: 2000.0, position: None, bounty: 0.0")
+        self.assertEqual(repr(self.toto),
+                         "TablePlayer(name: 'Toto', seat: 2, stack: 25500.0, position: None, bounty: 0.0")
+
 
 if __name__ == '__main__':
     unittest.main()

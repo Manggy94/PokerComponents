@@ -1,4 +1,6 @@
+from pkrcomponents.constants import BlindType
 from pkrcomponents.listings import players_positions
+from pkrcomponents.posting import AntePosting, BlindPosting, Posting, SBPosting, BBPosting
 
 
 class Players:
@@ -170,3 +172,24 @@ class Players:
         """Reset all players for a new hand"""
         for player in self:
             player.reset_hand_status()
+
+    def post_antes(self):
+        """Post antes for all players"""
+        for seat in self.preflop_ordered_seats:
+            player = self[seat]
+            posting = AntePosting(player_name=player.name, value=player.table.level.ante)
+            posting.execute(player)
+
+    def post_sb(self):
+        """Post Small Blind"""
+        seat = self.seats_mapper["SB"]
+        player = self[seat]
+        posting = SBPosting(player_name=player.name, value=player.table.level.sb)
+        posting.execute(player)
+
+    def post_bb(self):
+        """Preflop big blind posting"""
+        seat = self.seats_mapper["BB"]
+        player = self.seat_dict[seat]
+        posting = BBPosting(player_name=player.name, value=player.table.level.bb)
+        posting.execute(player)

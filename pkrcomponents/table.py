@@ -19,7 +19,8 @@ class Table:
 
     Attributes:
         board(Board): The board of the table
-        cnt_bets(int): The number of bets made on the table
+        cnt_bets(int): The number of bets made on the table at a given street
+        cnt_calls(int): The number of calls made on the table at a given street
         deck(Deck): The deck of the table
         evaluator(Evaluator): The evaluator of the table
         hand_has_started(bool): Whether the hand has started
@@ -47,8 +48,10 @@ class Table:
         {"text": "3/4 Pot", "value": 3 / 4},
         {"text": "Pot", "value": 1}
     ]
+
     board = field(default=Factory(Board), validator=instance_of(Board))
     cnt_bets = field(default=0, validator=[instance_of(int), ge(0)])
+    cnt_calls = field(default=0, validator=[instance_of(int), ge(0)])
     deck = field(default=Factory(Deck), validator=instance_of(Deck))
     evaluator = field(default=Factory(Evaluator), validator=instance_of(Evaluator))
     hand_has_started = field(default=False, validator=instance_of(bool))
@@ -58,6 +61,7 @@ class Table:
     max_players = field(default=6, validator=[instance_of(int), gt(2), le(10)])
     min_bet = field(default=0, validator=[instance_of(float), ge(0)], converter=float)
     players = field(default=Factory(Players), validator=instance_of(Players))
+    postings = field(default=[], validator=instance_of(list))
     pot = field(default=Factory(Pot), validator=instance_of(Pot))
     seat_playing = field(default=0, validator=[instance_of(int), ge(0)])
     start_date = field(default=None, validator=optional(instance_of(datetime)))
@@ -66,6 +70,7 @@ class Table:
 
     def __attrs_post_init__(self):
         self.deck.shuffle()
+        self.postings = list()
 
     def __repr__(self):
         return f"Table(max_players={self.max_players}), Tournament={self.tournament})"
@@ -341,34 +346,11 @@ class Table:
         if self.players.len > 1:
             self.players.distribute_positions()
 
-    def post_antes(self):
-        """Preflop Ante posting for players on the table"""
-        for i in self.players.preflop_ordered_seats:
-            player = self.players.seat_dict[i]
-            player.post(self.level.ante)
-
-    def post_sb(self):
-        """Preflop small blind posting"""
-        seat = self.players.seats_mapper["SB"]
-        player = self.players.seat_dict[seat]
-        if player.can_play:
-            player.do_bet(self.level.sb)
-            player.played = False
-
-    def post_bb(self):
-        """Preflop big blind posting"""
-        seat = self.players.seats_mapper["BB"]
-        player = self.players.seat_dict[seat]
-        if player.can_play:
-            player.do_bet(self.level.bb)
-            player.played = False
-        self.min_bet = self.level.bb*2
-
     def post_pregame(self):
         """Preflop posting antes and blinds"""
-        self.post_antes()
-        self.post_sb()
-        self.post_bb()
+        self.players.post_antes()
+        self.players.post_sb()
+        self.players.post_bb()
 
     @property
     def cost_per_round(self) -> float:
@@ -427,7 +409,8 @@ class Table:
         """Reset status of players in game and betting status for a new street"""
         self.pot.highest_bet = 0
         self.cnt_bets = 0
-        self.min_bet = self.level.bb
+        self.cnt_calls = 0
+        self.update_min_bet(self.level.bb)
         self.seat_playing = self.players_in_game[0].seat
         for player in self.players_in_game:
             player.reset_street_status()
@@ -499,9 +482,18 @@ class Table:
         self.deck.reset()
         self.board.reset()
         self.players.hand_reset()
+        self.reset_postings()
         self.hand_has_started = False
 
     def advance_to_next_hand(self):
         """Advance to the next hand"""
         self.hand_reset()
         self.players.advance_bb_seat()
+
+    def update_min_bet(self, value):
+        """Update the minimum bet on the table"""
+        self.min_bet = value
+
+    def reset_postings(self):
+        """Reset the postings"""
+        self.postings = list()

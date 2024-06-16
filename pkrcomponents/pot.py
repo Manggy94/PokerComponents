@@ -35,6 +35,18 @@ class Pot:
             raise ValueError("amount added to pot can only be positive")
         self.value += amount
 
+    def update_highest_bet(self, amount: float):
+        """
+        Update the highest bet in the pot
+
+        Args:
+            amount (float): The amount to compare with the current highest bet
+        """
+        if amount < 0:
+            raise ValueError("amount added to pot can only be positive")
+        if amount > self.highest_bet:
+            self.highest_bet = amount
+
     def reset(self) -> None:
         """Reset the pot"""
         self.value = 0

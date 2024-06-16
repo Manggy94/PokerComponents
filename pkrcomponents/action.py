@@ -18,7 +18,6 @@ class Action:
     Methods:
         __str__(): Returns a string representation of the action
         execute(): Executes the action
-        pay(value): Pays the value of the action
         play(): Plays the action on the table and advances the seat playing
 
     """
@@ -36,14 +35,21 @@ class Action:
         """
         return f"{self.player.name} does a {self.move.name} for {self.value}"
 
+    @property
+    def new_min_bet(self):
+        """
+        Returns the new minimum bet after the action
+        """
+        return max(2 * self.value - self.player.table.pot.highest_bet, self.player.table.min_bet)
+
     def execute(self):
         """
         Executes the action
         """
-        self.pay(self.value)
+        self.player.table.update_min_bet(self.new_min_bet)
+        self.player.pay(self.value)
         self.player.current_bet += self.value
-        if self.player.current_bet > self.player.table.pot.highest_bet:
-            self.player.table.pot.highest_bet = self.player.current_bet
+        self.player.table.pot.update_highest_bet(self.player.current_bet)
         self.player.actions.get(f"{self.player.table.street}").append(self)
 
     def play(self):
@@ -53,14 +59,6 @@ class Action:
         self.execute()
         self.player.table.advance_seat_playing()
         self.player.played = True
-
-    def pay(self, value: float):
-        """
-        Pays the value of the action
-        """
-        amount = self.player.max_bet(value)
-        self.player.stack -= amount
-        self.player.table.pot.add(amount)
 
 
 class FoldAction(Action):
@@ -92,6 +90,7 @@ class CallAction(Action):
 
     def execute(self):
         super().execute()
+        self.player.table.cnt_calls += 1
 
 
 class BetAction(Action):
@@ -104,8 +103,8 @@ class BetAction(Action):
         super().__init__(player=player, move=ActionMove.BET, value=value)
 
     def execute(self):
-        self.player.table.min_bet = 2 * self.value - self.player.table.pot.highest_bet
         super().execute()
+        self.player.table.cnt_bets += 1
 
 
 class RaiseAction(Action):
@@ -119,5 +118,5 @@ class RaiseAction(Action):
         super().__init__(player=player, move=ActionMove.RAISE, value=total_value)
 
     def execute(self):
-        self.player.table.min_bet = 2 * self.value - self.player.table.pot.highest_bet
         super().execute()
+        self.player.table.cnt_bets += 1

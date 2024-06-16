@@ -89,5 +89,17 @@ class FlopTest(unittest.TestCase):
         flop2 = Flop(Card("4s"), Card("2s"), Card("3d"))
         self.assertTrue(flop2.has_straights)
 
+    def test_from_string(self):
+        flop = Flop.from_string("AsAdTc")
+        self.assertEqual(flop, self.flop)
+        flop = Flop.from_string("AsKsTs")
+        self.assertEqual(flop, Flop(Card("As"), Card("Ks"), Card("Ts")))
+
+    def test_symbol(self):
+        self.assertEqual(self.flop.symbol, "A♠A♦T♣")
+        flop = Flop(Card("As"), Card("Ts"), Card("Ks"))
+        self.assertEqual(flop.symbol, "A♠K♠T♠")
+
+
 
 

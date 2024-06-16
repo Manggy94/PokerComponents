@@ -178,3 +178,9 @@ F
 tests/test_position.py,6\1\6158d75b436a728a2c37456a78557d6379227c74
 ?
 docs/players.md,d\a\da1198dd5bf7f21dd85803c74db45d7f7b2420e4
+H
+pkrcomponents/posting.py,5\9\59c1156f529ae42e9edb854c2412868c977f31bc
+H
+tests/test_blind_type.py,2\f\2f82069a107d0f4a37b0e00e7cb3e16a6b924f13
+E
+tests/test_posting.py,2\9\292f06c2d90d8f64f76d5eda7945c9c75451fdd3

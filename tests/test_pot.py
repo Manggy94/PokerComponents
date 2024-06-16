@@ -26,6 +26,14 @@ class MyPotTestCase(unittest.TestCase):
         self.assertEqual(p.value, 0)
         self.assertEqual(p.highest_bet, 0)
 
+    def test_update_highest_bet(self):
+        p = Pot()
+        with self.assertRaises(ValueError):
+            p.update_highest_bet(-10)
+        p.update_highest_bet(2500)
+        self.assertEqual(p.highest_bet, 2500)
+        p.update_highest_bet(500)
+        self.assertEqual(p.highest_bet, 2500)
 
 
 if __name__ == '__main__':
