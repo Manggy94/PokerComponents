@@ -27,10 +27,12 @@ players_positions = {
     4: [Position.CO, Position.BTN, Position.SB, Position.BB],
     5: [Position.HJ, Position.CO, Position.BTN, Position.SB, Position.BB],
     6: [Position.UTG, Position.HJ, Position.CO, Position.BTN, Position.SB, Position.BB],
-    7: [Position.UTG, Position.UTG1, Position.HJ, Position.CO, Position.BTN, Position.SB, Position.BB],
-    8: [Position.UTG, Position.UTG1, Position.UTG2, Position.HJ, Position.CO, Position.BTN, Position.SB, Position.BB],
-    9: [Position.UTG, Position.UTG1, Position.UTG2, Position.UTG3, Position.HJ, Position.CO, Position.BTN, Position.SB,
-        Position.BB]
+    7: [Position.UTG, Position.LJ, Position.HJ, Position.CO, Position.BTN, Position.SB, Position.BB],
+    8: [Position.UTG, Position.UTG1, Position.LJ, Position.HJ, Position.CO, Position.BTN, Position.SB, Position.BB],
+    9: [Position.UTG, Position.UTG1, Position.UTG2, Position.LJ, Position.HJ, Position.CO, Position.BTN, Position.SB,
+        Position.BB],
+    10: [Position.UTG, Position.UTG1, Position.UTG2, Position.UTG3, Position.LJ, Position.HJ, Position.CO, Position.BTN,
+         Position.SB, Position.BB]
 
 
 }
