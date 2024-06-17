@@ -1,5 +1,5 @@
 import unittest
-import pkrcomponents.utils._common as common
+import pkrcomponents.utils.common as common
 
 
 class MyCommonTestCase(unittest.TestCase):

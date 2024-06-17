@@ -1,4 +1,4 @@
-from pkrcomponents.utils._common import PokerEnum
+from pkrcomponents.utils.common import PokerEnum
 from itertools import combinations
 
 

@@ -1,5 +1,5 @@
 from itertools import product, combinations
-from pkrcomponents.utils._common import PokerEnum
+from pkrcomponents.utils.common import PokerEnum
 
 
 class Suit(PokerEnum):

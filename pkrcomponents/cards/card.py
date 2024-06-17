@@ -2,7 +2,7 @@
 It also contains the Rank and Suit classes, which are used to define the rank and suit of a card."""
 from functools import total_ordering
 
-from pkrcomponents.utils._common import _ReprMixin
+from pkrcomponents.utils.common import _ReprMixin
 from pkrcomponents.cards.rank import Rank
 from pkrcomponents.cards.suit import Suit
 from pkrcomponents.utils.meta.card_meta import CardMeta

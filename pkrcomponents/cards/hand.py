@@ -1,6 +1,6 @@
 import random
 from functools import total_ordering
-from pkrcomponents.utils._common import _ReprMixin
+from pkrcomponents.utils.common import _ReprMixin
 from pkrcomponents.cards.rank import Rank, FACE_RANKS, BROADWAY_RANKS
 
 __all__ = [

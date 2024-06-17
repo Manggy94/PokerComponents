@@ -1,4 +1,4 @@
-from pkrcomponents.utils._common import PokerEnum
+from pkrcomponents.utils.common import PokerEnum
 
 
 class PokerRoom(PokerEnum):
@@ -47,15 +47,6 @@ class TourFormat(PokerEnum):
     REBUY = "Rebuy", "+R"
     SECOND = ("2x Chance",)
     ACTION = ("Action Hour",)
-
-
-class TourSpeed(PokerEnum):
-    """Class describing the tournament speed"""
-    SLOW = ("Slow",)
-    REGULAR = ("Regular",)
-    TURBO = ("Turbo",)
-    HYPER = ("Hyper-Turbo",)
-    DOUBLE = ("2x-Turbo",)
 
 
 class MoneyType(PokerEnum):

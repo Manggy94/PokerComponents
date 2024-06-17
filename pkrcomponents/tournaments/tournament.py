@@ -5,6 +5,7 @@ from pkrcomponents.utils.constants import MoneyType
 from pkrcomponents.tournaments.level import Level
 from pkrcomponents.tournaments.payout import Payouts
 from pkrcomponents.tournaments.buy_in import BuyIn
+from pkrcomponents.tournaments.speed import TourSpeed
 from pkrcomponents.utils.validators import validate_players_remaining
 
 
@@ -34,6 +35,7 @@ class Tournament:
     payouts = field(default=Factory(Payouts), validator=[instance_of(Payouts)])
     total_players = field(default=2, validator=[gt(1), instance_of(int)])
     players_remaining = field(default=2, validator=validate_players_remaining)
+    speed = field(default=TourSpeed.REGULAR, validator=[instance_of(TourSpeed)], converter=TourSpeed)
     starting_stack = field(default=20000.0, validator=[gt(0), instance_of(float)], converter=float)
 
     def __str__(self):

@@ -25,6 +25,7 @@ class Table:
         evaluator(Evaluator): The evaluator of the table
         hand_has_started(bool): Whether the hand has started
         hand_id(str): The ID of the hand
+        hand_date(datetime): The date of the hand
         is_mtt(bool): Whether the table is a tournament
         level(Level): The level of the table
         max_players(int): The maximum number of players on the table
@@ -64,7 +65,7 @@ class Table:
     postings = field(default=[], validator=instance_of(list))
     pot = field(default=Factory(Pot), validator=instance_of(Pot))
     seat_playing = field(default=0, validator=[instance_of(int), ge(0)])
-    start_date = field(default=None, validator=optional(instance_of(datetime)))
+    hand_date = field(default=None, validator=optional(instance_of(datetime)))
     street = field(default=None, validator=optional(instance_of(Street)), converter=convert_to_street)
     tournament = field(default=None, validator=optional(instance_of(Tournament)))
 

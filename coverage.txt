@@ -31,10 +31,11 @@ pkrcomponents/tournaments/__init__.py         0      0   100%
 pkrcomponents/tournaments/buy_in.py          14      0   100%
 pkrcomponents/tournaments/level.py           17      0   100%
 pkrcomponents/tournaments/payout.py          37      0   100%
-pkrcomponents/tournaments/tournament.py      46      0   100%
+pkrcomponents/tournaments/speed.py            7      0   100%
+pkrcomponents/tournaments/tournament.py      48      0   100%
 pkrcomponents/utils/__init__.py               0      0   100%
-pkrcomponents/utils/_common.py               48      0   100%
-pkrcomponents/utils/constants.py             40      0   100%
+pkrcomponents/utils/common.py                48      0   100%
+pkrcomponents/utils/constants.py             34      0   100%
 pkrcomponents/utils/converters.py            13      0   100%
 pkrcomponents/utils/meta/__init__.py          0      0   100%
 pkrcomponents/utils/meta/card_meta.py        10      0   100%
@@ -43,4 +44,4 @@ pkrcomponents/utils/meta/flop_meta.py        11      1    91%
 pkrcomponents/utils/meta/hand_meta.py        24      1    96%
 pkrcomponents/utils/validators.py             7      0   100%
 -------------------------------------------------------------
-TOTAL                                      1784     26    99%
+TOTAL                                      1787     26    99%
