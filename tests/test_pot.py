@@ -1,5 +1,5 @@
 import unittest
-from pkrcomponents.pot import Pot
+from pkrcomponents.tables.pot import Pot
 
 
 class MyPotTestCase(unittest.TestCase):

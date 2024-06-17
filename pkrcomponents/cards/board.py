@@ -3,7 +3,7 @@ from attrs.validators import instance_of, optional
 import numpy as np
 import pandas as pd
 from pkrcomponents.cards.card import Card
-from pkrcomponents.flop import Flop
+from pkrcomponents.cards.flop import Flop
 from pkrcomponents.utils.converters import convert_to_card
 
 

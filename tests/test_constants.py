@@ -1,5 +1,5 @@
 import unittest
-import pkrcomponents.constants as cst
+import pkrcomponents.utils.constants as cst
 
 
 class MyConstantsTestCase(unittest.TestCase):

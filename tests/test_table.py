@@ -1,10 +1,11 @@
 import unittest
 import numpy as np
-from pkrcomponents.action import FoldAction, CheckAction, CallAction, BetAction, RaiseAction
-from pkrcomponents.buy_in import BuyIn
-from pkrcomponents.table import Table, Board, Players, Pot, Tournament, Level, Street
-from pkrcomponents.deck import Deck
-from pkrcomponents.table_player import TablePlayer
+from pkrcomponents.actions.action import FoldAction, CheckAction, CallAction, BetAction, RaiseAction
+from pkrcomponents.tournaments.buy_in import BuyIn
+from pkrcomponents.tables.table import Table, Board, Players, Pot, Tournament, Level
+from pkrcomponents.actions.street import Street
+from pkrcomponents.cards.deck import Deck
+from pkrcomponents.players.table_player import TablePlayer
 
 
 class TableTest(unittest.TestCase):

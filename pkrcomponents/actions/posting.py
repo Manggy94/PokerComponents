@@ -1,7 +1,7 @@
 from attrs import define, field
 from attrs.validators import instance_of, ge
 
-from pkrcomponents.constants import BlindType
+from pkrcomponents.actions.blind_type import BlindType
 
 
 @define

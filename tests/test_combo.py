@@ -1,7 +1,7 @@
 import unittest
 
-from pkrcomponents.combo import Combo
-from pkrcomponents.hand import Hand
+from pkrcomponents.cards.combo import Combo
+from pkrcomponents.cards.hand import Hand
 from pkrcomponents.cards.card import Card
 
 

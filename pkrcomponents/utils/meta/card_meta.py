@@ -1,7 +1,7 @@
 from itertools import product
 
-from pkrcomponents.rank import Rank
-from pkrcomponents.suit import Suit
+from pkrcomponents.cards.rank import Rank
+from pkrcomponents.cards.suit import Suit
 
 
 class CardMeta(type):

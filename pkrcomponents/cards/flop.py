@@ -1,6 +1,6 @@
 from itertools import combinations
 from pkrcomponents.cards.card import Card
-from pkrcomponents.rank import Rank
+from pkrcomponents.cards.rank import Rank
 from pkrcomponents.utils.meta.flop_meta import FlopMeta
 
 

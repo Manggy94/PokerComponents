@@ -1,7 +1,7 @@
 import unittest
 import pkrcomponents.cards.card as card
-import pkrcomponents.rank
-import pkrcomponents.suit
+import pkrcomponents.cards.rank
+import pkrcomponents.cards.suit
 
 
 class MyCardTestCase(unittest.TestCase):
@@ -36,15 +36,15 @@ class MyCardTestCase(unittest.TestCase):
 
     def test_card_slots(self):
         new_card = card.Card.make_random()
-        self.assertIsInstance(new_card.rank, pkrcomponents.rank.Rank)
-        self.assertIsInstance(new_card.suit, pkrcomponents.suit.Suit)
+        self.assertIsInstance(new_card.rank, pkrcomponents.cards.rank.Rank)
+        self.assertIsInstance(new_card.suit, pkrcomponents.cards.suit.Suit)
 
     def test_card_rank(self):
         new_card = card.Card("As")
-        self.assertEqual(new_card.rank, pkrcomponents.rank.Rank.ACE)
-        self.assertEqual(new_card.suit, pkrcomponents.suit.Suit.SPADES)
-        self.assertNotEqual(new_card.rank, pkrcomponents.rank.Rank.TEN)
-        self.assertNotEqual(new_card.suit, pkrcomponents.suit.Suit.HEARTS)
+        self.assertEqual(new_card.rank, pkrcomponents.cards.rank.Rank.ACE)
+        self.assertEqual(new_card.suit, pkrcomponents.cards.suit.Suit.SPADES)
+        self.assertNotEqual(new_card.rank, pkrcomponents.cards.rank.Rank.TEN)
+        self.assertNotEqual(new_card.suit, pkrcomponents.cards.suit.Suit.HEARTS)
 
     def test_card_difference_operator(self):
         c1 = card.Card("Ah")

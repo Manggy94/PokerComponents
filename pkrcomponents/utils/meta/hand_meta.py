@@ -1,4 +1,4 @@
-from pkrcomponents.rank import Rank
+from pkrcomponents.cards.rank import Rank
 
 
 class HandMeta(type):

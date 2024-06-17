@@ -1,6 +1,4 @@
 import unittest
-import pkrcomponents.hand as hand
-
 
 # class MyComboHandTestCase(unittest.TestCase):
 #

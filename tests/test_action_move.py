@@ -1,6 +1,6 @@
 
 import unittest
-from pkrcomponents.constants import ActionMove
+from pkrcomponents.actions.action_move import ActionMove
 
 
 class ActionMoveTest(unittest.TestCase):

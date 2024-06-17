@@ -1,6 +1,7 @@
 
 import unittest
-from pkrcomponents.action import Action, TablePlayer, ActionMove
+from pkrcomponents.actions.action import Action, TablePlayer
+from pkrcomponents.actions.action_move import ActionMove
 
 
 class ActionTest(unittest.TestCase):

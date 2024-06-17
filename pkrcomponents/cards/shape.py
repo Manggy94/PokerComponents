@@ -1,4 +1,4 @@
-from pkrcomponents._common import PokerEnum
+from pkrcomponents.utils._common import PokerEnum
 
 
 class Shape(PokerEnum):

@@ -1,8 +1,8 @@
 import unittest
-from pkrcomponents.table_player import TablePlayer
-from pkrcomponents.players import Players
-from pkrcomponents.table import Table
-from pkrcomponents.position import Position
+from pkrcomponents.players.table_player import TablePlayer
+from pkrcomponents.players.players import Players
+from pkrcomponents.tables.table import Table
+from pkrcomponents.players.position import Position
 
 
 class PlayersTest(unittest.TestCase):

@@ -1,5 +1,5 @@
 import unittest
-from pkrcomponents.suit import Suit
+from pkrcomponents.cards.suit import Suit
 
 
 class MySuitTestCase(unittest.TestCase):

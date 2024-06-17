@@ -1,7 +1,7 @@
 import unittest
 
-from pkrcomponents.hand import Hand
-from pkrcomponents.shape import Shape
+from pkrcomponents.cards.hand import Hand
+from pkrcomponents.cards.shape import Shape
 
 
 class MyHandTestCase(unittest.TestCase):

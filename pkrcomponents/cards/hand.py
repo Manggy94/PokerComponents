@@ -1,13 +1,13 @@
 import random
 from functools import total_ordering
-from pkrcomponents._common import _ReprMixin
-from pkrcomponents.rank import Rank, FACE_RANKS, BROADWAY_RANKS
+from pkrcomponents.utils._common import _ReprMixin
+from pkrcomponents.cards.rank import Rank, FACE_RANKS, BROADWAY_RANKS
 
 __all__ = [
     "Hand",
 ]
 
-from pkrcomponents.shape import Shape
+from pkrcomponents.cards.shape import Shape
 from pkrcomponents.utils.meta.hand_meta import HandMeta
 
 

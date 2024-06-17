@@ -1,6 +1,6 @@
 import unittest
 
-from pkrcomponents.position import Position
+from pkrcomponents.players.position import Position
 
 
 class TestPosition(unittest.TestCase):

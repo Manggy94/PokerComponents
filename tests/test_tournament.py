@@ -1,7 +1,7 @@
 import unittest
-from pkrcomponents.payout import Payout, Payouts
-from pkrcomponents.tournament import Tournament, BuyIn, Level
-from pkrcomponents.constants import MoneyType
+from pkrcomponents.tournaments.payout import Payout, Payouts
+from pkrcomponents.tournaments.tournament import Tournament, BuyIn, Level
+from pkrcomponents.utils.constants import MoneyType
 
 
 class MyTournamentTestCase(unittest.TestCase):

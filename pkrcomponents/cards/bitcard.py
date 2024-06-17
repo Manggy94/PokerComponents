@@ -1,7 +1,7 @@
 from __future__ import annotations
 from pkrcomponents.cards.card import Card
-from pkrcomponents.rank import Rank
-from pkrcomponents.suit import Suit
+from pkrcomponents.cards.rank import Rank
+from pkrcomponents.cards.suit import Suit
 import math
 
 

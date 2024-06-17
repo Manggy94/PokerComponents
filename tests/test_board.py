@@ -1,7 +1,7 @@
 import unittest
 
 import pandas as pd
-from pkrcomponents.board import Board
+from pkrcomponents.cards.board import Board
 from pkrcomponents.cards import card
 
 

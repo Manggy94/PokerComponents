@@ -1,5 +1,5 @@
 import unittest
-import pkrcomponents.lookup_table as lookup
+import pkrcomponents.cards.lookup_table as lookup
 
 
 class MyTestCase(unittest.TestCase):

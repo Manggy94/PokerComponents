@@ -1,5 +1,5 @@
-from pkrcomponents.posting import AntePosting, SBPosting, BBPosting
-from pkrcomponents.position import Position
+from pkrcomponents.actions.posting import AntePosting, SBPosting, BBPosting
+from pkrcomponents.players.position import Position
 
 
 class Players:

@@ -1,6 +1,6 @@
 import unittest
 from pkrcomponents.cards.card import Card
-from pkrcomponents.flop import Flop
+from pkrcomponents.cards.flop import Flop
 
 
 class FlopTest(unittest.TestCase):

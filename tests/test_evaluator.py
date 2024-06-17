@@ -1,6 +1,6 @@
 import unittest
-import pkrcomponents.evaluator as evaluator
-from pkrcomponents.lookup_table import LookupTable
+import pkrcomponents.cards.evaluator as evaluator
+from pkrcomponents.cards.lookup_table import LookupTable
 
 
 class MyEvaluatorTestCase(unittest.TestCase):
@@ -26,7 +26,7 @@ class MyEvaluatorTestCase(unittest.TestCase):
         self.assertIsInstance(evaluator.Evaluator.score_to_string(487), str)
         self.assertEqual(evaluator.Evaluator.score_to_string(487), "Flush")
         self.assertIsInstance(evaluator.Evaluator.get_five_card_rank_percentage(487), float)
-        self.assertEqual(evaluator.Evaluator.get_five_card_rank_percentage(487), 1-487 / 7462)
+        self.assertEqual(evaluator.Evaluator.get_five_card_rank_percentage(487), 1 - 487 / 7462)
 
 
 if __name__ == '__main__':

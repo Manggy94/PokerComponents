@@ -1,8 +1,8 @@
 from attrs import define, field
 from attrs.validators import instance_of, ge
 
-from pkrcomponents.constants import ActionMove
-from pkrcomponents.table_player import TablePlayer
+from pkrcomponents.actions.action_move import ActionMove
+from pkrcomponents.players.table_player import TablePlayer
 
 
 @define

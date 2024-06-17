@@ -1,14 +1,14 @@
 from attrs import define, field, Factory
 from attrs.validators import instance_of, optional, ge, gt, le
 from datetime import datetime
-from pkrcomponents.board import Board
+from pkrcomponents.cards.board import Board
 from pkrcomponents.cards.card import Card
-from pkrcomponents.deck import Deck
-from pkrcomponents.constants import Street
-from pkrcomponents.players import Players
-from pkrcomponents.pot import Pot
-from pkrcomponents.tournament import Level, Tournament
-from pkrcomponents.evaluator import Evaluator
+from pkrcomponents.cards.deck import Deck
+from pkrcomponents.actions.street import Street
+from pkrcomponents.players.players import Players
+from pkrcomponents.tables.pot import Pot
+from pkrcomponents.tournaments.tournament import Level, Tournament
+from pkrcomponents.cards.evaluator import Evaluator
 from pkrcomponents.utils.converters import convert_to_street
 
 

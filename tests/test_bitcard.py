@@ -1,5 +1,5 @@
 import unittest
-import pkrcomponents.bitcard as bitcard
+import pkrcomponents.cards.bitcard as bitcard
 
 
 class MyBitCardTestCase(unittest.TestCase):
@@ -25,7 +25,7 @@ class MyBitCardTestCase(unittest.TestCase):
     def test_prime_product_from_cards(self):
         self.assertIsInstance(bitcard.BitCard.prime_product_from_cards(("As", "Ad")), int)
         self.assertEqual(bitcard.BitCard.prime_product_from_cards(("2s", "3d", "4d")), 30)
-        self.assertEqual(bitcard.BitCard.prime_product_from_cards(("As", "2d", "4d")), 41*2*5)
+        self.assertEqual(bitcard.BitCard.prime_product_from_cards(("As", "2d", "4d")), 41 * 2 * 5)
 
 
 if __name__ == '__main__':

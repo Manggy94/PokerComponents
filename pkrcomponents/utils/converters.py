@@ -1,5 +1,5 @@
-from pkrcomponents.constants import Street
-from pkrcomponents.position import Position
+from pkrcomponents.actions.street import Street
+from pkrcomponents.players.position import Position
 from pkrcomponents.cards.card import Card
 
 

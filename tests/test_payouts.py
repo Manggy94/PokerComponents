@@ -1,5 +1,5 @@
 import unittest
-from pkrcomponents.payout import Payout, Payouts
+from pkrcomponents.tournaments.payout import Payout, Payouts
 
 
 class PayoutTest(unittest.TestCase):

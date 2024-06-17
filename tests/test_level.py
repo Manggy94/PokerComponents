@@ -1,6 +1,5 @@
 import unittest
-import pkrcomponents.tournament as tournament
-from pkrcomponents.level import Level
+from pkrcomponents.tournaments.level import Level
 
 
 class LevelTest(unittest.TestCase):
@@ -27,7 +26,7 @@ class LevelTest(unittest.TestCase):
         self.assertEqual(self.level.sb, 800)
 
     def test_ante(self):
-        lvl = tournament.Level(bb=200, ante=25)
+        lvl = Level(bb=200, ante=25)
         with self.assertRaises(ValueError):
             self.level.ante = -1
         self.assertEqual(self.level.ante, 200)

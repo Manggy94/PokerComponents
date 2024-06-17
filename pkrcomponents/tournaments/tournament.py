@@ -1,10 +1,10 @@
 from attrs import define, field, Factory
 from attrs.validators import instance_of, gt
 
-from pkrcomponents.constants import MoneyType
-from pkrcomponents.level import Level
-from pkrcomponents.payout import Payouts
-from pkrcomponents.buy_in import BuyIn
+from pkrcomponents.utils.constants import MoneyType
+from pkrcomponents.tournaments.level import Level
+from pkrcomponents.tournaments.payout import Payouts
+from pkrcomponents.tournaments.buy_in import BuyIn
 from pkrcomponents.utils.validators import validate_players_remaining
 
 

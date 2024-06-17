@@ -1,4 +1,4 @@
-from pkrcomponents.bitcard import BitCard
+from pkrcomponents.cards.bitcard import BitCard
 from typing import Dict
 import itertools
 

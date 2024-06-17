@@ -1,6 +1,6 @@
 
 import unittest
-from pkrcomponents.constants import Street
+from pkrcomponents.actions.street import Street
 
 
 class StreetTest(unittest.TestCase):

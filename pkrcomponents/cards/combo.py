@@ -1,10 +1,10 @@
 from functools import total_ordering
-from pkrcomponents._common import _ReprMixin
+from pkrcomponents.utils._common import _ReprMixin
 from pkrcomponents.cards.card import Card
-from pkrcomponents.hand import Hand
-from pkrcomponents.rank import Rank
-from pkrcomponents.shape import Shape
-from pkrcomponents.suit import Suit
+from pkrcomponents.cards.hand import Hand
+from pkrcomponents.cards.rank import Rank
+from pkrcomponents.cards.shape import Shape
+from pkrcomponents.cards.suit import Suit
 from pkrcomponents.utils.meta.combo_meta import ComboMeta
 
 

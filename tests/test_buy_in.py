@@ -1,5 +1,5 @@
 import unittest
-from pkrcomponents.buy_in import BuyIn
+from pkrcomponents.tournaments.buy_in import BuyIn
 
 
 class BuyInTest(unittest.TestCase):

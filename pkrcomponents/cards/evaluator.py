@@ -1,6 +1,6 @@
 import itertools
-from pkrcomponents.bitcard import BitCard
-from pkrcomponents.lookup_table import LookupTable
+from pkrcomponents.cards.bitcard import BitCard
+from pkrcomponents.cards.lookup_table import LookupTable
 
 LOOKUP_TABLE = LookupTable()
 
