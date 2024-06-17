@@ -1,6 +1,6 @@
 from functools import total_ordering
 from pkrcomponents._common import _ReprMixin
-from pkrcomponents.card import Card
+from pkrcomponents.cards.card import Card
 from pkrcomponents.hand import Hand
 from pkrcomponents.rank import Rank
 from pkrcomponents.shape import Shape

@@ -184,3 +184,7 @@ H
 tests/test_blind_type.py,2\f\2f82069a107d0f4a37b0e00e7cb3e16a6b924f13
 E
 tests/test_posting.py,2\9\292f06c2d90d8f64f76d5eda7945c9c75451fdd3
+I
+pkrcomponents/position.py,e\9\e9b431512892ea128727229e053a4fd7983807fb
+F
+tests/test_listings.py,c\5\c54e4bcdd149bdb4377d7a0301318af9b66c0cd6

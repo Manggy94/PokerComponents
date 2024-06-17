@@ -1,5 +1,5 @@
 from itertools import combinations
-from pkrcomponents.card import Card
+from pkrcomponents.cards.card import Card
 
 
 class FlopMeta(type):

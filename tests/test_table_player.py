@@ -2,7 +2,7 @@ import unittest
 from pkrcomponents.table_player import TablePlayer, Table
 from pkrcomponents.combo import Combo
 from pkrcomponents.tournament import Level
-from pkrcomponents.constants import Position
+from pkrcomponents.position import Position
 
 
 class MyPlayerTestCase(unittest.TestCase):

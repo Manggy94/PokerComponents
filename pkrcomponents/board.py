@@ -2,7 +2,7 @@ from attrs import define, field, Factory
 from attrs.validators import instance_of, optional
 import numpy as np
 import pandas as pd
-from pkrcomponents.card import Card
+from pkrcomponents.cards.card import Card
 from pkrcomponents.flop import Flop
 from pkrcomponents.utils.converters import convert_to_card
 

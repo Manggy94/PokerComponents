@@ -2,7 +2,7 @@ import unittest
 
 from pkrcomponents.combo import Combo
 from pkrcomponents.hand import Hand
-from pkrcomponents.card import Card
+from pkrcomponents.cards.card import Card
 
 
 class MyComboTestCase(unittest.TestCase):

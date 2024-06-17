@@ -1,10 +1,8 @@
 import unittest
 
-import numpy as np
 import pandas as pd
-from pkrcomponents.combo import Combo
 from pkrcomponents.board import Board
-from pkrcomponents import card
+from pkrcomponents.cards import card
 
 
 class MyBoardTestCase(unittest.TestCase):

@@ -1,6 +1,6 @@
 """This module contains the Deck class, which represents a deck of cards."""
 import random
-from pkrcomponents.card import Card
+from pkrcomponents.cards.card import Card
 
 
 class Deck:

@@ -1,6 +1,5 @@
-from itertools import product, combinations
-from pkrcomponents.card import Card
-from pkrcomponents.shape import Shape
+from itertools import combinations
+from pkrcomponents.cards.card import Card
 
 
 class ComboMeta(type):

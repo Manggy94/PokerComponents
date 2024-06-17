@@ -1,5 +1,5 @@
 from __future__ import annotations
-from pkrcomponents.card import Card
+from pkrcomponents.cards.card import Card
 from pkrcomponents.rank import Rank
 from pkrcomponents.suit import Suit
 import math

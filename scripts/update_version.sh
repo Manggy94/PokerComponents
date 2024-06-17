@@ -133,4 +133,16 @@ else
   echo "The distribution has been successfully uploaded to PyPI."
   echo ""
 fi
+
+echo "Removing the distribution files..."
+if [ -d "build" ]; then
+  rm -rf build
+fi
+if [ -d "dist" ]; then
+  rm -rf dist
+fi
+if [ $? -ne 0 ]; then
+  echo "An error occurred while removing the distribution files."
+  exit 1
+fi
 echo "Le script s'est terminé avec succès."

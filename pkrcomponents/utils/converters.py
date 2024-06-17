@@ -1,5 +1,6 @@
-from pkrcomponents.constants import Position, Street
-from pkrcomponents.card import Card
+from pkrcomponents.constants import Street
+from pkrcomponents.position import Position
+from pkrcomponents.cards.card import Card
 
 
 def convert_to_position(value: (str, Position)) -> Position:

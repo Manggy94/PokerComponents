@@ -1,5 +1,5 @@
 from itertools import combinations
-from pkrcomponents.card import Card
+from pkrcomponents.cards.card import Card
 from pkrcomponents.rank import Rank
 from pkrcomponents.utils.meta.flop_meta import FlopMeta
 

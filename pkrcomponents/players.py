@@ -1,6 +1,5 @@
-from pkrcomponents.constants import BlindType
-from pkrcomponents.listings import players_positions
-from pkrcomponents.posting import AntePosting, BlindPosting, Posting, SBPosting, BBPosting
+from pkrcomponents.posting import AntePosting, SBPosting, BBPosting
+from pkrcomponents.position import Position
 
 
 class Players:
@@ -104,14 +103,16 @@ class Players:
     def positions_mapper(self):
         """Returns a dict {seat: position} """
         nb_players = self.len
-        positions = players_positions[nb_players]
+        mapper = Position.get_mapper()
+        positions = mapper[nb_players]
         return dict(zip(self.preflop_ordered_seats, positions))
 
     @property
     def seats_mapper(self):
         """Returns a dict {position: seat} """
         nb_players = self.len
-        positions = tuple(position.name for position in players_positions[nb_players])
+        mapper = Position.get_mapper()
+        positions = tuple(position.name for position in mapper[nb_players])
         return dict(zip(positions, self.preflop_ordered_seats))
 
     def distribute_positions(self):

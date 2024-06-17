@@ -1,5 +1,5 @@
 import unittest
-import pkrcomponents.card as card
+import pkrcomponents.cards.card as card
 import pkrcomponents.deck
 
 

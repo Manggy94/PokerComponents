@@ -1,5 +1,4 @@
 import unittest
-import pkrcomponents.card as card
 import pkrcomponents.rank
 
 

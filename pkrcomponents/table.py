@@ -2,7 +2,7 @@ from attrs import define, field, Factory
 from attrs.validators import instance_of, optional, ge, gt, le
 from datetime import datetime
 from pkrcomponents.board import Board
-from pkrcomponents.card import Card
+from pkrcomponents.cards.card import Card
 from pkrcomponents.deck import Deck
 from pkrcomponents.constants import Street
 from pkrcomponents.players import Players
