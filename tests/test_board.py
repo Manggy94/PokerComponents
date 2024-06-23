@@ -1,17 +1,17 @@
 import unittest
 
 import pandas as pd
+from pkrcomponents.cards.card import Card
 from pkrcomponents.cards.board import Board
-from pkrcomponents.cards import card
 
 
 class MyBoardTestCase(unittest.TestCase):
 
     def setUp(self) -> None:
         self.board = Board.from_cards()
-        self.board2 = Board.from_cards(("As", "Ad", "Tc", "Td", card.Card("Ah")))
-        self.board3 = Board.from_cards(("Qd", "Ad", "Jc", "Td", card.Card("Ah")))
-        self.board4 = Board.from_cards(("Qd", "5d", "Td", "Tc", card.Card("Ah")))
+        self.board2 = Board.from_cards(("As", "Ad", "Tc", "Td", Card("Ah")))
+        self.board3 = Board.from_cards(("Qd", "Ad", "Jc", "Td", Card("Ah")))
+        self.board4 = Board.from_cards(("Qd", "5d", "Td", "Tc", Card("Ah")))
         self.board5 = Board.from_cards(("As", "Ad", "Ah"))
         self.board6 = Board.from_cards(("Ks", "Qs", "Js"))
 
@@ -25,12 +25,12 @@ class MyBoardTestCase(unittest.TestCase):
             Board.from_cards(["As", "As", "Tc"])
         with self.assertRaises(ValueError):
             Board.from_cards(["As", "Ad", "Tc", "Td", "Ah", "Js"])
-        new_board = Board.from_cards(("As", "Ad", "Tc", "Td", card.Card("Ah")))
-        self.assertEqual(new_board.cards["flop_1"], "As")
-        self.assertEqual(new_board.cards["flop_2"], "Ad")
-        self.assertEqual(new_board.cards["flop_3"], "Tc")
-        self.assertEqual(new_board.cards["turn"], "Td")
-        self.assertEqual(new_board.cards["river"], "Ah")
+        new_board = Board.from_cards(("As", "Ad", "Tc", "Td", Card("Ah")))
+        self.assertEqual(new_board.cards["flop_1"], Card("As"))
+        self.assertEqual(new_board.cards["flop_2"], Card("Ad"))
+        self.assertEqual(new_board.cards["flop_3"], Card("Tc"))
+        self.assertEqual(new_board.cards["turn"], Card("Td"))
+        self.assertEqual(new_board.cards["river"], Card("Ah"))
 
     def test_len(self):
         self.assertIsInstance(len(self.board), int)
@@ -44,10 +44,10 @@ class MyBoardTestCase(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.board.add("AA")
         self.board.add("As")
-        self.assertEqual(self.board.cards["flop_1"], "As")
+        self.assertEqual(self.board.cards["flop_1"], Card("As"))
         self.board.add("Qs")
-        self.assertNotEqual(self.board.cards["flop_2"], "As")
-        self.assertEqual(self.board.cards["flop_2"], "Qs")
+        self.assertNotEqual(self.board.cards["flop_2"], Card("As"))
+        self.assertEqual(self.board.cards["flop_2"], Card("Qs"))
         with self.assertRaises(ValueError):
             self.board.add("Qs")
 
@@ -80,10 +80,10 @@ class MyBoardTestCase(unittest.TestCase):
         })
 
     def test_eq(self):
-        self.assertEqual(self.board2, Board.from_cards(("As", "Ad", "Tc", "Td", card.Card("Ah"))))
+        self.assertEqual(self.board2, Board.from_cards(("As", "Ad", "Tc", "Td", Card("Ah"))))
         self.assertEqual(self.board2, Board.from_cards(("As", "Tc", "Ad", "Td", "Ah")))
         self.assertNotEqual(self.board2, Board.from_cards(("As", "Tc", "Ad", "Ah", "Td")))
-        self.assertNotEqual(self.board2, Board.from_cards(("As", "Ad", "Tc", "Td", card.Card("Ac"))))
+        self.assertNotEqual(self.board2, Board.from_cards(("As", "Ad", "Tc", "Td", Card("Ac"))))
 
 
 if __name__ == '__main__':

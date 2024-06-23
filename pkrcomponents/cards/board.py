@@ -41,7 +41,7 @@ class Board:
         return pd.Series(
             data=self.flop.cards + [self.turn, self.river],
             index=["flop_1", "flop_2", "flop_3", "turn", "river"],
-            dtype="<U8",
+            #dtype="<U8",
             name="cards"
         ).fillna(value=np.nan)
 
@@ -52,13 +52,13 @@ class Board:
         """
         return self.__len__()
 
-    def add(self, card):
+    def add(self, card: [str, Card]):
         """
         Add a card to the board
         """
+        card = Card(card)
         if len(self) == 5:
             raise ValueError("Board is already full with 5 cards")
-        card = f"{Card(card)}"
         if self.cards.isin([card]).any():
             raise ValueError("A same card cannot be put in the board twice or more")
         if len(self) == 0:

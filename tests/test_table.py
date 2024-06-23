@@ -1,6 +1,8 @@
 import unittest
 import numpy as np
 from pkrcomponents.actions.action import FoldAction, CheckAction, CallAction, BetAction, RaiseAction
+from pkrcomponents.cards.card import Card
+from pkrcomponents.cards.flop import Flop
 from pkrcomponents.tournaments.buy_in import BuyIn
 from pkrcomponents.tables.table import Table, Board, Players, Pot, Tournament, Level
 from pkrcomponents.actions.street import Street
@@ -93,20 +95,21 @@ class TableTest(unittest.TestCase):
         table = Table()
         table.draw_flop("As", "Ad", "Ah")
         self.assertEqual(table.board.len, 3)
-        self.assertTrue((table.board.cards.values[:3] == np.array(["As", "Ad", "Ah"])).all())
+        self.assertEqual(table.board.flop, Flop("As", "Ad", "Ah"))
         self.assertRaises(ValueError, lambda: table.draw_flop())
         self.assertRaises(ValueError, lambda: table.draw_turn("As"))
         self.assertRaises(ValueError, lambda: table.draw_river("Jd"))
         table.draw_turn("Ac")
         self.assertEqual(table.board.len, 4)
-        self.assertEqual(table.board.cards["turn"], "Ac")
-        self.assertTrue((table.board.cards.values[:4] == np.array(["As", "Ad", "Ah", "Ac"])).all())
+        self.assertEqual(table.board.turn, Card("Ac"))
+        print(table.board.cards.astype(str).values[:4])
+        self.assertEqual(table.board.cards.astype(str).values[:4].tolist(),  ["As", "Ad", "Ah", "Ac"])
         self.assertRaises(ValueError, lambda: table.draw_flop())
         self.assertRaises(ValueError, lambda: table.draw_turn("Jd"))
         table.draw_river("Jd")
         self.assertEqual(table.board.len, 5)
-        self.assertEqual(table.board.cards["river"], "Jd")
-        self.assertTrue((table.board.cards.values == np.array(["As", "Ad", "Ah", "Ac", "Jd"])).all())
+        self.assertEqual(table.board.cards["river"], Card("Jd"))
+        self.assertTrue((table.board.cards.astype(str).values == np.array(["As", "Ad", "Ah", "Ac", "Jd"])).all())
 
     def test_pregame_betting_and_odds(self):
         table = Table()

@@ -99,6 +99,12 @@ class FlopTest(unittest.TestCase):
         flop = Flop(Card("As"), Card("Ts"), Card("Ks"))
         self.assertEqual(flop.symbol, "A♠K♠T♠")
 
+    def test_eq(self):
+        flop = Flop(Card("Ad"), Card("As"), Card("Tc"))
+        self.assertEqual(flop, self.flop)
+        flop = Flop(Card("As"), Card("Ks"), Card("Ts"))
+        self.assertNotEqual(flop, self.flop)
+
 
 
 
