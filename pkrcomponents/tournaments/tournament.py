@@ -1,6 +1,6 @@
 from attrs import define, field, Factory
 from attrs.validators import instance_of, gt
-
+from datetime import datetime
 from pkrcomponents.utils.constants import MoneyType
 from pkrcomponents.tournaments.level import Level
 from pkrcomponents.tournaments.payout import Payouts
@@ -36,6 +36,7 @@ class Tournament:
     total_players = field(default=2, validator=[gt(1), instance_of(int)])
     players_remaining = field(default=2, validator=validate_players_remaining)
     speed = field(default=TourSpeed.REGULAR, validator=[instance_of(TourSpeed)], converter=TourSpeed)
+    start_date = field(default=datetime.now(), validator=[instance_of(datetime)])
     starting_stack = field(default=20000.0, validator=[gt(0), instance_of(float)], converter=float)
 
     def __str__(self):

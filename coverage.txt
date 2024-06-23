@@ -14,25 +14,25 @@ pkrcomponents/cards/card.py                  59      0   100%
 pkrcomponents/cards/combo.py                107      0   100%
 pkrcomponents/cards/deck.py                  26      1    96%
 pkrcomponents/cards/evaluator.py             28      0   100%
-pkrcomponents/cards/flop.py                  73      0   100%
+pkrcomponents/cards/flop.py                  75      1    99%
 pkrcomponents/cards/hand.py                 106      0   100%
 pkrcomponents/cards/lookup_table.py         112      0   100%
 pkrcomponents/cards/rank.py                  47      0   100%
 pkrcomponents/cards/shape.py                 14      0   100%
 pkrcomponents/cards/suit.py                  28      0   100%
 pkrcomponents/players/__init__.py             0      0   100%
-pkrcomponents/players/players.py            129      1    99%
+pkrcomponents/players/players.py            132      1    99%
 pkrcomponents/players/position.py            59     14    76%
 pkrcomponents/players/table_player.py       152      1    99%
 pkrcomponents/tables/__init__.py              0      0   100%
 pkrcomponents/tables/pot.py                  18      0   100%
-pkrcomponents/tables/table.py               267      2    99%
+pkrcomponents/tables/table.py               270      2    99%
 pkrcomponents/tournaments/__init__.py         0      0   100%
 pkrcomponents/tournaments/buy_in.py          14      0   100%
 pkrcomponents/tournaments/level.py           17      0   100%
 pkrcomponents/tournaments/payout.py          37      0   100%
 pkrcomponents/tournaments/speed.py            7      0   100%
-pkrcomponents/tournaments/tournament.py      48      0   100%
+pkrcomponents/tournaments/tournament.py      50      0   100%
 pkrcomponents/utils/__init__.py               0      0   100%
 pkrcomponents/utils/common.py                48      0   100%
 pkrcomponents/utils/constants.py             34      0   100%
@@ -44,4 +44,4 @@ pkrcomponents/utils/meta/flop_meta.py        11      1    91%
 pkrcomponents/utils/meta/hand_meta.py        24      1    96%
 pkrcomponents/utils/validators.py             7      0   100%
 -------------------------------------------------------------
-TOTAL                                      1787     26    99%
+TOTAL                                      1797     27    98%

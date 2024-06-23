@@ -6,17 +6,17 @@ class Players:
     """
     Class representing many players on a table
     """
-    _BB: int
+    _bb_seat: int
     _pl_list: list
     _name_dict: dict
     _seat_dict: dict
-    _positions_mapper: dict
+    button_seat: int
 
     def __init__(self):
         self.pl_list = []
         self.name_dict = {}
         self.seat_dict = {}
-        self._BB = 1
+        self._bb_seat = 1
 
     def __getitem__(self, item):
         if isinstance(item, str):
@@ -81,22 +81,22 @@ class Players:
         return tab
 
     @property
-    def bb(self):
+    def bb_seat(self):
         """Returns the seat of table's Big Blind"""
-        return self._BB
+        return self._bb_seat
 
-    @bb.setter
-    def bb(self, seat):
-        """ Setter for bb property"""
+    @bb_seat.setter
+    def bb_seat(self, seat):
+        """ Setter for bb_seat property"""
         if seat in self.occupied_seats:
-            self._BB = seat
+            self._bb_seat = seat
         else:
-            self._BB = self.occupied_seats[0]
+            self._bb_seat = self.occupied_seats[0]
 
     @property
     def preflop_ordered_seats(self):
         """Returns the list of the indexes of players on the table, with preflop playing order"""
-        cut = self.occupied_seats.index(self.bb) + 1
+        cut = self.occupied_seats.index(self.bb_seat) + 1
         return self.occupied_seats[cut:] + self.occupied_seats[:cut]
 
     @property
@@ -106,6 +106,9 @@ class Players:
         mapper = Position.get_mapper()
         positions = mapper[nb_players]
         return dict(zip(self.preflop_ordered_seats, positions))
+
+    def set_button_seat(self, seat: int):
+        self.button_seat = seat
 
     @property
     def seats_mapper(self):
@@ -140,9 +143,9 @@ class Players:
     def advance_bb_seat(self):
         """Advances the Big Blind seat"""
         try:
-            self.bb = self.occupied_seats[self.occupied_seats.index(self.bb) + 1]
+            self.bb_seat = self.occupied_seats[self.occupied_seats.index(self.bb_seat) + 1]
         except IndexError:
-            self.bb = self.occupied_seats[0]
+            self.bb_seat = self.occupied_seats[0]
         self.distribute_positions()
 
     def get_bb_seat_from_button(self, button_seat: int) -> int:
@@ -155,6 +158,7 @@ class Players:
         Returns:
             bb_seat (int): The seat of the Big Blind
         """
+        self.set_button_seat(button_seat)
         if len(self.occupied_seats) < 3:
             advance = 1
         else:

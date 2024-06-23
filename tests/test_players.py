@@ -29,9 +29,9 @@ class PlayersTest(unittest.TestCase):
             pl.sit(tab)
         self.assertEqual([pl.name for pl in tab.players], ['Toto', 'Tata', 'Titi', 'Tété'])
         self.assertEqual(tab.players.occupied_seats, [1, 2, 4, 6])
-        tab.players.bb = 2
+        tab.players.bb_seat = 2
         self.assertIsInstance(tab.players.positions_mapper, dict)
-        self.assertEqual(tab.players.bb, 2)
+        self.assertEqual(tab.players.bb_seat, 2)
         self.assertEqual(tab.players.preflop_ordered_seats, [4, 6, 1, 2])
         self.assertEqual(tab.players.positions_mapper, {
             4: Position.CO,
@@ -39,16 +39,16 @@ class PlayersTest(unittest.TestCase):
             1: Position.SB,
             2: Position.BB})
         self.assertEqual(tab.players.postflop_ordered_seats, [1, 2, 4, 6])
-        tab.players.bb = 3
-        self.assertEqual(tab.players.bb, 1)
+        tab.players.bb_seat = 3
+        self.assertEqual(tab.players.bb_seat, 1)
         self.assertEqual(tab.players.preflop_ordered_seats, [2, 4, 6, 1])
         self.assertIsInstance(tab.players.occupied_seats, list)
-        tab.players.bb = 6
+        tab.players.bb_seat = 6
         self.assertEqual(tab.players.preflop_ordered_seats, [1, 2, 4, 6])
         self.assertNotIn(self.p5, tab.players)
         self.p5.sit(tab)
         self.assertIn(self.p5, tab.players)
-        tab.players.bb = 4
+        tab.players.bb_seat = 4
         self.assertEqual(tab.players.occupied_seats, [1, 2, 4, 5, 6])
         self.assertEqual(tab.players.preflop_ordered_seats, [5, 6, 1, 2, 4])
         self.assertEqual(tab.players.positions_mapper, {
@@ -67,7 +67,7 @@ class PlayersTest(unittest.TestCase):
         table = Table()
         for pl in self.list:
             pl.sit(table)
-        table.players.bb = 2
+        table.players.bb_seat = 2
 
     def test_get_bb_from_button(self):
         table = Table()

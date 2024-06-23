@@ -20,6 +20,9 @@ class Flop(metaclass=FlopMeta):
     def __eq__(self, other):
         return self.cards_set == other.cards_set
 
+    def __repr__(self):
+        return f"Flop('{self.first_card}, {self.second_card}, {self.third_card}')"
+
     @property
     def short_name(self):
         return f"{self.first_card.short_name}{self.second_card.short_name}{self.third_card.short_name}"

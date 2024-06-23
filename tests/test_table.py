@@ -114,7 +114,7 @@ class TableTest(unittest.TestCase):
         table.add_tournament(self.tournament)
         for pl in self.pl_list:
             pl.sit(table)
-        table.players.bb = 1
+        table.players.bb_seat = 1
         table.players.distribute_positions()
         table.post_pregame()
         self.assertEqual(table.pot.value, 800)
@@ -150,7 +150,7 @@ class TableTest(unittest.TestCase):
         for pl in self.pl_list:
             pl.sit(table)
         table.set_bb_seat(2)
-        self.assertEqual(table.players.bb, 2)
+        self.assertEqual(table.players.bb_seat, 2)
 
     def test_advance_bb_seat(self):
         table = Table()
@@ -158,20 +158,20 @@ class TableTest(unittest.TestCase):
             pl.sit(table)
         table.set_bb_seat(2)
         table.advance_bb_seat()
-        self.assertEqual(table.players.bb, 4)
+        self.assertEqual(table.players.bb_seat, 4)
         table.advance_bb_seat()
-        self.assertEqual(table.players.bb, 6)
+        self.assertEqual(table.players.bb_seat, 6)
         table.advance_bb_seat()
-        self.assertEqual(table.players.bb, 1)
+        self.assertEqual(table.players.bb_seat, 1)
         table.advance_bb_seat()
-        self.assertEqual(table.players.bb, 2)
+        self.assertEqual(table.players.bb_seat, 2)
 
     def test_add_remove_player(self):
         table = Table()
         for pl in self.pl_list:
             pl.sit(table)
         self.assertEqual(table.players.occupied_seats, [1, 2, 4, 6])
-        table.players.bb = 2
+        table.players.bb_seat = 2
         self.assertEqual(table.players.preflop_ordered_seats, [4, 6, 1, 2])
         table.add_player(self.p5)
         self.assertEqual(table.players.occupied_seats, [1, 2, 4, 5, 6])
@@ -216,7 +216,7 @@ class TableTest(unittest.TestCase):
         self.assertFalse(table.hand_can_start)
         self.assertEqual(table.street, Street.PREFLOP)
         self.assertEqual(table.pot.value, 800)
-        self.assertEqual(table.players.bb, 1)
+        self.assertEqual(table.players.bb_seat, 1)
 
     def test_set_max_players(self):
         table = Table()

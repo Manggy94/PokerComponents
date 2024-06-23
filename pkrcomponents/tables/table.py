@@ -77,14 +77,19 @@ class Table:
         return f"Table(max_players={self.max_players}), Tournament={self.tournament})"
 
     @property
+    def cnt_players(self) -> int:
+        """Returns the number of players on the table"""
+        return self.players.len
+
+    @property
     def is_full(self) -> bool:
         """Returns True if the table is full"""
-        return self.players.len == self.max_players
+        return self.cnt_players == self.max_players
 
     @property
     def is_empty(self) -> bool:
         """Returns True if the table is empty"""
-        return self.players.len == 0
+        return self.cnt_players == 0
 
     @property
     def playing_order(self) -> list[int]:
@@ -163,7 +168,7 @@ class Table:
     @property
     def hand_can_start(self) -> bool:
         """Returns True if the hand can start"""
-        return self.players.len >= 2 and not self.hand_has_started
+        return self.cnt_players >= 2 and not self.hand_has_started
 
     def start_hand(self):
         """Starts a new hand"""
@@ -281,7 +286,7 @@ class Table:
             player (TablePlayer): The player to add
         """
         player.sit(self)
-        if self.players.len > 1:
+        if self.cnt_players > 1:
             self.players.distribute_positions()
         else:
             self.players.bb = player.seat
@@ -294,7 +299,7 @@ class Table:
             player (TablePlayer): The player to remove
         """
         player.sit_out()
-        if self.players.len > 1:
+        if self.cnt_players > 1:
             self.players.distribute_positions()
 
     def set_hero(self, player):
@@ -328,8 +333,8 @@ class Table:
         Args:
             player_seat (int): The seat of the big blind player
         """
-        self.players.bb = player_seat
-        if self.players.len > 1:
+        self.players.bb_seat = player_seat
+        if self.cnt_players > 1:
             self.players.distribute_positions()
 
     def advance_bb_seat(self):
@@ -344,7 +349,7 @@ class Table:
             max_players (int): The maximum number of players on the table
         """
         self.max_players = max_players
-        if self.players.len > 1:
+        if self.cnt_players > 1:
             self.players.distribute_positions()
 
     def post_pregame(self):
@@ -356,7 +361,7 @@ class Table:
     @property
     def cost_per_round(self) -> float:
         """Returns the cost of a round for a player"""
-        return self.level.bb * 1.5 + self.level.ante * self.players.len
+        return self.level.bb * 1.5 + self.level.ante * self.cnt_players
 
     @property
     def min_bet_bb(self) -> float:
@@ -376,7 +381,7 @@ class Table:
     @property
     def average_stack(self) -> float:
         """Returns the average stack of players on the table"""
-        return sum(pl.init_stack for pl in self.players) / self.players.len
+        return sum(pl.init_stack for pl in self.players) / self.cnt_players
 
     @property
     def average_stack_bb(self) -> float:

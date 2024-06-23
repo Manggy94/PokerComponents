@@ -1,38 +1,8 @@
 
 I
 pkrcomponents/__init__.py,a\5\a5a856c83a0325f914001106d2a94213017ec635
-M
-pkrcomponents/table_player.py,2\c\2c53323a0672624607e8709b35e14e786a84ff63
 D
 scripts/add_compo.sh,1\0\109aa11bb626c21992d5ff470802bc466da454c0
-F
-pkrcomponents/table.py,7\e\7e1dea19fb3df81678214e1b8b8502a26fb30031
-I
-pkrcomponents/listings.py,6\c\6c8fc2d1a073da0445e114cd46fda67b23e39f3b
-G
-pkrcomponents/action.py,e\c\ec58da9862dd6a225029ee1e9ce03d324025f0aa
-H
-pkrcomponents/players.py,a\4\a47198f63fdd166d043b328413a74d441a5a98aa
-J
-pkrcomponents/constants.py,4\9\4988f4132b19b4de87974e2211db995deb5bc5d4
-M
-pkrcomponents/lookup_table.py,d\0\d05856b3f7fe98bd23823f34069a50e969c60569
-E
-pkrcomponents/card.py,a\9\a94aa27792988adcda83ee0cf5f2e4e4f0a9dbde
-E
-pkrcomponents/hand.py,9\b\9bd45a056ba3dba45b722fcad1f4fd9c5150c2f4
-H
-pkrcomponents/_common.py,5\a\5a8dfa27137a9846daf4aa9bff6a66aed3f007ca
-H
-pkrcomponents/bitcard.py,2\8\28355338272a2f709ae1119e1f0e3e263505a713
-K
-pkrcomponents/tournament.py,f\8\f894318a4d8f5c3d7b534ab3a67aace65e3dbc5a
-D
-pkrcomponents/pot.py,b\5\b59f75e499d1fc4b05683aa2260de6f53b344b65
-J
-pkrcomponents/evaluator.py,7\e\7ec0d9f5da454b5ffb7346d9696b8026d98467c2
-F
-pkrcomponents/board.py,9\b\9b53b796a43d581d85128a4b6be52ab2c4b9d88a
 ;
 LICENSE.txt,7\9\79b82ce9b64a924266619555502f890dd80c83b9
 :
@@ -51,8 +21,6 @@ I
 scripts/update_scripts.sh,f\0\f0e765bb9c69c56a203172699fa5f1277df6714e
 G
 scripts/update_compo.sh,5\2\52d403f3c9eb31fc45421e072943300d7bbbcaa5
-P
- build/lib/pkrcomponents/table.py,f\5\f5474697daef739a6dab298332b31e492458f0fc
 ;
 MANIFEST.in,8\8\8875df48c18030126ef5ef5a6f5c93b23451fb9f
 D
@@ -90,18 +58,10 @@ E
 tests/test_players.py,7\a\7a07ea7fe03f03558905c8f9cce0bb65c3544d14
 J
 tests/test_table_player.py,e\b\ebc6682056f161ba8a348658058d98d66c41e827
-F
-pkrcomponents/level.py,a\5\a573c584645330a3011afa4739383c25791ae5d8
-G
-pkrcomponents/payout.py,d\8\d8cbf4eda873e9b8fc218611adffa04f0046c158
-G
-pkrcomponents/buy_in.py,3\5\351372aba553762785e22a35e099f588aa2dc386
 D
 tests/test_buy_in.py,6\e\6ebada57601163b218ca14cf7e1015f55d884adb
 Q
 !pkrcomponents/utils/validators.py,d\9\d925a5e1a0078c38c8dc554d22d5d2a70a0eef5c
-W
-'build/lib/pkrcomponents/lookup_table.py,7\5\7556461b4ae256ad5c085e28600bc4c8cf038c9b
 Q
 !pkrcomponents/utils/converters.py,b\d\bda0a06fa9b7ee286cf32fa6531e934ca7f12c60
 @
@@ -112,10 +72,6 @@ E
 scripts/build_docs.sh,5\9\59717e466b9e20068fd5122429e6e5bf577902eb
 >
 docs/action.md,b\3\b33f7976e49735552bad17c8e73c2eae18592d6b
-?
-site/index.html,f\8\f8b5f3ae1c096b53afb265d4a56fc2955bfc7607
-E
-pkrcomponents/deck.py,2\2\22f69eed42feb5eb67068a94270d3bf8168419b2
 <
 docs/card.md,e\9\e93ed0645c2acdf853025e3abf6156db231320f2
 <
@@ -142,26 +98,12 @@ B
 tests/test_rank.py,8\1\81cb434c4819c14c06ee18c840ccf117663cbd35
 D
 tests/test_street.py,a\b\abf8ee9948b807472d27f32377417c7a6964d078
-K
-pkrcomponents/utils/meta.py,7\3\73d4d16077c250f695fbeb1f04623a086552c539
-E
-pkrcomponents/suit.py,8\7\87eb4d888bda946f9e790c99467c7ad1c3c2f77a
-E
-pkrcomponents/rank.py,c\c\cc33a84ee77071ba5457afdf7b94298dde277572
 U
 %pkrcomponents/utils/meta/card_meta.py,3\0\3056a95cefc6baa705a160ff1aa9f09b7b21bcb5
 U
 %pkrcomponents/utils/meta/flop_meta.py,a\2\a2c78d7656f2bf2bb5df16f672792295f866fa6d
 T
 $pkrcomponents/utils/meta/__init__.py,c\0\c0f554c298e2c107062d76b45cc734f978fad38a
-E
-pkrcomponents/flop.py,4\5\45e17da6cd0f3db0a4912843c58639a631cc67ec
-F
-pkrcomponents/shape.py,4\e\4eaac001203811d66fe31a1de2605bd072375b01
-F
-pkrcomponents/combo.py,4\e\4ea9388db9712a774a50ec957f4eb0547500c7e3
-E
-tests/test_general.py,7\3\732eb448a3ae6c29a14a55368e1c403c75f6d83f
 U
 %pkrcomponents/utils/meta/hand_meta.py,2\3\233656f204bb9cbf9af175230f06c62d548e1d10
 V
@@ -170,8 +112,6 @@ C
 tests/test_combo.py,7\1\714e8c237df2ef7b534cc1cc56506b34390f90b6
 I
 tests/test_combo_range.py,c\9\c920ae844f415f84dd533269b85e4344d6866cb2
-U
-%pkrcomponents/utils/meta/suit_meta.py,6\1\610756f20a729953df2876fae9bdbf045f56da8f
 I
 tests/test_action_move.py,0\3\0378a1ba13334f9c42022f5958ee55a818cba600
 F
@@ -179,21 +119,13 @@ F
 ?
 docs/players.md,d\a\da1198dd5bf7f21dd85803c74db45d7f7b2420e4
 H
-pkrcomponents/posting.py,5\9\59c1156f529ae42e9edb854c2412868c977f31bc
-H
 tests/test_blind_type.py,2\f\2f82069a107d0f4a37b0e00e7cb3e16a6b924f13
 E
 tests/test_posting.py,2\9\292f06c2d90d8f64f76d5eda7945c9c75451fdd3
-I
-pkrcomponents/position.py,e\9\e9b431512892ea128727229e053a4fd7983807fb
-F
-tests/test_listings.py,c\5\c54e4bcdd149bdb4377d7a0301318af9b66c0cd6
 K
 pkrcomponents/cards/deck.py,e\5\e56a6da44e44473216a937f7fb6400c76d862fd1
 L
 pkrcomponents/cards/board.py,8\8\88c0b02e91cb473a13afd6d12cf8d2e194ff7969
-V
-&pkrcomponents/tournament/tournament.py,c\a\ca2f51688a118a86ebe4f1dc163ddffedc857dae
 Q
 !pkrcomponents/players/position.py,2\0\200740aa526384a2bbb665ac36933e59e323da19
 W
@@ -212,3 +144,9 @@ P
  pkrcomponents/utils/constants.py,e\6\e6450e68f7198b465b3918087514c5609a97b7e3
 M
 pkrcomponents/utils/common.py,1\b\1bd6711c624af6d1c033f8cddbcc7186e32db42e
+P
+ pkrcomponents/players/players.py,0\2\02457c87a60244a2cbf5d4f140bee1c3b6068598
+U
+%pkrcomponents/players/table_player.py,d\7\d71d7db7e62cde60e7e49bd5e50ee2d6f2ecf13f
+K
+pkrcomponents/cards/flop.py,c\5\c5cd5994f7167bde45d24ddef2b693240e5a9ca3

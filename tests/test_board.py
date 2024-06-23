@@ -51,7 +51,6 @@ class MyBoardTestCase(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.board.add("Qs")
 
-
     def test_to_json(self):
         self.assertIsInstance(self.board.to_json(), dict)
         self.assertEqual(self.board.to_json(), {
