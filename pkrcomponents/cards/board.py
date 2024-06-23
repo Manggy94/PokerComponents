@@ -7,7 +7,7 @@ from pkrcomponents.cards.flop import Flop
 from pkrcomponents.utils.converters import convert_to_card
 
 
-@define
+@define(eq=False)
 class Board:
     flop = field(default=Factory(Flop), validator=instance_of(Flop))
     turn = field(default=None, validator=optional(instance_of(Card)), converter=convert_to_card)

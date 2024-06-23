@@ -81,7 +81,7 @@ class MyBoardTestCase(unittest.TestCase):
 
     def test_eq(self):
         self.assertEqual(self.board2, Board.from_cards(("As", "Ad", "Tc", "Td", card.Card("Ah"))))
-        self.assertEqual(self.board2, Board.from_cards(("As","Tc", "Ad", "Td", "Ah")))
+        self.assertEqual(self.board2, Board.from_cards(("As", "Tc", "Ad", "Td", "Ah")))
         self.assertNotEqual(self.board2, Board.from_cards(("As", "Tc", "Ad", "Ah", "Td")))
         self.assertNotEqual(self.board2, Board.from_cards(("As", "Ad", "Tc", "Td", card.Card("Ac"))))
 
