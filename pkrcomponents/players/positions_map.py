@@ -1,17 +1,17 @@
 from pkrcomponents.players.position import Position
+from pkrcomponents.utils.common import _ReprMixin
 from pkrcomponents.utils.meta.positions_map_meta import PositionsMapMeta
 
 
-class PositionsMap(metaclass=PositionsMapMeta):
+class PositionsMap(_ReprMixin, metaclass=PositionsMapMeta):
     def __init__(self, positions_list: list[Position]):
         self.positions = positions_list
 
-    def __repr__(self):
-        return (f"<DBPositionsLookup('{self.cnt_players}"
+    def __str__(self):
+        return (f"{self.cnt_players}"
                 f"{'-BTN' if self.has_btn else ''}"
                 f"{'-SB' if self.has_sb else ''}"
-                f"{'-BB' if self.has_bb else ''}"
-                f"')>")
+                f"{'-BB' if self.has_bb else ''}")
 
     @property
     def cnt_players(self):

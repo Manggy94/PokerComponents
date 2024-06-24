@@ -23,7 +23,7 @@ pkrcomponents/cards/suit.py                         28      0   100%
 pkrcomponents/players/__init__.py                    0      0   100%
 pkrcomponents/players/players.py                   132      1    99%
 pkrcomponents/players/position.py                   59      0   100%
-pkrcomponents/players/positions_map.py              19      1    95%
+pkrcomponents/players/positions_map.py              20      1    95%
 pkrcomponents/players/table_player.py              152      1    99%
 pkrcomponents/tables/__init__.py                     0      0   100%
 pkrcomponents/tables/pot.py                         18      0   100%
@@ -46,4 +46,4 @@ pkrcomponents/utils/meta/hand_meta.py               26      2    92%
 pkrcomponents/utils/meta/positions_map_meta.py      10      2    80%
 pkrcomponents/utils/validators.py                    7      0   100%
 --------------------------------------------------------------------
-TOTAL                                             1834     19    99%
+TOTAL                                             1835     19    99%

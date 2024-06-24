@@ -102,7 +102,6 @@ class TableTest(unittest.TestCase):
         table.draw_turn("Ac")
         self.assertEqual(table.board.len, 4)
         self.assertEqual(table.board.turn, Card("Ac"))
-        print(table.board.cards.astype(str).values[:4])
         self.assertEqual(table.board.cards.astype(str).values[:4].tolist(),  ["As", "Ad", "Ah", "Ac"])
         self.assertRaises(ValueError, lambda: table.draw_flop())
         self.assertRaises(ValueError, lambda: table.draw_turn("Jd"))
