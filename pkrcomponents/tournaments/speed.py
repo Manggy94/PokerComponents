@@ -8,3 +8,7 @@ class TourSpeed(PokerEnum):
     TURBO = "Turbo", "semiturbo"
     HYPER = "Hyper-Turbo", "turbo"
     DOUBLE = "2x-Turbo",
+
+    @property
+    def name(self):
+        return self._name_
