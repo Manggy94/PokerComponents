@@ -166,3 +166,5 @@ J
 tests/test_lookup_table.py,e\f\efca4e490cd77830275caabb6b26b7564d4b4505
 K
 tests/test_positions_map.py,7\7\77d08fa9debb2fafc2117515ed70e56d182894f9
+R
+"pkrcomponents/tournaments/level.py,9\a\9a73dea19b0bf6daf8a457750b3f7e3d3622035b

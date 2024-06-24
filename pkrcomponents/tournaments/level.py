@@ -22,6 +22,7 @@ class Level:
     """
     value = field(default=1, validator=[ge(0), instance_of(int)])
     bb = field(default=200.0, validator=[ge(0), instance_of((float, int))])
+    sb = field(default=Factory(lambda self: self.bb / 2, takes_self=True), validator=[ge(0), instance_of((float, int))])
     ante = field(default=Factory(lambda self: 0.125 * self.bb, takes_self=True),
                  validator=[ge(0), instance_of((float, int))])
 
@@ -33,13 +34,6 @@ class Level:
             str: A string representation of the level
         """
         return f"Current level: {self.value}\nAnte={self.ante}\nSB={self.sb}\nBB={self.bb}"
-
-    @property
-    def sb(self) -> float:
-        """
-        Returns the small blind of the level
-        """
-        return self.bb / 2
 
     def to_json(self) -> dict:
         """
