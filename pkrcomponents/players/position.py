@@ -1,8 +1,8 @@
-from pkrcomponents.utils.common import PokerEnum
+from pkrcomponents.utils.common import PokerEnum, _ReprMixin
 from itertools import combinations
 
 
-class Position(PokerEnum):
+class Position(_ReprMixin, PokerEnum):
     """Class describing the table position"""
     UTG = "UTG", 1, 3, "under the gun"
     UTG1 = "UTG1", 2, 4, "utg+1", "utg + 1"
@@ -71,7 +71,7 @@ class Position(PokerEnum):
         }
 
     @classmethod
-    def get_lookups(cls):
+    def get_maps(cls):
         positions = list(cls)
         mapper = cls.get_mapper()
         positions_lookups = []
