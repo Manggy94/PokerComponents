@@ -19,6 +19,9 @@ class FlopMeta(type):
     def __iter__(cls):
         return iter(cls.all_flops)
 
+    def __len__(cls):
+        return len(cls.all_flops)
+
     def from_string(cls, string):
         """Create a Flop instance from a string."""
         return cls(

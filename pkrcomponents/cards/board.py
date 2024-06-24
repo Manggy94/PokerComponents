@@ -41,7 +41,6 @@ class Board:
         return pd.Series(
             data=self.flop.cards + [self.turn, self.river],
             index=["flop_1", "flop_2", "flop_3", "turn", "river"],
-            #dtype="<U8",
             name="cards"
         ).fillna(value=np.nan)
 

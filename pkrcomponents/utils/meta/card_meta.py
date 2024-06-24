@@ -15,3 +15,6 @@ class CardMeta(type):
 
     def __iter__(cls):
         return iter(cls.all_cards)
+
+    def __len__(cls):
+        return len(cls.all_cards)

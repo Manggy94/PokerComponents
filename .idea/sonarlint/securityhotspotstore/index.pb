@@ -150,3 +150,7 @@ U
 %pkrcomponents/players/table_player.py,d\7\d71d7db7e62cde60e7e49bd5e50ee2d6f2ecf13f
 K
 pkrcomponents/cards/flop.py,c\5\c5cd5994f7167bde45d24ddef2b693240e5a9ca3
+S
+#pkrcomponents/tournaments/payout.py,e\f\ef010655ccaa64000f6029cf9e0944567868f007
+K
+pkrcomponents/cards/card.py,a\f\af583df8e3e34fbec0752a504686a10621285f33

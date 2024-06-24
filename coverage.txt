@@ -38,10 +38,10 @@ pkrcomponents/utils/common.py                48      0   100%
 pkrcomponents/utils/constants.py             34      0   100%
 pkrcomponents/utils/converters.py            13      1    92%
 pkrcomponents/utils/meta/__init__.py          0      0   100%
-pkrcomponents/utils/meta/card_meta.py        10      0   100%
-pkrcomponents/utils/meta/combo_meta.py        9      1    89%
-pkrcomponents/utils/meta/flop_meta.py        11      1    91%
-pkrcomponents/utils/meta/hand_meta.py        24      1    96%
+pkrcomponents/utils/meta/card_meta.py        12      0   100%
+pkrcomponents/utils/meta/combo_meta.py       11      1    91%
+pkrcomponents/utils/meta/flop_meta.py        13      2    85%
+pkrcomponents/utils/meta/hand_meta.py        26      2    92%
 pkrcomponents/utils/validators.py             7      0   100%
 -------------------------------------------------------------
-TOTAL                                      1797     28    98%
+TOTAL                                      1805     30    98%

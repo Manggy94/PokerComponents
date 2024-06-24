@@ -36,3 +36,6 @@ class HandMeta(type):
 
     def __iter__(cls):
         return iter(cls.all_hands)
+
+    def __len__(cls):
+        return len(cls.all_hands)
