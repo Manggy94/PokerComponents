@@ -3,6 +3,7 @@ from attrs.validators import instance_of, optional, ge, gt, le
 from datetime import datetime
 from pkrcomponents.cards.board import Board
 from pkrcomponents.cards.card import Card
+from pkrcomponents.cards.combo import Combo
 from pkrcomponents.cards.deck import Deck
 from pkrcomponents.actions.street import Street
 from pkrcomponents.players.players import Players
@@ -26,6 +27,7 @@ class Table:
         hand_has_started(bool): Whether the hand has started
         hand_id(str): The ID of the hand
         hand_date(datetime): The date of the hand
+        hero_combo(Combo): The combo of the hero
         is_mtt(bool): Whether the table is a tournament
         level(Level): The level of the table
         max_players(int): The maximum number of players on the table
@@ -57,6 +59,7 @@ class Table:
     evaluator = field(default=Factory(Evaluator), validator=instance_of(Evaluator))
     hand_has_started = field(default=False, validator=instance_of(bool))
     hand_id = field(default=None, validator=optional(instance_of(str)))
+    hero_combo = field(default=None, validator=optional(instance_of(Combo)))
     is_mtt = field(default=False, validator=instance_of(bool))
     level = field(default=Factory(Level), validator=instance_of(Level))
     max_players = field(default=6, validator=[instance_of(int), gt(2), le(10)])
@@ -325,6 +328,7 @@ class Table:
         player = self.players[player_name]
         self.set_hero(player)
         player.distribute(f"{card1}{card2}")
+        self.hero_combo = player.combo
 
     def set_bb_seat(self, player_seat: int):
         """
