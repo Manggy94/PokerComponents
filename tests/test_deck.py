@@ -41,6 +41,17 @@ class MyDeckTestCase(unittest.TestCase):
         self.assertIsInstance(pkrcomponents.cards.deck.Deck().to_json()["cards"], list)
         self.assertIsInstance(pkrcomponents.cards.deck.Deck().to_json()["len"], int)
 
+    def test_replace(self):
+        deck = pkrcomponents.cards.deck.Deck()
+        c1 = deck.draw()
+        deck.replace(c1)
+        self.assertIn(c1, deck.cards)
+        self.assertEqual(len(deck.cards), 52)
+        c2 = deck.draw("As")
+        deck.replace(c2)
+        self.assertIn(c2, deck.cards)
+        self.assertEqual(len(deck.cards), 52)
+
 
 if __name__ == '__main__':
     unittest.main()

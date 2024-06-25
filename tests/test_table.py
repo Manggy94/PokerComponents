@@ -254,6 +254,7 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.pot.value, 900)
         self.assertEqual(table.pot.highest_bet, 400)
         self.assertTrue(table.players[3].is_current_player)
+        self.assertFalse(table.players[3].hand_stats.flag_vpip)
         action = FoldAction(table.current_player)
         action.play()
         self.assertTrue(table.players[3].played)
@@ -264,6 +265,7 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.pot.value, 900)
         self.assertEqual(table.pot.highest_bet, 400)
         self.assertFalse(table.players[3].is_current_player)
+        self.assertFalse(table.players[3].hand_stats.flag_vpip)
 
     def test_action_call(self):
         table = Table()
@@ -272,6 +274,9 @@ class TableTest(unittest.TestCase):
             table.add_player(player)
         table.set_bb_seat(2)
         table.start_hand()
+        self.assertEqual(table.cnt_bets, 1)
+        self.assertEqual(table.cnt_calls, 0)
+        self.assertFalse(table.is_opened)
         self.assertFalse(table.players[3].played)
         self.assertFalse(table.players[3].folded)
         self.assertEqual(table.players[3].stack, 11450)
@@ -280,9 +285,13 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.pot.value, 900)
         self.assertEqual(table.pot.highest_bet, 400)
         self.assertTrue(table.players[3].is_current_player)
+        self.assertFalse(table.players[3].hand_stats.flag_vpip)
 
         action = CallAction(table.current_player)
         action.play()
+        self.assertEqual(table.cnt_bets, 1)
+        self.assertEqual(table.cnt_calls, 1)
+        self.assertTrue(table.is_opened)
         self.assertTrue(table.players[3].played)
         self.assertFalse(table.players[3].folded)
         self.assertEqual(table.players[3].stack, 11050)
@@ -291,6 +300,7 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.pot.value, 1300)
         self.assertEqual(table.pot.highest_bet, 400)
         self.assertFalse(table.players[3].is_current_player)
+        self.assertTrue(table.players[3].hand_stats.flag_vpip)
 
     def test_action_raise(self):
         table = Table()
@@ -299,6 +309,9 @@ class TableTest(unittest.TestCase):
             table.add_player(player)
         table.set_bb_seat(2)
         table.start_hand()
+        self.assertEqual(table.cnt_bets, 1)
+        self.assertEqual(table.cnt_calls, 0)
+        self.assertFalse(table.is_opened)
         self.assertFalse(table.players[3].played)
         self.assertFalse(table.players[3].folded)
         self.assertEqual(table.players[3].stack, 11450)
@@ -307,12 +320,16 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.pot.value, 900)
         self.assertEqual(table.pot.highest_bet, 400)
         self.assertTrue(table.players[3].is_current_player)
+        self.assertFalse(table.players[3].hand_stats.flag_vpip)
         with self.assertRaises(ValueError):
             action = RaiseAction(table.current_player, 300)
             action.play()
+
         action = RaiseAction(table.current_player, 1050)
         action.play()
-
+        self.assertEqual(table.cnt_bets, 2)
+        self.assertEqual(table.cnt_calls, 0)
+        self.assertTrue(table.is_opened)
         self.assertTrue(table.players[3].played)
         self.assertFalse(table.players[3].folded)
         self.assertEqual(table.players[3].stack, 10000)
@@ -321,6 +338,7 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.pot.value, 2350)
         self.assertEqual(table.pot.highest_bet, 1450)
         self.assertFalse(table.players[3].is_current_player)
+        self.assertTrue(table.players[3].hand_stats.flag_vpip)
 
     def test_action_check(self):
         table = Table()

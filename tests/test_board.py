@@ -12,7 +12,7 @@ class MyBoardTestCase(unittest.TestCase):
         self.board2 = Board.from_cards(("As", "Ad", "Tc", "Td", Card("Ah")))
         self.board3 = Board.from_cards(("Qd", "Ad", "Jc", "Td", Card("Ah")))
         self.board4 = Board.from_cards(("Qd", "5d", "Td", "Tc", Card("Ah")))
-        self.board5 = Board.from_cards(("As", "Ad", "Ah"))
+        self.board5 = Board.from_cards(("As", "Ad", "Ah", "Ac"))
         self.board6 = Board.from_cards(("Ks", "Qs", "Js"))
 
     def test_new_board(self):
@@ -50,6 +50,8 @@ class MyBoardTestCase(unittest.TestCase):
         self.assertEqual(self.board.cards["flop_2"], Card("Qs"))
         with self.assertRaises(ValueError):
             self.board.add("Qs")
+        with self.assertRaises(ValueError):
+            self.board4.add("8s")
 
     def test_to_json(self):
         self.assertIsInstance(self.board.to_json(), dict)
@@ -66,6 +68,34 @@ class MyBoardTestCase(unittest.TestCase):
             'flop_3': 'Tc',
             'turn': 'Td',
             'river': 'Ah'
+        })
+        self.assertEqual(self.board3.to_json(), {
+            'flop_1': 'Ad',
+            'flop_2': 'Qd',
+            'flop_3': 'Jc',
+            'turn': 'Td',
+            'river': 'Ah'
+        })
+        self.assertEqual(self.board4.to_json(), {
+            'flop_1': 'Qd',
+            'flop_2': 'Td',
+            'flop_3': '5d',
+            'turn': 'Tc',
+            'river': 'Ah'
+        })
+        self.assertEqual(self.board5.to_json(), {
+            'flop_1': 'As',
+            'flop_2': 'Ah',
+            'flop_3': 'Ad',
+            'turn': 'Ac',
+            'river': 'nan'
+        })
+        self.assertEqual(self.board6.to_json(), {
+            'flop_1': 'Ks',
+            'flop_2': 'Qs',
+            'flop_3': 'Js',
+            'turn': 'nan',
+            'river': 'nan'
         })
 
     def test_reset(self):

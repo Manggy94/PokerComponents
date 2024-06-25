@@ -32,3 +32,17 @@ class ActionMoveTest(unittest.TestCase):
         self.assertEqual(ActionMove.CALL.verb, "calls")
         self.assertEqual(ActionMove.RAISE.verb, "raises")
         self.assertEqual(ActionMove.BET.verb, "bets")
+
+    def test_symbol(self):
+        self.assertEqual(ActionMove.FOLD.symbol, "F")
+        self.assertEqual(ActionMove.CHECK.symbol, "X")
+        self.assertEqual(ActionMove.CALL.symbol, "C")
+        self.assertEqual(ActionMove.RAISE.symbol, "R")
+        self.assertEqual(ActionMove.BET.symbol, "B")
+
+    def test_str_(self):
+        self.assertEqual(str(ActionMove.FOLD), "F")
+        self.assertEqual(str(ActionMove.CHECK), "X")
+        self.assertEqual(str(ActionMove.CALL), "C")
+        self.assertEqual(str(ActionMove.RAISE), "R")
+        self.assertEqual(str(ActionMove.BET), "B")

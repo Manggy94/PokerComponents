@@ -8,28 +8,31 @@ plugins:
 nav:
   - Home: index.md
   - API Reference:
-    - _common: _common.md
-    - action: action.md
-    - bitcard: bitcard.md
-    - board: board.md
-    - buy_in: buy_in.md
-    - card: card.md
-    - constants: constants.md
-    - deck: deck.md
-    - Utils:
-      - validators: utils/validators.md
-      - converters: utils/converters.md
-    - tournament: tournament.md
-    - table_player: table_player.md
-    - table: table.md
-    - pot: pot.md
-    - players: players.md
-    - payout: payout.md
-    - lookup_table: lookup_table.md
-    - listings: listings.md
-    - level: level.md
-    - hand: hand.md
-    - evaluator: evaluator.md
+      - Actions:
+          - Action: action.md
+          - Action Move: action_move.md
+  - _common: _common.md
+  - action: action.md
+  - bitcard: bitcard.md
+  - board: board.md
+  - buy_in: buy_in.md
+  - card: card.md
+  - constants: constants.md
+  - deck: deck.md
+  - Utils:
+    - validators: utils/validators.md
+    - converters: utils/converters.md
+  - tournament: tournament.md
+  - table_player: table_player.md
+  - table: table.md
+  - pot: pot.md
+  - players: players.md
+  - payout: payout.md
+  - lookup_table: lookup_table.md
+  - listings: listings.md
+  - level: level.md
+  - hand: hand.md
+  - evaluator: evaluator.md
 
 
 

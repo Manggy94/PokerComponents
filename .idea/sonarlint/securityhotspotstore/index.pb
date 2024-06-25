@@ -166,3 +166,19 @@ K
 tests/test_positions_map.py,7\7\77d08fa9debb2fafc2117515ed70e56d182894f9
 R
 "pkrcomponents/tournaments/level.py,9\a\9a73dea19b0bf6daf8a457750b3f7e3d3622035b
+H
+docs/utils/converters.md,f\a\faee8d49f5d8d2dd9c2e1db0f14b40f735cce550
+O
+pkrcomponents/actions/action.py,a\4\a4f5d90e85bc36e69636ab41e62ef8a126117b76
+S
+#pkrcomponents/players/hand_stats.py,f\f\ffd526ab94cd925443d871ae8425d196e09155fd
+Q
+!pkrcomponents/actions/sequence.py,0\7\07dbc903e8e549b008d7750f93ba898aea193324
+Y
+)pkrcomponents/actions/actions_sequence.py,1\e\1e25f40e62dd7084e608100eb35e8a9645ea75b4
+N
+tests/test_actions_sequence.py,e\1\e165027a311f2b36d54da8a31cf8afd313afe80b
+P
+ pkrcomponents/actions/posting.py,9\f\9fd0ca2815acecfd456f6d9fb3e005950336e3b4
+B
+tests/test_deck.py,1\6\1635c7c40ada2d10d96f5f851c178ed5c36c9f20

@@ -178,6 +178,12 @@ class MyHandTestCase(unittest.TestCase):
         for hand in suited_hands:
             self.assertEqual(hand.shape, Shape.SUITED)
 
+    def test_list_generation(self):
+        hands = iter(Hand)
+        for hand in hands:
+            self.assertIsInstance(hand, Hand)
+        self.assertEqual(Hand.__len__(), 169)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -2,8 +2,9 @@ from attrs import define, field, Factory
 from attrs.validators import instance_of, ge, le, optional, max_len, min_len
 
 from pkrcomponents.actions.street import Street
-from pkrcomponents.players.position import Position
 from pkrcomponents.cards.combo import Combo
+from pkrcomponents.players.hand_stats import HandStats
+from pkrcomponents.players.position import Position
 from pkrcomponents.tables.table import Table
 from pkrcomponents.utils.converters import convert_to_position
 
@@ -14,20 +15,21 @@ class TablePlayer:
     This class represents a player on a poker table
 
     Attributes:
-        name(str): The name of the player
-        seat(int): The seat number of the player
-        init_stack(float): The initial stack of the player at the beginning of the hand
-        stack(float): The current stack of the player
-        combo(Combo): The combo of the player
-        folded(bool): Whether the player has folded
-        position(Position): The position of the player
-        table(Table): The table the player is on
-        bounty(float): The bounty of the player
-        played(bool): Whether the player has played
-        is_hero(bool): Whether the player is the hero
-        current_bet(float): The current bet of the player
-        reward(int): The reward of the player
-        actions(dict): The actions of the player on each street
+        name (str): The name of the player
+        seat (int): The seat number of the player
+        init_stack (float): The initial stack of the player at the beginning of the hand
+        stack (float): The current stack of the player
+        combo (Combo): The combo of the player
+        folded (bool): Whether the player has folded
+        position (Position): The position of the player
+        table (Table): The table the player is on
+        bounty (float): The bounty of the player
+        played (bool): Whether the player has played
+        is_hero (bool): Whether the player is the hero
+        current_bet (float): The current bet of the player
+        reward (int): The reward of the player
+        actions (dict): The actions of the player on each street
+        hand_stats (HandStats): The hand statistics of the player
 
     Methods:
         stack_bb(): Returns the player's stack in big blinds
@@ -74,11 +76,24 @@ class TablePlayer:
 
     """
 
-    name = field(default="Villain", validator=[instance_of(str), max_len(12), min_len(3)])
-    seat = field(default=0, validator=[instance_of(int), ge(0), le(10)])
-    init_stack = field(default=0, validator=[ge(0), instance_of(float)], converter=float)
-    stack = field(default=Factory(lambda self: self.init_stack, takes_self=True),
-                  validator=[ge(0), instance_of(float)], converter=float)
+    name = field(
+        default="Villain",
+        validator=[instance_of(str), max_len(12), min_len(3)],
+        metadata={'description': 'The name of the player'})
+    seat = field(
+        default=0,
+        validator=[instance_of(int), ge(0), le(10)],
+        metadata={'description': 'The seat number of the player'})
+    init_stack = field(
+        default=0,
+        validator=[ge(0), instance_of(float)],
+        converter=float,
+        metadata={'description': 'The initial stack of the player at the beginning of the hand'})
+    stack = field(
+        default=Factory(lambda self: self.init_stack, takes_self=True),
+        validator=[ge(0), instance_of(float)],
+        converter=float,
+        metadata={'description': 'The current stack of the player'})
     combo = field(default=None, validator=optional(instance_of(Combo)), converter=Combo)
     folded = field(default=False, validator=instance_of(bool))
     position = field(default=None, validator=optional(instance_of(Position)), converter=convert_to_position)
@@ -94,6 +109,7 @@ class TablePlayer:
         f"{Street('Turn')}": [],
         f"{Street('River')}": []
     }, validator=instance_of(dict))
+    hand_stats = field(default=Factory(HandStats), validator=instance_of(HandStats))
 
     def __repr__(self):
         return (f"TablePlayer(name: '{self.name}', "

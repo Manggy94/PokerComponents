@@ -24,15 +24,6 @@ class Posting:
     blind = field(default=BlindType.BIG_BLIND, validator=[instance_of(BlindType)], converter=BlindType)
     value = field(default=0, validator=[ge(0), instance_of(float)], converter=float)
 
-    def __str__(self) -> str:
-        """
-        Returns a string representation of the posting
-
-        Returns:
-            str: A string representation of the posting
-        """
-        return f"{self.player_name} posts a {self.blind.name} for {self.value}"
-
     def execute(self, player):
         """
         Executes the posting

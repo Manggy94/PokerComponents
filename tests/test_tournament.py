@@ -41,6 +41,7 @@ class MyTournamentTestCase(unittest.TestCase):
         self.assertEqual(self.tour.name, "PLD")
         self.tour.name = "Name"
         self.assertEqual(self.tour.name, "Name")
+        self.assertEqual(self.tour.speed.name, "REGULAR")
 
     def test_buyin(self):
         self.assertIsInstance(self.tour.buy_in, BuyIn)

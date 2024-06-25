@@ -177,6 +177,7 @@ class Players:
         """Reset all players for a new hand"""
         for player in self:
             player.reset_hand_status()
+            player.hand_stats.reset()
 
     def post_antes(self):
         """Post antes for all players"""

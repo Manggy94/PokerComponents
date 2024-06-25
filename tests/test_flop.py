@@ -105,6 +105,13 @@ class FlopTest(unittest.TestCase):
         flop = Flop(Card("As"), Card("Ks"), Card("Ts"))
         self.assertNotEqual(flop, self.flop)
 
+    def test_repr(self):
+        self.assertEqual(repr(self.flop), "Flop('AsAdTc')")
 
+    def test_list_generation(self):
+        flops = iter(Flop)
+        for flop in flops:
+            self.assertIsInstance(flop, Flop)
+        self.assertEqual(Flop.__len__(), 22100)
 
 

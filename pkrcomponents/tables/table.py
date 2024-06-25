@@ -29,6 +29,7 @@ class Table:
         hand_date(datetime): The date of the hand
         hero_combo(Combo): The combo of the hero
         is_mtt(bool): Whether the table is a tournament
+        is_opened(bool): Whether the table is opened
         level(Level): The level of the table
         max_players(int): The maximum number of players on the table
         min_bet(float): The minimum bet on the table
@@ -61,6 +62,7 @@ class Table:
     hand_id = field(default=None, validator=optional(instance_of(str)))
     hero_combo = field(default=None, validator=optional(instance_of(Combo)))
     is_mtt = field(default=False, validator=instance_of(bool))
+    is_opened = field(default=False, validator=instance_of(bool))
     level = field(default=Factory(Level), validator=instance_of(Level))
     max_players = field(default=6, validator=[instance_of(int), gt(2), le(10)])
     min_bet = field(default=0, validator=[instance_of(float), ge(0)], converter=float)
@@ -177,8 +179,11 @@ class Table:
         """Starts a new hand"""
         self.hand_has_started = True
         self.street = Street.PREFLOP
+        self.is_opened = False
         self.street_reset()
         self.post_pregame()
+
+
 
     def draw_flop(self, card1: (str, Card) = None, card2: (str, Card) = None, card3: (str, Card) = None):
         """

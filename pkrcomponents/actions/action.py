@@ -2,6 +2,7 @@ from attrs import define, field
 from attrs.validators import instance_of, ge
 
 from pkrcomponents.actions.action_move import ActionMove
+from pkrcomponents.actions.street import Street
 from pkrcomponents.players.table_player import TablePlayer
 
 
@@ -36,29 +37,63 @@ class Action:
         return f"{self.player.name} does a {self.move.name} for {self.value}"
 
     @property
+    def table(self):
+        """
+        Returns the table where the action is made
+        """
+        return self.player.table
+
+    @property
     def new_min_bet(self):
         """
         Returns the new minimum bet after the action
         """
-        return max(2 * self.value - self.player.table.pot.highest_bet, self.player.table.min_bet)
+        return max(2 * self.value - self.table.pot.highest_bet, self.table.min_bet)
 
     def execute(self):
         """
         Executes the action
         """
-        self.player.table.update_min_bet(self.new_min_bet)
+        self.table.update_min_bet(self.new_min_bet)
         self.player.pay(self.value)
         self.player.current_bet += self.value
-        self.player.table.pot.update_highest_bet(self.player.current_bet)
-        self.player.actions.get(f"{self.player.table.street}").append(self)
+        self.table.pot.update_highest_bet(self.player.current_bet)
+        self.player.actions.get(f"{self.table.street}").append(self)
+        self.update_hand_stats()
 
     def play(self):
         """
         Plays the action on the table and advances the seat playing
         """
         self.execute()
-        self.player.table.advance_seat_playing()
+        self.table.advance_seat_playing()
         self.player.played = True
+
+    def update_hand_stats(self):
+        """
+        Updates the hand statistics of the player according to the action
+        """
+        match self.table.street:
+            case Street.PREFLOP:
+                if not self.table.is_opened:
+                    self.player.hand_stats.flag_preflop_open_opportunity = True
+                if self.table.cnt_bets >= 2:
+                    self.player.hand_stats.flag_preflop_face_raise = True
+                if self.table.cnt_bets == 2 and self.player.stack > self.player.to_call:
+                    self.player.hand_stats.flag_preflop_3bet_opportunity = True
+                if self.table.cnt_bets == 3:
+                    self.player.hand_stats.flag_preflop_face_3bet = True
+                if self.table.cnt_bets >= 4:
+                    self.player.hand_stats.flag_preflop_face_4bet = True
+                if self.table.cnt_bets >= 3 and self.player.stack > self.player.to_call:
+                    self.player.hand_stats.flag_preflop_4bet_opportunity = True
+            case Street.FLOP:
+                pass
+            case Street.TURN:
+                pass
+            case Street.RIVER:
+                pass
+
 
 
 class FoldAction(Action):
@@ -72,6 +107,12 @@ class FoldAction(Action):
         super().execute()
         self.player.folded = True
 
+    def update_hand_stats(self):
+        super().update_hand_stats()
+        match self.table.street:
+            case Street.PREFLOP:
+                self.player.hand_stats.flag_preflop_fold = True
+
 
 class CheckAction(Action):
     """
@@ -79,6 +120,18 @@ class CheckAction(Action):
     """
     def __init__(self, player: TablePlayer):
         super().__init__(player=player, move=ActionMove.CHECK)
+
+    def update_hand_stats(self):
+        super().update_hand_stats()
+        match self.table.street:
+            case Street.PREFLOP:
+                pass
+            case Street.FLOP:
+                pass
+            case Street.TURN:
+                pass
+            case Street.RIVER:
+                pass
 
 
 class CallAction(Action):
@@ -90,7 +143,26 @@ class CallAction(Action):
 
     def execute(self):
         super().execute()
-        self.player.table.cnt_calls += 1
+        self.table.cnt_calls += 1
+
+    def update_hand_stats(self):
+        super().update_hand_stats()
+        match self.table.street:
+            case Street.PREFLOP:
+                self.player.hand_stats.flag_vpip = True
+                self.player.hand_stats.flag_preflop_opened = True
+                self.player.hand_stats.count_preflop_player_calls += 1
+                self.table.is_opened = True
+                if self.table.cnt_bets == 1:
+                    self.player.hand_stats.flag_preflop_limp = True
+                else:
+                    self.player.hand_stats.flag_preflop_cold_called = True
+            case Street.FLOP:
+                pass
+            case Street.TURN:
+                pass
+            case Street.RIVER:
+                pass
 
 
 class BetAction(Action):
@@ -104,7 +176,17 @@ class BetAction(Action):
 
     def execute(self):
         super().execute()
-        self.player.table.cnt_bets += 1
+        self.table.cnt_bets += 1
+
+    def update_hand_stats(self):
+        super().update_hand_stats()
+        match self.table.street:
+            case Street.FLOP:
+                pass
+            case Street.TURN:
+                pass
+            case Street.RIVER:
+                pass
 
 
 class RaiseAction(Action):
@@ -119,4 +201,26 @@ class RaiseAction(Action):
 
     def execute(self):
         super().execute()
-        self.player.table.cnt_bets += 1
+        self.table.cnt_bets += 1
+
+    def update_hand_stats(self):
+        super().update_hand_stats()
+        match self.table.street:
+            case Street.PREFLOP:
+                self.player.hand_stats.flag_vpip = True
+                self.player.hand_stats.flag_preflop_opened = True
+                self.player.hand_stats.count_preflop_player_raises += 1
+                self.table.is_opened = True
+                if self.table.cnt_bets == 1:
+                    self.player.hand_stats.flag_preflop_first_raise = True
+                if self.table.cnt_bets == 2:
+                    self.player.hand_stats.flag_preflop_3bet = True
+                if self.table.cnt_bets >= 3:
+                    self.player.hand_stats.flag_preflop_4bet = True
+
+            case Street.FLOP:
+                pass
+            case Street.TURN:
+                pass
+            case Street.RIVER:
+                pass

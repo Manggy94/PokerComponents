@@ -156,6 +156,12 @@ class MyComboTestCase(unittest.TestCase):
         self.assertEqual(len(Combo.from_hand(Hand("AA"))), 6)
         self.assertIn(Combo("JsTd"), Combo.from_hand(Hand("JTo")))
 
+    def test_list_generation(self):
+        combos = iter(Combo)
+        for combo in combos:
+            self.assertIsInstance(combo, Combo)
+        self.assertEqual(Combo.__len__(), 1326)
+
 
 if __name__ == '__main__':
     unittest.main()
