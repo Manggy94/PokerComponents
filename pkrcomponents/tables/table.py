@@ -22,6 +22,7 @@ class Table:
         board(Board): The board of the table
         cnt_bets(int): The number of bets made on the table at a given street
         cnt_calls(int): The number of calls made on the table at a given street
+        cnt_cold_calls(int): The number of cold calls made on the table at a given street
         deck(Deck): The deck of the table
         evaluator(Evaluator): The evaluator of the table
         hand_has_started(bool): Whether the hand has started
@@ -56,6 +57,7 @@ class Table:
     board = field(default=Factory(Board), validator=instance_of(Board))
     cnt_bets = field(default=0, validator=[instance_of(int), ge(0)])
     cnt_calls = field(default=0, validator=[instance_of(int), ge(0)])
+    cnt_cold_calls = field(default=0, validator=[instance_of(int), ge(0)])
     deck = field(default=Factory(Deck), validator=instance_of(Deck))
     evaluator = field(default=Factory(Evaluator), validator=instance_of(Evaluator))
     hand_has_started = field(default=False, validator=instance_of(bool))
@@ -425,6 +427,7 @@ class Table:
         self.pot.highest_bet = 0
         self.cnt_bets = 0
         self.cnt_calls = 0
+        self.cnt_cold_calls = 0
         self.update_min_bet(self.level.bb)
         self.seat_playing = self.players_in_game[0].seat
         for player in self.players_in_game:

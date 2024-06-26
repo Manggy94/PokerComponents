@@ -77,18 +77,21 @@ class Action:
             case Street.PREFLOP:
                 if not self.table.is_opened:
                     self.player.hand_stats.flag_preflop_open_opportunity = True
-                if self.table.cnt_bets >= 2:
+                if self.player.face_raise:
                     self.player.hand_stats.flag_preflop_face_raise = True
-                if self.table.cnt_bets == 2 and self.player.stack_enables_raise:
+                if self.table.cnt_cold_calls > 0 and self.table.cnt_bets == 2 and self.player.stack_enables_raise:
+                    self.player.hand_stats.flag_preflop_squeeze_opportunity = True
+                if self.player.can_3bet:
                     self.player.hand_stats.flag_preflop_3bet_opportunity = True
-                if self.table.cnt_bets == 3:
+                if self.player.face_3bet:
                     self.player.hand_stats.flag_preflop_face_3bet = True
                 if self.table.cnt_bets >= 4:
                     self.player.hand_stats.flag_preflop_face_4bet = True
                 if self.table.cnt_bets >= 3 and self.player.stack_enables_raise:
                     self.player.hand_stats.flag_preflop_4bet_opportunity = True
             case Street.FLOP:
-                pass
+                if self.player.has_initiative and self.table.cnt_bets == 0:
+                    self.player.hand_stats.flag_flop_cbet_opportunity = True
             case Street.TURN:
                 pass
             case Street.RIVER:
@@ -104,8 +107,9 @@ class FoldAction(Action):
         super().__init__(player=player, move=ActionMove.FOLD)
 
     def execute(self):
-        super().execute()
+
         self.player.folded = True
+        super().execute()
 
     def update_hand_stats(self):
         super().update_hand_stats()
@@ -144,6 +148,8 @@ class CallAction(Action):
     def execute(self):
         super().execute()
         self.table.cnt_calls += 1
+        self.table.is_opened = True
+
 
     def update_hand_stats(self):
         super().update_hand_stats()
@@ -152,11 +158,12 @@ class CallAction(Action):
                 self.player.hand_stats.flag_vpip = True
                 self.player.hand_stats.flag_preflop_opened = True
                 self.player.hand_stats.count_preflop_player_calls += 1
-                self.table.is_opened = True
                 if self.table.cnt_bets == 1:
                     self.player.hand_stats.flag_preflop_limp = True
                 else:
                     self.player.hand_stats.flag_preflop_cold_called = True
+                    self.table.cnt_cold_calls += 1
+
             case Street.FLOP:
                 pass
             case Street.TURN:
@@ -175,19 +182,21 @@ class BetAction(Action):
         super().__init__(player=player, move=ActionMove.BET, value=value)
 
     def execute(self):
-        super().execute()
         self.table.cnt_bets += 1
         self.player.take_initiative()
+        super().execute()
 
     def update_hand_stats(self):
         super().update_hand_stats()
         match self.table.street:
             case Street.FLOP:
-                pass
+                self.player.hand_stats.flag_flop_bet = True
+                if self.player.has_initiative:
+                    self.player.hand_stats.flag_flop_cbet = True
             case Street.TURN:
-                pass
+                self.player.hand_stats.flag_flop_bet = True
             case Street.RIVER:
-                pass
+                self.player.hand_stats.flag_flop_bet = True
 
 
 class RaiseAction(Action):
@@ -201,9 +210,10 @@ class RaiseAction(Action):
         super().__init__(player=player, move=ActionMove.RAISE, value=total_value)
 
     def execute(self):
-        super().execute()
         self.table.cnt_bets += 1
+        self.table.is_opened = True
         self.player.take_initiative()
+        super().execute()
 
     def update_hand_stats(self):
         super().update_hand_stats()
@@ -212,11 +222,12 @@ class RaiseAction(Action):
                 self.player.hand_stats.flag_vpip = True
                 self.player.hand_stats.flag_preflop_opened = True
                 self.player.hand_stats.count_preflop_player_raises += 1
-                self.table.is_opened = True
                 if self.table.cnt_bets == 1:
                     self.player.hand_stats.flag_preflop_first_raise = True
                 if self.table.cnt_bets == 2:
                     self.player.hand_stats.flag_preflop_3bet = True
+                    if self.table.cnt_cold_calls > 0:
+                        self.player.hand_stats.flag_preflop_squeeze = True
                 if self.table.cnt_bets >= 3:
                     self.player.hand_stats.flag_preflop_4bet = True
 

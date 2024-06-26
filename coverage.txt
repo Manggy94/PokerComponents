@@ -2,7 +2,7 @@ Name                                             Stmts   Miss  Cover
 --------------------------------------------------------------------
 pkrcomponents/__init__.py                            0      0   100%
 pkrcomponents/actions/__init__.py                    0      0   100%
-pkrcomponents/actions/action.py                    144     11    92%
+pkrcomponents/actions/action.py                    151     12    92%
 pkrcomponents/actions/action_move.py                32      0   100%
 pkrcomponents/actions/actions_sequence.py           11      0   100%
 pkrcomponents/actions/blind_type.py                 11      0   100%
@@ -22,14 +22,14 @@ pkrcomponents/cards/rank.py                         47      0   100%
 pkrcomponents/cards/shape.py                        14      0   100%
 pkrcomponents/cards/suit.py                         28      0   100%
 pkrcomponents/players/__init__.py                    0      0   100%
-pkrcomponents/players/hand_stats.py                 37      0   100%
+pkrcomponents/players/hand_stats.py                 43      0   100%
 pkrcomponents/players/players.py                   133      1    99%
 pkrcomponents/players/position.py                   59      0   100%
 pkrcomponents/players/positions_map.py              20      0   100%
-pkrcomponents/players/table_player.py              154      1    99%
+pkrcomponents/players/table_player.py              171      1    99%
 pkrcomponents/tables/__init__.py                     0      0   100%
 pkrcomponents/tables/pot.py                         18      0   100%
-pkrcomponents/tables/table.py                      275      2    99%
+pkrcomponents/tables/table.py                      277      2    99%
 pkrcomponents/tournaments/__init__.py                0      0   100%
 pkrcomponents/tournaments/buy_in.py                 14      0   100%
 pkrcomponents/tournaments/level.py                  15      0   100%
@@ -48,4 +48,4 @@ pkrcomponents/utils/meta/hand_meta.py               26      0   100%
 pkrcomponents/utils/meta/positions_map_meta.py      10      0   100%
 pkrcomponents/utils/validators.py                    7      0   100%
 --------------------------------------------------------------------
-TOTAL                                             1978     16    99%
+TOTAL                                             2010     17    99%

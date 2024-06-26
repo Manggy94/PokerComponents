@@ -365,3 +365,20 @@ class TablePlayer:
         for player in self.table.players:
             player.has_initiative = False
         self.has_initiative = True
+
+    @property
+    def face_raise(self):
+        """Boolean indicating if player faces a raise"""
+        return self.table.cnt_bets >= 2
+
+    @property
+    def can_3bet(self):
+        """Boolean indicating if player can 3bet"""
+        return self.table.cnt_bets == 2 and self.stack_enables_raise
+
+    @property
+    def face_3bet(self):
+        """Boolean indicating if player faces a 3bet"""
+        return self.table.cnt_bets == 3
+
+
