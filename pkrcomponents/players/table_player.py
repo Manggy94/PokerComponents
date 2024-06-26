@@ -104,7 +104,9 @@ class TablePlayer:
     is_hero = field(default=False, validator=instance_of(bool))
     current_bet = field(default=0, validator=[ge(0), instance_of(float)], converter=float)
     reward = field(default=0, validator=optional([ge(0), instance_of((int, float))]))
-    actions = field(default=dict([(str(street), []) for street in list(Street)[:4]]), validator=instance_of(dict))
+    actions = field(
+        default=Factory(lambda: dict([(str(street), []) for street in list(Street)[:4]])),
+        validator=instance_of(dict))
     hand_stats = field(default=Factory(HandStats), validator=instance_of(HandStats))
     has_initiative = field(default=False, validator=instance_of(bool))
 
@@ -123,12 +125,17 @@ class TablePlayer:
         return self.stack / self.table.level.bb
 
     @property
-    def stack_to_pot_ratio(self):
+    def stack_to_pot_ratio(self) -> float:
         """Player's stack to pot ratio"""
         return float("inf") if self.table.pot.value == 0 else self.stack / self.table.pot.value
 
     @property
-    def is_all_in(self):
+    def stack_enables_raise(self) -> bool:
+        """Boolean indicating if the player's stack enables a raise"""
+        return self.stack > self.to_call
+
+    @property
+    def is_all_in(self) -> bool:
         """Boolean indicating if the player is all-in"""
         return self.stack == 0
 

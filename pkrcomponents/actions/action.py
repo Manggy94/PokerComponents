@@ -79,13 +79,13 @@ class Action:
                     self.player.hand_stats.flag_preflop_open_opportunity = True
                 if self.table.cnt_bets >= 2:
                     self.player.hand_stats.flag_preflop_face_raise = True
-                if self.table.cnt_bets == 2 and self.player.stack > self.player.to_call:
+                if self.table.cnt_bets == 2 and self.player.stack_enables_raise:
                     self.player.hand_stats.flag_preflop_3bet_opportunity = True
                 if self.table.cnt_bets == 3:
                     self.player.hand_stats.flag_preflop_face_3bet = True
                 if self.table.cnt_bets >= 4:
                     self.player.hand_stats.flag_preflop_face_4bet = True
-                if self.table.cnt_bets >= 3 and self.player.stack > self.player.to_call:
+                if self.table.cnt_bets >= 3 and self.player.stack_enables_raise:
                     self.player.hand_stats.flag_preflop_4bet_opportunity = True
             case Street.FLOP:
                 pass
