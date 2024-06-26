@@ -13,6 +13,9 @@ class MyPlayerTestCase(unittest.TestCase):
 
     def test_new_player(self):
         self.assertIsInstance(self.player, TablePlayer)
+        print(self.player.actions)
+        self.assertEqual(self.player.actions, {"PF": [], "F": [], "T": [], "R": []})
+
 
     def test_player_name(self):
         with self.assertRaises(ValueError):

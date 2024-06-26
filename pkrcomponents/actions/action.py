@@ -177,6 +177,7 @@ class BetAction(Action):
     def execute(self):
         super().execute()
         self.table.cnt_bets += 1
+        self.player.take_initiative()
 
     def update_hand_stats(self):
         super().update_hand_stats()
@@ -202,6 +203,7 @@ class RaiseAction(Action):
     def execute(self):
         super().execute()
         self.table.cnt_bets += 1
+        self.player.take_initiative()
 
     def update_hand_stats(self):
         super().update_hand_stats()

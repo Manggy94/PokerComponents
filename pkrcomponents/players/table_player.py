@@ -15,21 +15,22 @@ class TablePlayer:
     This class represents a player on a poker table
 
     Attributes:
-        name (str): The name of the player
-        seat (int): The seat number of the player
-        init_stack (float): The initial stack of the player at the beginning of the hand
-        stack (float): The current stack of the player
-        combo (Combo): The combo of the player
-        folded (bool): Whether the player has folded
-        position (Position): The position of the player
-        table (Table): The table the player is on
-        bounty (float): The bounty of the player
-        played (bool): Whether the player has played
-        is_hero (bool): Whether the player is the hero
-        current_bet (float): The current bet of the player
-        reward (int): The reward of the player
         actions (dict): The actions of the player on each street
+        bounty (float): The bounty of the player
+        combo (Combo): The combo of the player
+        current_bet (float): The current bet of the player
+        folded (bool): Whether the player has folded
         hand_stats (HandStats): The hand statistics of the player
+        has_initiative (bool): Whether the player has initiative
+        init_stack (float): The initial stack of the player at the beginning of the hand
+        is_hero (bool): Whether the player is the hero
+        name (str): The name of the player
+        position (Position): The position of the player
+        played (bool): Whether the player has played
+        reward (int): The reward of the player
+        seat (int): The seat number of the player
+        stack (float): The current stack of the player
+        table (Table): The table the player is on
 
     Methods:
         stack_bb(): Returns the player's stack in big blinds
@@ -103,13 +104,9 @@ class TablePlayer:
     is_hero = field(default=False, validator=instance_of(bool))
     current_bet = field(default=0, validator=[ge(0), instance_of(float)], converter=float)
     reward = field(default=0, validator=optional([ge(0), instance_of((int, float))]))
-    actions = field(default={
-        f"{Street('Preflop')}": [],
-        f"{Street('Flop')}": [],
-        f"{Street('Turn')}": [],
-        f"{Street('River')}": []
-    }, validator=instance_of(dict))
+    actions = field(default=dict([(str(street), []) for street in list(Street)[:4]]), validator=instance_of(dict))
     hand_stats = field(default=Factory(HandStats), validator=instance_of(HandStats))
+    has_initiative = field(default=False, validator=instance_of(bool))
 
     def __repr__(self):
         return (f"TablePlayer(name: '{self.name}', "
@@ -355,3 +352,9 @@ class TablePlayer:
             postflop_bets.append({"text": "Min Bet", "value": self.table.min_bet})
         postflop_bets = sorted(postflop_bets, key=lambda x: x.get("value"))
         return postflop_bets
+
+    def take_initiative(self):
+        """Player takes initiative"""
+        for player in self.table.players:
+            player.has_initiative = False
+        self.has_initiative = True

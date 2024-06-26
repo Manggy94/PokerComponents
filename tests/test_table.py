@@ -255,8 +255,10 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.pot.highest_bet, 400)
         self.assertTrue(table.players[3].is_current_player)
         self.assertFalse(table.players[3].hand_stats.flag_vpip)
+        self.assertFalse(table.players[3].has_initiative)
         action = FoldAction(table.current_player)
         action.play()
+        self.assertFalse(table.players[3].has_initiative)
         self.assertTrue(table.players[3].played)
         self.assertTrue(table.players[3].folded)
         self.assertEqual(table.players[3].stack, 11450)
@@ -286,7 +288,7 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.pot.highest_bet, 400)
         self.assertTrue(table.players[3].is_current_player)
         self.assertFalse(table.players[3].hand_stats.flag_vpip)
-
+        self.assertFalse(table.players[3].has_initiative)
         action = CallAction(table.current_player)
         action.play()
         self.assertEqual(table.cnt_bets, 1)
@@ -301,6 +303,7 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.pot.highest_bet, 400)
         self.assertFalse(table.players[3].is_current_player)
         self.assertTrue(table.players[3].hand_stats.flag_vpip)
+        self.assertFalse(table.players[3].has_initiative)
 
     def test_action_raise(self):
         table = Table()
@@ -321,6 +324,7 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.pot.highest_bet, 400)
         self.assertTrue(table.players[3].is_current_player)
         self.assertFalse(table.players[3].hand_stats.flag_vpip)
+        self.assertFalse(table.players[3].has_initiative)
         with self.assertRaises(ValueError):
             action = RaiseAction(table.current_player, 300)
             action.play()
@@ -339,6 +343,7 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.pot.highest_bet, 1450)
         self.assertFalse(table.players[3].is_current_player)
         self.assertTrue(table.players[3].hand_stats.flag_vpip)
+        self.assertTrue(table.players[3].has_initiative)
 
     def test_action_check(self):
         table = Table()
