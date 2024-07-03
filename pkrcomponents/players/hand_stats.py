@@ -27,7 +27,18 @@ class HandStats:
         count_preflop_player_calls (int): The number of calls the player made preflop
 
         flag_flop_bet (bool): Whether the player bet on the flop
+        flag_flop_open_opportunity (bool): Whether the player had the opportunity to open on the flop
+        flag_flop_open (bool): Whether the player opened on the flop
+        flag_flop_cbet_opportunity (bool): Whether the player had the opportunity to make a continuation bet on the flop
         flag_flop_cbet (bool): Whether the player made a continuation bet on the flop
+        flag_flop_donk_bet_opportunity (bool): Whether the player had the opportunity to make a donk bet on the flop
+        flag_flop_donk_bet (bool): Whether the player made a donk bet on the flop
+        flag_flop_first_raise (bool): Whether the player made the first raise on the flop
+        flag_flop_check (bool): Whether the player checked on the flop
+        flag_flop_3bet_opportunity (bool): Whether the player had the opportunity to 3bet on the flop
+        flag_flop_3bet (bool): Whether the player 3bet on the flop
+        flag_flop_4bet_opportunity (bool): Whether the player had the opportunity to 4+bet on the flop
+        flag_flop_4bet (bool): Whether the player 4+bet on the flop
     """
     # pylint: disable=too-many-instance-attributes
     # A. Preflop stats
@@ -54,16 +65,28 @@ class HandStats:
     # B. Flop stats
     # 1. Flags
     flag_flop_bet = field(default=False, validator=instance_of(bool))
+    flag_flop_open_opportunity = field(default=False, validator=instance_of(bool))
+    flag_flop_open = field(default=False, validator=instance_of(bool))
     flag_flop_cbet_opportunity = field(default=False, validator=instance_of(bool))
     flag_flop_cbet = field(default=False, validator=instance_of(bool))
-
-
+    flag_flop_donk_bet_opportunity = field(default=False, validator=instance_of(bool))
+    flag_flop_donk_bet = field(default=False, validator=instance_of(bool))
+    flag_flop_first_raise = field(default=False, validator=instance_of(bool))
+    flag_flop_check = field(default=False, validator=instance_of(bool))
+    flag_flop_3bet_opportunity = field(default=False, validator=instance_of(bool))
+    flag_flop_3bet = field(default=False, validator=instance_of(bool))
+    flag_flop_4bet_opportunity = field(default=False, validator=instance_of(bool))
+    flag_flop_4bet = field(default=False, validator=instance_of(bool))
     # 2. Counts
     # C. Turn stats
     # 1. Flags
+    flag_turn_bet = field(default=False, validator=instance_of(bool))
+    flag_turn_check = field(default=False, validator=instance_of(bool))
     # 2. Counts
     # D. River stats
     # 1. Flags
+    flag_river_bet = field(default=False, validator=instance_of(bool))
+    flag_river_check = field(default=False, validator=instance_of(bool))
     # 2. Counts
 
     def reset(self):
@@ -89,5 +112,9 @@ class HandStats:
         self.count_preflop_player_raises = 0
         self.count_preflop_player_calls = 0
         self.flag_flop_bet = False
+        self.flag_flop_cbet_opportunity = False
+        self.flag_flop_cbet = False
+        self.flag_flop_first_raise = False
+        self.flag_flop_check = False
 
 

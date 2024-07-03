@@ -376,9 +376,36 @@ class TablePlayer:
         """Boolean indicating if player can 3bet"""
         return self.table.cnt_bets == 2 and self.stack_enables_raise
 
+
+
     @property
     def face_3bet(self):
         """Boolean indicating if player faces a 3bet"""
         return self.table.cnt_bets == 3
 
+    @property
+    def can_4bet(self):
+        """Boolean indicating if player can 4bet"""
+        return self.table.cnt_bets >= 3 and self.stack_enables_raise
+
+    @property
+    def can_cbet(self):
+        """Boolean indicating if player can cbet"""
+        return self.has_initiative and self.can_open
+
+    @property
+    def can_donk_bet(self):
+        """Boolean indicating if player can donk bet"""
+        return not self.has_initiative and self.can_open
+
+    @property
+    def can_first_raise(self):
+        """Boolean indicating if player can make the first raise"""
+        return self.table.cnt_bets == 1
+
+    @property
+    def can_open(self):
+        """Boolean indicating if player can open"""
+        return ((self.table.street == Street.PREFLOP and not self.table.is_opened)
+                or (self.table.street != Street.PREFLOP and self.table.cnt_bets == 0))
 
