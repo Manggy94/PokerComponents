@@ -180,3 +180,7 @@ P
  pkrcomponents/actions/posting.py,9\f\9fd0ca2815acecfd456f6d9fb3e005950336e3b4
 B
 tests/test_deck.py,1\6\1635c7c40ada2d10d96f5f851c178ed5c36c9f20
+l
+<venv/lib/python3.10/site-packages/pygments/lexers/configs.py,1\4\14db9f124e36376687e33b792e2d04c406a41f9d
+X
+(pkrcomponents/actions/actions_history.py,3\b\3b7801fd39430a9c308e8fb8d0781b56b40410f7

@@ -20,7 +20,6 @@ class Action:
         __str__(): Returns a string representation of the action
         execute(): Executes the action
         play(): Plays the action on the table and advances the seat playing
-
     """
 
     player = field(validator=[instance_of(TablePlayer)])
@@ -79,7 +78,7 @@ class Action:
                     self.player.hand_stats.flag_preflop_open_opportunity = True
                 if self.player.face_raise:
                     self.player.hand_stats.flag_preflop_face_raise = True
-                if self.table.cnt_cold_calls > 0 and self.table.cnt_bets == 2 and self.player.stack_enables_raise:
+                if self.table.cnt_cold_calls > 0 and self.player.can_3bet:
                     self.player.hand_stats.flag_preflop_squeeze_opportunity = True
                 if self.player.can_3bet:
                     self.player.hand_stats.flag_preflop_3bet_opportunity = True
@@ -105,6 +104,19 @@ class Action:
             case Street.RIVER:
                 pass
 
+    def add_to_history(self):
+        """
+        Adds the action to the history
+        """
+        match self.table.street:
+            case Street.PREFLOP:
+                self.player.actions_history.preflop.add(self)
+            case Street.FLOP:
+                self.player.actions_history.flop.add(self)
+            case Street.TURN:
+                self.player.actions_history.turn.add(self)
+            case Street.RIVER:
+                self.player.actions_history.river.add(self)
 
 
 class FoldAction(Action):
@@ -157,7 +169,6 @@ class CallAction(Action):
         super().execute()
         self.table.cnt_calls += 1
         self.table.is_opened = True
-
 
     def update_hand_stats(self):
         super().update_hand_stats()

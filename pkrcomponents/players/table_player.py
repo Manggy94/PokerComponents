@@ -1,6 +1,7 @@
 from attrs import define, field, Factory
 from attrs.validators import instance_of, ge, le, optional, max_len, min_len
 
+from pkrcomponents.actions.actions_history import ActionsHistory
 from pkrcomponents.actions.street import Street
 from pkrcomponents.cards.combo import Combo
 from pkrcomponents.players.hand_stats import HandStats
@@ -16,6 +17,7 @@ class TablePlayer:
 
     Attributes:
         actions (dict): The actions of the player on each street
+        actions_history (ActionsHistory): The history of the player's actions
         bounty (float): The bounty of the player
         combo (Combo): The combo of the player
         current_bet (float): The current bet of the player
@@ -107,6 +109,7 @@ class TablePlayer:
     actions = field(
         default=Factory(lambda: dict([(str(street), []) for street in list(Street)[:4]])),
         validator=instance_of(dict))
+    actions_history = field(default=Factory(ActionsHistory), validator=instance_of(ActionsHistory))
     hand_stats = field(default=Factory(HandStats), validator=instance_of(HandStats))
     has_initiative = field(default=False, validator=instance_of(bool))
 
@@ -376,8 +379,6 @@ class TablePlayer:
         """Boolean indicating if player can 3bet"""
         return self.table.cnt_bets == 2 and self.stack_enables_raise
 
-
-
     @property
     def face_3bet(self):
         """Boolean indicating if player faces a 3bet"""
@@ -408,4 +409,3 @@ class TablePlayer:
         """Boolean indicating if player can open"""
         return ((self.table.street == Street.PREFLOP and not self.table.is_opened)
                 or (self.table.street != Street.PREFLOP and self.table.cnt_bets == 0))
-
