@@ -25,6 +25,7 @@ class HandStats:
         flag_preflop_squeeze (bool): Whether the player squeezed preflop
         count_preflop_player_raises (int): The number of raises the player made preflop
         count_preflop_player_calls (int): The number of calls the player made preflop
+        preflop_actions_sequence (str): The sequence of actions the player made preflop
 
         flag_flop_bet (bool): Whether the player bet on the flop
         flag_flop_open_opportunity (bool): Whether the player had the opportunity to open on the flop
@@ -116,5 +117,6 @@ class HandStats:
         self.flag_flop_cbet = False
         self.flag_flop_first_raise = False
         self.flag_flop_check = False
+
 
 
