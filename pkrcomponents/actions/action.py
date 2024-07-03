@@ -57,7 +57,7 @@ class Action:
         self.player.pay(self.value)
         self.player.current_bet += self.value
         self.table.pot.update_highest_bet(self.player.current_bet)
-        self.player.actions.get(f"{self.table.street}").append(self)
+        self.add_to_history()
         self.update_hand_stats()
 
     def play(self):

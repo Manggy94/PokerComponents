@@ -10,13 +10,12 @@ from pkrcomponents.tables.table import Table
 from pkrcomponents.utils.converters import convert_to_position
 
 
-@define
+@define(repr=False)
 class TablePlayer:
     """
     This class represents a player on a poker table
 
     Attributes:
-        actions (dict): The actions of the player on each street
         actions_history (ActionsHistory): The history of the player's actions
         bounty (float): The bounty of the player
         combo (Combo): The combo of the player
@@ -106,10 +105,7 @@ class TablePlayer:
     is_hero = field(default=False, validator=instance_of(bool))
     current_bet = field(default=0, validator=[ge(0), instance_of(float)], converter=float)
     reward = field(default=0, validator=optional([ge(0), instance_of((int, float))]))
-    actions = field(
-        default=Factory(lambda: dict([(str(street), []) for street in list(Street)[:4]])),
-        validator=instance_of(dict))
-    actions_history = field(default=Factory(ActionsHistory), validator=instance_of(ActionsHistory))
+    actions_history = field(default=Factory(lambda: ActionsHistory()), validator=instance_of(ActionsHistory))
     hand_stats = field(default=Factory(HandStats), validator=instance_of(HandStats))
     has_initiative = field(default=False, validator=instance_of(bool))
 
@@ -118,7 +114,10 @@ class TablePlayer:
                 f"seat: {self.seat}, "
                 f"stack: {self.stack}, "
                 f"position: {self.position}, "
-                f"bounty: {self.bounty}")
+                f"bounty: {self.bounty})")
+
+    def __attrs_post_init__(self):
+        self.actions_history.reset()
 
     @property
     def stack_bb(self) -> float:
@@ -301,12 +300,7 @@ class TablePlayer:
 
     def reset_actions(self):
         """Reset actions"""
-        self.actions = {
-            f"{Street('Preflop')}": [],
-            f"{Street('Flop')}": [],
-            f"{Street('Turn')}": [],
-            f"{Street('River')}": []
-        }
+        self.actions_history.reset()
 
     def reset_hand_status(self):
         """Reset hand status"""

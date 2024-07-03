@@ -13,7 +13,7 @@ class MyPlayerTestCase(unittest.TestCase):
 
     def test_new_player(self):
         self.assertIsInstance(self.player, TablePlayer)
-        self.assertEqual(self.player.actions, {"PF": [], "F": [], "T": [], "R": []})
+
 
 
     def test_player_name(self):
@@ -112,9 +112,9 @@ class MyPlayerTestCase(unittest.TestCase):
 
     def test_repr(self):
         self.assertEqual(repr(self.player),
-                         "TablePlayer(name: 'Jean', seat: 3, stack: 2000.0, position: None, bounty: 0.0")
+                         "TablePlayer(name: 'Jean', seat: 3, stack: 2000.0, position: None, bounty: 0.0)")
         self.assertEqual(repr(self.toto),
-                         "TablePlayer(name: 'Toto', seat: 2, stack: 25500.0, position: None, bounty: 0.0")
+                         "TablePlayer(name: 'Toto', seat: 2, stack: 25500.0, position: None, bounty: 0.0)")
 
 
 if __name__ == '__main__':
