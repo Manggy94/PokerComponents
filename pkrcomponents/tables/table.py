@@ -205,7 +205,7 @@ class Table:
         self.board.add(card2)
         self.board.add(card3)
 
-    def flop(self, card1: (str, Card) = None, card2: (str, Card) = None, card3: (str, Card) = None):
+    def execute_flop(self, card1: (str, Card) = None, card2: (str, Card) = None, card3: (str, Card) = None):
         """
         Draw a flop and steps to this new street
 
@@ -232,7 +232,7 @@ class Table:
         card = self.deck.draw(card)
         self.board.add(card)
 
-    def turn(self, card: (str, Card) = None):
+    def execute_turn(self, card: (str, Card) = None):
         """
         Draw a turn and steps to this new street
 
@@ -257,7 +257,7 @@ class Table:
         card = self.deck.draw(card)
         self.board.add(card)
 
-    def river(self, card: (str, Card) = None):
+    def execute_river(self, card: (str, Card) = None):
         """
         Draw a river and steps to this new street
 
