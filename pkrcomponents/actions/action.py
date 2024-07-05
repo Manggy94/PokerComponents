@@ -229,6 +229,8 @@ class RaiseAction(Action):
     def __init__(self, player: TablePlayer, value: float):
         total_value = value + player.to_call
         if total_value < player.table.min_bet and total_value != player.stack:
+            print(f"Valeur totale du raise: {total_value}, stack: {player.stack}, min_bet: {player.table.min_bet}, Montant à payer: {player.to_call}")
+            print(f"Raise value must be at least {value} or player should go all-in.")
             raise ValueError(f"Raise value must be at least {value} or player should go all-in.")
         super().__init__(player=player, move=ActionMove.RAISE, value=total_value)
 

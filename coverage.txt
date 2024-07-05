@@ -2,7 +2,7 @@ Name                                             Stmts   Miss  Cover
 --------------------------------------------------------------------
 pkrcomponents/__init__.py                            0      0   100%
 pkrcomponents/actions/__init__.py                    0      0   100%
-pkrcomponents/actions/action.py                    180     18    90%
+pkrcomponents/actions/action.py                    182     18    90%
 pkrcomponents/actions/action_move.py                32      0   100%
 pkrcomponents/actions/actions_history.py            14      0   100%
 pkrcomponents/actions/actions_sequence.py           21      3    86%
@@ -49,4 +49,4 @@ pkrcomponents/utils/meta/hand_meta.py               26      0   100%
 pkrcomponents/utils/meta/positions_map_meta.py      10      0   100%
 pkrcomponents/utils/validators.py                    7      0   100%
 --------------------------------------------------------------------
-TOTAL                                             2109     28    99%
+TOTAL                                             2111     28    99%
