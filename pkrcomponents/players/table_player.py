@@ -187,7 +187,7 @@ class TablePlayer:
 
     @property
     def can_play(self):
-        """Boolean indicating if the player can still play in this hand"""
+        """Boolean indicating if the player can still play in this street"""
         return not (self.is_all_in or (self.to_call == 0 and self.played) or self.folded)
 
     @property

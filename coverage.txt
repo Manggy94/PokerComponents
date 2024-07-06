@@ -30,7 +30,7 @@ pkrcomponents/players/positions_map.py              20      0   100%
 pkrcomponents/players/table_player.py              193      1    99%
 pkrcomponents/tables/__init__.py                     0      0   100%
 pkrcomponents/tables/pot.py                         18      0   100%
-pkrcomponents/tables/table.py                      284      4    99%
+pkrcomponents/tables/table.py                      289      4    99%
 pkrcomponents/tournaments/__init__.py                0      0   100%
 pkrcomponents/tournaments/buy_in.py                 14      0   100%
 pkrcomponents/tournaments/level.py                  15      0   100%
@@ -50,4 +50,4 @@ pkrcomponents/utils/meta/hand_meta.py               26      0   100%
 pkrcomponents/utils/meta/positions_map_meta.py      10      0   100%
 pkrcomponents/utils/validators.py                    7      0   100%
 --------------------------------------------------------------------
-TOTAL                                             2140     32    99%
+TOTAL                                             2145     32    99%

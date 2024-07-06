@@ -5,6 +5,7 @@ from pkrcomponents.cards.board import Board
 from pkrcomponents.cards.card import Card
 from pkrcomponents.cards.combo import Combo
 from pkrcomponents.cards.deck import Deck
+from pkrcomponents.cards.flop import Flop
 from pkrcomponents.actions.street import Street
 from pkrcomponents.players.players import Players
 from pkrcomponents.tables.pot import Pot
@@ -207,9 +208,10 @@ class Table:
         card1 = self.deck.draw(card1)
         card2 = self.deck.draw(card2)
         card3 = self.deck.draw(card3)
-        self.board.add(card1)
-        self.board.add(card2)
-        self.board.add(card3)
+        flop = Flop(card1, card2, card3)
+        self.board.add(flop.first_card)
+        self.board.add(flop.second_card)
+        self.board.add(flop.third_card)
 
     def execute_flop(self, card1: (str, Card) = None, card2: (str, Card) = None, card3: (str, Card) = None):
         """
@@ -428,13 +430,20 @@ class Table:
         """ Returns the next seat to play after the current player"""
         return self.next_player.seat
 
+    def update_min_bet(self, value):
+        """Update the minimum bet on the table"""
+        self.min_bet = value
+
     def street_reset(self):
         """Reset status of players in game and betting status for a new street"""
         self.pot.highest_bet = 0
         self.cnt_bets = 0
         self.cnt_calls = 0
         self.cnt_cold_calls = 0
+        print(self.level.bb)
+        print(self.min_bet)
         self.update_min_bet(self.level.bb)
+        print(self.min_bet)
         try:
             self.seat_playing = self.players_in_game[0].seat
             for player in self.players_in_game:
@@ -516,10 +525,6 @@ class Table:
         """Advance to the next hand"""
         self.hand_reset()
         self.players.advance_bb_seat()
-
-    def update_min_bet(self, value):
-        """Update the minimum bet on the table"""
-        self.min_bet = value
 
     def reset_postings(self):
         """Reset the postings"""

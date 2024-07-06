@@ -103,13 +103,13 @@ class TableTest(unittest.TestCase):
         table.draw_turn("Ac")
         self.assertEqual(table.board.len, 4)
         self.assertEqual(table.board.turn, Card("Ac"))
-        self.assertEqual(table.board.cards.astype(str).values[:4].tolist(),  ["As", "Ad", "Ah", "Ac"])
+        self.assertEqual(table.board.cards.astype(str).values[:4].tolist(),  ["As", "Ah", "Ad", "Ac"])
         self.assertRaises(ValueError, lambda: table.draw_flop())
         self.assertRaises(ValueError, lambda: table.draw_turn("Jd"))
         table.draw_river("Jd")
         self.assertEqual(table.board.len, 5)
         self.assertEqual(table.board.cards["river"], Card("Jd"))
-        self.assertTrue((table.board.cards.astype(str).values == np.array(["As", "Ad", "Ah", "Ac", "Jd"])).all())
+        self.assertTrue((table.board.cards.astype(str).values == np.array(["As", "Ah", "Ad", "Ac", "Jd"])).all())
 
     def test_pregame_betting_and_odds(self):
         table = Table()
