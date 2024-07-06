@@ -17,3 +17,10 @@ class NotSufficientRaiseError(Exception):
                    f"Raise value must be at least {player.min_raise} or player should go all-in.")
         self.message = message
         super().__init__(self.message)
+
+
+class HandEndedError(Exception):
+    """Raised when trying to make an action after the hand has ended"""
+    def __init__(self, message="The hand has ended. No more actions can be made."):
+        self.message = message
+        super().__init__(self.message)

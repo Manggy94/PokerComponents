@@ -11,6 +11,7 @@ from pkrcomponents.tables.pot import Pot
 from pkrcomponents.tournaments.tournament import Level, Tournament
 from pkrcomponents.cards.evaluator import Evaluator
 from pkrcomponents.utils.converters import convert_to_street
+from pkrcomponents.utils.exceptions import HandEndedError
 
 
 @define
@@ -429,9 +430,12 @@ class Table:
         self.cnt_calls = 0
         self.cnt_cold_calls = 0
         self.update_min_bet(self.level.bb)
-        self.seat_playing = self.players_in_game[0].seat
-        for player in self.players_in_game:
-            player.reset_street_status()
+        try:
+            self.seat_playing = self.players_in_game[0].seat
+            for player in self.players_in_game:
+                player.reset_street_status()
+        except IndexError:
+            pass
 
     @property
     def current_player(self):
