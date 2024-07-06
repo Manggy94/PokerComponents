@@ -15,7 +15,7 @@ from pkrcomponents.utils.converters import convert_to_street
 from pkrcomponents.utils.exceptions import HandEndedError
 
 
-@define
+@define(repr=False)
 class Table:
     """
     This class represents a poker table
@@ -121,13 +121,7 @@ class Table:
     @property
     def street_ended(self) -> bool:
         """Returns True if the street has ended"""
-        return not self.has_players_waiting or (
-                self.nb_waiting == 1
-                and self.nb_in_game == 1
-                and self.players_waiting[0].to_call == 0
-                and self.street != Street.SHOWDOWN) or (
-                self.street == Street.SHOWDOWN and len(self.unrevealed_players) == 0
-        )
+        return not self.has_players_waiting or self.one_player_left or self.showdown_is_over
 
     @property
     def players_in_game(self) -> list:
@@ -142,7 +136,7 @@ class Table:
     @property
     def hand_ended(self) -> bool:
         """Returns True if the hand has ended"""
-        return self.nb_involved == 1 or self.street == Street.SHOWDOWN
+        return self.nb_involved == 1 or self.is_at_showdown
 
     @property
     def next_street_ready(self) -> bool:
@@ -180,6 +174,12 @@ class Table:
         return len(self.players_involved)
 
     @property
+    def one_player_left(self) -> bool:
+        """Returns True if there is only one player left in the game that can play and he has called"""
+        return (self.nb_waiting == 1 and self.nb_in_game == 1 and self.players_waiting[0].to_call == 0 and not
+                self.is_at_showdown)
+
+    @property
     def hand_can_start(self) -> bool:
         """Returns True if the hand can start"""
         return self.cnt_players >= 2 and not self.hand_has_started
@@ -191,8 +191,6 @@ class Table:
         self.is_opened = False
         self.street_reset()
         self.post_pregame()
-
-
 
     def draw_flop(self, card1: (str, Card) = None, card2: (str, Card) = None, card3: (str, Card) = None):
         """
@@ -440,10 +438,7 @@ class Table:
         self.cnt_bets = 0
         self.cnt_calls = 0
         self.cnt_cold_calls = 0
-        print(self.level.bb)
-        print(self.min_bet)
         self.update_min_bet(self.level.bb)
-        print(self.min_bet)
         try:
             self.seat_playing = self.players_in_game[0].seat
             for player in self.players_in_game:
@@ -465,6 +460,21 @@ class Table:
     def nb_unrevealed(self) -> int:
         """Returns the number of players that have not revealed their cards"""
         return len(self.unrevealed_players)
+
+    @property
+    def has_unrevealed_players(self) -> bool:
+        """Returns True if there are players that have not revealed their cards"""
+        return self.nb_unrevealed > 0
+
+    @property
+    def is_at_showdown(self):
+        """Returns True if the table is at showdown"""
+        return self.street == Street.SHOWDOWN
+
+    @property
+    def showdown_is_over(self) -> bool:
+        """Returns True if the showdown is over"""
+        return self.is_at_showdown and not self.has_unrevealed_players
 
     @property
     def can_parse_winners(self) -> bool:
