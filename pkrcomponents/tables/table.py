@@ -120,7 +120,7 @@ class Table:
     @property
     def street_ended(self) -> bool:
         """Returns True if the street has ended"""
-        return len(self.players_waiting) == 0 or (
+        return not self.has_players_waiting or (
                 self.nb_waiting == 1
                 and self.nb_in_game == 1
                 and self.players_waiting[0].to_call == 0
@@ -162,6 +162,11 @@ class Table:
     def nb_waiting(self) -> int:
         """Returns the number of players waiting to play"""
         return len(self.players_waiting)
+
+    @property
+    def has_players_waiting(self):
+        """Returns True if there are players waiting to play"""
+        return self.nb_waiting > 0
 
     @property
     def nb_in_game(self) -> int:
@@ -408,7 +413,7 @@ class Table:
     def advance_seat_playing(self):
         """Advances seat playing to next available player"""
         self.seat_playing = self.next_seat
-        if not self.current_player.can_play and self.nb_waiting > 0:
+        if not self.current_player.can_play and self.has_players_waiting:
             self.advance_seat_playing()
 
     @property
