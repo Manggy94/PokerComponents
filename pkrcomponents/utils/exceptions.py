@@ -10,6 +10,7 @@ class NotSufficientBetError(Exception):
         self.message = message
         super().__init__(self.message)
 
+
 class NotSufficientRaiseError(Exception):
     """Raised when the raise is not sufficient to cover the bet"""
     def __init__(self, value, player):
@@ -38,5 +39,12 @@ class HandEndedError(Exception):
 class ShowdownNotReachedError(Exception):
     """Raised when trying to show a combo hand before the showdown"""
     def __init__(self, message="A player cannot show a combo hand before the showdown"):
+        self.message = message
+        super().__init__(self.message)
+
+
+class CannotParseWinnersError(Exception):
+    """Raised when trying to parse the winners of a hand"""
+    def __init__(self, message="Cannot parse the winners of the hand"):
         self.message = message
         super().__init__(self.message)

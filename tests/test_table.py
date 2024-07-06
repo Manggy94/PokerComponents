@@ -8,7 +8,8 @@ from pkrcomponents.tables.table import Table, Board, Players, Pot, Tournament, L
 from pkrcomponents.actions.street import Street
 from pkrcomponents.cards.deck import Deck
 from pkrcomponents.players.table_player import TablePlayer
-from pkrcomponents.utils.exceptions import NotSufficientRaiseError, ShowdownNotReachedError, NotSufficientBetError
+from pkrcomponents.utils.exceptions import NotSufficientRaiseError, ShowdownNotReachedError, NotSufficientBetError, \
+    CannotParseWinnersError
 
 
 class TableTest(unittest.TestCase):
@@ -561,7 +562,7 @@ class TableTest(unittest.TestCase):
         action = BetAction(table.current_player, 2525)
         action.play()
         self.assertFalse(table.street_ended)
-        with self.assertRaises(ValueError):
+        with self.assertRaises(CannotParseWinnersError):
             table.distribute_rewards()
         self.assertEqual(table.current_player.postflop_bets,
                          [{'text': 'Min Bet', 'value': 5050.0},

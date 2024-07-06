@@ -12,7 +12,7 @@ from pkrcomponents.tables.pot import Pot
 from pkrcomponents.tournaments.tournament import Level, Tournament
 from pkrcomponents.cards.evaluator import Evaluator
 from pkrcomponents.utils.converters import convert_to_street
-from pkrcomponents.utils.exceptions import HandEndedError
+from pkrcomponents.utils.exceptions import HandEndedError, CannotParseWinnersError
 
 
 @define(repr=False)
@@ -485,7 +485,7 @@ class Table:
     def winners(self) -> dict[int, list]:
         """Current status of winners with associated scores"""
         if not self.can_parse_winners:
-            raise ValueError("Winners can't be parsed yet")
+            raise CannotParseWinnersError
         if self.nb_involved == 1:
             return {1: [self.players_involved[0]]}
         winners = {}
