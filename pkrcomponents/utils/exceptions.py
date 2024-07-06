@@ -1,6 +1,15 @@
 """This module gathers all custom exceptions used in the project"""
 
 
+class NotSufficientBetError(Exception):
+    """Raised when the bet is not sufficient to cover the minimum bet"""
+    def __init__(self, value, player):
+        message = (f"Bet value must be at least {player.table.min_bet} or player should go all-in.\n"
+                   f"Stack: {player.stack}\n"
+                   f"Bet Value: {value}")
+        self.message = message
+        super().__init__(self.message)
+
 class NotSufficientRaiseError(Exception):
     """Raised when the raise is not sufficient to cover the bet"""
     def __init__(self, value, player):

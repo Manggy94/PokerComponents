@@ -4,7 +4,7 @@ from attrs.validators import instance_of, ge
 from pkrcomponents.actions.action_move import ActionMove
 from pkrcomponents.actions.street import Street
 from pkrcomponents.players.table_player import TablePlayer
-from pkrcomponents.utils.exceptions import NotSufficientRaiseError
+from pkrcomponents.utils.exceptions import NotSufficientRaiseError, NotSufficientBetError
 
 
 @define
@@ -198,7 +198,7 @@ class BetAction(Action):
     """
     def __init__(self, player: TablePlayer, value: float):
         if value < player.table.min_bet:
-            raise ValueError(f"Bet value must be at least {player.table.min_bet}.")
+            raise NotSufficientBetError(value, player)
         super().__init__(player=player, move=ActionMove.BET, value=value)
 
     def execute(self):
