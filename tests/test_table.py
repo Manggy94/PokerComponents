@@ -8,6 +8,7 @@ from pkrcomponents.tables.table import Table, Board, Players, Pot, Tournament, L
 from pkrcomponents.actions.street import Street
 from pkrcomponents.cards.deck import Deck
 from pkrcomponents.players.table_player import TablePlayer
+from pkrcomponents.utils.exceptions import NotSufficientRaiseError
 
 
 class TableTest(unittest.TestCase):
@@ -325,7 +326,8 @@ class TableTest(unittest.TestCase):
         self.assertTrue(table.players[3].is_current_player)
         self.assertFalse(table.players[3].hand_stats.flag_vpip)
         self.assertFalse(table.players[3].has_initiative)
-        with self.assertRaises(ValueError):
+        self.assertEqual(table.players[3].min_raise, 400)
+        with self.assertRaises(NotSufficientRaiseError):
             action = RaiseAction(table.current_player, 300)
             action.play()
 
@@ -344,6 +346,10 @@ class TableTest(unittest.TestCase):
         self.assertFalse(table.players[3].is_current_player)
         self.assertTrue(table.players[3].hand_stats.flag_vpip)
         self.assertTrue(table.players[3].has_initiative)
+        self.assertTrue(table.players[4].is_current_player)
+        with self.assertRaises(NotSufficientRaiseError):
+            action = RaiseAction(table.current_player, 1000)
+            action.play()
 
     def test_action_check(self):
         table = Table()

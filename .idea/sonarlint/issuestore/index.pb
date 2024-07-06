@@ -186,3 +186,9 @@ X
 (pkrcomponents/actions/actions_history.py,3\b\3b7801fd39430a9c308e8fb8d0781b56b40410f7
 Q
 !pkrcomponents/players/__init__.py,9\1\91ccd12b4963f8aa88a34f0a01c9f30fea823dbf
+Q
+!pkrcomponents/utils/exceptions.py,3\1\31a3847829f3782b5e763e3a1a0d22e5b6a8f70c
+U
+%pkrcomponents/tournaments/__init__.py,9\b\9b5bab1b6b161579cf2e1f03e8d8113271f9e46d
+S
+#pkrcomponents/tournaments/buy_in.py,c\4\c4510df52f772c994b92b7d4e749f93f82bd9796

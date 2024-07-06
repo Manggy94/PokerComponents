@@ -167,6 +167,11 @@ class TablePlayer:
         return self.max_bet(self.table.pot.highest_bet - self.current_bet)
 
     @property
+    def min_raise(self) -> float:
+        """The minimum amount to raise"""
+        return self.table.min_bet - (self.to_call + self.current_bet)
+
+    @property
     def to_call_bb(self):
         """The amount to call to continue on the table in big blinds"""
         return self.to_call / self.table.level.bb

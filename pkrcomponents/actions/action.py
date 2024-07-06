@@ -4,6 +4,7 @@ from attrs.validators import instance_of, ge
 from pkrcomponents.actions.action_move import ActionMove
 from pkrcomponents.actions.street import Street
 from pkrcomponents.players.table_player import TablePlayer
+from pkrcomponents.utils.exceptions import NotSufficientRaiseError
 
 
 @define
@@ -227,11 +228,10 @@ class RaiseAction(Action):
     This class represents a raise action made by a player in a poker game
     """
     def __init__(self, player: TablePlayer, value: float):
+
         total_value = value + player.to_call
-        if total_value < player.table.min_bet and total_value != player.stack:
-            print(f"Valeur totale du raise: {total_value}, stack: {player.stack}, min_bet: {player.table.min_bet}, Montant à payer: {player.to_call}")
-            print(f"Raise value must be at least {value} or player should go all-in.")
-            raise ValueError(f"Raise value must be at least {value} or player should go all-in.")
+        if value < player.min_raise and total_value != player.stack:
+            raise NotSufficientRaiseError(value, player)
         super().__init__(player=player, move=ActionMove.RAISE, value=total_value)
 
     def execute(self):
