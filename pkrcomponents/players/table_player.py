@@ -287,7 +287,7 @@ class TablePlayer:
         if self.table.street != Street.SHOWDOWN:
             raise ValueError("Player cannot show combo if it is not showdown")
         self.combo = Combo(combo)
-        if self.has_table:
+        if self.has_table and not self.is_hero:
             self.table.deck.draw(self.combo.first)
             self.table.deck.draw(self.combo.second)
 
