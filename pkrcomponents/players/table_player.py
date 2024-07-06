@@ -8,6 +8,7 @@ from pkrcomponents.players.hand_stats import HandStats
 from pkrcomponents.players.position import Position
 from pkrcomponents.tables.table import Table
 from pkrcomponents.utils.converters import convert_to_position
+from pkrcomponents.utils.exceptions import ShowdownNotReachedError
 
 
 @define(repr=False)
@@ -285,7 +286,7 @@ class TablePlayer:
             combo (Combo, str): The combo to show
         """
         if self.table.street != Street.SHOWDOWN:
-            raise ValueError("Player cannot show combo if it is not showdown")
+            raise ShowdownNotReachedError()
         self.combo = Combo(combo)
         if self.has_table and not self.is_hero:
             self.table.deck.draw(self.combo.first)

@@ -8,7 +8,7 @@ from pkrcomponents.tables.table import Table, Board, Players, Pot, Tournament, L
 from pkrcomponents.actions.street import Street
 from pkrcomponents.cards.deck import Deck
 from pkrcomponents.players.table_player import TablePlayer
-from pkrcomponents.utils.exceptions import NotSufficientRaiseError
+from pkrcomponents.utils.exceptions import NotSufficientRaiseError, ShowdownNotReachedError
 
 
 class TableTest(unittest.TestCase):
@@ -429,7 +429,7 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.current_player.preflop_bet_amounts, [400, 440, 500, 600, 800, 1400, 2000, 19550.0])
         action = FoldAction(table.current_player)
         action.play()
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ShowdownNotReachedError):
             table.current_player.shows("AsAd")
         self.assertEqual(table.pot_value, 450)
         self.assertEqual(table.pot.highest_bet, 200)

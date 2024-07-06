@@ -24,3 +24,10 @@ class HandEndedError(Exception):
     def __init__(self, message="The hand has ended. No more actions can be made."):
         self.message = message
         super().__init__(self.message)
+
+
+class ShowdownNotReachedError(Exception):
+    """Raised when trying to show a combo hand before the showdown"""
+    def __init__(self, message="A player cannot show a combo hand before the showdown"):
+        self.message = message
+        super().__init__(self.message)
