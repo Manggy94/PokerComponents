@@ -48,3 +48,10 @@ class CannotParseWinnersError(Exception):
     def __init__(self, message="Cannot parse the winners of the hand"):
         self.message = message
         super().__init__(self.message)
+
+
+class EmptyButtonSeatError(Exception):
+    """Raised when the button seat is not a valid seat"""
+    def __init__(self, message="The button seat is not a valid seat"):
+        self.message = message
+        super().__init__(self.message)

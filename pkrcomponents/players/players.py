@@ -1,5 +1,6 @@
 from pkrcomponents.actions.posting import AntePosting, SBPosting, BBPosting
 from pkrcomponents.players.position import Position
+from pkrcomponents.utils.exceptions import EmptyButtonSeatError
 
 
 class Players:
@@ -163,8 +164,10 @@ class Players:
             advance = 1
         else:
             advance = 2
-        # button_index = self.occupied_seats.index(button_seat)
-        button_index = self.occupied_seats.index(self.button_seat)
+        try:
+            button_index = self.occupied_seats.index(self.button_seat)
+        except ValueError:
+            raise EmptyButtonSeatError
         bb_index = button_index
         for _ in range(advance):
             bb_index += 1
