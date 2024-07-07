@@ -25,8 +25,8 @@ class PlayersTest(unittest.TestCase):
 
     def test_occupied_and_distribute_positions(self):
         tab = Table()
-        for pl in self.list:
-            pl.sit(tab)
+        for player in self.list:
+            player.sit(tab)
         self.assertEqual([pl.name for pl in tab.players], ['Toto', 'Tata', 'Titi', 'Tété'])
         self.assertEqual(tab.players.occupied_seats, [1, 2, 4, 6])
         tab.players.bb_seat = 2

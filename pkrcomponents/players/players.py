@@ -163,7 +163,8 @@ class Players:
             advance = 1
         else:
             advance = 2
-        button_index = self.occupied_seats.index(button_seat)
+        # button_index = self.occupied_seats.index(button_seat)
+        button_index = self.occupied_seats.index(self.button_seat)
         bb_index = button_index
         for _ in range(advance):
             bb_index += 1

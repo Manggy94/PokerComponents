@@ -518,6 +518,7 @@ class Table:
         scores = [score for score in self.winners.keys()]
         scores.sort()
         for score in scores:
+            print(f"Winners with score {score}: {self.winners[score]}")
             players = self.winners[score]
             self.split_pot(players)
 

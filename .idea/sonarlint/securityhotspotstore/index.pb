@@ -192,3 +192,5 @@ U
 %pkrcomponents/tournaments/__init__.py,9\b\9b5bab1b6b161579cf2e1f03e8d8113271f9e46d
 S
 #pkrcomponents/tournaments/buy_in.py,c\4\c4510df52f772c994b92b7d4e749f93f82bd9796
+K
+pkrcomponents/tables/pot.py,c\0\c035924b47f945b5f6d0831cc2eeb5857b301158

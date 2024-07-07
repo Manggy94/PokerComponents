@@ -421,7 +421,6 @@ class TableTest(unittest.TestCase):
         table.start_hand()
         self.assertEqual(table.estimated_players_remaining, 2164)
         self.assertEqual(table.average_stack_bb, 116.67)
-
         self.assertEqual(table.min_bet, 400)
         self.assertEqual(table.min_bet_bb, 2)
         self.assertEqual(table.pot_value, 450)
