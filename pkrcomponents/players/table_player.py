@@ -33,6 +33,7 @@ class TablePlayer:
         seat (int): The seat number of the player
         stack (float): The current stack of the player
         table (Table): The table the player is on
+        went_to_showdown (bool): Whether the player went to showdown
 
     Methods:
         stack_bb(): Returns the player's stack in big blinds
@@ -109,6 +110,7 @@ class TablePlayer:
     actions_history = field(default=Factory(lambda: ActionsHistory()), validator=instance_of(ActionsHistory))
     hand_stats = field(default=Factory(HandStats), validator=instance_of(HandStats))
     has_initiative = field(default=False, validator=instance_of(bool))
+    went_to_showdown = field(default=False, validator=instance_of(bool))
 
     def __repr__(self):
         return (f"TablePlayer(name: '{self.name}', "
@@ -288,6 +290,7 @@ class TablePlayer:
         if self.table.street != Street.SHOWDOWN:
             raise ShowdownNotReachedError()
         self.combo = Combo(combo)
+        self.went_to_showdown = True
         if self.has_table and not self.is_hero:
             self.table.deck.draw(self.combo.first)
             self.table.deck.draw(self.combo.second)

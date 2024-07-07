@@ -68,7 +68,7 @@ class Table:
     is_mtt = field(default=False, validator=instance_of(bool))
     is_opened = field(default=False, validator=instance_of(bool))
     level = field(default=Factory(Level), validator=instance_of(Level))
-    max_players = field(default=6, validator=[instance_of(int), gt(2), le(10)])
+    max_players = field(default=6, validator=[instance_of(int), ge(2), le(10)])
     min_bet = field(default=0, validator=[instance_of(float), ge(0)], converter=float)
     players = field(default=Factory(Players), validator=instance_of(Players))
     postings = field(default=[], validator=instance_of(list))

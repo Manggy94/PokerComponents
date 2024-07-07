@@ -63,6 +63,8 @@ class HandStats:
     # 2. Counts
     count_preflop_player_raises = field(default=0, validator=ge(0))
     count_preflop_player_calls = field(default=0, validator=ge(0))
+    # 3. Sequences
+    preflop_actions_sequence = field(default="", validator=instance_of(str))
     # B. Flop stats
     # 1. Flags
     flag_flop_bet = field(default=False, validator=instance_of(bool))
@@ -112,6 +114,7 @@ class HandStats:
         self.flag_preflop_squeeze = False
         self.count_preflop_player_raises = 0
         self.count_preflop_player_calls = 0
+        self.preflop_actions_sequence = ""
         self.flag_flop_bet = False
         self.flag_flop_cbet_opportunity = False
         self.flag_flop_cbet = False
