@@ -77,6 +77,7 @@ class Action:
             case Street.PREFLOP:
                 if not self.table.is_opened:
                     self.player.hand_stats.flag_preflop_open_opportunity = True
+                    self.player.hand_stats.count_faced_limps = self.table.cnt_limps
                 if self.player.face_raise:
                     self.player.hand_stats.flag_preflop_face_raise = True
                 if self.table.cnt_cold_calls > 0 and self.player.can_3bet:
@@ -180,6 +181,7 @@ class CallAction(Action):
                 self.player.hand_stats.count_preflop_player_calls += 1
                 if self.player.can_first_raise:
                     self.player.hand_stats.flag_preflop_limp = True
+                    self.table.cnt_limps += 1
                 else:
                     self.player.hand_stats.flag_preflop_cold_called = True
                     self.table.cnt_cold_calls += 1
