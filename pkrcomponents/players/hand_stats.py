@@ -67,6 +67,8 @@ class HandStats:
         flag_flop_4bet (bool): Whether the player 4+bet on the flop
         flag_flop_face_4bet (bool): Whether the player faced a 4+bet on the flop
         # 2. Counts
+        count_flop_player_raises (int): The number of raises the player made on the flop
+        count_flop_player_calls (int): The number of calls the player made on the flop
         # 3. Sequences
         # C. Turn stats
         # 1. Flags
@@ -94,6 +96,8 @@ class HandStats:
         flag_turn_4bet (bool): Whether the player 4+bet on the turn
         flag_turn_face_4bet (bool): Whether the player faced a 4+bet on the turn
         # 2. Counts
+        count_turn_player_raises (int): The number of raises the player made on the turn
+        count_turn_player_calls (int): The number of calls the player made on the turn
         # 3. Sequences
         # D. River stats
         # 1. Flags
@@ -121,6 +125,8 @@ class HandStats:
         flag_river_4bet (bool): Whether the player 4+bet on the river
         flag_river_face_4bet (bool): Whether the player faced a 4+bet on the river
         # 2. Counts
+        count_river_player_raises (int): The number of raises the player made on the river
+        count_river_player_calls (int): The number of calls the player made on the river
         # 3. Sequences
         # E. General stats
         combo (Combo): The combo the player had
@@ -184,6 +190,8 @@ class HandStats:
     flag_flop_4bet = field(default=False, validator=instance_of(bool))
     flag_flop_face_4bet = field(default=False, validator=instance_of(bool))
     # 2. Counts
+    count_flop_player_raises = field(default=0, validator=ge(0))
+    count_flop_player_calls = field(default=0, validator=ge(0))
     # 3. Sequences
     flop_actions_sequence = field(default=Factory(lambda: ActionsSequence()), validator=instance_of(ActionsSequence))
     # C. Turn stats
@@ -211,8 +219,9 @@ class HandStats:
     flag_turn_4bet_opportunity = field(default=False, validator=instance_of(bool))
     flag_turn_4bet = field(default=False, validator=instance_of(bool))
     flag_turn_face_4bet = field(default=False, validator=instance_of(bool))
-
     # 2. Counts
+    count_turn_player_raises = field(default=0, validator=ge(0))
+    count_turn_player_calls = field(default=0, validator=ge(0))
     # 3. Sequences
     turn_actions_sequence = field(default=Factory(lambda: ActionsSequence()), validator=instance_of(ActionsSequence))
     # D. River stats
@@ -240,8 +249,9 @@ class HandStats:
     flag_river_4bet_opportunity = field(default=False, validator=instance_of(bool))
     flag_river_4bet = field(default=False, validator=instance_of(bool))
     flag_river_face_4bet = field(default=False, validator=instance_of(bool))
-
     # 2. Counts
+    count_river_player_raises = field(default=0, validator=ge(0))
+    count_river_player_calls = field(default=0, validator=ge(0))
     # 3. Sequences
     river_actions_sequence = field(default=Factory(lambda: ActionsSequence()), validator=instance_of(ActionsSequence))
     # E. General stats
@@ -305,6 +315,8 @@ class HandStats:
         self.flag_flop_4bet = False
         self.flag_flop_face_4bet = False
         # 2. Counts
+        self.count_flop_player_raises = 0
+        self.count_flop_player_calls = 0
         # 3. Sequences
         self.flop_actions_sequence = ActionsSequence()
         # C. Turn stats
