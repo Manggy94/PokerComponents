@@ -131,6 +131,8 @@ class HandStats:
         # E. General stats
         combo (Combo): The combo the player had
         flag_went_to_showdown (bool): Whether the player went to showdown
+        flag_is_hero (bool): Whether the player is the hero
+        flag_won_hand (bool): Whether the player won the hand
     """
     # pylint: disable=too-many-instance-attributes
     # A. Preflop stats
@@ -257,6 +259,8 @@ class HandStats:
     # E. General stats
     combo = field(default=None, validator=optional(instance_of(Combo)))
     flag_went_to_showdown = field(default=False, validator=instance_of(bool))
+    flag_is_hero = field(default=False, validator=instance_of(bool))
+    flag_won_hand = field(default=False, validator=instance_of(bool))
 
     def reset(self):
         """
@@ -372,5 +376,7 @@ class HandStats:
         # E. General stats
         self.combo = None
         self.flag_went_to_showdown = False
+        self.flag_is_hero = False
+        self.flag_won_hand = False
 
 
