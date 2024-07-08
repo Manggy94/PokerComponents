@@ -81,7 +81,7 @@ class Action:
                 if self.player.face_raise:
                     self.player.hand_stats.flag_preflop_face_raise = True
                 if self.table.cnt_cold_calls > 0 and self.player.can_3bet:
-                    self.player.hand_stats.flag_preflop_squeeze_opportunity = True
+                    self.player.hand_stats.flag_squeeze_opportunity = True
                 if self.player.can_3bet:
                     self.player.hand_stats.flag_preflop_3bet_opportunity = True
                 if self.player.face_3bet:
@@ -254,7 +254,7 @@ class RaiseAction(Action):
                 if self.table.cnt_bets == 2:
                     self.player.hand_stats.flag_preflop_3bet = True
                     if self.table.cnt_cold_calls > 0:
-                        self.player.hand_stats.flag_preflop_squeeze = True
+                        self.player.hand_stats.flag_squeeze = True
                 if self.table.cnt_bets >= 3:
                     self.player.hand_stats.flag_preflop_4bet = True
 

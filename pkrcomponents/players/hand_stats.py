@@ -27,8 +27,14 @@ class HandStats:
         flag_preflop_4bet_opportunity (bool): Whether the player had the opportunity to 4+bet preflop
         flag_preflop_4bet (bool): Whether the player 4+bet preflop
         flag_preflop_face_4bet (bool): Whether the player faced a 4+bet preflop
-        flag_preflop_squeeze_opportunity (bool): Whether the player had the opportunity to squeeze preflop
-        flag_preflop_squeeze (bool): Whether the player squeezed preflop
+        flag_squeeze_opportunity (bool): Whether the player had the opportunity to squeeze preflop
+        flag_squeeze (bool): Whether the player squeezed preflop
+        flag_face_squeeze (bool): Whether the player faced a squeeze preflop
+        flag_steal_opportunity (bool): Whether the player had the opportunity to steal preflop
+        flag_steal_attempt (bool): Whether the player attempted to steal preflop
+        flag_face_steal_attempt (bool): Whether the player faced a steal attempt preflop
+        flag_fold_to_steal_attempt (bool): Whether the player folded to a steal attempt preflop
+        flag_blind_defense (bool): Whether the player defended the blinds preflop
         # 2. Counts
         count_preflop_player_raises (int): The number of raises the player made preflop
         count_preflop_player_calls (int): The number of calls the player made preflop
@@ -117,6 +123,8 @@ class HandStats:
         # 2. Counts
         # 3. Sequences
         # E. General stats
+        combo (Combo): The combo the player had
+        flag_went_to_showdown (bool): Whether the player went to showdown
     """
     # pylint: disable=too-many-instance-attributes
     # A. Preflop stats
@@ -136,9 +144,14 @@ class HandStats:
     flag_preflop_4bet_opportunity = field(default=False, validator=instance_of(bool))
     flag_preflop_4bet = field(default=False, validator=instance_of(bool))
     flag_preflop_face_4bet = field(default=False, validator=instance_of(bool))
-    flag_preflop_squeeze_opportunity = field(default=False, validator=instance_of(bool))
-    flag_preflop_squeeze = field(default=False, validator=instance_of(bool))
-    flag_preflop_face_squeeze = field(default=False, validator=instance_of(bool))
+    flag_squeeze_opportunity = field(default=False, validator=instance_of(bool))
+    flag_squeeze = field(default=False, validator=instance_of(bool))
+    flag_face_squeeze = field(default=False, validator=instance_of(bool))
+    flag_steal_opportunity = field(default=False, validator=instance_of(bool))
+    flag_steal_attempt = field(default=False, validator=instance_of(bool))
+    flag_face_steal_attempt = field(default=False, validator=instance_of(bool))
+    flag_fold_to_steal_attempt = field(default=False, validator=instance_of(bool))
+    flag_blind_defense = field(default=False, validator=instance_of(bool))
     # 2. Counts
     count_preflop_player_raises = field(default=0, validator=ge(0))
     count_preflop_player_calls = field(default=0, validator=ge(0))
@@ -233,7 +246,7 @@ class HandStats:
     river_actions_sequence = field(default=Factory(lambda: ActionsSequence()), validator=instance_of(ActionsSequence))
     # E. General stats
     combo = field(default=None, validator=optional(instance_of(Combo)))
-    went_to_showdown = field(default=False, validator=instance_of(bool))
+    flag_went_to_showdown = field(default=False, validator=instance_of(bool))
 
     def reset(self):
         """
@@ -256,8 +269,14 @@ class HandStats:
         self.flag_preflop_4bet_opportunity = False
         self.flag_preflop_4bet = False
         self.flag_preflop_face_4bet = False
-        self.flag_preflop_squeeze_opportunity = False
-        self.flag_preflop_squeeze = False
+        self.flag_squeeze_opportunity = False
+        self.flag_squeeze = False
+        self.flag_face_squeeze = False
+        self.flag_steal_opportunity = False
+        self.flag_steal_attempt = False
+        self.flag_face_steal_attempt = False
+        self.flag_fold_to_steal_attempt = False
+        self.flag_blind_defense = False
         # 2. Counts
         self.count_preflop_player_raises = 0
         self.count_preflop_player_calls = 0
@@ -339,5 +358,7 @@ class HandStats:
         # 2. Counts
         # 3. Sequences
         # E. General stats
+        self.combo = None
+        self.flag_went_to_showdown = False
 
 
