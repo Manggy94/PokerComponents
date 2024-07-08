@@ -53,6 +53,12 @@ class HandStats:
         amount_to_call_facing_preflop_4bet (float): The amount the player had to call facing the preflop 4bet
         amount_first_raise_made_preflop (float): The amount the player used on his first raise preflop
         amount_second_raise_made_preflop (float): The amount the player used on his second raise preflop
+        ratio_to_call_facing_preflop_bet (float): The ratio of the pot the player had to call facing the preflop bet
+        ratio_to_call_facing_preflop_2bet (float): The ratio of the pot the player had to call facing the preflop 2bet
+        ratio_to_call_facing_preflop_3bet (float): The ratio of the pot the player had to call facing the preflop 3bet
+        ratio_to_call_facing_preflop_4bet (float): The ratio of the pot the player had to call facing the preflop 4bet
+        ratio_first_raise_made_preflop (float): The ratio of the pot the player used on his first raise preflop
+        ratio_second_raise_made_preflop (float): The ratio of the pot the player used on his second raise preflop
         total_preflop_bet_amount (float): The total amount the player bet preflop
         # 5. Moves
         move_facing_preflop_2bet (ActionMove): The move the player did when facing a preflop 2bet
@@ -99,6 +105,13 @@ class HandStats:
         amount_bet_made_flop (float): The amount the player used to bet on the flop
         amount_first_raise_made_flop (float): The amount the player used on his first raise on the flop
         amount_second_raise_made_flop (float): The amount the player used on his second raise on the flop
+        ratio_to_call_facing_flop_bet (float): The ratio of the pot the player had to call facing the flop bet
+        ratio_to_call_facing_flop_2bet (float): The ratio of the pot the player had to call facing the flop 2bet
+        ratio_to_call_facing_flop_3bet (float): The ratio of the pot the player had to call facing the flop 3bet
+        ratio_to_call_facing_flop_4bet (float): The ratio of the pot the player had to call facing the flop 4bet
+        ratio_bet_made_flop (float): The ratio of the pot the player used to bet on the flop
+        ratio_first_raise_made_flop (float): The ratio of the pot the player used on his first raise on the flop
+        ratio_second_raise_made_flop (float): The ratio of the pot the player used on his second raise on the flop
         total_flop_bet_amount(float): The total amount the player bet on the flop
         # 5. Moves
         move_facing_flop_bet (ActionMove): The move the player did when facing the flop bet
@@ -146,6 +159,13 @@ class HandStats:
         amount_bet_made_turn (float): The amount the player used to bet on the turn
         amount_first_raise_made_turn (float): The amount the player used on his first raise on the turn
         amount_second_raise_made_turn (float): The amount the player used on his second raise on the turn
+        ratio_to_call_facing_turn_bet (float): The ratio of the pot the player had to call facing the turn bet
+        ratio_to_call_facing_turn_2bet (float): The ratio of the pot the player had to call facing the turn 2bet
+        ratio_to_call_facing_turn_3bet (float): The ratio of the pot the player had to call facing the turn 3bet
+        ratio_to_call_facing_turn_4bet (float): The ratio of the pot the player had to call facing the turn 4bet
+        ratio_bet_made_turn (float): The ratio of the pot the player used to bet on the turn
+        ratio_first_raise_made_turn (float): The ratio of the pot the player used on his first raise on the turn
+        ratio_second_raise_made_turn (float): The ratio of the pot the player used on his second raise on the turn
         total_turn_bet_amount(float): The total amount the player bet on the turn
         # 5. Moves
         move_facing_turn_bet (ActionMove): The move the player did when facing the turn bet
@@ -193,6 +213,13 @@ class HandStats:
         amount_bet_made_river (float): The amount the player used to bet on the river
         amount_first_raise_made_river (float): The amount the player used on his first raise on the river
         amount_second_raise_made_river (float): The amount the player used on his second raise on the river
+        ratio_to_call_facing_river_bet (float): The ratio of the pot the player had to call facing the river bet
+        ratio_to_call_facing_river_2bet (float): The ratio of the pot the player had to call facing the river 2bet
+        ratio_to_call_facing_river_3bet (float): The ratio of the pot the player had to call facing the river 3bet
+        ratio_to_call_facing_river_4bet (float): The ratio of the pot the player had to call facing the river 4bet
+        ratio_bet_made_river (float): The ratio of the pot the player used to bet on the river
+        ratio_first_raise_made_river (float): The ratio of the pot the player used on his first raise on the river
+        ratio_second_raise_made_river (float): The ratio of the pot the player used on his second raise on the river
         total_river_bet_amount(float): The total amount the player bet on the river
         # 5. Moves
         move_facing_river_bet (ActionMove): The move the player did when facing the river bet
@@ -258,6 +285,12 @@ class HandStats:
     amount_to_call_facing_preflop_4bet = field(default=0, validator=instance_of(float), converter=float)
     amount_first_raise_made_preflop = field(default=0, validator=instance_of(float), converter=float)
     amount_second_raise_made_preflop = field(default=0, validator=instance_of(float), converter=float)
+    ratio_to_call_facing_preflop_bet = field(default=0, validator=instance_of(float), converter=float)
+    ratio_to_call_facing_preflop_2bet = field(default=0, validator=instance_of(float), converter=float)
+    ratio_to_call_facing_preflop_3bet = field(default=0, validator=instance_of(float), converter=float)
+    ratio_to_call_facing_preflop_4bet = field(default=0, validator=instance_of(float), converter=float)
+    ratio_first_raise_made_preflop = field(default=0, validator=instance_of(float), converter=float)
+    ratio_second_raise_made_preflop = field(default=0, validator=instance_of(float), converter=float)
     total_preflop_bet_amount = field(default=0, validator=instance_of(float), converter=float)
     # 5. Moves
     move_facing_preflop_2bet = field(default=None, validator=optional(instance_of(ActionMove)))
@@ -304,6 +337,13 @@ class HandStats:
     amount_bet_made_flop = field(default=0, validator=instance_of(float), converter=float)
     amount_first_raise_made_flop = field(default=0, validator=instance_of(float), converter=float)
     amount_second_raise_made_flop = field(default=0, validator=instance_of(float), converter=float)
+    ratio_to_call_facing_flop_bet = field(default=0, validator=instance_of(float), converter=float)
+    ratio_to_call_facing_flop_2bet = field(default=0, validator=instance_of(float), converter=float)
+    ratio_to_call_facing_flop_3bet = field(default=0, validator=instance_of(float), converter=float)
+    ratio_to_call_facing_flop_4bet = field(default=0, validator=instance_of(float), converter=float)
+    ratio_bet_made_flop = field(default=0, validator=instance_of(float), converter=float)
+    ratio_first_raise_made_flop = field(default=0, validator=instance_of(float), converter=float)
+    ratio_second_raise_made_flop = field(default=0, validator=instance_of(float), converter=float)
     total_flop_bet_amount = field(default=0, validator=instance_of(float), converter=float)
     # 5. Moves
     move_facing_flop_bet = field(default=None, validator=optional(instance_of(ActionMove)))
@@ -351,6 +391,13 @@ class HandStats:
     amount_bet_made_turn = field(default=0, validator=instance_of(float), converter=float)
     amount_first_raise_made_turn = field(default=0, validator=instance_of(float), converter=float)
     amount_second_raise_made_turn = field(default=0, validator=instance_of(float), converter=float)
+    ratio_to_call_facing_turn_bet = field(default=0, validator=instance_of(float), converter=float)
+    ratio_to_call_facing_turn_2bet = field(default=0, validator=instance_of(float), converter=float)
+    ratio_to_call_facing_turn_3bet = field(default=0, validator=instance_of(float), converter=float)
+    ratio_to_call_facing_turn_4bet = field(default=0, validator=instance_of(float), converter=float)
+    ratio_bet_made_turn = field(default=0, validator=instance_of(float), converter=float)
+    ratio_first_raise_made_turn = field(default=0, validator=instance_of(float), converter=float)
+    ratio_second_raise_made_turn = field(default=0, validator=instance_of(float), converter=float)
     total_turn_bet_amount = field(default=0, validator=instance_of(float), converter=float)
     # 5. Moves
     move_facing_turn_bet = field(default=None, validator=optional(instance_of(ActionMove)))
@@ -398,6 +445,13 @@ class HandStats:
     amount_bet_made_river = field(default=0, validator=instance_of(float), converter=float)
     amount_first_raise_made_river = field(default=0, validator=instance_of(float), converter=float)
     amount_second_raise_made_river = field(default=0, validator=instance_of(float), converter=float)
+    ratio_to_call_facing_river_bet = field(default=0, validator=instance_of(float), converter=float)
+    ratio_to_call_facing_river_2bet = field(default=0, validator=instance_of(float), converter=float)
+    ratio_to_call_facing_river_3bet = field(default=0, validator=instance_of(float), converter=float)
+    ratio_to_call_facing_river_4bet = field(default=0, validator=instance_of(float), converter=float)
+    ratio_bet_made_river = field(default=0, validator=instance_of(float), converter=float)
+    ratio_first_raise_made_river = field(default=0, validator=instance_of(float), converter=float)
+    ratio_second_raise_made_river = field(default=0, validator=instance_of(float), converter=float)
     total_river_bet_amount = field(default=0, validator=instance_of(float), converter=float)
     # 5. Moves
     move_facing_river_bet = field(default=None, validator=optional(instance_of(ActionMove)))
@@ -426,8 +480,8 @@ class HandStats:
         """
         Resets the statistics
         """
-        for field in self.__attrs_attrs__:
-            if isinstance(field.default, Factory):
-                setattr(self, field.name, field.default.factory())
+        for attribute in self.__attrs_attrs__:
+            if isinstance(attribute.default, Factory):
+                setattr(self, attribute.name, attribute.default.factory())
             else:
-                setattr(self, field.name, field.default)
+                setattr(self, attribute.name, attribute.default)
