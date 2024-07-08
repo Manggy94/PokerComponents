@@ -1,7 +1,9 @@
 from attrs import define, field, Factory
 from attrs.validators import instance_of, ge, optional
 
+from pkrcomponents.actions.action_move import ActionMove
 from pkrcomponents.actions.actions_sequence import ActionsSequence
+from pkrcomponents.actions.street import Street
 from pkrcomponents.cards.combo import Combo
 
 
@@ -35,6 +37,8 @@ class HandStats:
         flag_face_steal_attempt (bool): Whether the player faced a steal attempt preflop
         flag_fold_to_steal_attempt (bool): Whether the player folded to a steal attempt preflop
         flag_blind_defense (bool): Whether the player defended the blinds preflop
+        flag_open_shove (bool): Whether the player open shoved preflop
+        flag_voluntary_all_in_preflop (bool): Whether the player went all-in preflop voluntarily
         # 2. Counts
         count_preflop_player_raises (int): The number of raises the player made preflop
         count_preflop_player_calls (int): The number of calls the player made preflop
@@ -50,6 +54,7 @@ class HandStats:
         amount_first_raise_made_preflop (float): The amount the player used on his first raise preflop
         amount_second_raise_made_preflop (float): The amount the player used on his second raise preflop
         total_preflop_bet_amount (float): The total amount the player bet preflop
+        # 5. Moves
         # B. Flop stats
         # 1. Flags
         flag_saw_flop (bool): Whether the player saw the flop
@@ -90,6 +95,7 @@ class HandStats:
         amount_first_raise_made_flop (float): The amount the player used on his first raise on the flop
         amount_second_raise_made_flop (float): The amount the player used on his second raise on the flop
         total_flop_bet_amount(float): The total amount the player bet on the flop
+        # 5. Moves
         # C. Turn stats
         # 1. Flags
         flag_saw_turn (bool): Whether the player saw the turn
@@ -130,6 +136,7 @@ class HandStats:
         amount_first_raise_made_turn (float): The amount the player used on his first raise on the turn
         amount_second_raise_made_turn (float): The amount the player used on his second raise on the turn
         total_turn_bet_amount(float): The total amount the player bet on the turn
+        # 5. Moves
         # D. River stats
         # 1. Flags
         flag_saw_river (bool): Whether the player saw the river
@@ -170,15 +177,21 @@ class HandStats:
         amount_first_raise_made_river (float): The amount the player used on his first raise on the river
         amount_second_raise_made_river (float): The amount the player used on his second raise on the river
         total_river_bet_amount(float): The total amount the player bet on the river
+        # 5. Moves
         # E. General stats
         combo (Combo): The combo the player had
         starting_stack (float): The starting stack of the player at the beginning of the hand
-        starting_stack_bb (float): The starting stack of the player at the beginning of the hand in big blinds
         amount_won (float): The amount the player won in the hand
         flag_went_to_showdown (bool): Whether the player went to showdown
         flag_is_hero (bool): Whether the player is the hero
         flag_won_hand (bool): Whether the player won the hand
         total_bet_amount (float): The total amount the player bet in the hand
+        fold_street (Street): The street the player folded
+        all_in_street (Street): The street the player went all-in
+        face_covering_bet_street (Street): The street the player faced a covering bet
+        face_allin_street (Street): The street the player faced an all-in
+        facing_covering_bet_move (ActionMove): The move the player did when facing a covering bet
+        facing_allin_move (ActionMove): The move the player did when facing an all-in
     """
     # pylint: disable=too-many-instance-attributes
     # A. Preflop stats
@@ -206,6 +219,8 @@ class HandStats:
     flag_face_steal_attempt = field(default=False, validator=instance_of(bool))
     flag_fold_to_steal_attempt = field(default=False, validator=instance_of(bool))
     flag_blind_defense = field(default=False, validator=instance_of(bool))
+    flag_open_shove = field(default=False, validator=instance_of(bool))
+    flag_voluntary_all_in_preflop = field(default=False, validator=instance_of(bool))
     # 2. Counts
     count_preflop_player_raises = field(default=0, validator=ge(0))
     count_preflop_player_calls = field(default=0, validator=ge(0))
@@ -221,6 +236,7 @@ class HandStats:
     amount_first_raise_made_preflop = field(default=0, validator=instance_of(float))
     amount_second_raise_made_preflop = field(default=0, validator=instance_of(float))
     total_preflop_bet_amount = field(default=0, validator=instance_of(float))
+    # 5. Moves
     # B. Flop stats
     # 1. Flags
     flag_saw_flop = field(default=False, validator=instance_of(bool))
@@ -261,6 +277,7 @@ class HandStats:
     amount_first_raise_made_flop = field(default=0, validator=instance_of(float))
     amount_second_raise_made_flop = field(default=0, validator=instance_of(float))
     total_flop_bet_amount = field(default=0, validator=instance_of(float))
+    # 5. Moves
     # C. Turn stats
     # 1. Flags
     flag_saw_turn = field(default=False, validator=instance_of(bool))
@@ -301,6 +318,7 @@ class HandStats:
     amount_first_raise_made_turn = field(default=0, validator=instance_of(float))
     amount_second_raise_made_turn = field(default=0, validator=instance_of(float))
     total_turn_bet_amount = field(default=0, validator=instance_of(float))
+    # 5. Moves
     # D. River stats
     # 1. Flags
     flag_saw_river = field(default=False, validator=instance_of(bool))
@@ -341,16 +359,23 @@ class HandStats:
     amount_first_raise_made_river = field(default=0, validator=instance_of(float))
     amount_second_raise_made_river = field(default=0, validator=instance_of(float))
     total_river_bet_amount = field(default=0, validator=instance_of(float))
+    # 5. Moves
     # E. General stats
     combo = field(default=None, validator=optional(instance_of(Combo)))
     starting_stack = field(default=0, validator=[ge(0), instance_of(float)])
-    starting_stack_bb = field(default=0, validator=[ge(0), instance_of(float)])
     amount_won = field(default=0, validator=instance_of(float))
     amount_expected_won = field(default=0, validator=instance_of(float))
     flag_went_to_showdown = field(default=False, validator=instance_of(bool))
     flag_is_hero = field(default=False, validator=instance_of(bool))
     flag_won_hand = field(default=False, validator=instance_of(bool))
     total_bet_amount = field(default=0, validator=instance_of(float))
+    fold_street = field(default=None, validator=optional(instance_of(Street)))
+    all_in_street = field(default=None, validator=optional(instance_of(Street)))
+    face_covering_bet_street = field(default=None, validator=optional(instance_of(Street)))
+    face_allin_street = field(default=None, validator=optional(instance_of(Street)))
+    facing_covering_bet_move = field(default=None, validator=optional(instance_of(ActionMove)))
+    facing_allin_move = field(default=None, validator=optional(instance_of(ActionMove)))
+
 
     def reset(self):
         """
@@ -381,6 +406,8 @@ class HandStats:
         self.flag_face_steal_attempt = False
         self.flag_fold_to_steal_attempt = False
         self.flag_blind_defense = False
+        self.flag_open_shove = False
+        self.flag_voluntary_all_in_preflop = False
         # 2. Counts
         self.count_preflop_player_raises = 0
         self.count_preflop_player_calls = 0
@@ -395,6 +422,8 @@ class HandStats:
         self.amount_to_call_facing_preflop_4bet = 0
         self.amount_first_raise_made_preflop = 0
         self.amount_second_raise_made_preflop = 0
+        self.total_preflop_bet_amount = 0
+        # 5. Moves
         # B. Flop stats
         # 1. Flags
         self.flag_saw_flop = False
@@ -430,6 +459,8 @@ class HandStats:
         self.amount_bet_made_flop = 0
         self.amount_first_raise_made_flop = 0
         self.amount_second_raise_made_flop = 0
+        self.total_flop_bet_amount = 0
+        # 5. Moves
         # C. Turn stats
         # 1. Flags
         self.flag_saw_turn = False
@@ -467,6 +498,8 @@ class HandStats:
         self.amount_bet_made_turn = 0
         self.amount_first_raise_made_turn = 0
         self.amount_second_raise_made_turn = 0
+        self.total_turn_bet_amount = 0
+        # 5. Moves
         # D. River stats
         # 1. Flags
         self.flag_saw_river = False
@@ -504,12 +537,19 @@ class HandStats:
         self.amount_bet_made_river = 0
         self.amount_first_raise_made_river = 0
         self.amount_second_raise_made_river = 0
+        self.total_river_bet_amount = 0
+        # 5. Moves
         # E. General stats
         self.combo = None
         self.starting_stack = 0
-        self.starting_stack_bb = 0
         self.flag_went_to_showdown = False
         self.flag_is_hero = False
         self.flag_won_hand = False
+        self.total_bet_amount = 0
+        self.fold_street = None
+        self.all_in_street = None
+        self.face_covering_bet_street = None
+        self.face_allin_street = None
+
 
 
