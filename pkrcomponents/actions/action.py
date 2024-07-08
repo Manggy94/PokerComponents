@@ -177,7 +177,7 @@ class CallAction(Action):
         match self.table.street:
             case Street.PREFLOP:
                 self.player.hand_stats.flag_vpip = True
-                self.player.hand_stats.flag_preflop_opened = True
+                self.player.hand_stats.flag_preflop_open = True
                 self.player.hand_stats.count_preflop_player_calls += 1
                 if self.player.can_first_raise:
                     self.player.hand_stats.flag_preflop_limp = True
@@ -247,7 +247,7 @@ class RaiseAction(Action):
         match self.table.street:
             case Street.PREFLOP:
                 self.player.hand_stats.flag_vpip = True
-                self.player.hand_stats.flag_preflop_opened = True
+                self.player.hand_stats.flag_preflop_open = True
                 self.player.hand_stats.count_preflop_player_raises += 1
                 if self.player.can_first_raise:
                     self.player.hand_stats.flag_preflop_first_raise = True
