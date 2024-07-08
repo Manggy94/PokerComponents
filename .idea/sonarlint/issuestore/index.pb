@@ -194,3 +194,7 @@ S
 #pkrcomponents/tournaments/buy_in.py,c\4\c4510df52f772c994b92b7d4e749f93f82bd9796
 K
 pkrcomponents/tables/pot.py,c\0\c035924b47f945b5f6d0831cc2eeb5857b301158
+P
+ pkrcomponents/cards/evaluator.py,2\b\2b3d3d7764330bba8114546c60e98c120f021031
+S
+#pkrcomponents/cards/lookup_table.py,5\4\54927e9a991de7e8177ac95eb63fd9ff9ba16c53

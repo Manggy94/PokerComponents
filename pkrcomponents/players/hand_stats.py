@@ -41,6 +41,8 @@ class HandStats:
         count_faced_limps (int): The number of limps the player faced preflop
         # 3. Sequences
         preflop_actions_sequence (ActionsSequence): The sequence of actions the player made preflop
+        # 4. Amounts
+        amount_preflop_effective_stack (float): The effective stack the player had preflop
         # B. Flop stats
         # 1. Flags
         flag_saw_flop (bool): Whether the player saw the flop
@@ -71,6 +73,7 @@ class HandStats:
         count_flop_player_calls (int): The number of calls the player made on the flop
         # 3. Sequences
         flop_actions_sequence (ActionsSequence): The sequence of actions the player made on the flop
+        # 4. Amounts
         # C. Turn stats
         # 1. Flags
         flag_saw_turn (bool): Whether the player saw the turn
@@ -101,6 +104,7 @@ class HandStats:
         count_turn_player_calls (int): The number of calls the player made on the turn
         # 3. Sequences
         turn_actions_sequence (ActionsSequence): The sequence of actions the player made on the turn
+        # 4. Amounts
         # D. River stats
         # 1. Flags
         flag_saw_river (bool): Whether the player saw the river
@@ -131,9 +135,12 @@ class HandStats:
         count_river_player_calls (int): The number of calls the player made on the river
         # 3. Sequences
         river_actions_sequence (ActionsSequence): The sequence of actions the player made on the river
+        # 4. Amounts
         # E. General stats
         combo (Combo): The combo the player had
-        starting_stack (int): The starting stack of the player at the beginning of the hand
+        starting_stack (float): The starting stack of the player at the beginning of the hand
+        starting_stack_bb (float): The starting stack of the player at the beginning of the hand in big blinds
+        amount_won (float): The amount the player won in the hand
         flag_went_to_showdown (bool): Whether the player went to showdown
         flag_is_hero (bool): Whether the player is the hero
         flag_won_hand (bool): Whether the player won the hand
@@ -170,6 +177,9 @@ class HandStats:
     count_faced_limps = field(default=0, validator=ge(0))
     # 3. Sequences
     preflop_actions_sequence = field(default=Factory(lambda: ActionsSequence()), validator=instance_of(ActionsSequence))
+    # 4. Amounts
+    amount_preflop_effective_stack = field(default=0, validator=instance_of(float))
+    amount_to_call_facing_preflop_raise = field(default=0, validator=instance_of(float))
     # B. Flop stats
     # 1. Flags
     flag_saw_flop = field(default=False, validator=instance_of(bool))
@@ -200,6 +210,8 @@ class HandStats:
     count_flop_player_calls = field(default=0, validator=ge(0))
     # 3. Sequences
     flop_actions_sequence = field(default=Factory(lambda: ActionsSequence()), validator=instance_of(ActionsSequence))
+    # 4. Amounts
+    amount_flop_effective_stack = field(default=0, validator=instance_of(float))
     # C. Turn stats
     # 1. Flags
     flag_saw_turn = field(default=False, validator=instance_of(bool))
@@ -230,6 +242,8 @@ class HandStats:
     count_turn_player_calls = field(default=0, validator=ge(0))
     # 3. Sequences
     turn_actions_sequence = field(default=Factory(lambda: ActionsSequence()), validator=instance_of(ActionsSequence))
+    # 4. Amounts
+    amount_turn_effective_stack = field(default=0, validator=instance_of(float))
     # D. River stats
     # 1. Flags
     flag_saw_river = field(default=False, validator=instance_of(bool))
@@ -260,9 +274,13 @@ class HandStats:
     count_river_player_calls = field(default=0, validator=ge(0))
     # 3. Sequences
     river_actions_sequence = field(default=Factory(lambda: ActionsSequence()), validator=instance_of(ActionsSequence))
+    # 4. Amounts
+    amount_river_effective_stack = field(default=0, validator=instance_of(float))
     # E. General stats
     combo = field(default=None, validator=optional(instance_of(Combo)))
-    starting_stack = field(default=0, validator=ge(0))
+    starting_stack = field(default=0, validator=[ge(0), instance_of(float)])
+    starting_stack_bb = field(default=0, validator=[ge(0), instance_of(float)])
+    amount_won = field(default=0, validator=instance_of(float))
     flag_went_to_showdown = field(default=False, validator=instance_of(bool))
     flag_is_hero = field(default=False, validator=instance_of(bool))
     flag_won_hand = field(default=False, validator=instance_of(bool))
@@ -302,6 +320,9 @@ class HandStats:
         self.count_faced_limps = 0
         # 3. Sequences
         self.preflop_actions_sequence = ActionsSequence()
+        # 4. Amounts
+        self.amount_preflop_effective_stack = 0
+        self.amount_to_call_facing_preflop_raise = 0
         # B. Flop stats
         # 1. Flags
         self.flag_saw_flop = False
@@ -328,6 +349,8 @@ class HandStats:
         self.count_flop_player_calls = 0
         # 3. Sequences
         self.flop_actions_sequence = ActionsSequence()
+        # 4. Amounts
+        self.amount_flop_effective_stack = 0
         # C. Turn stats
         # 1. Flags
         self.flag_saw_turn = False
@@ -356,6 +379,8 @@ class HandStats:
         self.count_turn_player_calls = 0
         # 3. Sequences
         self.turn_actions_sequence = ActionsSequence()
+        # 4. Amounts
+        self.amount_turn_effective_stack = 0
         # D. River stats
         # 1. Flags
         self.flag_saw_river = False
@@ -384,9 +409,12 @@ class HandStats:
         self.count_river_player_calls = 0
         # 3. Sequences
         self.river_actions_sequence = ActionsSequence()
+        # 4. Amounts
+        self.amount_river_effective_stack = 0
         # E. General stats
         self.combo = None
         self.starting_stack = 0
+        self.starting_stack_bb = 0
         self.flag_went_to_showdown = False
         self.flag_is_hero = False
         self.flag_won_hand = False
