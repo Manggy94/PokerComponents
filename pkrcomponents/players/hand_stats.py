@@ -49,6 +49,7 @@ class HandStats:
         amount_to_call_facing_preflop_4bet (float): The amount the player had to call facing the preflop 4bet
         amount_first_raise_made_preflop (float): The amount the player used on his first raise preflop
         amount_second_raise_made_preflop (float): The amount the player used on his second raise preflop
+        total_preflop_bet_amount (float): The total amount the player bet preflop
         # B. Flop stats
         # 1. Flags
         flag_saw_flop (bool): Whether the player saw the flop
@@ -88,6 +89,7 @@ class HandStats:
         amount_bet_made_flop (float): The amount the player used to bet on the flop
         amount_first_raise_made_flop (float): The amount the player used on his first raise on the flop
         amount_second_raise_made_flop (float): The amount the player used on his second raise on the flop
+        total_flop_bet_amount(float): The total amount the player bet on the flop
         # C. Turn stats
         # 1. Flags
         flag_saw_turn (bool): Whether the player saw the turn
@@ -127,6 +129,7 @@ class HandStats:
         amount_bet_made_turn (float): The amount the player used to bet on the turn
         amount_first_raise_made_turn (float): The amount the player used on his first raise on the turn
         amount_second_raise_made_turn (float): The amount the player used on his second raise on the turn
+        total_turn_bet_amount(float): The total amount the player bet on the turn
         # D. River stats
         # 1. Flags
         flag_saw_river (bool): Whether the player saw the river
@@ -166,6 +169,7 @@ class HandStats:
         amount_bet_made_river (float): The amount the player used to bet on the river
         amount_first_raise_made_river (float): The amount the player used on his first raise on the river
         amount_second_raise_made_river (float): The amount the player used on his second raise on the river
+        total_river_bet_amount(float): The total amount the player bet on the river
         # E. General stats
         combo (Combo): The combo the player had
         starting_stack (float): The starting stack of the player at the beginning of the hand
@@ -174,6 +178,7 @@ class HandStats:
         flag_went_to_showdown (bool): Whether the player went to showdown
         flag_is_hero (bool): Whether the player is the hero
         flag_won_hand (bool): Whether the player won the hand
+        total_bet_amount (float): The total amount the player bet in the hand
     """
     # pylint: disable=too-many-instance-attributes
     # A. Preflop stats
@@ -215,6 +220,7 @@ class HandStats:
     amount_to_call_facing_preflop_4bet = field(default=0, validator=instance_of(float))
     amount_first_raise_made_preflop = field(default=0, validator=instance_of(float))
     amount_second_raise_made_preflop = field(default=0, validator=instance_of(float))
+    total_preflop_bet_amount = field(default=0, validator=instance_of(float))
     # B. Flop stats
     # 1. Flags
     flag_saw_flop = field(default=False, validator=instance_of(bool))
@@ -254,6 +260,7 @@ class HandStats:
     amount_bet_made_flop = field(default=0, validator=instance_of(float))
     amount_first_raise_made_flop = field(default=0, validator=instance_of(float))
     amount_second_raise_made_flop = field(default=0, validator=instance_of(float))
+    total_flop_bet_amount = field(default=0, validator=instance_of(float))
     # C. Turn stats
     # 1. Flags
     flag_saw_turn = field(default=False, validator=instance_of(bool))
@@ -293,6 +300,7 @@ class HandStats:
     amount_bet_made_turn = field(default=0, validator=instance_of(float))
     amount_first_raise_made_turn = field(default=0, validator=instance_of(float))
     amount_second_raise_made_turn = field(default=0, validator=instance_of(float))
+    total_turn_bet_amount = field(default=0, validator=instance_of(float))
     # D. River stats
     # 1. Flags
     flag_saw_river = field(default=False, validator=instance_of(bool))
@@ -332,6 +340,7 @@ class HandStats:
     amount_bet_made_river = field(default=0, validator=instance_of(float))
     amount_first_raise_made_river = field(default=0, validator=instance_of(float))
     amount_second_raise_made_river = field(default=0, validator=instance_of(float))
+    total_river_bet_amount = field(default=0, validator=instance_of(float))
     # E. General stats
     combo = field(default=None, validator=optional(instance_of(Combo)))
     starting_stack = field(default=0, validator=[ge(0), instance_of(float)])
@@ -340,6 +349,7 @@ class HandStats:
     flag_went_to_showdown = field(default=False, validator=instance_of(bool))
     flag_is_hero = field(default=False, validator=instance_of(bool))
     flag_won_hand = field(default=False, validator=instance_of(bool))
+    total_bet_amount = field(default=0, validator=instance_of(float))
 
     def reset(self):
         """
