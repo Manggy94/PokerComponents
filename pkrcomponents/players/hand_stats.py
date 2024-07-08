@@ -70,6 +70,7 @@ class HandStats:
         count_flop_player_raises (int): The number of raises the player made on the flop
         count_flop_player_calls (int): The number of calls the player made on the flop
         # 3. Sequences
+        flop_actions_sequence (ActionsSequence): The sequence of actions the player made on the flop
         # C. Turn stats
         # 1. Flags
         flag_saw_turn (bool): Whether the player saw the turn
@@ -99,6 +100,7 @@ class HandStats:
         count_turn_player_raises (int): The number of raises the player made on the turn
         count_turn_player_calls (int): The number of calls the player made on the turn
         # 3. Sequences
+        turn_actions_sequence (ActionsSequence): The sequence of actions the player made on the turn
         # D. River stats
         # 1. Flags
         flag_saw_river (bool): Whether the player saw the river
@@ -128,6 +130,7 @@ class HandStats:
         count_river_player_raises (int): The number of raises the player made on the river
         count_river_player_calls (int): The number of calls the player made on the river
         # 3. Sequences
+        river_actions_sequence (ActionsSequence): The sequence of actions the player made on the river
         # E. General stats
         combo (Combo): The combo the player had
         flag_went_to_showdown (bool): Whether the player went to showdown
@@ -347,7 +350,10 @@ class HandStats:
         self.flag_turn_4bet = False
         self.flag_turn_face_4bet = False
         # 2. Counts
+        self.count_turn_player_raises = 0
+        self.count_turn_player_calls = 0
         # 3. Sequences
+        self.turn_actions_sequence = ActionsSequence()
         # D. River stats
         # 1. Flags
         self.flag_saw_river = False
@@ -372,7 +378,10 @@ class HandStats:
         self.flag_river_4bet = False
         self.flag_river_face_4bet = False
         # 2. Counts
+        self.count_river_player_raises = 0
+        self.count_river_player_calls = 0
         # 3. Sequences
+        self.river_actions_sequence = ActionsSequence()
         # E. General stats
         self.combo = None
         self.flag_went_to_showdown = False
