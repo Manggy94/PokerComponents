@@ -38,6 +38,7 @@ class HandStats:
         # B. Flop stats
         # 1. Flags
         flag_saw_flop (bool): Whether the player saw the flop
+        flag_flop_first_to_talk (bool): Whether the player was the first to talk on the flop
         flag_flop_has_position (bool): Whether the player had position on the flop
         flag_flop_bet (bool): Whether the player bet on the flop
         flag_flop_open_opportunity (bool): Whether the player had the opportunity to open on the flop
@@ -63,6 +64,30 @@ class HandStats:
         # 3. Sequences
         # C. Turn stats
         # 1. Flags
+        flag_saw_turn (bool): Whether the player saw the turn
+        flag_turn_first_to_talk (bool): Whether the player was the first to talk on the turn
+        flag_turn_has_position (bool): Whether the player had position on the turn
+        flag_turn_bet (bool): Whether the player bet on the turn
+        flag_turn_open_opportunity (bool): Whether the player had the opportunity to open on the turn
+        flag_turn_open (bool): Whether the player opened on the turn
+        flag_turn_cbet_opportunity (bool): Whether the player had the opportunity to make a continuation bet on the turn
+        flag_turn_cbet (bool): Whether the player made a continuation bet on the turn
+        flag_turn_face_cbet (bool): Whether the player faced a continuation bet on the turn
+        flag_turn_donk_bet_opportunity (bool): Whether the player had the opportunity to make a donk bet on the turn
+        flag_turn_donk_bet (bool): Whether the player made a donk bet on the turn
+        flag_turn_face_donk_bet (bool): Whether the player faced a donk bet on the turn
+        flag_turn_first_raise (bool): Whether the player made the first raise on the turn
+        flag_turn_fold (bool): Whether the player folded on the turn
+        flag_turn_check (bool): Whether the player checked on the turn
+        flag_turn_check_raise (bool): Whether the player check-raised on the turn
+        flag_turn_face_raise (bool): Whether the player faced a raise on the turn
+        flag_turn_3bet_opportunity (bool): Whether the player had the opportunity to 3bet on the turn
+        flag_turn_3bet (bool): Whether the player 3bet on the turn
+        flag_turn_face_3bet (bool): Whether the player faced a 3bet on the turn
+        flag_turn_4bet_opportunity (bool): Whether the player had the opportunity to 4+bet on the turn
+        flag_turn_4bet (bool): Whether the player 4+bet on the turn
+        flag_turn_face_4bet (bool): Whether the player faced a 4+bet on the turn
+
         # 2. Counts
         # 3. Sequences
         # D. River stats
@@ -101,6 +126,7 @@ class HandStats:
     # B. Flop stats
     # 1. Flags
     flag_saw_flop = field(default=False, validator=instance_of(bool))
+    flag_flop_first_to_talk = field(default=False, validator=instance_of(bool))
     flag_flop_has_position = field(default=False, validator=instance_of(bool))
     flag_flop_bet = field(default=False, validator=instance_of(bool))
     flag_flop_open_opportunity = field(default=False, validator=instance_of(bool))
@@ -127,8 +153,30 @@ class HandStats:
     flop_actions_sequence = field(default=Factory(lambda: ActionsSequence()), validator=instance_of(ActionsSequence))
     # C. Turn stats
     # 1. Flags
+    flag_saw_turn = field(default=False, validator=instance_of(bool))
+    flag_turn_first_to_talk = field(default=False, validator=instance_of(bool))
+    flag_turn_has_position = field(default=False, validator=instance_of(bool))
     flag_turn_bet = field(default=False, validator=instance_of(bool))
+    flag_turn_open_opportunity = field(default=False, validator=instance_of(bool))
+    flag_turn_open = field(default=False, validator=instance_of(bool))
+    flag_turn_cbet_opportunity = field(default=False, validator=instance_of(bool))
+    flag_turn_cbet = field(default=False, validator=instance_of(bool))
+    flag_turn_face_cbet = field(default=False, validator=instance_of(bool))
+    flag_turn_donk_bet_opportunity = field(default=False, validator=instance_of(bool))
+    flag_turn_donk_bet = field(default=False, validator=instance_of(bool))
+    flag_turn_face_donk_bet = field(default=False, validator=instance_of(bool))
+    flag_turn_first_raise = field(default=False, validator=instance_of(bool))
+    flag_turn_fold = field(default=False, validator=instance_of(bool))
     flag_turn_check = field(default=False, validator=instance_of(bool))
+    flag_turn_check_raise = field(default=False, validator=instance_of(bool))
+    flag_turn_face_raise = field(default=False, validator=instance_of(bool))
+    flag_turn_3bet_opportunity = field(default=False, validator=instance_of(bool))
+    flag_turn_3bet = field(default=False, validator=instance_of(bool))
+    flag_turn_face_3bet = field(default=False, validator=instance_of(bool))
+    flag_turn_4bet_opportunity = field(default=False, validator=instance_of(bool))
+    flag_turn_4bet = field(default=False, validator=instance_of(bool))
+    flag_turn_face_4bet = field(default=False, validator=instance_of(bool))
+
     # 2. Counts
     # 3. Sequences
     turn_actions_sequence = field(default=Factory(lambda: ActionsSequence()), validator=instance_of(ActionsSequence))
@@ -175,6 +223,7 @@ class HandStats:
         # B. Flop stats
         # 1. Flags
         self.flag_saw_flop = False
+        self.flag_flop_first_to_talk = False
         self.flag_flop_has_position = False
         self.flag_flop_bet = False
         self.flag_flop_cbet_opportunity = False
@@ -197,6 +246,29 @@ class HandStats:
         self.flop_actions_sequence = ActionsSequence()
         # C. Turn stats
         # 1. Flags
+        self.flag_saw_turn = False
+        self.flag_turn_first_to_talk = False
+        self.flag_turn_has_position = False
+        self.flag_turn_bet = False
+        self.flag_turn_cbet_opportunity = False
+        self.flag_turn_cbet = False
+        self.flag_turn_face_cbet = False
+        self.flag_turn_donk_bet_opportunity = False
+        self.flag_turn_donk_bet = False
+        self.flag_turn_face_donk_bet = False
+        self.flag_turn_first_raise = False
+        self.flag_turn_fold = False
+        self.flag_turn_check = False
+        self.flag_turn_check_raise = False
+        self.flag_turn_face_raise = False
+        self.flag_turn_3bet_opportunity = False
+        self.flag_turn_3bet = False
+        self.flag_turn_face_3bet = False
+        self.flag_turn_4bet_opportunity = False
+        self.flag_turn_4bet = False
+        self.flag_turn_face_4bet = False
+
+
         # 2. Counts
         # 3. Sequences
         # D. River stats
