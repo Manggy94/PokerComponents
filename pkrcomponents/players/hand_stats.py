@@ -55,6 +55,11 @@ class HandStats:
         amount_second_raise_made_preflop (float): The amount the player used on his second raise preflop
         total_preflop_bet_amount (float): The total amount the player bet preflop
         # 5. Moves
+        move_facing_preflop_2bet (ActionMove): The move the player did when facing a preflop 2bet
+        move_facing_preflop_3bet (ActionMove): The move the player did when facing a preflop 3bet
+        move_facing_preflop_4bet (ActionMove): The move the player did when facing a preflop 4bet
+        move_facing_preflop_squeeze (ActionMove): The move the player did when facing a preflop squeeze
+        move_facing_preflop_steal_attempt (ActionMove): The move the player did when facing a preflop steal attempt
         # B. Flop stats
         # 1. Flags
         flag_saw_flop (bool): Whether the player saw the flop
@@ -96,6 +101,12 @@ class HandStats:
         amount_second_raise_made_flop (float): The amount the player used on his second raise on the flop
         total_flop_bet_amount(float): The total amount the player bet on the flop
         # 5. Moves
+        move_facing_flop_bet (ActionMove): The move the player did when facing the flop bet
+        move_facing_flop_2bet (ActionMove): The move the player did when facing the flop 2bet
+        move_facing_flop_3bet (ActionMove): The move the player did when facing the flop 3bet
+        move_facing_flop_4bet (ActionMove): The move the player did when facing the flop 4bet
+        move_facing_flop_cbet (ActionMove): The move the player did when facing the flop cbet
+        move_facing_flop_donk_bet (ActionMove): The move the player did when facing the flop donk bet
         # C. Turn stats
         # 1. Flags
         flag_saw_turn (bool): Whether the player saw the turn
@@ -137,6 +148,12 @@ class HandStats:
         amount_second_raise_made_turn (float): The amount the player used on his second raise on the turn
         total_turn_bet_amount(float): The total amount the player bet on the turn
         # 5. Moves
+        move_facing_turn_bet (ActionMove): The move the player did when facing the turn bet
+        move_facing_turn_2bet (ActionMove): The move the player did when facing the turn 2bet
+        move_facing_turn_3bet (ActionMove): The move the player did when facing the turn 3bet
+        move_facing_turn_4bet (ActionMove): The move the player did when facing the turn 4bet
+        move_facing_turn_cbet (ActionMove): The move the player did when facing the turn cbet
+        move_facing_turn_donk_bet (ActionMove): The move the player did when facing the turn donk bet
         # D. River stats
         # 1. Flags
         flag_saw_river (bool): Whether the player saw the river
@@ -178,6 +195,12 @@ class HandStats:
         amount_second_raise_made_river (float): The amount the player used on his second raise on the river
         total_river_bet_amount(float): The total amount the player bet on the river
         # 5. Moves
+        move_facing_river_bet (ActionMove): The move the player did when facing the river bet
+        move_facing_river_2bet (ActionMove): The move the player did when facing the river 2bet
+        move_facing_river_3bet (ActionMove): The move the player did when facing the river 3bet
+        move_facing_river_4bet (ActionMove): The move the player did when facing the river 4bet
+        move_facing_river_cbet (ActionMove): The move the player did when facing the river cbet
+        move_facing_river_donk_bet (ActionMove): The move the player did when facing the river donk bet
         # E. General stats
         combo (Combo): The combo the player had
         starting_stack (float): The starting stack of the player at the beginning of the hand
@@ -228,15 +251,20 @@ class HandStats:
     # 3. Sequences
     preflop_actions_sequence = field(default=Factory(lambda: ActionsSequence()), validator=instance_of(ActionsSequence))
     # 4. Amounts
-    amount_preflop_effective_stack = field(default=0, validator=instance_of(float))
-    amount_to_call_facing_preflop_bet = field(default=0, validator=instance_of(float))
-    amount_to_call_facing_preflop_2bet = field(default=0, validator=instance_of(float))
-    amount_to_call_facing_preflop_3bet = field(default=0, validator=instance_of(float))
-    amount_to_call_facing_preflop_4bet = field(default=0, validator=instance_of(float))
-    amount_first_raise_made_preflop = field(default=0, validator=instance_of(float))
-    amount_second_raise_made_preflop = field(default=0, validator=instance_of(float))
-    total_preflop_bet_amount = field(default=0, validator=instance_of(float))
+    amount_preflop_effective_stack = field(default=0, validator=instance_of(float), converter=float)
+    amount_to_call_facing_preflop_bet = field(default=0, validator=instance_of(float), converter=float)
+    amount_to_call_facing_preflop_2bet = field(default=0, validator=instance_of(float), converter=float)
+    amount_to_call_facing_preflop_3bet = field(default=0, validator=instance_of(float), converter=float)
+    amount_to_call_facing_preflop_4bet = field(default=0, validator=instance_of(float), converter=float)
+    amount_first_raise_made_preflop = field(default=0, validator=instance_of(float), converter=float)
+    amount_second_raise_made_preflop = field(default=0, validator=instance_of(float), converter=float)
+    total_preflop_bet_amount = field(default=0, validator=instance_of(float), converter=float)
     # 5. Moves
+    move_facing_preflop_2bet = field(default=None, validator=optional(instance_of(ActionMove)))
+    move_facing_preflop_3bet = field(default=None, validator=optional(instance_of(ActionMove)))
+    move_facing_preflop_4bet = field(default=None, validator=optional(instance_of(ActionMove)))
+    move_facing_preflop_squeeze = field(default=None, validator=optional(instance_of(ActionMove)))
+    move_facing_preflop_steal_attempt = field(default=None, validator=optional(instance_of(ActionMove)))
     # B. Flop stats
     # 1. Flags
     flag_saw_flop = field(default=False, validator=instance_of(bool))
@@ -268,16 +296,22 @@ class HandStats:
     # 3. Sequences
     flop_actions_sequence = field(default=Factory(lambda: ActionsSequence()), validator=instance_of(ActionsSequence))
     # 4. Amounts
-    amount_flop_effective_stack = field(default=0, validator=instance_of(float))
-    amount_to_call_facing_flop_bet = field(default=0, validator=instance_of(float))
-    amount_to_call_facing_flop_2bet = field(default=0, validator=instance_of(float))
-    amount_to_call_facing_flop_3bet = field(default=0, validator=instance_of(float))
-    amount_to_call_facing_flop_4bet = field(default=0, validator=instance_of(float))
-    amount_bet_made_flop = field(default=0, validator=instance_of(float))
-    amount_first_raise_made_flop = field(default=0, validator=instance_of(float))
-    amount_second_raise_made_flop = field(default=0, validator=instance_of(float))
-    total_flop_bet_amount = field(default=0, validator=instance_of(float))
+    amount_flop_effective_stack = field(default=0, validator=instance_of(float), converter=float)
+    amount_to_call_facing_flop_bet = field(default=0, validator=instance_of(float), converter=float)
+    amount_to_call_facing_flop_2bet = field(default=0, validator=instance_of(float), converter=float)
+    amount_to_call_facing_flop_3bet = field(default=0, validator=instance_of(float), converter=float)
+    amount_to_call_facing_flop_4bet = field(default=0, validator=instance_of(float), converter=float)
+    amount_bet_made_flop = field(default=0, validator=instance_of(float), converter=float)
+    amount_first_raise_made_flop = field(default=0, validator=instance_of(float), converter=float)
+    amount_second_raise_made_flop = field(default=0, validator=instance_of(float), converter=float)
+    total_flop_bet_amount = field(default=0, validator=instance_of(float), converter=float)
     # 5. Moves
+    move_facing_flop_bet = field(default=None, validator=optional(instance_of(ActionMove)))
+    move_facing_flop_2bet = field(default=None, validator=optional(instance_of(ActionMove)))
+    move_facing_flop_3bet = field(default=None, validator=optional(instance_of(ActionMove)))
+    move_facing_flop_4bet = field(default=None, validator=optional(instance_of(ActionMove)))
+    move_facing_flop_cbet = field(default=None, validator=optional(instance_of(ActionMove)))
+    move_facing_flop_donk_bet = field(default=None, validator=optional(instance_of(ActionMove)))
     # C. Turn stats
     # 1. Flags
     flag_saw_turn = field(default=False, validator=instance_of(bool))
@@ -309,16 +343,22 @@ class HandStats:
     # 3. Sequences
     turn_actions_sequence = field(default=Factory(lambda: ActionsSequence()), validator=instance_of(ActionsSequence))
     # 4. Amounts
-    amount_turn_effective_stack = field(default=0, validator=instance_of(float))
-    amount_to_call_facing_turn_bet = field(default=0, validator=instance_of(float))
-    amount_to_call_facing_turn_2bet = field(default=0, validator=instance_of(float))
-    amount_to_call_facing_turn_3bet = field(default=0, validator=instance_of(float))
-    amount_to_call_facing_turn_4bet = field(default=0, validator=instance_of(float))
-    amount_bet_made_turn = field(default=0, validator=instance_of(float))
-    amount_first_raise_made_turn = field(default=0, validator=instance_of(float))
-    amount_second_raise_made_turn = field(default=0, validator=instance_of(float))
-    total_turn_bet_amount = field(default=0, validator=instance_of(float))
+    amount_turn_effective_stack = field(default=0, validator=instance_of(float), converter=float)
+    amount_to_call_facing_turn_bet = field(default=0, validator=instance_of(float), converter=float)
+    amount_to_call_facing_turn_2bet = field(default=0, validator=instance_of(float), converter=float)
+    amount_to_call_facing_turn_3bet = field(default=0, validator=instance_of(float), converter=float)
+    amount_to_call_facing_turn_4bet = field(default=0, validator=instance_of(float), converter=float)
+    amount_bet_made_turn = field(default=0, validator=instance_of(float), converter=float)
+    amount_first_raise_made_turn = field(default=0, validator=instance_of(float), converter=float)
+    amount_second_raise_made_turn = field(default=0, validator=instance_of(float), converter=float)
+    total_turn_bet_amount = field(default=0, validator=instance_of(float), converter=float)
     # 5. Moves
+    move_facing_turn_bet = field(default=None, validator=optional(instance_of(ActionMove)))
+    move_facing_turn_2bet = field(default=None, validator=optional(instance_of(ActionMove)))
+    move_facing_turn_3bet = field(default=None, validator=optional(instance_of(ActionMove)))
+    move_facing_turn_4bet = field(default=None, validator=optional(instance_of(ActionMove)))
+    move_facing_turn_cbet = field(default=None, validator=optional(instance_of(ActionMove)))
+    move_facing_turn_donk_bet = field(default=None, validator=optional(instance_of(ActionMove)))
     # D. River stats
     # 1. Flags
     flag_saw_river = field(default=False, validator=instance_of(bool))
@@ -350,25 +390,31 @@ class HandStats:
     # 3. Sequences
     river_actions_sequence = field(default=Factory(lambda: ActionsSequence()), validator=instance_of(ActionsSequence))
     # 4. Amounts
-    amount_river_effective_stack = field(default=0, validator=instance_of(float))
-    amount_to_call_facing_river_bet = field(default=0, validator=instance_of(float))
-    amount_to_call_facing_river_2bet = field(default=0, validator=instance_of(float))
-    amount_to_call_facing_river_3bet = field(default=0, validator=instance_of(float))
-    amount_to_call_facing_river_4bet = field(default=0, validator=instance_of(float))
-    amount_bet_made_river = field(default=0, validator=instance_of(float))
-    amount_first_raise_made_river = field(default=0, validator=instance_of(float))
-    amount_second_raise_made_river = field(default=0, validator=instance_of(float))
-    total_river_bet_amount = field(default=0, validator=instance_of(float))
+    amount_river_effective_stack = field(default=0, validator=instance_of(float), converter=float)
+    amount_to_call_facing_river_bet = field(default=0, validator=instance_of(float), converter=float)
+    amount_to_call_facing_river_2bet = field(default=0, validator=instance_of(float), converter=float)
+    amount_to_call_facing_river_3bet = field(default=0, validator=instance_of(float), converter=float)
+    amount_to_call_facing_river_4bet = field(default=0, validator=instance_of(float), converter=float)
+    amount_bet_made_river = field(default=0, validator=instance_of(float), converter=float)
+    amount_first_raise_made_river = field(default=0, validator=instance_of(float), converter=float)
+    amount_second_raise_made_river = field(default=0, validator=instance_of(float), converter=float)
+    total_river_bet_amount = field(default=0, validator=instance_of(float), converter=float)
     # 5. Moves
+    move_facing_river_bet = field(default=None, validator=optional(instance_of(ActionMove)))
+    move_facing_river_2bet = field(default=None, validator=optional(instance_of(ActionMove)))
+    move_facing_river_3bet = field(default=None, validator=optional(instance_of(ActionMove)))
+    move_facing_river_4bet = field(default=None, validator=optional(instance_of(ActionMove)))
+    move_facing_river_cbet = field(default=None, validator=optional(instance_of(ActionMove)))
+    move_facing_river_donk_bet = field(default=None, validator=optional(instance_of(ActionMove)))
     # E. General stats
     combo = field(default=None, validator=optional(instance_of(Combo)))
-    starting_stack = field(default=0, validator=[ge(0), instance_of(float)])
-    amount_won = field(default=0, validator=instance_of(float))
-    amount_expected_won = field(default=0, validator=instance_of(float))
+    starting_stack = field(default=0, validator=[ge(0), instance_of(float)], converter=float)
+    amount_won = field(default=0, validator=instance_of(float), converter=float)
+    amount_expected_won = field(default=0, validator=instance_of(float), converter=float)
     flag_went_to_showdown = field(default=False, validator=instance_of(bool))
     flag_is_hero = field(default=False, validator=instance_of(bool))
     flag_won_hand = field(default=False, validator=instance_of(bool))
-    total_bet_amount = field(default=0, validator=instance_of(float))
+    total_bet_amount = field(default=0, validator=instance_of(float), converter=float)
     fold_street = field(default=None, validator=optional(instance_of(Street)))
     all_in_street = field(default=None, validator=optional(instance_of(Street)))
     face_covering_bet_street = field(default=None, validator=optional(instance_of(Street)))
@@ -376,180 +422,12 @@ class HandStats:
     facing_covering_bet_move = field(default=None, validator=optional(instance_of(ActionMove)))
     facing_allin_move = field(default=None, validator=optional(instance_of(ActionMove)))
 
-
     def reset(self):
         """
         Resets the statistics
         """
-        # A. Preflop stats
-        # 1. Flags
-        self.flag_vpip = False
-        self.flag_preflop_open_opportunity = False
-        self.flag_preflop_open = False
-        self.flag_preflop_first_raise = False
-        self.flag_preflop_fold = False
-        self.flag_preflop_limp = False
-        self.flag_preflop_cold_called = False
-        self.flag_preflop_face_raise = False
-        self.flag_preflop_bet = False
-        self.flag_preflop_3bet_opportunity = False
-        self.flag_preflop_3bet = False
-        self.flag_preflop_face_3bet = False
-        self.flag_preflop_4bet_opportunity = False
-        self.flag_preflop_4bet = False
-        self.flag_preflop_face_4bet = False
-        self.flag_squeeze_opportunity = False
-        self.flag_squeeze = False
-        self.flag_face_squeeze = False
-        self.flag_steal_opportunity = False
-        self.flag_steal_attempt = False
-        self.flag_face_steal_attempt = False
-        self.flag_fold_to_steal_attempt = False
-        self.flag_blind_defense = False
-        self.flag_open_shove = False
-        self.flag_voluntary_all_in_preflop = False
-        # 2. Counts
-        self.count_preflop_player_raises = 0
-        self.count_preflop_player_calls = 0
-        self.count_faced_limps = 0
-        # 3. Sequences
-        self.preflop_actions_sequence = ActionsSequence()
-        # 4. Amounts
-        self.amount_preflop_effective_stack = 0
-        self.amount_to_call_facing_preflop_bet = 0
-        self.amount_to_call_facing_preflop_2bet = 0
-        self.amount_to_call_facing_preflop_3bet = 0
-        self.amount_to_call_facing_preflop_4bet = 0
-        self.amount_first_raise_made_preflop = 0
-        self.amount_second_raise_made_preflop = 0
-        self.total_preflop_bet_amount = 0
-        # 5. Moves
-        # B. Flop stats
-        # 1. Flags
-        self.flag_saw_flop = False
-        self.flag_flop_first_to_talk = False
-        self.flag_flop_has_position = False
-        self.flag_flop_bet = False
-        self.flag_flop_cbet_opportunity = False
-        self.flag_flop_cbet = False
-        self.flag_flop_face_cbet = False
-        self.flag_flop_donk_bet_opportunity = False
-        self.flag_flop_donk_bet = False
-        self.flag_flop_face_donk_bet = False
-        self.flag_flop_first_raise = False
-        self.flag_flop_check = False
-        self.flag_flop_check_raise = False
-        self.flag_flop_face_raise = False
-        self.flag_flop_3bet_opportunity = False
-        self.flag_flop_3bet = False
-        self.flag_flop_4bet_opportunity = False
-        self.flag_flop_4bet = False
-        self.flag_flop_face_4bet = False
-        # 2. Counts
-        self.count_flop_player_raises = 0
-        self.count_flop_player_calls = 0
-        # 3. Sequences
-        self.flop_actions_sequence = ActionsSequence()
-        # 4. Amounts
-        self.amount_flop_effective_stack = 0
-        self.amount_to_call_facing_flop_bet = 0
-        self.amount_to_call_facing_flop_2bet = 0
-        self.amount_to_call_facing_flop_3bet = 0
-        self.amount_to_call_facing_flop_4bet = 0
-        self.amount_bet_made_flop = 0
-        self.amount_first_raise_made_flop = 0
-        self.amount_second_raise_made_flop = 0
-        self.total_flop_bet_amount = 0
-        # 5. Moves
-        # C. Turn stats
-        # 1. Flags
-        self.flag_saw_turn = False
-        self.flag_turn_first_to_talk = False
-        self.flag_turn_has_position = False
-        self.flag_turn_bet = False
-        self.flag_turn_cbet_opportunity = False
-        self.flag_turn_cbet = False
-        self.flag_turn_face_cbet = False
-        self.flag_turn_donk_bet_opportunity = False
-        self.flag_turn_donk_bet = False
-        self.flag_turn_face_donk_bet = False
-        self.flag_turn_first_raise = False
-        self.flag_turn_fold = False
-        self.flag_turn_check = False
-        self.flag_turn_check_raise = False
-        self.flag_turn_face_raise = False
-        self.flag_turn_3bet_opportunity = False
-        self.flag_turn_3bet = False
-        self.flag_turn_face_3bet = False
-        self.flag_turn_4bet_opportunity = False
-        self.flag_turn_4bet = False
-        self.flag_turn_face_4bet = False
-        # 2. Counts
-        self.count_turn_player_raises = 0
-        self.count_turn_player_calls = 0
-        # 3. Sequences
-        self.turn_actions_sequence = ActionsSequence()
-        # 4. Amounts
-        self.amount_turn_effective_stack = 0
-        self.amount_to_call_facing_turn_bet = 0
-        self.amount_to_call_facing_turn_2bet = 0
-        self.amount_to_call_facing_turn_3bet = 0
-        self.amount_to_call_facing_turn_4bet = 0
-        self.amount_bet_made_turn = 0
-        self.amount_first_raise_made_turn = 0
-        self.amount_second_raise_made_turn = 0
-        self.total_turn_bet_amount = 0
-        # 5. Moves
-        # D. River stats
-        # 1. Flags
-        self.flag_saw_river = False
-        self.flag_river_first_to_talk = False
-        self.flag_river_has_position = False
-        self.flag_river_bet = False
-        self.flag_river_cbet_opportunity = False
-        self.flag_river_cbet = False
-        self.flag_river_face_cbet = False
-        self.flag_river_donk_bet_opportunity = False
-        self.flag_river_donk_bet = False
-        self.flag_river_face_donk_bet = False
-        self.flag_river_first_raise = False
-        self.flag_river_fold = False
-        self.flag_river_check = False
-        self.flag_river_check_raise = False
-        self.flag_river_face_raise = False
-        self.flag_river_3bet_opportunity = False
-        self.flag_river_3bet = False
-        self.flag_river_face_3bet = False
-        self.flag_river_4bet_opportunity = False
-        self.flag_river_4bet = False
-        self.flag_river_face_4bet = False
-        # 2. Counts
-        self.count_river_player_raises = 0
-        self.count_river_player_calls = 0
-        # 3. Sequences
-        self.river_actions_sequence = ActionsSequence()
-        # 4. Amounts
-        self.amount_river_effective_stack = 0
-        self.amount_to_call_facing_river_bet = 0
-        self.amount_to_call_facing_river_2bet = 0
-        self.amount_to_call_facing_river_3bet = 0
-        self.amount_to_call_facing_river_4bet = 0
-        self.amount_bet_made_river = 0
-        self.amount_first_raise_made_river = 0
-        self.amount_second_raise_made_river = 0
-        self.total_river_bet_amount = 0
-        # 5. Moves
-        # E. General stats
-        self.combo = None
-        self.starting_stack = 0
-        self.flag_went_to_showdown = False
-        self.flag_is_hero = False
-        self.flag_won_hand = False
-        self.total_bet_amount = 0
-        self.fold_street = None
-        self.all_in_street = None
-        self.face_covering_bet_street = None
-        self.face_allin_street = None
-
-
-
+        for field in self.__attrs_attrs__:
+            if isinstance(field.default, Factory):
+                setattr(self, field.name, field.default.factory())
+            else:
+                setattr(self, field.name, field.default)
