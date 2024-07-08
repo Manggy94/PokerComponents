@@ -133,6 +133,7 @@ class HandStats:
         river_actions_sequence (ActionsSequence): The sequence of actions the player made on the river
         # E. General stats
         combo (Combo): The combo the player had
+        starting_stack (int): The starting stack of the player at the beginning of the hand
         flag_went_to_showdown (bool): Whether the player went to showdown
         flag_is_hero (bool): Whether the player is the hero
         flag_won_hand (bool): Whether the player won the hand
@@ -261,6 +262,7 @@ class HandStats:
     river_actions_sequence = field(default=Factory(lambda: ActionsSequence()), validator=instance_of(ActionsSequence))
     # E. General stats
     combo = field(default=None, validator=optional(instance_of(Combo)))
+    starting_stack = field(default=0, validator=ge(0))
     flag_went_to_showdown = field(default=False, validator=instance_of(bool))
     flag_is_hero = field(default=False, validator=instance_of(bool))
     flag_won_hand = field(default=False, validator=instance_of(bool))
@@ -384,6 +386,7 @@ class HandStats:
         self.river_actions_sequence = ActionsSequence()
         # E. General stats
         self.combo = None
+        self.starting_stack = 0
         self.flag_went_to_showdown = False
         self.flag_is_hero = False
         self.flag_won_hand = False
