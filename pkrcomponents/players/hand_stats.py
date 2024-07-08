@@ -346,6 +346,7 @@ class HandStats:
     starting_stack = field(default=0, validator=[ge(0), instance_of(float)])
     starting_stack_bb = field(default=0, validator=[ge(0), instance_of(float)])
     amount_won = field(default=0, validator=instance_of(float))
+    amount_expected_won = field(default=0, validator=instance_of(float))
     flag_went_to_showdown = field(default=False, validator=instance_of(bool))
     flag_is_hero = field(default=False, validator=instance_of(bool))
     flag_won_hand = field(default=False, validator=instance_of(bool))
