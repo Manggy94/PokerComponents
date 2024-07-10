@@ -378,19 +378,44 @@ class TablePlayer:
         return self.table.cnt_bets >= 2
 
     @property
+    def can_1bet(self):
+        """Boolean indicating if player can 1bet"""
+        return self.table.cnt_bets == 0 and self.stack_enables_raise
+
+    @property
+    def can_2bet(self):
+        """Boolean indicating if player can 2bet"""
+        return self.table.cnt_bets == 1 and self.stack_enables_raise
+
+    @property
     def can_3bet(self):
         """Boolean indicating if player can 3bet"""
         return self.table.cnt_bets == 2 and self.stack_enables_raise
 
     @property
-    def face_3bet(self):
-        """Boolean indicating if player faces a 3bet"""
-        return self.table.cnt_bets == 3
-
-    @property
     def can_4bet(self):
         """Boolean indicating if player can 4bet"""
         return self.table.cnt_bets >= 3 and self.stack_enables_raise
+
+    @property
+    def is_facing_1bet(self):
+        """Boolean indicating if player is facing a 1bet"""
+        return self.table.cnt_bets == 1
+
+    @property
+    def is_facing_2bet(self):
+        """Boolean indicating if player is facing a 2bet"""
+        return self.table.cnt_bets == 2
+
+    @property
+    def is_facing_3bet(self):
+        """Boolean indicating if player is facing a 3bet"""
+        return self.table.cnt_bets == 3
+
+    @property
+    def is_facing_4bet(self):
+        """Boolean indicating if player is facing a 4bet"""
+        return self.table.cnt_bets >= 4
 
     @property
     def can_cbet(self):
@@ -412,3 +437,8 @@ class TablePlayer:
         """Boolean indicating if player can open"""
         return ((self.table.street == Street.PREFLOP and not self.table.is_opened)
                 or (self.table.street != Street.PREFLOP and self.table.cnt_bets == 0))
+
+    @property
+    def can_squeeze(self):
+        """Boolean indicating if player can squeeze"""
+        return self.can_3bet and self.table.cnt_cold_calls > 0 and self.table.street.is_preflop

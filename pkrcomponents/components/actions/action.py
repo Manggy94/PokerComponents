@@ -21,6 +21,8 @@ class Action:
         __str__(): Returns a string representation of the action
         execute(): Executes the action
         play(): Plays the action on the table and advances the seat playing
+        add_to_history(): Adds the action to the history
+        update_hand_stats(): Updates the hand statistics of the player according to the action
     """
 
     player = field(validator=[instance_of(TablePlayer)])
@@ -75,22 +77,24 @@ class Action:
         """
         match self.table.street:
             case Street.PREFLOP:
+                self.player.hand_stats.preflop_actions_sequence = self.player.actions_history.preflop
                 if not self.table.is_opened:
                     self.player.hand_stats.flag_preflop_open_opportunity = True
                     self.player.hand_stats.count_faced_limps = self.table.cnt_limps
                 if self.player.face_raise:
                     self.player.hand_stats.flag_preflop_face_raise = True
-                if self.table.cnt_cold_calls > 0 and self.player.can_3bet:
+                if self.player.can_squeeze:
                     self.player.hand_stats.flag_squeeze_opportunity = True
                 if self.player.can_3bet:
                     self.player.hand_stats.flag_preflop_3bet_opportunity = True
-                if self.player.face_3bet:
+                if self.player.is_facing_3bet:
                     self.player.hand_stats.flag_preflop_face_3bet = True
                 if self.table.cnt_bets >= 4:
                     self.player.hand_stats.flag_preflop_face_4bet = True
                 if self.player.can_4bet:
                     self.player.hand_stats.flag_preflop_4bet_opportunity = True
             case Street.FLOP:
+                self.player.hand_stats.flop_actions_sequence = self.player.actions_history.flop
                 if self.player.can_open:
                     self.player.hand_stats.flag_flop_open_opportunity = True
                 if self.player.can_cbet:
@@ -102,9 +106,9 @@ class Action:
                 if self.player.can_3bet:
                     self.player.hand_stats.flag_flop_3bet_opportunity = True
             case Street.TURN:
-                pass
+                self.player.hand_stats.turn_actions_sequence = self.player.actions_history.turn
             case Street.RIVER:
-                pass
+                self.player.hand_stats.river_actions_sequence = self.player.actions_history.river
 
     def add_to_history(self):
         """
@@ -247,14 +251,16 @@ class RaiseAction(Action):
         match self.table.street:
             case Street.PREFLOP:
                 self.player.hand_stats.flag_vpip = True
-                self.player.hand_stats.flag_preflop_open = True
+                self.player.hand_stats.flag_preflop_bet = True
                 self.player.hand_stats.count_preflop_player_raises += 1
+                if self.player.can_open:
+                    self.player.hand_stats.flag_preflop_open = True
                 if self.player.can_first_raise:
                     self.player.hand_stats.flag_preflop_first_raise = True
+                if self.player.can_squeeze:
+                    self.player.hand_stats.flag_squeeze = True
                 if self.table.cnt_bets == 2:
                     self.player.hand_stats.flag_preflop_3bet = True
-                    if self.table.cnt_cold_calls > 0:
-                        self.player.hand_stats.flag_squeeze = True
                 if self.table.cnt_bets >= 3:
                     self.player.hand_stats.flag_preflop_4bet = True
 
