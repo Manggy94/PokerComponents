@@ -1,4 +1,4 @@
-# card
+# flop
 
 ## Overview
 
@@ -6,4 +6,4 @@ This module is part of the `pkrcomponents` package.
 
 ## API Documentation
 
-::: pkrcomponents.card
+::: pkrcomponents.components.cards.flop

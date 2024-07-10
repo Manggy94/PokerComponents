@@ -1,4 +1,4 @@
-# _common
+# table
 
 ## Overview
 
@@ -6,4 +6,4 @@ This module is part of the `pkrcomponents` package.
 
 ## API Documentation
 
-::: pkrcomponents._common
+::: pkrcomponents.components.tables.table

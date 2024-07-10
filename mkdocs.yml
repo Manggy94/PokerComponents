@@ -8,31 +8,50 @@ plugins:
 nav:
   - Home: index.md
   - API Reference:
+    - Components:
       - Actions:
-          - Action: action.md
-          - Action Move: action_move.md
-  - _common: _common.md
-  - action: action.md
-  - bitcard: bitcard.md
-  - board: board.md
-  - buy_in: buy_in.md
-  - card: card.md
-  - constants: constants.md
-  - deck: deck.md
-  - Utils:
-    - validators: utils/validators.md
-    - converters: utils/converters.md
-  - tournament: tournament.md
-  - table_player: table_player.md
-  - table: table.md
-  - pot: pot.md
-  - players: players.md
-  - payout: payout.md
-  - lookup_table: lookup_table.md
-  - listings: listings.md
-  - level: level.md
-  - hand: hand.md
-  - evaluator: evaluator.md
+        - Action: components/actions/action.md
+        - Action Move: components/actions/action_move.md
+        - Actions History: components/actions/actions_history.md
+        - Actions Sequence: components/actions/actions_sequence.md
+        - Blind Type: components/actions/blind_type.md
+        - Posting: components/actions/posting.md
+        - Street: components/actions/street.md
+      - Cards:
+        - BitCard: components/cards/bitcard.md
+        - Board: components/cards/board.md
+        - Card: components/cards/card.md
+        - Combo: components/cards/combo.md
+        - Deck: components/cards/deck.md
+        - Evaluator: components/cards/evaluator.md
+        - Flop: components/cards/flop.md
+        - Hand: components/cards/hand.md
+        - LookupTable: components/cards/lookup_table.md
+        - Rank: components/cards/rank.md
+        - Shape: components/cards/shape.md
+        - Suit: components/cards/suit.md
+      - Players:
+        - Hand Stats: components/players/hand_stats.md
+        - Players: components/players/players.md
+        - Position: components/players/position.md
+        - Positions Map: components/players/positions_map.md
+        - Table Player: components/players/table_player.md
+      - Tables:
+        - Pot: components/tables/pot.md
+        - Table: components/tables/table.md
+      - Tournaments:
+        - Buy-In: components/tournaments/buy_in.md
+        - Level: components/tournaments/level.md
+        - PayOut: components/tournaments/payout.md
+        - Speed: components/tournaments/speed.md
+        - Tournament: components/tournaments/tournament.md
+      - Utils:
+        - Common: components/utils/common.md
+        - Constants: components/utils/constants.md
+        - Converters: components/utils/converters.md
+        - Exceptions: components/utils/exceptions.md
+        - Validators: components/utils/validators.md
+
 
 
 

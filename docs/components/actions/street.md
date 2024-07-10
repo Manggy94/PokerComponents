@@ -1,4 +1,4 @@
-# buy_in
+# street
 
 ## Overview
 
@@ -6,4 +6,4 @@ This module is part of the `pkrcomponents` package.
 
 ## API Documentation
 
-::: pkrcomponents.buy_in
+::: pkrcomponents.components.actions.street

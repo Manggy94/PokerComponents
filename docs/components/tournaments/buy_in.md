@@ -1,4 +1,4 @@
-# players
+# buy_in
 
 ## Overview
 
@@ -6,4 +6,4 @@ This module is part of the `pkrcomponents` package.
 
 ## API Documentation
 
-::: pkrcomponents.components.players
+::: pkrcomponents.components.tournaments.buy_in

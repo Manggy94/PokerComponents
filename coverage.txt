@@ -24,7 +24,13 @@ pkrcomponents/components/cards/rank.py                         47      0   100%
 pkrcomponents/components/cards/shape.py                        14      0   100%
 pkrcomponents/components/cards/suit.py                         28      0   100%
 pkrcomponents/components/players/__init__.py                    0      0   100%
-pkrcomponents/components/players/hand_stats.py                219      0   100%
+pkrcomponents/components/players/datafields/__init__.py         0      0   100%
+pkrcomponents/components/players/datafields/flop.py            52      0   100%
+pkrcomponents/components/players/datafields/general.py         20      0   100%
+pkrcomponents/components/players/datafields/preflop.py         53      0   100%
+pkrcomponents/components/players/datafields/river.py           52      0   100%
+pkrcomponents/components/players/datafields/turn.py            52      0   100%
+pkrcomponents/components/players/hand_stats.py                226      9    96%
 pkrcomponents/components/players/players.py                   137      3    98%
 pkrcomponents/components/players/position.py                   59      0   100%
 pkrcomponents/components/players/positions_map.py              20      0   100%
@@ -55,4 +61,4 @@ pkrcomponents/history_converter/converter.py                  204     18    91%
 pkrcomponents/history_converter/utils/__init__.py               0      0   100%
 pkrcomponents/history_converter/utils/exceptions.py             4      0   100%
 -------------------------------------------------------------------------------
-TOTAL                                                        2535     46    98%
+TOTAL                                                        2771     55    98%

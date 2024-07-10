@@ -1,4 +1,4 @@
-# action
+# position
 
 ## Overview
 
@@ -6,4 +6,4 @@ This module is part of the `pkrcomponents` package.
 
 ## API Documentation
 
-::: pkrcomponents.action
+::: pkrcomponents.components.players.position

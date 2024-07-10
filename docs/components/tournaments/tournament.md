@@ -1,4 +1,4 @@
-# table
+# tournament
 
 ## Overview
 
@@ -6,4 +6,4 @@ This module is part of the `pkrcomponents` package.
 
 ## API Documentation
 
-::: pkrcomponents.table
+::: pkrcomponents.components.tournaments.tournament

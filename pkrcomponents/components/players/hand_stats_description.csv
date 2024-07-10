@@ -1,0 +1,205 @@
+name,default,description,type
+flag_vpip,False,Whether the player voluntarily put money in the pot,bool
+flag_preflop_open_opportunity,False,Whether the player had the opportunity to open preflop,bool
+flag_preflop_open,False,Whether the player opened preflop,bool
+flag_preflop_first_raise,False,Whether the player made the first raise preflop,bool
+flag_preflop_fold,False,Whether the player folded preflop,bool
+flag_preflop_limp,False,Whether the player limped preflop,bool
+flag_preflop_cold_called,False,Whether the player cold called preflop,bool
+flag_preflop_face_raise,False,Whether the player faced a raise preflop,bool
+flag_preflop_bet,False,Whether the player bet preflop (Realized at least one raise),bool
+flag_preflop_3bet_opportunity,False,Whether the player had the opportunity to 3bet preflop,bool
+flag_preflop_3bet,False,Whether the player 3bet preflop,bool
+flag_preflop_face_3bet,False,Whether the player faced a 3bet preflop,bool
+flag_preflop_4bet_opportunity,False,Whether the player had the opportunity to 4+bet preflop,bool
+flag_preflop_4bet,False,Whether the player 4+bet preflop,bool
+flag_preflop_face_4bet,False,Whether the player faced a 4+bet preflop,bool
+flag_squeeze_opportunity,False,Whether the player had the opportunity to squeeze preflop,bool
+flag_squeeze,False,Whether the player squeezed preflop,bool
+flag_face_squeeze,False,Whether the player faced a squeeze preflop,bool
+flag_steal_opportunity,False,Whether the player had the opportunity to steal preflop,bool
+flag_steal_attempt,False,Whether the player attempted to steal preflop,bool
+flag_face_steal_attempt,False,Whether the player faced a steal attempt preflop,bool
+flag_fold_to_steal_attempt,False,Whether the player folded to a steal attempt preflop,bool
+flag_blind_defense,False,Whether the player defended the blinds preflop,bool
+flag_open_shove,False,Whether the player open shoved preflop,bool
+flag_voluntary_all_in_preflop,False,Whether the player voluntarily went all in preflop,bool
+count_preflop_player_raises,0,The number of raises the player made preflop,int
+count_preflop_player_calls,0,The number of calls the player made preflop,int
+count_faced_limps,0,The number of limps the player faced preflop,int
+preflop_actions_sequence,,The sequence of actions the player made preflop,ActionsSequence
+amount_preflop_effective_stack,0,The effective stack the player had preflop,float
+amount_to_call_facing_preflop_bet,0,The amount the player had to call facing the preflop blinds,float
+amount_to_call_facing_preflop_2bet,0,The amount the player had to call facing the preflop 2bet,float
+amount_to_call_facing_preflop_3bet,0,The amount the player had to call facing the preflop 3bet,float
+amount_to_call_facing_preflop_4bet,0,The amount the player had to call facing the preflop 4bet,float
+amount_first_raise_made_preflop,0,The amount the player used on his first raise preflop,float
+amount_second_raise_made_preflop,0,The amount the player used on his second raise preflop,float
+ratio_to_call_facing_preflop_bet,0,The ratio of the pot the player had to call facing the preflop bet,float
+ratio_to_call_facing_preflop_2bet,0,The ratio of the pot the player had to call facing the preflop 2bet,float
+ratio_to_call_facing_preflop_3bet,0,The ratio of the pot the player had to call facing the preflop 3bet,float
+ratio_to_call_facing_preflop_4bet,0,The ratio of the pot the player had to call facing the preflop 4bet,float
+ratio_first_raise_made_preflop,0,The ratio of the pot the player used on his first raise preflop,float
+ratio_second_raise_made_preflop,0,The ratio of the pot the player used on his second raise preflop,float
+total_preflop_bet_amount,0,The total amount the player bet preflop,float
+move_facing_preflop_2bet,,The move the player did when facing a preflop 2bet,ActionMove
+move_facing_preflop_3bet,,The move the player did when facing a preflop 3bet,ActionMove
+move_facing_preflop_4bet,,The move the player did when facing a preflop 4bet,ActionMove
+move_facing_preflop_squeeze,,The move the player did when facing a preflop squeeze,ActionMove
+move_facing_preflop_steal_attempt,,The move the player did when facing a preflop steal attempt,ActionMove
+flag_saw_flop,False,Whether the player saw the flop,bool
+flag_flop_first_to_talk,False,Whether the player was the first to talk on the flop,bool
+flag_flop_has_position,False,Whether the player had position on the flop,bool
+flag_flop_bet,False,Whether the player bet on the flop,bool
+flag_flop_open_opportunity,False,Whether the player had the opportunity to open on the flop,bool
+flag_flop_open,False,Whether the player opened on the flop,bool
+flag_flop_cbet_opportunity,False,Whether the player had the opportunity to make a continuation bet on the flop,bool
+flag_flop_cbet,False,Whether the player made a continuation bet on the flop,bool
+flag_flop_face_cbet,False,Whether the player faced a continuation bet on the flop,bool
+flag_flop_donk_bet_opportunity,False,Whether the player had the opportunity to make a donk bet on the flop,bool
+flag_flop_donk_bet,False,Whether the player made a donk bet on the flop,bool
+flag_flop_face_donk_bet,False,Whether the player faced a donk bet on the flop,bool
+flag_flop_first_raise,False,Whether the player made the first raise on the flop,bool
+flag_flop_fold,False,Whether the player folded on the flop,bool
+flag_flop_check,False,Whether the player checked on the flop,bool
+flag_flop_check_raise,False,Whether the player check-raised on the flop,bool
+flag_flop_face_raise,False,Whether the player faced a raise on the flop,bool
+flag_flop_3bet_opportunity,False,Whether the player had the opportunity to 3bet on the flop,bool
+flag_flop_3bet,False,Whether the player 3bet on the flop,bool
+flag_flop_face_3bet,False,Whether the player faced a 3bet on the flop,bool
+flag_flop_4bet_opportunity,False,Whether the player had the opportunity to 4+bet on the flop,bool
+flag_flop_4bet,False,Whether the player 4+bet on the flop,bool
+flag_flop_face_4bet,False,Whether the player faced a 4+bet on the flop,bool
+count_flop_player_raises,0,The number of raises the player made on the flop,int
+count_flop_player_calls,0,The number of calls the player made on the flop,int
+flop_actions_sequence,,The sequence of actions the player made on the flop,ActionsSequence
+amount_flop_effective_stack,0,The effective stack the player had on the flop,float
+amount_to_call_facing_flop_bet,0,The amount the player had to call facing the flop bet,float
+amount_to_call_facing_flop_2bet,0,The amount the player had to call facing the flop 2bet,float
+amount_to_call_facing_flop_3bet,0,The amount the player had to call facing the flop 3bet,float
+amount_to_call_facing_flop_4bet,0,The amount the player had to call facing the flop 4bet,float
+amount_bet_made_flop,0,The amount the player used to bet on the flop,float
+amount_first_raise_made_flop,0,The amount the player used on his first raise on the flop,float
+amount_second_raise_made_flop,0,The amount the player used on his second raise on the flop,float
+ratio_to_call_facing_flop_bet,0,The ratio of the pot the player had to call facing the flop bet,float
+ratio_to_call_facing_flop_2bet,0,The ratio of the pot the player had to call facing the flop 2bet,float
+ratio_to_call_facing_flop_3bet,0,The ratio of the pot the player had to call facing the flop 3bet,float
+ratio_to_call_facing_flop_4bet,0,The ratio of the pot the player had to call facing the flop 4bet,float
+ratio_bet_made_flop,0,The ratio of the pot the player used to bet on the flop,float
+ratio_first_raise_made_flop,0,The ratio of the pot the player used on his first raise on the flop,float
+ratio_second_raise_made_flop,0,The ratio of the pot the player used on his second raise on the flop,float
+total_flop_bet_amount,0,The total amount the player bet on the flop,float
+move_facing_flop_bet,,The move the player did when facing the flop bet,ActionMove
+move_facing_flop_2bet,,The move the player did when facing the flop 2bet,ActionMove
+move_facing_flop_3bet,,The move the player did when facing the flop 3bet,ActionMove
+move_facing_flop_4bet,,The move the player did when facing the flop 4bet,ActionMove
+move_facing_flop_cbet,,The move the player did when facing the flop cbet,ActionMove
+move_facing_flop_donk_bet,,The move the player did when facing the flop donk bet,ActionMove
+flag_saw_turn,False,Whether the player saw the turn,bool
+flag_turn_first_to_talk,False,Whether the player was the first to talk on the turn,bool
+flag_turn_has_position,False,Whether the player had position on the turn,bool
+flag_turn_bet,False,Whether the player bet on the turn,bool
+flag_turn_open_opportunity,False,Whether the player had the opportunity to open on the turn,bool
+flag_turn_open,False,Whether the player opened on the turn,bool
+flag_turn_cbet_opportunity,False,Whether the player had the opportunity to make a continuation bet on the turn,bool
+flag_turn_cbet,False,Whether the player made a continuation bet on the turn,bool
+flag_turn_face_cbet,False,Whether the player faced a continuation bet on the turn,bool
+flag_turn_donk_bet_opportunity,False,Whether the player had the opportunity to make a donk bet on the turn,bool
+flag_turn_donk_bet,False,Whether the player made a donk bet on the turn,bool
+flag_turn_face_donk_bet,False,Whether the player faced a donk bet on the turn,bool
+flag_turn_first_raise,False,Whether the player made the first raise on the turn,bool
+flag_turn_fold,False,Whether the player folded on the turn,bool
+flag_turn_check,False,Whether the player checked on the turn,bool
+flag_turn_check_raise,False,Whether the player check-raised on the turn,bool
+flag_turn_face_raise,False,Whether the player faced a raise on the turn,bool
+flag_turn_3bet_opportunity,False,Whether the player had the opportunity to 3bet on the turn,bool
+flag_turn_3bet,False,Whether the player 3bet on the turn,bool
+flag_turn_face_3bet,False,Whether the player faced a 3bet on the turn,bool
+flag_turn_4bet_opportunity,False,Whether the player had the opportunity to 4+bet on the turn,bool
+flag_turn_4bet,False,Whether the player 4+bet on the turn,bool
+flag_turn_face_4bet,False,Whether the player faced a 4+bet on the turn,bool
+count_turn_player_raises,0,The number of raises the player made on the turn,int
+count_turn_player_calls,0,The number of calls the player made on the turn,int
+turn_actions_sequence,,The sequence of actions the player made on the turn,ActionsSequence
+amount_turn_effective_stack,0.0,The effective stack the player had on the turn,float
+amount_to_call_facing_turn_bet,0.0,The amount the player had to call facing the turn bet,float
+amount_to_call_facing_turn_2bet,0.0,The amount the player had to call facing the turn 2bet,float
+amount_to_call_facing_turn_3bet,0.0,The amount the player had to call facing the turn 3bet,float
+amount_to_call_facing_turn_4bet,0.0,The amount the player had to call facing the turn 4bet,float
+amount_bet_made_turn,0.0,The amount the player used to bet on the turn,float
+amount_first_raise_made_turn,0.0,The amount the player used on his first raise on the turn,float
+amount_second_raise_made_turn,0.0,The amount the player used on his second raise on the turn,float
+ratio_to_call_facing_turn_bet,0.0,The ratio of the pot the player had to call facing the turn bet,float
+ratio_to_call_facing_turn_2bet,0.0,The ratio of the pot the player had to call facing the turn 2bet,float
+ratio_to_call_facing_turn_3bet,0.0,The ratio of the pot the player had to call facing the turn 3bet,float
+ratio_to_call_facing_turn_4bet,0.0,The ratio of the pot the player had to call facing the turn 4bet,float
+ratio_bet_made_turn,0.0,The ratio of the pot the player used to bet on the turn,float
+ratio_first_raise_made_turn,0.0,The ratio of the pot the player used on his first raise on the turn,float
+ratio_second_raise_made_turn,0.0,The ratio of the pot the player used on his second raise on the turn,float
+total_turn_bet_amount,0.0,The total amount the player bet on the turn,float
+move_facing_turn_bet,,The move the player did when facing the turn bet,ActionMove
+move_facing_turn_2bet,,The move the player did when facing the turn 2bet,ActionMove
+move_facing_turn_3bet,,The move the player did when facing the turn 3bet,ActionMove
+move_facing_turn_4bet,,The move the player did when facing the turn 4bet,ActionMove
+move_facing_turn_cbet,,The move the player did when facing the turn cbet,ActionMove
+move_facing_turn_donk_bet,,The move the player did when facing the turn donk bet,ActionMove
+flag_saw_river,False,Whether the player saw the river,bool
+flag_river_first_to_talk,False,Whether the player was the first to talk on the river,bool
+flag_river_has_position,False,Whether the player had position on the river,bool
+flag_river_bet,False,Whether the player bet on the river,bool
+flag_river_cbet_opportunity,False,Whether the player had the opportunity to make a c-bet on the river,bool
+flag_river_cbet,False,Whether the player made a continuation bet on the river,bool
+flag_river_face_cbet,False,Whether the player faced a continuation bet on the river,bool
+flag_river_donk_bet_opportunity,False,Whether the player had the opportunity to make a donk bet on the river,bool
+flag_river_donk_bet,False,Whether the player made a donk bet on the river,bool
+flag_river_face_donk_bet,False,Whether the player faced a donk bet on the river,bool
+flag_river_first_raise,False,Whether the player made the first raise on the river,bool
+flag_river_fold,False,Whether the player folded on the river,bool
+flag_river_check,False,Whether the player checked on the river,bool
+flag_river_check_raise,False,Whether the player check-raised on the river,bool
+flag_river_face_raise,False,Whether the player faced a raise on the river,bool
+flag_river_3bet_opportunity,False,Whether the player had the opportunity to 3bet on the river,bool
+flag_river_3bet,False,Whether the player 3bet on the river,bool
+flag_river_face_3bet,False,Whether the player faced a 3bet on the river,bool
+flag_river_4bet_opportunity,False,Whether the player had the opportunity to 4+bet on the river,bool
+flag_river_4bet,False,Whether the player 4+bet on the river,bool
+flag_river_face_4bet,False,Whether the player faced a 4+bet on the river,bool
+count_river_player_raises,0,The number of raises the player made on the river,int
+count_river_player_calls,0,The number of calls the player made on the river,int
+river_actions_sequence,,The sequence of actions the player made on the river,ActionsSequence
+amount_river_effective_stack,0,The effective stack the player had on the river,float
+amount_to_call_facing_river_bet,0,The amount the player had to call facing the river bet,float
+amount_to_call_facing_river_2bet,0,The amount the player had to call facing the river 2bet,float
+amount_to_call_facing_river_3bet,0,The amount the player had to call facing the river 3bet,float
+amount_to_call_facing_river_4bet,0,The amount the player had to call facing the river 4bet,float
+amount_bet_made_river,0,The amount the player used to bet on the river,float
+amount_first_raise_made_river,0,The amount the player used on his first raise on the river,float
+amount_second_raise_made_river,0,The amount the player used on his second raise on the river,float
+ratio_to_call_facing_river_bet,0,The ratio of the pot the player had to call facing the river bet,float
+ratio_to_call_facing_river_2bet,0,The ratio of the pot the player had to call facing the river 2bet,float
+ratio_to_call_facing_river_3bet,0,The ratio of the pot the player had to call facing the river 3bet,float
+ratio_to_call_facing_river_4bet,0,The ratio of the pot the player had to call facing the river 4bet,float
+ratio_bet_made_river,0,The ratio of the pot the player used to bet on the river,float
+ratio_first_raise_made_river,0,The ratio of the pot the player used on his first raise on the river,float
+ratio_second_raise_made_river,0,The ratio of the pot the player used on his second raise on the river,float
+total_river_bet_amount,0,The total amount the player bet on the river,float
+move_facing_river_bet,,The move the player did when facing the river bet,ActionMove
+move_facing_river_2bet,,The move the player did when facing the river 2bet,ActionMove
+move_facing_river_3bet,,The move the player did when facing the river 3bet,ActionMove
+move_facing_river_4bet,,The move the player did when facing the river 4bet,ActionMove
+move_facing_river_cbet,,The move the player did when facing the river cbet,ActionMove
+move_facing_river_donk_bet,,The move the player did when facing the river donk bet,ActionMove
+flag_went_to_showdown,False,Whether the player went to showdown,bool
+flag_is_hero,False,Whether the player is the hero,bool
+flag_won_hand,False,Whether the player won the hand,bool
+starting_stack,0,The starting stack of the player at the beginning of the hand,float
+amount_won,0,The amount the player won in the hand,float
+amount_expected_won,0,The amount the player is expected to win in the hand when all combos are revealed (EV),float
+total_bet_amount,0,The total amount the player bet in the hand,float
+facing_covering_bet_move,,The move the player did when facing a covering bet,ActionMove
+facing_allin_move,,The move the player did when facing an all-in,ActionMove
+fold_street,,The street the player folded,Street
+all_in_street,,The street the player went all-in,Street
+face_covering_bet_street,,The street the player faced a covering bet,Street
+face_allin_street,,The street the player faced an all-in,Street
+combo,,The combo the player had,Combo

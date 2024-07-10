@@ -133,6 +133,8 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertTrue(hero_player.is_hero)
         hero_stats = hero_player.hand_stats
         self.assertIsInstance(hero_stats, HandStats)
+        # Preflop
+        # Flags
         self.assertFalse(hero_stats.flag_vpip)
         self.assertFalse(hero_stats.flag_preflop_open_opportunity)
         self.assertFalse(hero_stats.flag_preflop_open)
@@ -143,6 +145,31 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertTrue(hero_stats.flag_preflop_face_raise)
         self.assertFalse(hero_stats.flag_preflop_bet)
         self.assertTrue(hero_stats.flag_preflop_3bet_opportunity)
+        self.assertFalse(hero_stats.flag_preflop_3bet)
+        self.assertFalse(hero_stats.flag_preflop_face_3bet)
+        self.assertFalse(hero_stats.flag_preflop_4bet_opportunity)
+        self.assertFalse(hero_stats.flag_preflop_4bet)
+        self.assertFalse(hero_stats.flag_preflop_face_4bet)
+        self.assertFalse(hero_stats.flag_squeeze_opportunity)
+        self.assertFalse(hero_stats.flag_squeeze)
+        self.assertFalse(hero_stats.flag_face_squeeze)
+        self.assertFalse(hero_stats.flag_steal_opportunity)
+        self.assertFalse(hero_stats.flag_steal_attempt)
+        self.assertFalse(hero_stats.flag_face_steal_attempt)
+        self.assertFalse(hero_stats.flag_fold_to_steal_attempt)
+        self.assertFalse(hero_stats.flag_blind_defense)
+        self.assertFalse(hero_stats.flag_open_shove)
+        self.assertFalse(hero_stats.flag_voluntary_all_in_preflop)
+        # counts
+        self.assertEqual(hero_stats.count_preflop_player_raises, 0)
+        self.assertEqual(hero_stats.count_preflop_player_calls, 0)
+        self.assertEqual(hero_stats.count_faced_limps, 0)
+        # sequences
+        # self.assertEqual(hero_stats.preflop_actions_sequence.symbol, "F")
+        # amounts
+        # self.assertEqual(hero_stats.amount_preflop_effective_stack, 0)
+
+
 
 
 class TestHandHistoryConverter2(unittest.TestCase):

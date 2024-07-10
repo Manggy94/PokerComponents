@@ -13,9 +13,9 @@ class Action:
     This class represents an action made by a player in a poker game
 
     Attributes:
-        player(TablePlayer): The player making the action
-        move(ActionMove): The move made by the player
-        value(float): The value of the move made by the player
+        player (TablePlayer): The player making the action
+        move (ActionMove): The move made by the player
+        value (float): The value of the move made by the player
 
     Methods:
         __str__(): Returns a string representation of the action

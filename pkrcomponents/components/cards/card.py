@@ -1,5 +1,4 @@
-"""This module contains the Card class, which represents a playing card.
-It also contains the Rank and Suit classes, which are used to define the rank and suit of a card."""
+"""This module contains the Card class, which represents a playing card."""
 from functools import total_ordering
 
 from pkrcomponents.components.utils.common import _ReprMixin
