@@ -6,4 +6,4 @@ This module is part of the `pkrcomponents` package.
 
 ## API Documentation
 
-::: pkrcomponents.utils.converters
+::: pkrcomponents.components.utils.converters

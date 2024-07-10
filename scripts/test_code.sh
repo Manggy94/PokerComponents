@@ -7,7 +7,7 @@ echo "Running tests..."
 SOURCE_DIRS="pkrcomponents"
 
 # Execute tests
-coverage run --source=$SOURCE_DIRS -m unittest discover -s tests -p "test_*.py"
+coverage run --source=$SOURCE_DIRS -m unittest discover -s tests -p "*.py"
 
 # Check if tests failed
 if [ $? -ne 0 ]; then

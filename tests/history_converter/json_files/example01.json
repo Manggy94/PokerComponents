@@ -1,0 +1,673 @@
+{
+    "hand_id": "2612804708405870609-6-1672853787",
+    "datetime": "04-01-2023 17:36:27",
+    "game_type": "Tournament",
+    "buy_in": {
+        "prize_pool_contribution": 4.5,
+        "bounty": 0.0,
+        "rake": 0.5
+    },
+    "level": {
+        "value": 1,
+        "ante": 25.0,
+        "sb": 100.0,
+        "bb": 200.0
+    },
+    "tournament_info": {
+        "tournament_name": "GUERILLA",
+        "tournament_id": "608341002",
+        "table_number": "016",
+        "prize_pool": 7218.0,
+        "registered_players": 2525,
+        "speed": "semiturbo",
+        "start_date": "2023/01/04 17:30:01 UTC",
+        "levels_structure": [
+            {
+                "value": 1,
+                "sb": "100",
+                "bb": "200",
+                "ante": "25"
+            },
+            {
+                "value": 2,
+                "sb": "125",
+                "bb": "250",
+                "ante": "30"
+            },
+            {
+                "value": 3,
+                "sb": "150",
+                "bb": "300",
+                "ante": "35"
+            },
+            {
+                "value": 4,
+                "sb": "175",
+                "bb": "350",
+                "ante": "40"
+            },
+            {
+                "value": 5,
+                "sb": "200",
+                "bb": "400",
+                "ante": "50"
+            },
+            {
+                "value": 6,
+                "sb": "250",
+                "bb": "500",
+                "ante": "60"
+            },
+            {
+                "value": 7,
+                "sb": "300",
+                "bb": "600",
+                "ante": "70"
+            },
+            {
+                "value": 8,
+                "sb": "350",
+                "bb": "700",
+                "ante": "80"
+            },
+            {
+                "value": 9,
+                "sb": "400",
+                "bb": "800",
+                "ante": "100"
+            },
+            {
+                "value": 10,
+                "sb": "500",
+                "bb": "1000",
+                "ante": "120"
+            },
+            {
+                "value": 11,
+                "sb": "600",
+                "bb": "1200",
+                "ante": "140"
+            },
+            {
+                "value": 12,
+                "sb": "700",
+                "bb": "1400",
+                "ante": "160"
+            },
+            {
+                "value": 13,
+                "sb": "800",
+                "bb": "1600",
+                "ante": "200"
+            },
+            {
+                "value": 14,
+                "sb": "1000",
+                "bb": "2000",
+                "ante": "250"
+            },
+            {
+                "value": 15,
+                "sb": "1250",
+                "bb": "2500",
+                "ante": "300"
+            },
+            {
+                "value": 16,
+                "sb": "1500",
+                "bb": "3000",
+                "ante": "350"
+            },
+            {
+                "value": 17,
+                "sb": "1750",
+                "bb": "3500",
+                "ante": "400"
+            },
+            {
+                "value": 18,
+                "sb": "2000",
+                "bb": "4000",
+                "ante": "500"
+            },
+            {
+                "value": 19,
+                "sb": "2500",
+                "bb": "5000",
+                "ante": "600"
+            },
+            {
+                "value": 20,
+                "sb": "3000",
+                "bb": "6000",
+                "ante": "700"
+            },
+            {
+                "value": 21,
+                "sb": "3500",
+                "bb": "7000",
+                "ante": "800"
+            },
+            {
+                "value": 22,
+                "sb": "4000",
+                "bb": "8000",
+                "ante": "1000"
+            },
+            {
+                "value": 23,
+                "sb": "5000",
+                "bb": "10000",
+                "ante": "1200"
+            },
+            {
+                "value": 24,
+                "sb": "6000",
+                "bb": "12000",
+                "ante": "1400"
+            },
+            {
+                "value": 25,
+                "sb": "7000",
+                "bb": "14000",
+                "ante": "1600"
+            },
+            {
+                "value": 26,
+                "sb": "8000",
+                "bb": "16000",
+                "ante": "2000"
+            },
+            {
+                "value": 27,
+                "sb": "10000",
+                "bb": "20000",
+                "ante": "2500"
+            },
+            {
+                "value": 28,
+                "sb": "12500",
+                "bb": "25000",
+                "ante": "3000"
+            },
+            {
+                "value": 29,
+                "sb": "15000",
+                "bb": "30000",
+                "ante": "3500"
+            },
+            {
+                "value": 30,
+                "sb": "17500",
+                "bb": "35000",
+                "ante": "4000"
+            },
+            {
+                "value": 31,
+                "sb": "20000",
+                "bb": "40000",
+                "ante": "5000"
+            },
+            {
+                "value": 32,
+                "sb": "25000",
+                "bb": "50000",
+                "ante": "6000"
+            },
+            {
+                "value": 33,
+                "sb": "30000",
+                "bb": "60000",
+                "ante": "7000"
+            },
+            {
+                "value": 34,
+                "sb": "35000",
+                "bb": "70000",
+                "ante": "8000"
+            },
+            {
+                "value": 35,
+                "sb": "40000",
+                "bb": "80000",
+                "ante": "10000"
+            },
+            {
+                "value": 36,
+                "sb": "50000",
+                "bb": "100000",
+                "ante": "12000"
+            },
+            {
+                "value": 37,
+                "sb": "60000",
+                "bb": "120000",
+                "ante": "14000"
+            },
+            {
+                "value": 38,
+                "sb": "70000",
+                "bb": "140000",
+                "ante": "16000"
+            },
+            {
+                "value": 39,
+                "sb": "80000",
+                "bb": "160000",
+                "ante": "20000"
+            },
+            {
+                "value": 40,
+                "sb": "100000",
+                "bb": "200000",
+                "ante": "25000"
+            },
+            {
+                "value": 41,
+                "sb": "125000",
+                "bb": "250000",
+                "ante": "30000"
+            },
+            {
+                "value": 42,
+                "sb": "150000",
+                "bb": "300000",
+                "ante": "35000"
+            },
+            {
+                "value": 43,
+                "sb": "175000",
+                "bb": "350000",
+                "ante": "40000"
+            },
+            {
+                "value": 44,
+                "sb": "200000",
+                "bb": "400000",
+                "ante": "50000"
+            },
+            {
+                "value": 45,
+                "sb": "250000",
+                "bb": "500000",
+                "ante": "60000"
+            },
+            {
+                "value": 46,
+                "sb": "300000",
+                "bb": "600000",
+                "ante": "70000"
+            },
+            {
+                "value": 47,
+                "sb": "350000",
+                "bb": "700000",
+                "ante": "80000"
+            },
+            {
+                "value": 48,
+                "sb": "400000",
+                "bb": "800000",
+                "ante": "100000"
+            },
+            {
+                "value": 49,
+                "sb": "500000",
+                "bb": "1000000",
+                "ante": "120000"
+            },
+            {
+                "value": 50,
+                "sb": "600000",
+                "bb": "1200000",
+                "ante": "140000"
+            },
+            {
+                "value": 51,
+                "sb": "700000",
+                "bb": "1400000",
+                "ante": "160000"
+            },
+            {
+                "value": 52,
+                "sb": "800000",
+                "bb": "1600000",
+                "ante": "200000"
+            },
+            {
+                "value": 53,
+                "sb": "1000000",
+                "bb": "2000000",
+                "ante": "250000"
+            },
+            {
+                "value": 54,
+                "sb": "1250000",
+                "bb": "2500000",
+                "ante": "300000"
+            },
+            {
+                "value": 55,
+                "sb": "1500000",
+                "bb": "3000000",
+                "ante": "350000"
+            },
+            {
+                "value": 56,
+                "sb": "1750000",
+                "bb": "3500000",
+                "ante": "400000"
+            },
+            {
+                "value": 57,
+                "sb": "2000000",
+                "bb": "4000000",
+                "ante": "500000"
+            },
+            {
+                "value": 58,
+                "sb": "2500000",
+                "bb": "5000000",
+                "ante": "600000"
+            },
+            {
+                "value": 59,
+                "sb": "3000000",
+                "bb": "6000000",
+                "ante": "700000"
+            },
+            {
+                "value": 60,
+                "sb": "3500000",
+                "bb": "7000000",
+                "ante": "800000"
+            },
+            {
+                "value": 61,
+                "sb": "4000000",
+                "bb": "8000000",
+                "ante": "1000000"
+            },
+            {
+                "value": 62,
+                "sb": "5000000",
+                "bb": "10000000",
+                "ante": "1200000"
+            },
+            {
+                "value": 63,
+                "sb": "6000000",
+                "bb": "12000000",
+                "ante": "1400000"
+            },
+            {
+                "value": 64,
+                "sb": "7000000",
+                "bb": "14000000",
+                "ante": "1600000"
+            },
+            {
+                "value": 65,
+                "sb": "8000000",
+                "bb": "16000000",
+                "ante": "2000000"
+            },
+            {
+                "value": 66,
+                "sb": "10000000",
+                "bb": "20000000",
+                "ante": "2500000"
+            },
+            {
+                "value": 67,
+                "sb": "12500000",
+                "bb": "25000000",
+                "ante": "3000000"
+            },
+            {
+                "value": 68,
+                "sb": "15000000",
+                "bb": "30000000",
+                "ante": "3500000"
+            },
+            {
+                "value": 69,
+                "sb": "17500000",
+                "bb": "35000000",
+                "ante": "4000000"
+            },
+            {
+                "value": 70,
+                "sb": "20000000",
+                "bb": "40000000",
+                "ante": "5000000"
+            },
+            {
+                "value": 71,
+                "sb": "25000000",
+                "bb": "50000000",
+                "ante": "6000000"
+            },
+            {
+                "value": 72,
+                "sb": "30000000",
+                "bb": "60000000",
+                "ante": "7000000"
+            },
+            {
+                "value": 73,
+                "sb": "35000000",
+                "bb": "70000000",
+                "ante": "8000000"
+            },
+            {
+                "value": 74,
+                "sb": "40000000",
+                "bb": "80000000",
+                "ante": "10000000"
+            },
+            {
+                "value": 75,
+                "sb": "50000000",
+                "bb": "100000000",
+                "ante": "12000000"
+            }
+        ],
+        "tournament_type": "knockout"
+    },
+    "max_players": 6,
+    "button_seat": 4,
+    "players": {
+        "1": {
+            "seat": 1,
+            "name": "FrenchAAAA",
+            "init_stack": 19575.0,
+            "bounty": 2.25
+        },
+        "2": {
+            "seat": 2,
+            "name": "daifwa",
+            "init_stack": 21830.0,
+            "bounty": 2.25
+        },
+        "3": {
+            "seat": 3,
+            "name": "Roomxx",
+            "init_stack": 34263.0,
+            "bounty": 3.37
+        },
+        "4": {
+            "seat": 4,
+            "name": "SB Warrior34",
+            "init_stack": 18548.0,
+            "bounty": 2.25
+        },
+        "5": {
+            "seat": 5,
+            "name": "GoToVG",
+            "init_stack": 26609.0,
+            "bounty": 2.25
+        },
+        "6": {
+            "seat": 6,
+            "name": "manggy94",
+            "init_stack": 19175.0,
+            "bounty": 2.25
+        }
+    },
+    "hero_hand": {
+        "hero": "manggy94",
+        "first_card": "2c",
+        "second_card": "5h"
+    },
+    "postings": [
+        {
+            "name": "GoToVG",
+            "amount": 25.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "manggy94",
+            "amount": 25.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "FrenchAAAA",
+            "amount": 25.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "daifwa",
+            "amount": 25.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "Roomxx",
+            "amount": 25.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "SB Warrior34",
+            "amount": 25.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "GoToVG",
+            "amount": 100.0,
+            "blind_type": "small blind"
+        },
+        {
+            "name": "manggy94",
+            "amount": 200.0,
+            "blind_type": "big blind"
+        }
+    ],
+    "actions": {
+        "preflop": [
+            {
+                "player": "FrenchAAAA",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "daifwa",
+                "action": "calls",
+                "amount": 200.0
+            },
+            {
+                "player": "Roomxx",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "SB Warrior34",
+                "action": "calls",
+                "amount": 200.0
+            },
+            {
+                "player": "GoToVG",
+                "action": "raises",
+                "amount": 700.0
+            },
+            {
+                "player": "manggy94",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "daifwa",
+                "action": "calls",
+                "amount": 700.0
+            },
+            {
+                "player": "SB Warrior34",
+                "action": "calls",
+                "amount": 700.0
+            }
+        ],
+        "flop": [
+            {
+                "player": "GoToVG",
+                "action": "checks",
+                "amount": 0.0
+            },
+            {
+                "player": "daifwa",
+                "action": "checks",
+                "amount": 0.0
+            },
+            {
+                "player": "SB Warrior34",
+                "action": "checks",
+                "amount": 0.0
+            }
+        ],
+        "turn": [
+            {
+                "player": "GoToVG",
+                "action": "bets",
+                "amount": 1000.0
+            },
+            {
+                "player": "daifwa",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "SB Warrior34",
+                "action": "calls",
+                "amount": 1000.0
+            }
+        ],
+        "river": [
+            {
+                "player": "GoToVG",
+                "action": "bets",
+                "amount": 2525.0
+            },
+            {
+                "player": "SB Warrior34",
+                "action": "folds",
+                "amount": 0.0
+            }
+        ]
+    },
+    "flop": {
+        "flop_card_1": "7h",
+        "flop_card_2": "2d",
+        "flop_card_3": "5c"
+    },
+    "turn": {
+        "turn_card": "2h"
+    },
+    "river": {
+        "river_card": "8c"
+    },
+    "showdown": {},
+    "winners": {
+        "GoToVG": {
+            "amount": 7575.0,
+            "pot_type": "pot"
+        }
+    }
+}
