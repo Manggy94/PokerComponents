@@ -81,7 +81,9 @@ class Action:
                 if not self.table.is_opened:
                     self.player.hand_stats.flag_preflop_open_opportunity = True
                     self.player.hand_stats.count_faced_limps = self.table.cnt_limps
-                if self.player.face_raise:
+                if self.player.can_raise:
+                    self.player.hand_stats.flag_preflop_raise_opportunity = True
+                if self.player.is_facing_raise:
                     self.player.hand_stats.flag_preflop_face_raise = True
                 if self.player.can_squeeze:
                     self.player.hand_stats.flag_squeeze_opportunity = True
@@ -101,7 +103,7 @@ class Action:
                     self.player.hand_stats.flag_flop_cbet_opportunity = True
                 if self.player.can_donk_bet:
                     self.player.hand_stats.flag_flop_donk_bet_opportunity = True
-                if self.player.face_raise:
+                if self.player.is_facing_raise:
                     self.player.hand_stats.flag_flop_first_raise = True
                 if self.player.can_3bet:
                     self.player.hand_stats.flag_flop_3bet_opportunity = True
@@ -251,7 +253,7 @@ class RaiseAction(Action):
         match self.table.street:
             case Street.PREFLOP:
                 self.player.hand_stats.flag_vpip = True
-                self.player.hand_stats.flag_preflop_bet = True
+                self.player.hand_stats.flag_preflop_raise = True
                 self.player.hand_stats.count_preflop_player_raises += 1
                 if self.player.can_open:
                     self.player.hand_stats.flag_preflop_open = True

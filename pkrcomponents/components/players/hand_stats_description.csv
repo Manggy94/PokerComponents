@@ -6,8 +6,9 @@ flag_preflop_first_raise,False,Whether the player made the first raise preflop,b
 flag_preflop_fold,False,Whether the player folded preflop,bool
 flag_preflop_limp,False,Whether the player limped preflop,bool
 flag_preflop_cold_called,False,Whether the player cold called preflop,bool
+flag_preflop_raise,False,Whether the player raised preflop,bool
+flag_preflop_raise_opportunity,False,Whether the player had the opportunity to raise preflop,bool
 flag_preflop_face_raise,False,Whether the player faced a raise preflop,bool
-flag_preflop_bet,False,Whether the player bet preflop (Realized at least one raise),bool
 flag_preflop_3bet_opportunity,False,Whether the player had the opportunity to 3bet preflop,bool
 flag_preflop_3bet,False,Whether the player 3bet preflop,bool
 flag_preflop_face_3bet,False,Whether the player faced a 3bet preflop,bool

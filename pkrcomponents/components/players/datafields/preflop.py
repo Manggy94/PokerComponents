@@ -5,60 +5,7 @@ from attrs import field, Factory
 from attrs.validators import instance_of, ge, optional
 from pkrcomponents.components.actions.action_move import ActionMove
 from pkrcomponents.components.actions.actions_sequence import ActionsSequence
-"""
-        flag_vpip (bool): Whether the player voluntarily put money in the pot
-        flag_preflop_open_opportunity (bool): Whether the player had the opportunity to open preflop
-        flag_preflop_open (bool): Whether the player opened preflop
-        flag_preflop_first_raise (bool): Whether the player made the first raise preflop
-        flag_preflop_fold (bool): Whether the player folded preflop
-        flag_preflop_limp (bool): Whether the player limped preflop
-        flag_preflop_cold_called (bool): Whether the player cold called preflop
-        flag_preflop_face_raise (bool): Whether the player faced a raise preflop
-        flag_preflop_bet (bool): Whether the player bet preflop (Realized at least one raise)
-        flag_preflop_3bet_opportunity (bool): Whether the player had the opportunity to 3bet preflop
-        flag_preflop_3bet (bool): Whether the player 3bet preflop
-        flag_preflop_face_3bet (bool): Whether the player faced a 3bet preflop
-        flag_preflop_4bet_opportunity (bool): Whether the player had the opportunity to 4+bet preflop
-        flag_preflop_4bet (bool): Whether the player 4+bet preflop
-        flag_preflop_face_4bet (bool): Whether the player faced a 4+bet preflop
-        flag_squeeze_opportunity (bool): Whether the player had the opportunity to squeeze preflop
-        flag_squeeze (bool): Whether the player squeezed preflop
-        flag_face_squeeze (bool): Whether the player faced a squeeze preflop
-        flag_steal_opportunity (bool): Whether the player had the opportunity to steal preflop
-        flag_steal_attempt (bool): Whether the player attempted to steal preflop
-        flag_face_steal_attempt (bool): Whether the player faced a steal attempt preflop
-        flag_fold_to_steal_attempt (bool): Whether the player folded to a steal attempt preflop
-        flag_blind_defense (bool): Whether the player defended the blinds preflop
-        flag_open_shove (bool): Whether the player open shoved preflop
-        flag_voluntary_all_in_preflop (bool): Whether the player went all-in preflop voluntarily
-        # 2. Counts
-        count_preflop_player_raises (int): The number of raises the player made preflop
-        count_preflop_player_calls (int): The number of calls the player made preflop
-        count_faced_limps (int): The number of limps the player faced preflop
-        # 3. Sequences
-        preflop_actions_sequence (ActionsSequence): The sequence of actions the player made preflop
-        # 4. Amounts
-        amount_preflop_effective_stack (float): The effective stack the player had preflop
-        amount_to_call_facing_preflop_bet (float): The amount the player had to call facing the preflop blinds
-        amount_to_call_facing_preflop_2bet (float): The amount the player had to call facing the preflop 2bet
-        amount_to_call_facing_preflop_3bet (float): The amount the player had to call facing the preflop 3bet
-        amount_to_call_facing_preflop_4bet (float): The amount the player had to call facing the preflop 4bet
-        amount_first_raise_made_preflop (float): The amount the player used on his first raise preflop
-        amount_second_raise_made_preflop (float): The amount the player used on his second raise preflop
-        ratio_to_call_facing_preflop_bet (float): The ratio of the pot the player had to call facing the preflop bet
-        ratio_to_call_facing_preflop_2bet (float): The ratio of the pot the player had to call facing the preflop 2bet
-        ratio_to_call_facing_preflop_3bet (float): The ratio of the pot the player had to call facing the preflop 3bet
-        ratio_to_call_facing_preflop_4bet (float): The ratio of the pot the player had to call facing the preflop 4bet
-        ratio_first_raise_made_preflop (float): The ratio of the pot the player used on his first raise preflop
-        ratio_second_raise_made_preflop (float): The ratio of the pot the player used on his second raise preflop
-        total_preflop_bet_amount (float): The total amount the player bet preflop
-        # 5. Moves
-        move_facing_preflop_2bet (ActionMove): The move the player did when facing a preflop 2bet
-        move_facing_preflop_3bet (ActionMove): The move the player did when facing a preflop 3bet
-        move_facing_preflop_4bet (ActionMove): The move the player did when facing a preflop 4bet
-        move_facing_preflop_squeeze (ActionMove): The move the player did when facing a preflop squeeze
-        move_facing_preflop_steal_attempt (ActionMove): The move the player did when facing a preflop steal attempt
-"""
+
 # 1. Flags
 FLAG_VPIP = field(
         default=False, validator=instance_of(bool),
@@ -95,16 +42,22 @@ FLAG_PREFLOP_COLD_CALLED = field(
     metadata={
         'description': 'Whether the player cold called preflop',
         'type': 'bool'})
+FLAG_PREFLOP_RAISE = field(
+    default=False, validator=instance_of(bool),
+    metadata={
+        'description': 'Whether the player raised preflop',
+        'type': 'bool'})
+FLAG_PREFLOP_RAISE_OPPORTUNITY = field(
+    default=False, validator=instance_of(bool),
+    metadata={
+        'description': 'Whether the player had the opportunity to raise preflop',
+        'type': 'bool'})
 FLAG_PREFLOP_FACE_RAISE = field(
     default=False, validator=instance_of(bool),
     metadata={
         'description': 'Whether the player faced a raise preflop',
         'type': 'bool'})
-FLAG_PREFLOP_BET = field(
-    default=False, validator=instance_of(bool),
-    metadata={
-        'description': 'Whether the player bet preflop (Realized at least one raise)',
-        'type': 'bool'})
+
 FLAG_PREFLOP_3BET_OPPORTUNITY = field(
     default=False, validator=instance_of(bool),
     metadata={

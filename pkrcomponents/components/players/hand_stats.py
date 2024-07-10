@@ -20,8 +20,9 @@ class HandStats:
     flag_preflop_fold = preflop.FLAG_PREFLOP_FOLD
     flag_preflop_limp = preflop.FLAG_PREFLOP_LIMP
     flag_preflop_cold_called = preflop.FLAG_PREFLOP_COLD_CALLED
+    flag_preflop_raise_opportunity = preflop.FLAG_PREFLOP_RAISE_OPPORTUNITY
+    flag_preflop_raise = preflop.FLAG_PREFLOP_RAISE
     flag_preflop_face_raise = preflop.FLAG_PREFLOP_FACE_RAISE
-    flag_preflop_bet = preflop.FLAG_PREFLOP_BET
     flag_preflop_3bet_opportunity = preflop.FLAG_PREFLOP_3BET_OPPORTUNITY
     flag_preflop_3bet = preflop.FLAG_PREFLOP_3BET
     flag_preflop_face_3bet = preflop.FLAG_PREFLOP_FACE_3BET

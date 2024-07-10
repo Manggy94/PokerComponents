@@ -373,11 +373,6 @@ class TablePlayer:
         self.has_initiative = True
 
     @property
-    def face_raise(self):
-        """Boolean indicating if player faces a raise"""
-        return self.table.cnt_bets >= 2
-
-    @property
     def can_1bet(self):
         """Boolean indicating if player can 1bet"""
         return self.table.cnt_bets == 0 and self.stack_enables_raise
@@ -396,6 +391,42 @@ class TablePlayer:
     def can_4bet(self):
         """Boolean indicating if player can 4bet"""
         return self.table.cnt_bets >= 3 and self.stack_enables_raise
+
+    @property
+    def can_cbet(self):
+        """Boolean indicating if player can cbet"""
+        return self.has_initiative and self.can_open
+
+    @property
+    def can_donk_bet(self):
+        """Boolean indicating if player can donk bet"""
+        return not self.has_initiative and self.can_open
+
+    @property
+    def can_raise(self):
+        """Boolean indicating if player can raise"""
+        return self.table.cnt_bets >= 1 and self.stack_enables_raise
+
+    @property
+    def can_first_raise(self):
+        """Boolean indicating if player can make the first raise"""
+        return self.table.cnt_bets == 1
+
+    @property
+    def can_open(self):
+        """Boolean indicating if player can open"""
+        return ((self.table.street == Street.PREFLOP and not self.table.is_opened)
+                or (self.table.street != Street.PREFLOP and self.table.cnt_bets == 0))
+
+    @property
+    def can_squeeze(self):
+        """Boolean indicating if player can squeeze"""
+        return self.can_3bet and self.table.cnt_cold_calls > 0 and self.table.street.is_preflop
+
+    @property
+    def is_facing_raise(self):
+        """Boolean indicating if player faces a raise"""
+        return self.table.cnt_bets >= 2
 
     @property
     def is_facing_1bet(self):
@@ -417,28 +448,4 @@ class TablePlayer:
         """Boolean indicating if player is facing a 4bet"""
         return self.table.cnt_bets >= 4
 
-    @property
-    def can_cbet(self):
-        """Boolean indicating if player can cbet"""
-        return self.has_initiative and self.can_open
 
-    @property
-    def can_donk_bet(self):
-        """Boolean indicating if player can donk bet"""
-        return not self.has_initiative and self.can_open
-
-    @property
-    def can_first_raise(self):
-        """Boolean indicating if player can make the first raise"""
-        return self.table.cnt_bets == 1
-
-    @property
-    def can_open(self):
-        """Boolean indicating if player can open"""
-        return ((self.table.street == Street.PREFLOP and not self.table.is_opened)
-                or (self.table.street != Street.PREFLOP and self.table.cnt_bets == 0))
-
-    @property
-    def can_squeeze(self):
-        """Boolean indicating if player can squeeze"""
-        return self.can_3bet and self.table.cnt_cold_calls > 0 and self.table.street.is_preflop

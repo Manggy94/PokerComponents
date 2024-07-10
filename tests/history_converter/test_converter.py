@@ -142,8 +142,9 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertTrue(hero_stats.flag_preflop_fold)
         self.assertFalse(hero_stats.flag_preflop_limp)
         self.assertFalse(hero_stats.flag_preflop_cold_called)
+        self.assertTrue(hero_stats.flag_preflop_raise_opportunity)
+        self.assertFalse(hero_stats.flag_preflop_raise)
         self.assertTrue(hero_stats.flag_preflop_face_raise)
-        self.assertFalse(hero_stats.flag_preflop_bet)
         self.assertTrue(hero_stats.flag_preflop_3bet_opportunity)
         self.assertFalse(hero_stats.flag_preflop_3bet)
         self.assertFalse(hero_stats.flag_preflop_face_3bet)
@@ -169,8 +170,6 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertEqual(hero_stats.preflop_actions_sequence.symbol, "F")
         # amounts
         self.assertEqual(hero_stats.amount_preflop_effective_stack, 0)
-
-
 
 
 class TestHandHistoryConverter2(unittest.TestCase):
