@@ -136,6 +136,8 @@ class Action:
             case Street.FLOP:
                 self.hand_stats.flag_saw_flop = True
                 self.hand_stats.flop_actions_sequence = self.player.actions_history.flop
+                if not any(player.hand_stats.flag_flop_first_to_talk for player in self.table.players_in_game):
+                    self.hand_stats.flag_flop_first_to_talk = True
                 if self.player.can_open:
                     self.hand_stats.flag_flop_open_opportunity = True
                 if self.player.can_cbet:
