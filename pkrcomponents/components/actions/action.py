@@ -89,8 +89,12 @@ class Action:
                     self.player.hand_stats.flag_preflop_face_raise = True
                 if self.player.can_squeeze:
                     self.player.hand_stats.flag_squeeze_opportunity = True
+                if self.player.is_facing_squeeze:
+                    self.player.hand_stats.flag_face_squeeze = True
                 if self.player.can_steal:
                     self.player.hand_stats.flag_steal_opportunity = True
+                if self.player.is_facing_steal:
+                    self.player.hand_stats.flag_face_steal_attempt = True
                 if self.player.can_3bet:
                     self.player.hand_stats.flag_preflop_3bet_opportunity = True
                 if self.player.is_facing_3bet:
