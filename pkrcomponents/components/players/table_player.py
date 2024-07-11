@@ -431,7 +431,7 @@ class TablePlayer:
     @property
     def can_steal(self):
         """Boolean indicating if player can steal"""
-        return self.can_open and self.position.is_late and self.table.street.is_preflop
+        return self.can_open and self.position.is_steal and self.table.street.is_preflop
 
     @property
     def is_facing_raise(self):
