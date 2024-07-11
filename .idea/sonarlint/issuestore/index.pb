@@ -172,3 +172,5 @@ d
 4pkrcomponents/components/players/datafields/river.py,4\a\4a4ecc70f5720a60bfe411efaa8e75444e705930
 f
 6pkrcomponents/components/players/datafields/general.py,4\7\471ff5bb8cb6de79aed69d3982fd287096079860
+\
+,pkrcomponents/components/players/position.py,d\a\daf1da0dcf289e6832b5f8f164d0009c25fd0224

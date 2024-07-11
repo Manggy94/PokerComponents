@@ -44,6 +44,10 @@ class Position(_ReprMixin, PokerEnum):
         return self.name in ["SB", "BB"]
 
     @property
+    def is_steal(self):
+        return self.name in ["BTN", "CO", "SB"]
+
+    @property
     def preflop_order(self):
         return self._value_[1]
 

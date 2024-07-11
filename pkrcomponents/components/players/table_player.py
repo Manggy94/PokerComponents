@@ -429,6 +429,11 @@ class TablePlayer:
         return self.can_3bet and self.table.cnt_cold_calls > 0 and self.table.street.is_preflop
 
     @property
+    def can_steal(self):
+        """Boolean indicating if player can steal"""
+        return self.can_open and self.position.is_late and self.table.street.is_preflop
+
+    @property
     def is_facing_raise(self):
         """Boolean indicating if player faces a raise"""
         return self.table.cnt_bets >= 2
