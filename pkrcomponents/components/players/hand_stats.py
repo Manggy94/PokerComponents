@@ -54,7 +54,7 @@ class HandStats:
     amount_to_call_facing_preflop_4bet = preflop.AMOUNT_TO_CALL_FACING_PREFLOP_4BET
     amount_first_raise_made_preflop = preflop.AMOUNT_FIRST_RAISE_MADE_PREFLOP
     amount_second_raise_made_preflop = preflop.AMOUNT_SECOND_RAISE_MADE_PREFLOP
-    ratio_to_call_facing_preflop_bet = preflop.RATIO_TO_CALL_FACING_PREFLOP_BET
+    ratio_to_call_facing_preflop_bb = preflop.RATIO_TO_CALL_FACING_PREFLOP_BB
     ratio_to_call_facing_preflop_2bet = preflop.RATIO_TO_CALL_FACING_PREFLOP_2BET
     ratio_to_call_facing_preflop_3bet = preflop.RATIO_TO_CALL_FACING_PREFLOP_3BET
     ratio_to_call_facing_preflop_4bet = preflop.RATIO_TO_CALL_FACING_PREFLOP_4BET

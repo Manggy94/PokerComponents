@@ -201,10 +201,10 @@ AMOUNT_SECOND_RAISE_MADE_PREFLOP = field(
     metadata={
         'description': 'The amount the player used on his second raise preflop',
         'type': 'float'})
-RATIO_TO_CALL_FACING_PREFLOP_BET = field(
+RATIO_TO_CALL_FACING_PREFLOP_BB = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={
-        'description': 'The ratio of the pot the player had to call facing the preflop bet',
+        'description': 'The ratio of the pot the player had to call facing the bb',
         'type': 'float'})
 RATIO_TO_CALL_FACING_PREFLOP_2BET = field(
     default=0, validator=instance_of(float), converter=float,

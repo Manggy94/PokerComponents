@@ -37,7 +37,7 @@ amount_to_call_facing_preflop_3bet,0,The amount the player had to call facing th
 amount_to_call_facing_preflop_4bet,0,The amount the player had to call facing the preflop 4bet,float
 amount_first_raise_made_preflop,0,The amount the player used on his first raise preflop,float
 amount_second_raise_made_preflop,0,The amount the player used on his second raise preflop,float
-ratio_to_call_facing_preflop_bet,0,The ratio of the pot the player had to call facing the preflop bet,float
+ratio_to_call_facing_preflop_bb,0,The ratio of the pot the player had to call facing the bb,float
 ratio_to_call_facing_preflop_2bet,0,The ratio of the pot the player had to call facing the preflop 2bet,float
 ratio_to_call_facing_preflop_3bet,0,The ratio of the pot the player had to call facing the preflop 3bet,float
 ratio_to_call_facing_preflop_4bet,0,The ratio of the pot the player had to call facing the preflop 4bet,float

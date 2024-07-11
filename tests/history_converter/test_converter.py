@@ -170,6 +170,19 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertEqual(hero_stats.preflop_actions_sequence.symbol, "F")
         # amounts
         self.assertEqual(hero_stats.amount_preflop_effective_stack, 18950)
+        self.assertEqual(hero_stats.amount_to_call_facing_preflop_bb, 0)
+        self.assertEqual(hero_stats.amount_to_call_facing_preflop_2bet, 700)
+        self.assertEqual(hero_stats.amount_to_call_facing_preflop_3bet, 0)
+        self.assertEqual(hero_stats.amount_to_call_facing_preflop_4bet, 0)
+        self.assertEqual(hero_stats.amount_first_raise_made_preflop, 0)
+        self.assertEqual(hero_stats.amount_second_raise_made_preflop, 0)
+        self.assertEqual(hero_stats.ratio_to_call_facing_preflop_bb, 0)
+        self.assertAlmostEquals(hero_stats.ratio_to_call_facing_preflop_2bet, 0.424, 3)
+        self.assertEqual(hero_stats.ratio_to_call_facing_preflop_3bet, 0)
+        self.assertEqual(hero_stats.ratio_to_call_facing_preflop_4bet, 0)
+        self.assertEqual(hero_stats.ratio_first_raise_made_preflop, 0)
+        self.assertEqual(hero_stats.ratio_second_raise_made_preflop, 0)
+        self.assertEqual(hero_stats.total_preflop_bet_amount, 0)
 
 
 class TestHandHistoryConverter2(unittest.TestCase):

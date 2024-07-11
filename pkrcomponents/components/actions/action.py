@@ -106,14 +106,18 @@ class Action:
                     self.hand_stats.flag_blind_defense_opportunity = True
                 if self.player.is_facing_1bet:
                     self.hand_stats.amount_to_call_facing_preflop_bb = self.player.to_call
+                    self.hand_stats.ratio_to_call_facing_preflop_bb = self.player.to_call / self.table.pot_value
                 if self.player.is_facing_2bet:
                     self.hand_stats.amount_to_call_facing_preflop_2bet = self.player.to_call
+                    self.hand_stats.ratio_to_call_facing_preflop_2bet = self.player.to_call / self.table.pot_value
                 if self.player.is_facing_3bet:
                     self.hand_stats.flag_preflop_face_3bet = True
                     self.hand_stats.amount_to_call_facing_preflop_3bet = self.player.to_call
+                    self.hand_stats.ratio_to_call_facing_preflop_3bet = self.player.to_call / self.table.pot_value
                 if self.player.is_facing_4bet:
                     self.hand_stats.flag_preflop_face_4bet = True
                     self.hand_stats.amount_to_call_facing_preflop_4bet = self.player.to_call
+                    self.hand_stats.ratio_to_call_facing_preflop_4bet = self.player.to_call / self.table.pot_value
                 if self.player.can_3bet:
                     self.hand_stats.flag_preflop_3bet_opportunity = True
 
