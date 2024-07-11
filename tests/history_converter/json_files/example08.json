@@ -1,0 +1,649 @@
+{
+    "hand_id": "550715288107089921-36-1441484269",
+    "datetime": "05-09-2015 20:17:49",
+    "game_type": "Tournament",
+    "buy_in": {
+        "prize_pool_contribution": 0.9,
+        "bounty": 0,
+        "rake": 0.1
+    },
+    "level": {
+        "value": 0,
+        "ante": 10.0,
+        "sb": 60.0,
+        "bb": 120.0
+    },
+    "tournament_info": {
+        "tournament_name": null,
+        "tournament_id": null,
+        "table_number": null,
+        "prize_pool": 81.0,
+        "registered_players": 90,
+        "speed": "normal",
+        "start_date": "2015/09/05 19:35:00 UTC",
+        "levels_structure": [
+            {
+                "value": 1,
+                "sb": 10.0,
+                "bb": 20.0,
+                "ante": 3.0
+            },
+            {
+                "value": 2,
+                "sb": 15.0,
+                "bb": 30.0,
+                "ante": 4.0
+            },
+            {
+                "value": 3,
+                "sb": 20.0,
+                "bb": 40.0,
+                "ante": 6.0
+            },
+            {
+                "value": 4,
+                "sb": 30.0,
+                "bb": 60.0,
+                "ante": 8.0
+            },
+            {
+                "value": 5,
+                "sb": 40.0,
+                "bb": 80.0,
+                "ante": 10.0
+            },
+            {
+                "value": 6,
+                "sb": 50.0,
+                "bb": 100.0,
+                "ante": 12.0
+            },
+            {
+                "value": 7,
+                "sb": 60.0,
+                "bb": 120.0,
+                "ante": 16.0
+            },
+            {
+                "value": 8,
+                "sb": 80.0,
+                "bb": 160.0,
+                "ante": 20.0
+            },
+            {
+                "value": 9,
+                "sb": 100.0,
+                "bb": 200.0,
+                "ante": 25.0
+            },
+            {
+                "value": 10,
+                "sb": 125.0,
+                "bb": 250.0,
+                "ante": 30.0
+            },
+            {
+                "value": 11,
+                "sb": 150.0,
+                "bb": 300.0,
+                "ante": 40.0
+            },
+            {
+                "value": 12,
+                "sb": 200.0,
+                "bb": 400.0,
+                "ante": 50.0
+            },
+            {
+                "value": 13,
+                "sb": 250.0,
+                "bb": 500.0,
+                "ante": 60.0
+            },
+            {
+                "value": 14,
+                "sb": 300.0,
+                "bb": 600.0,
+                "ante": 80.0
+            },
+            {
+                "value": 15,
+                "sb": 400.0,
+                "bb": 800.0,
+                "ante": 100.0
+            },
+            {
+                "value": 16,
+                "sb": 500.0,
+                "bb": 1000.0,
+                "ante": 120.0
+            },
+            {
+                "value": 17,
+                "sb": 600.0,
+                "bb": 1200.0,
+                "ante": 150.0
+            },
+            {
+                "value": 18,
+                "sb": 800.0,
+                "bb": 1600.0,
+                "ante": 200.0
+            },
+            {
+                "value": 19,
+                "sb": 1000.0,
+                "bb": 2000.0,
+                "ante": 250.0
+            },
+            {
+                "value": 20,
+                "sb": 1250.0,
+                "bb": 2500.0,
+                "ante": 300.0
+            },
+            {
+                "value": 21,
+                "sb": 1500.0,
+                "bb": 3000.0,
+                "ante": 400.0
+            },
+            {
+                "value": 22,
+                "sb": 2000.0,
+                "bb": 4000.0,
+                "ante": 500.0
+            },
+            {
+                "value": 23,
+                "sb": 2500.0,
+                "bb": 5000.0,
+                "ante": 600.0
+            },
+            {
+                "value": 24,
+                "sb": 3000.0,
+                "bb": 6000.0,
+                "ante": 800.0
+            },
+            {
+                "value": 25,
+                "sb": 4000.0,
+                "bb": 8000.0,
+                "ante": 1000.0
+            },
+            {
+                "value": 26,
+                "sb": 5000.0,
+                "bb": 10000.0,
+                "ante": 1200.0
+            },
+            {
+                "value": 27,
+                "sb": 6000.0,
+                "bb": 12000.0,
+                "ante": 1500.0
+            },
+            {
+                "value": 28,
+                "sb": 8000.0,
+                "bb": 16000.0,
+                "ante": 2000.0
+            },
+            {
+                "value": 29,
+                "sb": 10000.0,
+                "bb": 20000.0,
+                "ante": 2500.0
+            },
+            {
+                "value": 30,
+                "sb": 12500.0,
+                "bb": 25000.0,
+                "ante": 3000.0
+            },
+            {
+                "value": 31,
+                "sb": 15000.0,
+                "bb": 30000.0,
+                "ante": 4000.0
+            },
+            {
+                "value": 32,
+                "sb": 20000.0,
+                "bb": 40000.0,
+                "ante": 5000.0
+            },
+            {
+                "value": 33,
+                "sb": 25000.0,
+                "bb": 50000.0,
+                "ante": 6000.0
+            },
+            {
+                "value": 34,
+                "sb": 30000.0,
+                "bb": 60000.0,
+                "ante": 8000.0
+            },
+            {
+                "value": 35,
+                "sb": 40000.0,
+                "bb": 80000.0,
+                "ante": 10000.0
+            },
+            {
+                "value": 36,
+                "sb": 50000.0,
+                "bb": 100000.0,
+                "ante": 12000.0
+            },
+            {
+                "value": 37,
+                "sb": 60000.0,
+                "bb": 120000.0,
+                "ante": 15000.0
+            },
+            {
+                "value": 38,
+                "sb": 80000.0,
+                "bb": 160000.0,
+                "ante": 20000.0
+            },
+            {
+                "value": 39,
+                "sb": 100000.0,
+                "bb": 200000.0,
+                "ante": 25000.0
+            },
+            {
+                "value": 40,
+                "sb": 125000.0,
+                "bb": 250000.0,
+                "ante": 30000.0
+            },
+            {
+                "value": 41,
+                "sb": 150000.0,
+                "bb": 300000.0,
+                "ante": 40000.0
+            },
+            {
+                "value": 42,
+                "sb": 200000.0,
+                "bb": 400000.0,
+                "ante": 50000.0
+            },
+            {
+                "value": 43,
+                "sb": 250000.0,
+                "bb": 500000.0,
+                "ante": 60000.0
+            },
+            {
+                "value": 44,
+                "sb": 300000.0,
+                "bb": 600000.0,
+                "ante": 80000.0
+            },
+            {
+                "value": 45,
+                "sb": 400000.0,
+                "bb": 800000.0,
+                "ante": 100000.0
+            },
+            {
+                "value": 46,
+                "sb": 500000.0,
+                "bb": 1000000.0,
+                "ante": 120000.0
+            },
+            {
+                "value": 47,
+                "sb": 600000.0,
+                "bb": 1200000.0,
+                "ante": 150000.0
+            },
+            {
+                "value": 48,
+                "sb": 800000.0,
+                "bb": 1600000.0,
+                "ante": 200000.0
+            },
+            {
+                "value": 49,
+                "sb": 1000000.0,
+                "bb": 2000000.0,
+                "ante": 250000.0
+            },
+            {
+                "value": 50,
+                "sb": 1250000.0,
+                "bb": 2500000.0,
+                "ante": 300000.0
+            },
+            {
+                "value": 51,
+                "sb": 1500000.0,
+                "bb": 3000000.0,
+                "ante": 400000.0
+            },
+            {
+                "value": 52,
+                "sb": 2000000.0,
+                "bb": 4000000.0,
+                "ante": 500000.0
+            },
+            {
+                "value": 53,
+                "sb": 2500000.0,
+                "bb": 5000000.0,
+                "ante": 600000.0
+            },
+            {
+                "value": 54,
+                "sb": 3000000.0,
+                "bb": 6000000.0,
+                "ante": 800000.0
+            },
+            {
+                "value": 55,
+                "sb": 4000000.0,
+                "bb": 8000000.0,
+                "ante": 1000000.0
+            },
+            {
+                "value": 56,
+                "sb": 5000000.0,
+                "bb": 10000000.0,
+                "ante": 1200000.0
+            },
+            {
+                "value": 57,
+                "sb": 6000000.0,
+                "bb": 12000000.0,
+                "ante": 1500000.0
+            },
+            {
+                "value": 58,
+                "sb": 8000000.0,
+                "bb": 16000000.0,
+                "ante": 2000000.0
+            },
+            {
+                "value": 59,
+                "sb": 10000000.0,
+                "bb": 20000000.0,
+                "ante": 2500000.0
+            },
+            {
+                "value": 60,
+                "sb": 12500000.0,
+                "bb": 25000000.0,
+                "ante": 3000000.0
+            },
+            {
+                "value": 61,
+                "sb": 15000000.0,
+                "bb": 30000000.0,
+                "ante": 4000000.0
+            },
+            {
+                "value": 62,
+                "sb": 20000000.0,
+                "bb": 40000000.0,
+                "ante": 5000000.0
+            },
+            {
+                "value": 63,
+                "sb": 25000000.0,
+                "bb": 50000000.0,
+                "ante": 6000000.0
+            },
+            {
+                "value": 64,
+                "sb": 30000000.0,
+                "bb": 60000000.0,
+                "ante": 8000000.0
+            },
+            {
+                "value": 65,
+                "sb": 40000000.0,
+                "bb": 80000000.0,
+                "ante": 10000000.0
+            },
+            {
+                "value": 66,
+                "sb": 50000000.0,
+                "bb": 100000000.0,
+                "ante": 12000000.0
+            }
+        ],
+        "tournament_type": "qualifier"
+    },
+    "max_players": 9,
+    "button_seat": 8,
+    "players": {
+        "1": {
+            "seat": 1,
+            "name": "carlitouam",
+            "init_stack": 3135.0,
+            "bounty": 0.0
+        },
+        "2": {
+            "seat": 2,
+            "name": "manggy94",
+            "init_stack": 3000.0,
+            "bounty": 0.0
+        },
+        "3": {
+            "seat": 3,
+            "name": "LeCavSeRebif",
+            "init_stack": 2670.0,
+            "bounty": 0.0
+        },
+        "4": {
+            "seat": 4,
+            "name": "ashalama",
+            "init_stack": 5297.0,
+            "bounty": 0.0
+        },
+        "5": {
+            "seat": 5,
+            "name": "legrandtote",
+            "init_stack": 2810.0,
+            "bounty": 0.0
+        },
+        "6": {
+            "seat": 6,
+            "name": "SHOVE&TILT",
+            "init_stack": 1633.0,
+            "bounty": 0.0
+        },
+        "7": {
+            "seat": 7,
+            "name": "Ussidio",
+            "init_stack": 1848.0,
+            "bounty": 0.0
+        },
+        "8": {
+            "seat": 8,
+            "name": "CASUAL_17",
+            "init_stack": 6140.0,
+            "bounty": 0.0
+        },
+        "9": {
+            "seat": 9,
+            "name": "InUrAss",
+            "init_stack": 2840.0,
+            "bounty": 0.0
+        }
+    },
+    "hero_hand": {
+        "hero": "manggy94",
+        "first_card": "6d",
+        "second_card": "3c"
+    },
+    "postings": [
+        {
+            "name": "InUrAss",
+            "amount": 10.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "carlitouam",
+            "amount": 10.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "manggy94",
+            "amount": 10.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "LeCavSeRebif",
+            "amount": 10.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "ashalama",
+            "amount": 10.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "legrandtote",
+            "amount": 10.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "SHOVE&TILT",
+            "amount": 10.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "Ussidio",
+            "amount": 10.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "CASUAL_17",
+            "amount": 10.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "InUrAss",
+            "amount": 60.0,
+            "blind_type": "small blind"
+        },
+        {
+            "name": "carlitouam",
+            "amount": 120.0,
+            "blind_type": "big blind"
+        }
+    ],
+    "actions": {
+        "preflop": [
+            {
+                "player": "manggy94",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "LeCavSeRebif",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "ashalama",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "legrandtote",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "SHOVE&TILT",
+                "action": "raises",
+                "amount": 120.0
+            },
+            {
+                "player": "Ussidio",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "CASUAL_17",
+                "action": "calls",
+                "amount": 240.0
+            },
+            {
+                "player": "InUrAss",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "carlitouam",
+                "action": "calls",
+                "amount": 120.0
+            }
+        ],
+        "flop": [
+            {
+                "player": "carlitouam",
+                "action": "checks",
+                "amount": 0.0
+            },
+            {
+                "player": "SHOVE&TILT",
+                "action": "bets",
+                "amount": 435.0
+            },
+            {
+                "player": "CASUAL_17",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "carlitouam",
+                "action": "raises",
+                "amount": 1005.0
+            },
+            {
+                "player": "SHOVE&TILT",
+                "action": "calls",
+                "amount": 948.0
+            }
+        ],
+        "turn": [],
+        "river": []
+    },
+    "flop": {
+        "flop_card_1": "Ts",
+        "flop_card_2": "Jh",
+        "flop_card_3": "9d"
+    },
+    "turn": {
+        "turn_card": "Qc"
+    },
+    "river": {
+        "river_card": "9c"
+    },
+    "showdown": {
+        "SHOVE&TILT": {
+            "first_card": "Th",
+            "second_card": "Qh"
+        },
+        "carlitouam": {
+            "first_card": "Ks",
+            "second_card": "Qd"
+        }
+    },
+    "winners": {
+        "carlitouam": {
+            "amount": 3693.0,
+            "pot_type": "pot"
+        }
+    }
+}

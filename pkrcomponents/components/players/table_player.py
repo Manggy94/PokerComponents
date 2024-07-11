@@ -224,7 +224,7 @@ class TablePlayer:
     @property
     def max_reward(self) -> float:
         """Float indicating the maximum amount that can be won by the player"""
-        return (not self.folded) * sum([min(self.invested, pl.invested) for pl in self.table.players])
+        return (not self.folded) * sum([min(self.invested, player.invested) for player in self.table.players])
 
     @property
     def has_combo(self) -> bool:
@@ -307,10 +307,22 @@ class TablePlayer:
             self.table.deck.replace(self.combo.second)
             self.combo = None
 
+    def update_has_position_stat(self):
+        """Update has position stat"""
+        if self.is_in_position:
+            match self.table.street:
+                case Street.FLOP:
+                    self.hand_stats.flag_flop_has_position = True
+                case Street.TURN:
+                    self.hand_stats.flag_turn_has_position = True
+                case Street.RIVER:
+                    self.hand_stats.flag_river_has_position = True
+
     def reset_street_status(self):
         """Reset street status"""
         self.played = False
         self.current_bet = 0
+
 
     def reset_actions(self):
         """Reset actions"""
@@ -342,7 +354,6 @@ class TablePlayer:
         Args:
             amount (float): The amount to win
         """
-        self.table.pot.value -= amount
         self.stack += amount
 
     @property
@@ -376,6 +387,14 @@ class TablePlayer:
         for player in self.table.players:
             player.has_initiative = False
         self.has_initiative = True
+
+    @property
+    def is_in_position(self):
+        """
+        Boolean indicating if player is in position
+        """
+        return self.table.players_in_game[-1] == self
+
 
     @property
     def can_1bet(self):
@@ -420,7 +439,7 @@ class TablePlayer:
     @property
     def can_open(self):
         """Boolean indicating if player can open"""
-        return ((self.table.street == Street.PREFLOP and not self.table.is_opened)
+        return ((self.table.street.is_preflop and not self.table.is_opened)
                 or (self.table.street != Street.PREFLOP and self.table.cnt_bets == 0))
 
     @property

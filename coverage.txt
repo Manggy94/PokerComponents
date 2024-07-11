@@ -3,7 +3,7 @@ Name                                                        Stmts   Miss  Cover
 pkrcomponents/__init__.py                                       0      0   100%
 pkrcomponents/components/__init__.py                            0      0   100%
 pkrcomponents/components/actions/__init__.py                    0      0   100%
-pkrcomponents/components/actions/action.py                    183     12    93%
+pkrcomponents/components/actions/action.py                    238     13    95%
 pkrcomponents/components/actions/action_move.py                32      0   100%
 pkrcomponents/components/actions/actions_history.py            14      0   100%
 pkrcomponents/components/actions/actions_sequence.py           21      3    86%
@@ -27,17 +27,17 @@ pkrcomponents/components/players/__init__.py                    0      0   100%
 pkrcomponents/components/players/datafields/__init__.py         0      0   100%
 pkrcomponents/components/players/datafields/flop.py            52      0   100%
 pkrcomponents/components/players/datafields/general.py         20      0   100%
-pkrcomponents/components/players/datafields/preflop.py         53      0   100%
+pkrcomponents/components/players/datafields/preflop.py         54      0   100%
 pkrcomponents/components/players/datafields/river.py           52      0   100%
 pkrcomponents/components/players/datafields/turn.py            52      0   100%
-pkrcomponents/components/players/hand_stats.py                226      9    96%
+pkrcomponents/components/players/hand_stats.py                216      0   100%
 pkrcomponents/components/players/players.py                   137      3    98%
-pkrcomponents/components/players/position.py                   59      0   100%
+pkrcomponents/components/players/position.py                   62      0   100%
 pkrcomponents/components/players/positions_map.py              20      0   100%
-pkrcomponents/components/players/table_player.py              195      1    99%
+pkrcomponents/components/players/table_player.py              242      3    99%
 pkrcomponents/components/tables/__init__.py                     0      0   100%
 pkrcomponents/components/tables/pot.py                         18      0   100%
-pkrcomponents/components/tables/table.py                      299      2    99%
+pkrcomponents/components/tables/table.py                      312      2    99%
 pkrcomponents/components/tournaments/__init__.py                0      0   100%
 pkrcomponents/components/tournaments/buy_in.py                 14      0   100%
 pkrcomponents/components/tournaments/level.py                  15      0   100%
@@ -57,8 +57,8 @@ pkrcomponents/components/utils/meta/hand_meta.py               26      0   100%
 pkrcomponents/components/utils/meta/positions_map_meta.py      10      0   100%
 pkrcomponents/components/utils/validators.py                    7      0   100%
 pkrcomponents/history_converter/__init__.py                     0      0   100%
-pkrcomponents/history_converter/converter.py                  204     18    91%
+pkrcomponents/history_converter/converter.py                  210     17    92%
 pkrcomponents/history_converter/utils/__init__.py               0      0   100%
 pkrcomponents/history_converter/utils/exceptions.py             4      0   100%
 -------------------------------------------------------------------------------
-TOTAL                                                        2771     55    98%
+TOTAL                                                        2886     48    98%

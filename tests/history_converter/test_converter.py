@@ -179,7 +179,7 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertEqual(hero_stats.amount_first_raise_made_preflop, 0)
         self.assertEqual(hero_stats.amount_second_raise_made_preflop, 0)
         self.assertEqual(hero_stats.ratio_to_call_facing_preflop_bb, 0)
-        self.assertAlmostEquals(hero_stats.ratio_to_call_facing_preflop_2bet, 0.424, 3)
+        self.assertAlmostEqual(hero_stats.ratio_to_call_facing_preflop_2bet, 0.424, 3)
         self.assertEqual(hero_stats.ratio_to_call_facing_preflop_3bet, 0)
         self.assertEqual(hero_stats.ratio_to_call_facing_preflop_4bet, 0)
         self.assertEqual(hero_stats.ratio_first_raise_made_preflop, 0)
@@ -189,7 +189,7 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertEqual(hero_stats.move_facing_preflop_2bet, ActionMove.FOLD)
         self.assertIsNone(hero_stats.move_facing_preflop_3bet)
         self.assertIsNone(hero_stats.move_facing_preflop_4bet)
-        self.assertIsNone(hero_stats.move_facing_preflop_squeeze)
+        self.assertIsNone(hero_stats.move_facing_squeeze)
         self.assertIsNone(hero_stats.move_facing_steal_attempt)
         villain_player = table.players["GoToVG"]
         villain_stats = villain_player.hand_stats
@@ -234,18 +234,18 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertEqual(villain_stats.amount_to_call_facing_preflop_4bet, 0)
         self.assertEqual(villain_stats.amount_first_raise_made_preflop, 800)
         self.assertEqual(villain_stats.amount_second_raise_made_preflop, 0)
-        self.assertAlmostEquals(villain_stats.ratio_to_call_facing_preflop_bb, 0.06, 2)
+        self.assertAlmostEqual(villain_stats.ratio_to_call_facing_preflop_bb, 0.06, 2)
         self.assertEqual(villain_stats.ratio_to_call_facing_preflop_2bet, 0)
         self.assertEqual(villain_stats.ratio_to_call_facing_preflop_3bet, 0)
         self.assertEqual(villain_stats.ratio_to_call_facing_preflop_4bet, 0)
-        self.assertAlmostEquals(villain_stats.ratio_first_raise_made_preflop, 0.48, 2)
+        self.assertAlmostEqual(villain_stats.ratio_first_raise_made_preflop, 0.48, 2)
         self.assertEqual(villain_stats.ratio_second_raise_made_preflop, 0)
         self.assertEqual(villain_stats.total_preflop_bet_amount, 800)
         # moves
         self.assertIsNone(villain_stats.move_facing_preflop_2bet)
         self.assertIsNone(villain_stats.move_facing_preflop_3bet)
         self.assertIsNone(villain_stats.move_facing_preflop_4bet)
-        self.assertIsNone(villain_stats.move_facing_preflop_squeeze)
+        self.assertIsNone(villain_stats.move_facing_squeeze)
         self.assertIsNone(villain_stats.move_facing_steal_attempt)
         # Flop
         # Flags
@@ -253,6 +253,8 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertTrue(villain_stats.flag_saw_flop)
         self.assertFalse(hero_stats.flag_flop_first_to_talk)
         self.assertTrue(villain_stats.flag_flop_first_to_talk)
+        self.assertFalse(hero_stats.flag_flop_has_position)
+        self.assertFalse(villain_stats.flag_flop_has_position)
 
 
 class TestHandHistoryConverter2(unittest.TestCase):
@@ -336,7 +338,7 @@ class TestHandHistoryConverter2(unittest.TestCase):
 
 class TestHandHistoryConverter3(unittest.TestCase):
     def setUp(self):
-        self.history_path = os.path.join(FILES_DIR, 'example_03.json')
+        self.history_path = os.path.join(FILES_DIR, 'example03.json')
         self.converter = HandHistoryConverter()
         self.converter.get_data(self.history_path)
 
@@ -458,6 +460,27 @@ class TestHandHistoryConverter6(unittest.TestCase):
 class TestHandHistoryConverter7(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example07.json')
+        self.converter = HandHistoryConverter()
+        self.converter.get_data(self.history_path)
+
+    def test_convert_history(self):
+        self.converter.convert_history(self.history_path)
+
+
+class TestHandHistoryConverter8(unittest.TestCase):
+    def setUp(self):
+        self.history_path = os.path.join(FILES_DIR, 'example08.json')
+        self.converter = HandHistoryConverter()
+        self.converter.get_data(self.history_path)
+
+    def test_convert_history(self):
+        with self.assertRaises(HandConversionError):
+            self.converter.convert_history(self.history_path)
+
+
+class TestHandHistoryConverter9(unittest.TestCase):
+    def setUp(self):
+        self.history_path = os.path.join(FILES_DIR, 'example09.json')
         self.converter = HandHistoryConverter()
         self.converter.get_data(self.history_path)
 

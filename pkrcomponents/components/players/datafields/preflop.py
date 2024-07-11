@@ -252,7 +252,7 @@ MOVE_FACING_PREFLOP_4BET = field(
     metadata={
         'description': 'The move the player did when facing a preflop 4bet',
         'type': 'ActionMove'})
-MOVE_FACING_PREFLOP_SQUEEZE = field(
+MOVE_FACING_SQUEEZE = field(
     default=None, validator=optional(instance_of(ActionMove)),
     metadata={
         'description': 'The move the player did when facing a preflop squeeze',

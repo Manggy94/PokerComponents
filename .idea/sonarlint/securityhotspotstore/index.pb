@@ -182,3 +182,9 @@ U
 %tests/components/tables/test_table.py,4\d\4d55cb80814e54908befeef08c666ee8dbed7303
 \
 ,pkrcomponents/components/utils/exceptions.py,8\f\8f3f818f999b6a7f854c7ce7156ec5012a4de2e7
+c
+3pkrcomponents/history_converter/utils/exceptions.py,3\0\30736e5f3e02ec340247c45bf3da8a467209699b
+a
+1tests/history_converter/json_files/example08.json,8\7\877f36c68a5b099da1f73e03a82f78e994333b61
+a
+1tests/history_converter/json_files/example09.json,1\a\1afac784456c70759f58df7286903c3632773536

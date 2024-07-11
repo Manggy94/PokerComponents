@@ -564,7 +564,7 @@ class TableTest(unittest.TestCase):
         action.play()
         self.assertFalse(table.street_ended)
         with self.assertRaises(CannotParseWinnersError):
-            table.distribute_rewards()
+            table.calculate_and_distribute_rewards()
         self.assertEqual(table.current_player.postflop_bets,
                          [{'text': 'Min Bet', 'value': 5050.0},
                           {'text': '3/4 Pot', 'value': 5681},
@@ -584,7 +584,7 @@ class TableTest(unittest.TestCase):
         self.assertEqual(sum(pl.invested for pl in table.players), 7575)
         with self.assertRaises(ValueError):
             table.advance_to_showdown()
-        table.distribute_rewards()
+        table.calculate_and_distribute_rewards()
         self.assertEqual(table.pot_value, 0)
         self.assertEqual(table.players[1].stack, 19550.0)
         self.assertEqual(table.players[2].stack, 20905.0)
@@ -677,7 +677,7 @@ class TableTest(unittest.TestCase):
         self.assertFalse(table.can_parse_winners)
         table.players["Romain miklo"].shows("4c4h")
         self.assertTrue(table.can_parse_winners)
-        table.distribute_rewards()
+        table.calculate_and_distribute_rewards()
 
 
 if __name__ == '__main__':

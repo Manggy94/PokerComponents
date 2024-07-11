@@ -146,6 +146,7 @@ class HandHistoryConverter:
                                     total_players=total_players, start_date=start_date)
             self.table.add_tournament(tournament)
         except TypeError:
+            print("Error converting tournament info data")
             raise HandConversionError
 
     def get_hand_id(self):
@@ -229,6 +230,7 @@ class HandHistoryConverter:
             self.table.set_bb_seat(bb_seat)
             self.table.players.distribute_positions()
         except EmptyButtonSeatError:
+            print("Error converting players data: Empty button seat")
             raise HandConversionError
 
     def get_player(self, player_dict: dict):
@@ -307,6 +309,7 @@ class HandHistoryConverter:
                 action = RaiseAction(player, amount)
             action.play()
         except (NotSufficientBetError, NotSufficientRaiseError):
+            print("Error converting actions data: Not sufficient bet or raise")
             raise HandConversionError
 
     def get_flop(self):
@@ -349,8 +352,10 @@ class HandHistoryConverter:
                 combo = Combo.from_cards(first_card, second_card)
                 player.shows(combo)
         except ShowdownNotReachedError:
+            print("Error converting showdown data: Showdown not reached")
             raise HandConversionError
         except KeyError:
+            print("Error converting showdown data: Key error")
             raise HandConversionError
 
     def get_winners(self):
@@ -358,8 +363,9 @@ class HandHistoryConverter:
         Get the winners data from the data and set it to the table object
         """
         try:
-            self.table.distribute_rewards()
+            self.table.calculate_and_distribute_rewards()
         except (CannotParseWinnersError, ValueError):
+            print("Error converting winners data: Cannot parse winners")
             raise HandConversionError
 
     def advance_street(self):
@@ -405,7 +411,7 @@ class HandHistoryConverter:
             self.get_winners()
             return self.table
         except HandConversionError:
-            print(f"Error for file {file_path}")
+            print(f" Hand Conversion Error for file {file_path}")
             raise HandConversionError
         except ValueError:
             print(f"Error for file {file_path}")

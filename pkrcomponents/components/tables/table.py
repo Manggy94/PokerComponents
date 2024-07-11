@@ -39,6 +39,8 @@ class Table:
         min_bet(float): The minimum bet on the table
         players(Players): The players on the table
         pot(Pot): The pot of the table
+        rewards_table (list): The rewards table
+
         seat_playing(int): The seat of the player currently playing
         street(Street): The current street of the table
         tournament(Tournament): The tournament associated with the table
@@ -79,6 +81,7 @@ class Table:
     hand_date = field(default=None, validator=optional(instance_of(datetime)))
     street = field(default=None, validator=optional(instance_of(Street)), converter=convert_to_street)
     tournament = field(default=None, validator=optional(instance_of(Tournament)))
+    rewards_table = field(default=[], validator=instance_of(list))
 
     def __attrs_post_init__(self):
         self.deck.shuffle()
@@ -105,7 +108,7 @@ class Table:
     @property
     def playing_order(self) -> list[int]:
         """Returns the list of the indexes of players on the table, with order depending on current street"""
-        if self.street == Street.PREFLOP:
+        if self.street.is_preflop:
             return self.players.preflop_ordered_seats
         else:
             return self.players.postflop_ordered_seats
@@ -445,6 +448,8 @@ class Table:
             self.seat_playing = self.players_in_game[0].seat
             for player in self.players_in_game:
                 player.reset_street_status()
+                player.update_has_position_stat()
+
         except IndexError:
             pass
 
@@ -499,29 +504,46 @@ class Table:
                 winners[pl_score].append(player)
         return winners
 
-    def split_pot(self, players: list):
+    def split_pot(self, winning_players: list):
         """
         Split pot between players
 
         Args:
-            players (list): The list of players to split the pot between
+            winning_players (list): The list of players to split the pot between
         """
-        while len(players) > 0 and self.pot.value > 0:
-            min_reward = min([pl.max_reward for pl in players])
-            reward = min(min_reward, self.pot.value/len(players))
-            for player in players:
-                player.reward += reward
-                if player.reward >= player.max_reward:
-                    players.remove(player)
-                    player.win(reward)
+        while len(winning_players) > 0 and self.pot.value > 0:
+            remaining_players_minimum_reward = min([player.max_reward for player in winning_players])
+            max_reward_from_pot = self.pot.value/len(winning_players)
+            reward_given_to_each_player = min(remaining_players_minimum_reward, max_reward_from_pot)
+            for player in winning_players:
+                player.reward += reward_given_to_each_player
+                if player.reward >= player.max_reward or player.reward >= self.pot.value:
+                    reward_dict = {"player": player, "reward": player.reward}
+                    winning_players.remove(player)
+                    self.rewards_table.append(reward_dict)
+                    self.pot.value -= reward_given_to_each_player
 
-    def distribute_rewards(self):
-        """Distribute rewards between players"""
+    def calculate_rewards(self):
+        """
+        Calculate rewards for each player
+        """
         scores = [score for score in self.winners.keys()]
         scores.sort()
         for score in scores:
-            players = self.winners[score]
-            self.split_pot(players)
+            winning_players = self.winners[score]
+            self.split_pot(winning_players)
+
+    def distribute_rewards(self):
+        """Distribute rewards between players"""
+        for reward_dict in self.rewards_table:
+            player = reward_dict["player"]
+            reward = reward_dict["reward"]
+            player.win(reward)
+
+    def calculate_and_distribute_rewards(self):
+        """Calculate and distribute rewards"""
+        self.calculate_rewards()
+        self.distribute_rewards()
 
     def hand_reset(self):
         """Reset the table for a new hand"""
