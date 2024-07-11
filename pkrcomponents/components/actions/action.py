@@ -84,6 +84,7 @@ class Action:
         """
         match self.table.street:
             case Street.PREFLOP:
+                self.hand_stats.flag_voluntary_all_in_preflop = self.value >= self.player.effective_stack
                 self.hand_stats.preflop_actions_sequence = self.player.actions_history.preflop
                 self.hand_stats.total_preflop_bet_amount = sum(
                     [action.value for action in self.hand_stats.preflop_actions_sequence.actions])
