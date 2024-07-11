@@ -63,12 +63,14 @@ class Action:
         """
         Executes the action
         """
-        self.table.update_min_bet(self.new_min_bet)
+
         self.player.pay(self.value)
-        self.player.current_bet += self.value
-        self.table.pot.update_highest_bet(self.player.current_bet)
         self.add_to_history()
         self.update_hand_stats()
+        self.player.current_bet += self.value
+        self.table.update_min_bet(self.new_min_bet)
+        self.table.pot.update_highest_bet(self.player.current_bet)
+
 
     def play(self):
         """
@@ -132,6 +134,7 @@ class Action:
                 if self.player.can_4bet:
                     self.hand_stats.flag_preflop_4bet_opportunity = True
             case Street.FLOP:
+                self.hand_stats.flag_saw_flop = True
                 self.hand_stats.flop_actions_sequence = self.player.actions_history.flop
                 if self.player.can_open:
                     self.hand_stats.flag_flop_open_opportunity = True
@@ -251,9 +254,10 @@ class BetAction(Action):
         super().__init__(player=player, move=ActionMove.BET, value=value)
 
     def execute(self):
+        super().execute()
         self.table.cnt_bets += 1
         self.player.take_initiative()
-        super().execute()
+
 
     def update_hand_stats(self):
         super().update_hand_stats()
@@ -284,10 +288,12 @@ class RaiseAction(Action):
         super().__init__(player=player, move=ActionMove.RAISE, value=total_value)
 
     def execute(self):
+        super().execute()
+        # self.table.update_min_bet(self.new_min_bet)
         self.table.cnt_bets += 1
         self.table.is_opened = True
         self.player.take_initiative()
-        super().execute()
+
 
     def update_hand_stats(self):
         super().update_hand_stats()

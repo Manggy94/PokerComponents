@@ -327,11 +327,13 @@ class TableTest(unittest.TestCase):
         self.assertTrue(table.players[3].is_current_player)
         self.assertFalse(table.players[3].hand_stats.flag_vpip)
         self.assertFalse(table.players[3].has_initiative)
+        self.assertEqual(table.min_bet, 800)
         self.assertEqual(table.players[3].min_raise, 400)
         with self.assertRaises(NotSufficientRaiseError):
             action = RaiseAction(table.current_player, 300)
             action.play()
-
+        self.assertEqual(table.min_bet, 800)
+        self.assertEqual(table.players[3].min_raise, 400)
         action = RaiseAction(table.current_player, 1050)
         action.play()
         self.assertEqual(table.cnt_bets, 2)

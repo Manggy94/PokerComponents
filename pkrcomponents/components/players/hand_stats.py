@@ -66,7 +66,7 @@ class HandStats:
     move_facing_preflop_3bet = preflop.MOVE_FACING_PREFLOP_3BET
     move_facing_preflop_4bet = preflop.MOVE_FACING_PREFLOP_4BET
     move_facing_preflop_squeeze = preflop.MOVE_FACING_PREFLOP_SQUEEZE
-    move_facing_preflop_steal_attempt = preflop.MOVE_FACING_PREFLOP_STEAL_ATTEMPT
+    move_facing_steal_attempt = preflop.MOVE_FACING_STEAL_ATTEMPT
     # B. Flop stats
     # 1. Flags
     flag_saw_flop = flop.FLAG_SAW_FLOP

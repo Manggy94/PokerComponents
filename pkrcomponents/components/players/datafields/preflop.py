@@ -257,7 +257,7 @@ MOVE_FACING_PREFLOP_SQUEEZE = field(
     metadata={
         'description': 'The move the player did when facing a preflop squeeze',
         'type': 'ActionMove'})
-MOVE_FACING_PREFLOP_STEAL_ATTEMPT = field(
+MOVE_FACING_STEAL_ATTEMPT = field(
     default=None, validator=optional(instance_of(ActionMove)),
     metadata={
         'description': 'The move the player did when facing a preflop steal attempt',
