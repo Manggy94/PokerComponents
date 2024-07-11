@@ -1,6 +1,8 @@
 import unittest
 import os
 from datetime import datetime
+
+from pkrcomponents.components.actions.action_move import ActionMove
 from pkrcomponents.components.cards.board import Board
 from pkrcomponents.components.cards.combo import Combo
 from pkrcomponents.components.players.hand_stats import HandStats
@@ -183,6 +185,11 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertEqual(hero_stats.ratio_first_raise_made_preflop, 0)
         self.assertEqual(hero_stats.ratio_second_raise_made_preflop, 0)
         self.assertEqual(hero_stats.total_preflop_bet_amount, 0)
+        self.assertEqual(hero_stats.move_facing_preflop_2bet, ActionMove.FOLD)
+        self.assertIsNone(hero_stats.move_facing_preflop_3bet)
+        self.assertIsNone(hero_stats.move_facing_preflop_4bet)
+        self.assertIsNone(hero_stats.move_facing_preflop_squeeze)
+        self.assertIsNone(hero_stats.move_facing_preflop_steal_attempt)
 
 
 class TestHandHistoryConverter2(unittest.TestCase):

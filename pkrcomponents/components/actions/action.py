@@ -101,24 +101,29 @@ class Action:
                     self.hand_stats.flag_squeeze_opportunity = True
                 if self.player.is_facing_squeeze:
                     self.hand_stats.flag_face_squeeze = True
+                    self.hand_stats.move_facing_squeeze = self.move
                 if self.player.can_steal:
                     self.hand_stats.flag_steal_opportunity = True
                 if self.player.is_facing_steal:
                     self.hand_stats.flag_face_steal_attempt = True
+                    self.hand_stats.move_facing_steal_attempt = self.move
                 if self.player.is_defending_blinds:
                     self.hand_stats.flag_blind_defense_opportunity = True
                 if self.player.is_facing_1bet:
                     self.hand_stats.amount_to_call_facing_preflop_bb = self.player.to_call
                     self.hand_stats.ratio_to_call_facing_preflop_bb = self.player.to_call / self.table.pot_value
                 if self.player.is_facing_2bet:
+                    self.hand_stats.move_facing_preflop_2bet = self.move
                     self.hand_stats.amount_to_call_facing_preflop_2bet = self.player.to_call
                     self.hand_stats.ratio_to_call_facing_preflop_2bet = self.player.to_call / self.table.pot_value
                 if self.player.is_facing_3bet:
                     self.hand_stats.flag_preflop_face_3bet = True
+                    self.hand_stats.move_facing_preflop_3bet = self.move
                     self.hand_stats.amount_to_call_facing_preflop_3bet = self.player.to_call
                     self.hand_stats.ratio_to_call_facing_preflop_3bet = self.player.to_call / self.table.pot_value
                 if self.player.is_facing_4bet:
                     self.hand_stats.flag_preflop_face_4bet = True
+                    self.hand_stats.move_facing_preflop_4bet = self.move
                     self.hand_stats.amount_to_call_facing_preflop_4bet = self.player.to_call
                     self.hand_stats.ratio_to_call_facing_preflop_4bet = self.player.to_call / self.table.pot_value
                 if self.player.can_3bet:
