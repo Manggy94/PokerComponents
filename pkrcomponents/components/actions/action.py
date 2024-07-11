@@ -289,8 +289,10 @@ class RaiseAction(Action):
                 self.hand_stats.flag_preflop_raise = True
                 if self.hand_stats.count_preflop_player_raises == 0:
                     self.hand_stats.amount_first_raise_made_preflop = self.value
+                    self.hand_stats.ratio_first_raise_made_preflop = self.value / self.table.pot_value
                 if self.hand_stats.count_preflop_player_raises == 1:
                     self.hand_stats.amount_second_raise_made_preflop = self.value
+                    self.hand_stats.ratio_second_raise_made_preflop = self.value / self.table.pot_value
                 if self.player.can_open:
                     self.hand_stats.flag_preflop_open = True
                 if self.player.can_open and self.value >= self.player.effective_stack:
