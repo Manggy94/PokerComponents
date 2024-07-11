@@ -135,6 +135,11 @@ class TablePlayer:
         return float("inf") if self.table.pot.value == 0 else self.stack / self.table.pot.value
 
     @property
+    def effective_stack(self) -> float:
+        """Player's effective stack"""
+        return min(self.stack, max([pl.stack for pl in self.table.players_in_game if pl != self]))
+
+    @property
     def stack_enables_raise(self) -> bool:
         """Boolean indicating if the player's stack enables a raise"""
         return self.stack > self.to_call

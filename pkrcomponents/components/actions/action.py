@@ -81,6 +81,8 @@ class Action:
                 if not self.table.is_opened:
                     self.player.hand_stats.flag_preflop_open_opportunity = True
                     self.player.hand_stats.count_faced_limps = self.table.cnt_limps
+                if self.player.hand_stats.amount_preflop_effective_stack == 0:
+                    self.player.hand_stats.amount_preflop_effective_stack = self.player.effective_stack
                 if self.player.can_raise:
                     self.player.hand_stats.flag_preflop_raise_opportunity = True
                 if self.player.is_facing_raise:

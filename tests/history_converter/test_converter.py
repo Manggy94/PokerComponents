@@ -166,10 +166,9 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertEqual(hero_stats.count_preflop_player_calls, 0)
         self.assertEqual(hero_stats.count_faced_limps, 0)
         # sequences
-        print(hero_player.actions_history.preflop)
         self.assertEqual(hero_stats.preflop_actions_sequence.symbol, "F")
         # amounts
-        self.assertEqual(hero_stats.amount_preflop_effective_stack, 0)
+        self.assertEqual(hero_stats.amount_preflop_effective_stack, 18950)
 
 
 class TestHandHistoryConverter2(unittest.TestCase):
