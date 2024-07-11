@@ -123,6 +123,11 @@ FLAG_FOLD_TO_STEAL_ATTEMPT = field(
     metadata={
         'description': 'Whether the player folded to a steal attempt preflop',
         'type': 'bool'})
+FLAG_BLIND_DEFENSE_OPPORTUNITY = field(
+    default=False, validator=instance_of(bool),
+    metadata={
+        'description': 'Whether the player had the opportunity to defend the blinds preflop',
+        'type': 'bool'})
 FLAG_BLIND_DEFENSE = field(
     default=False, validator=instance_of(bool),
     metadata={

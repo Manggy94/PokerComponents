@@ -36,6 +36,7 @@ class HandStats:
     flag_steal_attempt = preflop.FLAG_STEAL_ATTEMPT
     flag_face_steal_attempt = preflop.FLAG_FACE_STEAL_ATTEMPT
     flag_fold_to_steal_attempt = preflop.FLAG_FOLD_TO_STEAL_ATTEMPT
+    flag_blind_defense_opportunity = preflop.FLAG_BLIND_DEFENSE_OPPORTUNITY
     flag_blind_defense = preflop.FLAG_BLIND_DEFENSE
     flag_open_shove = preflop.FLAG_OPEN_SHOVE
     flag_voluntary_all_in_preflop = preflop.FLAG_VOLUNTARY_ALL_IN_PREFLOP

@@ -158,6 +158,7 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertFalse(hero_stats.flag_steal_attempt)
         self.assertFalse(hero_stats.flag_face_steal_attempt)
         self.assertFalse(hero_stats.flag_fold_to_steal_attempt)
+        self.assertTrue(hero_stats.flag_blind_defense_opportunity)
         self.assertFalse(hero_stats.flag_blind_defense)
         self.assertFalse(hero_stats.flag_open_shove)
         self.assertFalse(hero_stats.flag_voluntary_all_in_preflop)

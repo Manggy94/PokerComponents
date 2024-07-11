@@ -470,4 +470,9 @@ class TablePlayer:
         return (self.is_facing_2bet and any([player.hand_stats.flag_steal_attempt for player in self.table.players_involved])
                 and self.table.street.is_preflop)
 
+    @property
+    def is_defending_blinds(self):
+        """Boolean indicating if player is defending blinds"""
+        return self.is_facing_raise and self.position.is_blind and self.table.street.is_preflop
+
 

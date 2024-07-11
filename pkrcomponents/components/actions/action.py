@@ -102,6 +102,8 @@ class Action:
                     self.hand_stats.flag_steal_opportunity = True
                 if self.player.is_facing_steal:
                     self.hand_stats.flag_face_steal_attempt = True
+                if self.player.is_defending_blinds:
+                    self.hand_stats.flag_blind_defense_opportunity = True
                 if self.player.can_3bet:
                     self.hand_stats.flag_preflop_3bet_opportunity = True
                 if self.player.is_facing_3bet:
@@ -203,6 +205,8 @@ class CallAction(Action):
                 self.hand_stats.flag_vpip = True
                 self.hand_stats.flag_preflop_open = True
                 self.hand_stats.count_preflop_player_calls += 1
+                if self.player.is_defending_blinds:
+                    self.hand_stats.flag_blind_defense = True
                 if self.player.can_first_raise:
                     self.hand_stats.flag_preflop_limp = True
                     self.table.cnt_limps += 1
@@ -281,6 +285,8 @@ class RaiseAction(Action):
                     self.hand_stats.flag_squeeze = True
                 if self.player.can_steal:
                     self.hand_stats.flag_steal_attempt = True
+                if self.player.is_defending_blinds:
+                    self.hand_stats.flag_blind_defense = True
                 if self.table.cnt_bets == 2:
                     self.hand_stats.flag_preflop_3bet = True
                 if self.table.cnt_bets >= 3:

@@ -22,6 +22,7 @@ flag_steal_opportunity,False,Whether the player had the opportunity to steal pre
 flag_steal_attempt,False,Whether the player attempted to steal preflop,bool
 flag_face_steal_attempt,False,Whether the player faced a steal attempt preflop,bool
 flag_fold_to_steal_attempt,False,Whether the player folded to a steal attempt preflop,bool
+flag_blind_defense_opportunity,False,Whether the player had the opportunity to defend the blinds preflop,bool
 flag_blind_defense,False,Whether the player defended the blinds preflop,bool
 flag_open_shove,False,Whether the player open shoved preflop,bool
 flag_voluntary_all_in_preflop,False,Whether the player voluntarily went all in preflop,bool
