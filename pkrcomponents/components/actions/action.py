@@ -283,7 +283,10 @@ class RaiseAction(Action):
             case Street.PREFLOP:
                 self.hand_stats.flag_vpip = True
                 self.hand_stats.flag_preflop_raise = True
-                self.hand_stats.count_preflop_player_raises += 1
+                if self.hand_stats.count_preflop_player_raises == 0:
+                    self.hand_stats.amount_first_raise_made_preflop = self.value
+                if self.hand_stats.count_preflop_player_raises == 1:
+                    self.hand_stats.amount_second_raise_made_preflop = self.value
                 if self.player.can_open:
                     self.hand_stats.flag_preflop_open = True
                 if self.player.can_open and self.value >= self.player.effective_stack:
@@ -296,10 +299,11 @@ class RaiseAction(Action):
                     self.hand_stats.flag_steal_attempt = True
                 if self.player.is_defending_blinds:
                     self.hand_stats.flag_blind_defense = True
-                if self.table.cnt_bets == 2:
+                if self.player.can_3bet:
                     self.hand_stats.flag_preflop_3bet = True
-                if self.table.cnt_bets >= 3:
+                if self.player.can_4bet:
                     self.hand_stats.flag_preflop_4bet = True
+                self.hand_stats.count_preflop_player_raises += 1
 
             case Street.FLOP:
                 if self.player.can_first_raise:
