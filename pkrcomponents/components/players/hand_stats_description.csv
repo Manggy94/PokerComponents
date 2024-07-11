@@ -31,7 +31,7 @@ count_preflop_player_calls,0,The number of calls the player made preflop,int
 count_faced_limps,0,The number of limps the player faced preflop,int
 preflop_actions_sequence,,The sequence of actions the player made preflop,ActionsSequence
 amount_preflop_effective_stack,0,The effective stack the player had preflop,float
-amount_to_call_facing_preflop_bet,0,The amount the player had to call facing the preflop blinds,float
+amount_to_call_facing_preflop_bb,0,The amount the player had to call facing the preflop big blind,float
 amount_to_call_facing_preflop_2bet,0,The amount the player had to call facing the preflop 2bet,float
 amount_to_call_facing_preflop_3bet,0,The amount the player had to call facing the preflop 3bet,float
 amount_to_call_facing_preflop_4bet,0,The amount the player had to call facing the preflop 4bet,float

@@ -104,12 +104,19 @@ class Action:
                     self.hand_stats.flag_face_steal_attempt = True
                 if self.player.is_defending_blinds:
                     self.hand_stats.flag_blind_defense_opportunity = True
-                if self.player.can_3bet:
-                    self.hand_stats.flag_preflop_3bet_opportunity = True
+                if self.player.is_facing_1bet:
+                    self.hand_stats.amount_to_call_facing_preflop_bb = self.player.to_call
+                if self.player.is_facing_2bet:
+                    self.hand_stats.amount_to_call_facing_preflop_2bet = self.player.to_call
                 if self.player.is_facing_3bet:
                     self.hand_stats.flag_preflop_face_3bet = True
-                if self.table.cnt_bets >= 4:
+                    self.hand_stats.amount_to_call_facing_preflop_3bet = self.player.to_call
+                if self.player.is_facing_4bet:
                     self.hand_stats.flag_preflop_face_4bet = True
+                    self.hand_stats.amount_to_call_facing_preflop_4bet = self.player.to_call
+                if self.player.can_3bet:
+                    self.hand_stats.flag_preflop_3bet_opportunity = True
+
                 if self.player.can_4bet:
                     self.hand_stats.flag_preflop_4bet_opportunity = True
             case Street.FLOP:
@@ -279,6 +286,8 @@ class RaiseAction(Action):
                 self.hand_stats.count_preflop_player_raises += 1
                 if self.player.can_open:
                     self.hand_stats.flag_preflop_open = True
+                if self.player.can_open and self.value >= self.player.effective_stack:
+                    self.hand_stats.flag_open_shove = True
                 if self.player.can_first_raise:
                     self.hand_stats.flag_preflop_first_raise = True
                 if self.player.can_squeeze:

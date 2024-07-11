@@ -171,10 +171,10 @@ AMOUNT_PREFLOP_EFFECTIVE_STACK = field(
     metadata={
         'description': 'The effective stack the player had preflop',
         'type': 'float'})
-AMOUNT_TO_CALL_FACING_PREFLOP_BET = field(
+AMOUNT_TO_CALL_FACING_PREFLOP_BB = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={
-        'description': 'The amount the player had to call facing the preflop blinds',
+        'description': 'The amount the player had to call facing the preflop big blind',
         'type': 'float'})
 AMOUNT_TO_CALL_FACING_PREFLOP_2BET = field(
     default=0, validator=instance_of(float), converter=float,

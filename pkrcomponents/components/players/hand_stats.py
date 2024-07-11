@@ -48,7 +48,7 @@ class HandStats:
     preflop_actions_sequence = preflop.PREFLOP_ACTIONS_SEQUENCE
     # 4. Amounts
     amount_preflop_effective_stack = preflop.AMOUNT_PREFLOP_EFFECTIVE_STACK
-    amount_to_call_facing_preflop_bet = preflop.AMOUNT_TO_CALL_FACING_PREFLOP_BET
+    amount_to_call_facing_preflop_bb = preflop.AMOUNT_TO_CALL_FACING_PREFLOP_BB
     amount_to_call_facing_preflop_2bet = preflop.AMOUNT_TO_CALL_FACING_PREFLOP_2BET
     amount_to_call_facing_preflop_3bet = preflop.AMOUNT_TO_CALL_FACING_PREFLOP_3BET
     amount_to_call_facing_preflop_4bet = preflop.AMOUNT_TO_CALL_FACING_PREFLOP_4BET
