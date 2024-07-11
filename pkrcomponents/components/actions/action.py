@@ -260,14 +260,13 @@ class BetAction(Action):
         self.table.cnt_bets += 1
         self.player.take_initiative()
 
-
     def update_hand_stats(self):
         super().update_hand_stats()
         match self.table.street:
             case Street.FLOP:
+                self.hand_stats.flag_flop_bet = True
                 if self.player.can_open:
                     self.hand_stats.flag_flop_open = True
-                self.hand_stats.flag_flop_bet = True
                 if self.player.has_initiative:
                     self.hand_stats.flag_flop_cbet = True
                 else:
@@ -328,6 +327,7 @@ class RaiseAction(Action):
                 self.hand_stats.count_preflop_player_raises += 1
 
             case Street.FLOP:
+                self.hand_stats.flag_flop_bet = True
                 if self.player.can_first_raise:
                     self.hand_stats.flag_flop_first_raise = True
                 if self.table.cnt_bets == 2:
