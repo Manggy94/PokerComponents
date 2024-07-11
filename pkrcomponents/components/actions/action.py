@@ -46,6 +46,13 @@ class Action:
         return self.player.table
 
     @property
+    def hand_stats(self):
+        """
+        Returns the hand statistics of the player
+        """
+        return self.player.hand_stats
+
+    @property
     def new_min_bet(self):
         """
         Returns the new minimum bet after the action
@@ -77,48 +84,48 @@ class Action:
         """
         match self.table.street:
             case Street.PREFLOP:
-                self.player.hand_stats.preflop_actions_sequence = self.player.actions_history.preflop
+                self.hand_stats.preflop_actions_sequence = self.player.actions_history.preflop
                 if not self.table.is_opened:
-                    self.player.hand_stats.flag_preflop_open_opportunity = True
-                    self.player.hand_stats.count_faced_limps = self.table.cnt_limps
-                if self.player.hand_stats.amount_preflop_effective_stack == 0:
-                    self.player.hand_stats.amount_preflop_effective_stack = self.player.effective_stack
+                    self.hand_stats.flag_preflop_open_opportunity = True
+                    self.hand_stats.count_faced_limps = self.table.cnt_limps
+                if self.hand_stats.amount_preflop_effective_stack == 0:
+                    self.hand_stats.amount_preflop_effective_stack = self.player.effective_stack
                 if self.player.can_raise:
-                    self.player.hand_stats.flag_preflop_raise_opportunity = True
+                    self.hand_stats.flag_preflop_raise_opportunity = True
                 if self.player.is_facing_raise:
-                    self.player.hand_stats.flag_preflop_face_raise = True
+                    self.hand_stats.flag_preflop_face_raise = True
                 if self.player.can_squeeze:
-                    self.player.hand_stats.flag_squeeze_opportunity = True
+                    self.hand_stats.flag_squeeze_opportunity = True
                 if self.player.is_facing_squeeze:
-                    self.player.hand_stats.flag_face_squeeze = True
+                    self.hand_stats.flag_face_squeeze = True
                 if self.player.can_steal:
-                    self.player.hand_stats.flag_steal_opportunity = True
+                    self.hand_stats.flag_steal_opportunity = True
                 if self.player.is_facing_steal:
-                    self.player.hand_stats.flag_face_steal_attempt = True
+                    self.hand_stats.flag_face_steal_attempt = True
                 if self.player.can_3bet:
-                    self.player.hand_stats.flag_preflop_3bet_opportunity = True
+                    self.hand_stats.flag_preflop_3bet_opportunity = True
                 if self.player.is_facing_3bet:
-                    self.player.hand_stats.flag_preflop_face_3bet = True
+                    self.hand_stats.flag_preflop_face_3bet = True
                 if self.table.cnt_bets >= 4:
-                    self.player.hand_stats.flag_preflop_face_4bet = True
+                    self.hand_stats.flag_preflop_face_4bet = True
                 if self.player.can_4bet:
-                    self.player.hand_stats.flag_preflop_4bet_opportunity = True
+                    self.hand_stats.flag_preflop_4bet_opportunity = True
             case Street.FLOP:
-                self.player.hand_stats.flop_actions_sequence = self.player.actions_history.flop
+                self.hand_stats.flop_actions_sequence = self.player.actions_history.flop
                 if self.player.can_open:
-                    self.player.hand_stats.flag_flop_open_opportunity = True
+                    self.hand_stats.flag_flop_open_opportunity = True
                 if self.player.can_cbet:
-                    self.player.hand_stats.flag_flop_cbet_opportunity = True
+                    self.hand_stats.flag_flop_cbet_opportunity = True
                 if self.player.can_donk_bet:
-                    self.player.hand_stats.flag_flop_donk_bet_opportunity = True
+                    self.hand_stats.flag_flop_donk_bet_opportunity = True
                 if self.player.is_facing_raise:
-                    self.player.hand_stats.flag_flop_first_raise = True
+                    self.hand_stats.flag_flop_first_raise = True
                 if self.player.can_3bet:
-                    self.player.hand_stats.flag_flop_3bet_opportunity = True
+                    self.hand_stats.flag_flop_3bet_opportunity = True
             case Street.TURN:
-                self.player.hand_stats.turn_actions_sequence = self.player.actions_history.turn
+                self.hand_stats.turn_actions_sequence = self.player.actions_history.turn
             case Street.RIVER:
-                self.player.hand_stats.river_actions_sequence = self.player.actions_history.river
+                self.hand_stats.river_actions_sequence = self.player.actions_history.river
 
     def add_to_history(self):
         """
@@ -151,7 +158,10 @@ class FoldAction(Action):
         super().update_hand_stats()
         match self.table.street:
             case Street.PREFLOP:
-                self.player.hand_stats.flag_preflop_fold = True
+                self.hand_stats.flag_preflop_fold = True
+                if self.player.is_facing_steal:
+                    self.hand_stats.flag_fold_to_steal_attempt = True
+
 
 
 class CheckAction(Action):
@@ -167,7 +177,7 @@ class CheckAction(Action):
             case Street.PREFLOP:
                 pass
             case Street.FLOP:
-                self.player.hand_stats.flag_flop_check = True
+                self.hand_stats.flag_flop_check = True
             case Street.TURN:
                 pass
             case Street.RIVER:
@@ -190,14 +200,14 @@ class CallAction(Action):
         super().update_hand_stats()
         match self.table.street:
             case Street.PREFLOP:
-                self.player.hand_stats.flag_vpip = True
-                self.player.hand_stats.flag_preflop_open = True
-                self.player.hand_stats.count_preflop_player_calls += 1
+                self.hand_stats.flag_vpip = True
+                self.hand_stats.flag_preflop_open = True
+                self.hand_stats.count_preflop_player_calls += 1
                 if self.player.can_first_raise:
-                    self.player.hand_stats.flag_preflop_limp = True
+                    self.hand_stats.flag_preflop_limp = True
                     self.table.cnt_limps += 1
                 else:
-                    self.player.hand_stats.flag_preflop_cold_called = True
+                    self.hand_stats.flag_preflop_cold_called = True
                     self.table.cnt_cold_calls += 1
 
             case Street.FLOP:
@@ -227,16 +237,16 @@ class BetAction(Action):
         match self.table.street:
             case Street.FLOP:
                 if self.player.can_open:
-                    self.player.hand_stats.flag_flop_open = True
-                self.player.hand_stats.flag_flop_bet = True
+                    self.hand_stats.flag_flop_open = True
+                self.hand_stats.flag_flop_bet = True
                 if self.player.has_initiative:
-                    self.player.hand_stats.flag_flop_cbet = True
+                    self.hand_stats.flag_flop_cbet = True
                 else:
-                    self.player.hand_stats.flag_flop_donk_bet = True
+                    self.hand_stats.flag_flop_donk_bet = True
             case Street.TURN:
-                self.player.hand_stats.flag_turn_bet = True
+                self.hand_stats.flag_turn_bet = True
             case Street.RIVER:
-                self.player.hand_stats.flag_river_bet = True
+                self.hand_stats.flag_river_bet = True
 
 
 class RaiseAction(Action):
@@ -260,29 +270,29 @@ class RaiseAction(Action):
         super().update_hand_stats()
         match self.table.street:
             case Street.PREFLOP:
-                self.player.hand_stats.flag_vpip = True
-                self.player.hand_stats.flag_preflop_raise = True
-                self.player.hand_stats.count_preflop_player_raises += 1
+                self.hand_stats.flag_vpip = True
+                self.hand_stats.flag_preflop_raise = True
+                self.hand_stats.count_preflop_player_raises += 1
                 if self.player.can_open:
-                    self.player.hand_stats.flag_preflop_open = True
+                    self.hand_stats.flag_preflop_open = True
                 if self.player.can_first_raise:
-                    self.player.hand_stats.flag_preflop_first_raise = True
+                    self.hand_stats.flag_preflop_first_raise = True
                 if self.player.can_squeeze:
-                    self.player.hand_stats.flag_squeeze = True
+                    self.hand_stats.flag_squeeze = True
                 if self.player.can_steal:
-                    self.player.hand_stats.flag_steal_attempt = True
+                    self.hand_stats.flag_steal_attempt = True
                 if self.table.cnt_bets == 2:
-                    self.player.hand_stats.flag_preflop_3bet = True
+                    self.hand_stats.flag_preflop_3bet = True
                 if self.table.cnt_bets >= 3:
-                    self.player.hand_stats.flag_preflop_4bet = True
+                    self.hand_stats.flag_preflop_4bet = True
 
             case Street.FLOP:
                 if self.player.can_first_raise:
-                    self.player.hand_stats.flag_flop_first_raise = True
+                    self.hand_stats.flag_flop_first_raise = True
                 if self.table.cnt_bets == 2:
-                    self.player.hand_stats.flag_flop_3bet = True
+                    self.hand_stats.flag_flop_3bet = True
                 if self.table.cnt_bets >= 3:
-                    self.player.hand_stats.flag_flop_4bet = True
+                    self.hand_stats.flag_flop_4bet = True
 
             case Street.TURN:
                 pass
