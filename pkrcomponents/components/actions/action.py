@@ -85,6 +85,8 @@ class Action:
         match self.table.street:
             case Street.PREFLOP:
                 self.hand_stats.preflop_actions_sequence = self.player.actions_history.preflop
+                self.hand_stats.total_preflop_bet_amount = sum(
+                    [action.value for action in self.hand_stats.preflop_actions_sequence.actions])
                 if not self.table.is_opened:
                     self.hand_stats.flag_preflop_open_opportunity = True
                     self.hand_stats.count_faced_limps = self.table.cnt_limps
