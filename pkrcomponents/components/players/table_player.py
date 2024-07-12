@@ -304,6 +304,7 @@ class TablePlayer:
         self.combo = Combo(combo)
         self.hand_stats.combo = self.combo
         self.went_to_showdown = True
+        self.hand_stats.flag_went_to_showdown = True
         if self.has_table and not self.is_hero:
             self.table.deck.draw(self.combo.first)
             self.table.deck.draw(self.combo.second)
@@ -342,6 +343,7 @@ class TablePlayer:
         """Reset hand status"""
         self.reset_street_status()
         self.folded = False
+        self.went_to_showdown = False
         self.reset_init_stack()
         self.delete_combo()
         self.reset_actions()

@@ -187,6 +187,7 @@ class Players:
         """Post antes for all players"""
         for seat in self.preflop_ordered_seats:
             player = self[seat]
+            player.hand_stats.starting_stack = player.init_stack
             posting = AntePosting(player_name=player.name, value=player.table.level.ante)
             posting.execute(player)
 

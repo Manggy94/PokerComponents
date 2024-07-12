@@ -554,6 +554,8 @@ class TestHandHistoryConverter(unittest.TestCase):
         # General
         self.assertEqual(hero_stats.combo, Combo("5h2c"))
         self.assertIsNone(villain_stats.combo)
+        self.assertEqual(hero_stats.starting_stack, 19175)
+        self.assertEqual(villain_stats.starting_stack, 26609)
 
 
 class TestHandHistoryConverter2(unittest.TestCase):
