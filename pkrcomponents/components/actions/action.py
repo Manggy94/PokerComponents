@@ -191,6 +191,8 @@ class FoldAction(Action):
                 self.hand_stats.flag_preflop_fold = True
                 if self.player.is_facing_steal:
                     self.hand_stats.flag_fold_to_steal_attempt = True
+            case Street.FLOP:
+                self.hand_stats.flag_flop_fold = True
 
 
 
