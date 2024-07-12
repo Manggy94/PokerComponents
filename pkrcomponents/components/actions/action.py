@@ -212,6 +212,8 @@ class Action:
                     self.hand_stats.ratio_to_call_facing_turn_4bet = self.player.to_call / self.table.pot_value
                     self.hand_stats.flag_turn_face_4bet = True
                     self.hand_stats.move_facing_turn_4bet = self.move
+                if self.player.can_open:
+                    self.hand_stats.flag_turn_open_opportunity = True
             case Street.RIVER:
                 self.hand_stats.flag_saw_river = True
                 self.hand_stats.river_actions_sequence = self.player.actions_history.river
@@ -245,6 +247,8 @@ class Action:
                     self.hand_stats.ratio_to_call_facing_river_4bet = self.player.to_call / self.table.pot_value
                     self.hand_stats.flag_river_face_4bet = True
                     self.hand_stats.move_facing_river_4bet = self.move
+                if self.player.can_open:
+                    self.hand_stats.flag_river_open_opportunity = True
 
 
     def add_to_history(self):

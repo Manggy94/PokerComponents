@@ -181,6 +181,8 @@ class HandStats:
     flag_river_first_to_talk = river.FLAG_RIVER_FIRST_TO_TALK
     flag_river_has_position = river.FLAG_RIVER_HAS_POSITION
     flag_river_bet = river.FLAG_RIVER_BET
+    flag_river_open_opportunity = river.FLAG_RIVER_OPEN_OPPORTUNITY
+    flag_river_open = river.FLAG_RIVER_OPEN
     flag_river_cbet_opportunity = river.FLAG_RIVER_CBET_OPPORTUNITY
     flag_river_cbet = river.FLAG_RIVER_CBET
     flag_river_face_cbet = river.FLAG_RIVER_FACE_CBET

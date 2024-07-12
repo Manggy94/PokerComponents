@@ -47,8 +47,8 @@ total_preflop_bet_amount,0,The total amount the player bet preflop,float
 move_facing_preflop_2bet,,The move the player did when facing a preflop 2bet,ActionMove
 move_facing_preflop_3bet,,The move the player did when facing a preflop 3bet,ActionMove
 move_facing_preflop_4bet,,The move the player did when facing a preflop 4bet,ActionMove
-move_facing_preflop_squeeze,,The move the player did when facing a preflop squeeze,ActionMove
-move_facing_preflop_steal_attempt,,The move the player did when facing a preflop steal attempt,ActionMove
+move_facing_squeeze,,The move the player did when facing a preflop squeeze,ActionMove
+move_facing_steal_attempt,,The move the player did when facing a preflop steal attempt,ActionMove
 flag_saw_flop,False,Whether the player saw the flop,bool
 flag_flop_first_to_talk,False,Whether the player was the first to talk on the flop,bool
 flag_flop_has_position,False,Whether the player had position on the flop,bool
@@ -149,6 +149,8 @@ flag_saw_river,False,Whether the player saw the river,bool
 flag_river_first_to_talk,False,Whether the player was the first to talk on the river,bool
 flag_river_has_position,False,Whether the player had position on the river,bool
 flag_river_bet,False,Whether the player bet on the river,bool
+flag_river_open_opportunity,False,Whether the player had the opportunity to open on the river,bool
+flag_river_open,False,Whether the player opened on the river,bool
 flag_river_cbet_opportunity,False,Whether the player had the opportunity to make a c-bet on the river,bool
 flag_river_cbet,False,Whether the player made a continuation bet on the river,bool
 flag_river_face_cbet,False,Whether the player faced a continuation bet on the river,bool
