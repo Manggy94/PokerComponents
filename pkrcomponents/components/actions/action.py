@@ -184,6 +184,8 @@ class Action:
                     [action.value for action in self.hand_stats.turn_actions_sequence.actions])
                 if self.hand_stats.amount_turn_effective_stack == 0:
                     self.hand_stats.amount_turn_effective_stack = self.player.effective_stack
+                if not any(player.hand_stats.flag_turn_first_to_talk for player in self.table.players_in_game):
+                    self.hand_stats.flag_turn_first_to_talk = True
                 if self.player.is_facing_cbet:
                     self.hand_stats.flag_turn_face_cbet = True
                     self.hand_stats.move_facing_turn_cbet = self.move
@@ -215,6 +217,8 @@ class Action:
                     [action.value for action in self.hand_stats.river_actions_sequence.actions])
                 if self.hand_stats.amount_river_effective_stack == 0:
                     self.hand_stats.amount_river_effective_stack = self.player.effective_stack
+                if not any(player.hand_stats.flag_river_first_to_talk for player in self.table.players_in_game):
+                    self.hand_stats.flag_river_first_to_talk = True
                 if self.player.is_facing_cbet:
                     self.hand_stats.flag_river_face_cbet = True
                     self.hand_stats.move_facing_river_cbet = self.move
