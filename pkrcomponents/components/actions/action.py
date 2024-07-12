@@ -194,6 +194,8 @@ class Action:
                 if self.player.is_facing_donk_bet:
                     self.hand_stats.flag_turn_face_donk_bet = True
                     self.hand_stats.move_facing_turn_donk_bet = self.move
+                if self.player.is_facing_raise:
+                    self.hand_stats.flag_turn_face_raise = True
                 if self.player.is_facing_1bet:
                     self.hand_stats.amount_to_call_facing_turn_bet = self.player.to_call
                     self.hand_stats.ratio_to_call_facing_turn_bet = self.player.to_call / self.table.pot_value
@@ -237,6 +239,8 @@ class Action:
                 if self.player.is_facing_donk_bet:
                     self.hand_stats.flag_river_face_donk_bet = True
                     self.hand_stats.move_facing_river_donk_bet = self.move
+                if self.player.is_facing_raise:
+                    self.hand_stats.flag_river_face_raise = True
                 if self.player.is_facing_1bet:
                     self.hand_stats.amount_to_call_facing_river_bet = self.player.to_call
                     self.hand_stats.ratio_to_call_facing_river_bet = self.player.to_call / self.table.pot_value
