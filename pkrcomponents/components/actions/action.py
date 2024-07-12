@@ -206,14 +206,12 @@ class CheckAction(Action):
     def update_hand_stats(self):
         super().update_hand_stats()
         match self.table.street:
-            case Street.PREFLOP:
-                pass
             case Street.FLOP:
                 self.hand_stats.flag_flop_check = True
             case Street.TURN:
-                pass
+                self.hand_stats.flag_turn_check = True
             case Street.RIVER:
-                pass
+                self.hand_stats.flag_river_check = True
 
 
 class CallAction(Action):
