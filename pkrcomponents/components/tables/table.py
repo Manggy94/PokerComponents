@@ -333,6 +333,7 @@ class Table:
         for p in self.players:
             p.is_hero = False
         player.is_hero = True
+        player.hand_stats.flag_is_hero = True
 
     def distribute_hero_cards(self, player_name: str, card1: (str, Card), card2: (str, Card)):
         """

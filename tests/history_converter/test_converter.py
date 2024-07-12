@@ -558,6 +558,12 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertEqual(villain_stats.starting_stack, 26609)
         self.assertEqual(hero_stats.total_bet_amount, 0)
         self.assertEqual(villain_stats.total_bet_amount, 4325)
+        self.assertTrue(hero_stats.flag_is_hero)
+        self.assertFalse(villain_stats.flag_is_hero)
+        self.assertIsNone(hero_stats.face_covering_bet_street)
+        self.assertIsNone(villain_stats.face_covering_bet_street)
+        self.assertIsNone(hero_stats.facing_covering_bet_move)
+        self.assertIsNone(villain_stats.facing_covering_bet_move)
 
 
 class TestHandHistoryConverter2(unittest.TestCase):

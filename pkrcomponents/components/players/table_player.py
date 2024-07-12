@@ -517,4 +517,7 @@ class TablePlayer:
         """Boolean indicating if player is facing a donk bet"""
         return self.is_facing_1bet and any([player.flag_street_donk_bet for player in self.table.players_involved])
 
-
+    @property
+    def is_facing_covering_bet(self):
+        """Boolean indicating if player is facing a covering bet"""
+        return self.to_call >= self.stack

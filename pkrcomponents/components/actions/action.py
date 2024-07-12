@@ -86,6 +86,9 @@ class Action:
         """
         if not any(player.flag_street_first_to_talk for player in self.table.players_in_game):
             self.player.flag_street_first_to_talk = True
+        if self.player.is_facing_covering_bet:
+            self.hand_stats.face_covering_bet_street = self.table.street
+            self.hand_stats.facing_covering_bet_move = self.move
         match self.table.street:
             case Street.PREFLOP:
                 self.hand_stats.flag_voluntary_all_in_preflop = self.value >= self.player.effective_stack
