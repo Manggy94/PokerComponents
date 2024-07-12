@@ -348,6 +348,8 @@ class BetAction(Action):
         super().update_hand_stats()
         match self.table.street:
             case Street.FLOP:
+                self.hand_stats.amount_bet_made_flop = self.value
+                self.hand_stats.ratio_bet_made_flop = self.value / self.table.pot_value
                 self.hand_stats.flag_flop_bet = True
                 if self.player.can_open:
                     self.hand_stats.flag_flop_open = True
@@ -356,8 +358,12 @@ class BetAction(Action):
                 else:
                     self.hand_stats.flag_flop_donk_bet = True
             case Street.TURN:
+                self.hand_stats.amount_bet_made_turn = self.value
+                self.hand_stats.ratio_bet_made_turn = self.value / self.table.pot_value
                 self.hand_stats.flag_turn_bet = True
             case Street.RIVER:
+                self.hand_stats.amount_bet_made_river = self.value
+                self.hand_stats.ratio_bet_made_river = self.value / self.table.pot_value
                 self.hand_stats.flag_river_bet = True
 
 
@@ -410,6 +416,12 @@ class RaiseAction(Action):
                 self.hand_stats.count_preflop_player_raises += 1
             case Street.FLOP:
                 self.hand_stats.flag_flop_bet = True
+                if self.hand_stats.count_flop_player_raises == 0:
+                    self.hand_stats.amount_first_raise_made_flop = self.value
+                    self.hand_stats.ratio_first_raise_made_flop = self.value / self.table.pot_value
+                if self.hand_stats.count_flop_player_raises == 1:
+                    self.hand_stats.amount_second_raise_made_flop = self.value
+                    self.hand_stats.ratio_second_raise_made_flop = self.value / self.table.pot_value
                 if self.player.can_first_raise:
                     self.hand_stats.flag_flop_first_raise = True
                 if self.table.cnt_bets == 2:
@@ -420,10 +432,24 @@ class RaiseAction(Action):
                     self.hand_stats.flag_flop_check_raise = True
                 self.hand_stats.count_flop_player_raises += 1
             case Street.TURN:
+                self.hand_stats.flag_turn_bet = True
+                if self.hand_stats.count_turn_player_raises == 0:
+                    self.hand_stats.amount_first_raise_made_turn = self.value
+                    self.hand_stats.ratio_first_raise_made_turn = self.value / self.table.pot_value
+                if self.hand_stats.count_turn_player_raises == 1:
+                    self.hand_stats.amount_second_raise_made_turn = self.value
+                    self.hand_stats.ratio_second_raise_made_turn = self.value / self.table.pot_value
                 if self.hand_stats.turn_actions_sequence.symbol == "XR":
                     self.hand_stats.flag_turn_check_raise = True
                 self.hand_stats.count_turn_player_raises += 1
             case Street.RIVER:
+                self.hand_stats.flag_river_bet = True
+                if self.hand_stats.count_river_player_raises == 0:
+                    self.hand_stats.amount_first_raise_made_river = self.value
+                    self.hand_stats.ratio_first_raise_made_river = self.value / self.table.pot_value
+                if self.hand_stats.count_river_player_raises == 1:
+                    self.hand_stats.amount_second_raise_made_river = self.value
+                    self.hand_stats.ratio_second_raise_made_river = self.value / self.table.pot_value
                 if self.hand_stats.river_actions_sequence.symbol == "XR":
                     self.hand_stats.flag_river_check_raise = True
                 self.hand_stats.count_river_player_raises += 1

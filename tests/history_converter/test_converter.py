@@ -318,6 +318,22 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertEqual(villain_stats.amount_first_raise_made_flop, 0)
         self.assertEqual(hero_stats.amount_second_raise_made_flop, 0)
         self.assertEqual(villain_stats.amount_second_raise_made_flop, 0)
+        self.assertEqual(hero_stats.ratio_to_call_facing_flop_bet, 0)
+        self.assertEqual(villain_stats.ratio_to_call_facing_flop_bet, 0)
+        self.assertEqual(hero_stats.ratio_to_call_facing_flop_2bet, 0)
+        self.assertEqual(villain_stats.ratio_to_call_facing_flop_2bet, 0)
+        self.assertEqual(hero_stats.ratio_to_call_facing_flop_3bet, 0)
+        self.assertEqual(villain_stats.ratio_to_call_facing_flop_3bet, 0)
+        self.assertEqual(hero_stats.ratio_to_call_facing_flop_4bet, 0)
+        self.assertEqual(villain_stats.ratio_to_call_facing_flop_4bet, 0)
+        self.assertEqual(hero_stats.ratio_bet_made_flop, 0)
+        self.assertEqual(villain_stats.ratio_bet_made_flop, 0)
+        self.assertEqual(hero_stats.ratio_first_raise_made_flop, 0)
+        self.assertEqual(villain_stats.ratio_first_raise_made_flop, 0)
+        self.assertEqual(hero_stats.ratio_second_raise_made_flop, 0)
+        self.assertEqual(villain_stats.ratio_second_raise_made_flop, 0)
+        self.assertEqual(hero_stats.total_flop_bet_amount, 0)
+        self.assertEqual(villain_stats.total_flop_bet_amount, 0)
 
 
 
