@@ -260,11 +260,11 @@ class CallAction(Action):
                     self.table.cnt_cold_calls += 1
 
             case Street.FLOP:
-                pass
+                self.hand_stats.count_flop_player_calls += 1
             case Street.TURN:
-                pass
+                self.hand_stats.count_turn_player_calls += 1
             case Street.RIVER:
-                pass
+                self.hand_stats.count_river_player_calls += 1
 
 
 class BetAction(Action):
