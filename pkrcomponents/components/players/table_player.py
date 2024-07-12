@@ -434,13 +434,13 @@ class TablePlayer:
     @property
     def can_first_raise(self):
         """Boolean indicating if player can make the first raise"""
-        return self.table.cnt_bets == 1
+        return self.is_facing_1bet and self.stack_enables_raise
 
     @property
     def can_open(self):
         """Boolean indicating if player can open"""
         return ((self.table.street.is_preflop and not self.table.is_opened)
-                or (self.table.street != Street.PREFLOP and self.table.cnt_bets == 0))
+                or (not self.table.street.is_preflop and self.table.cnt_bets == 0))
 
     @property
     def can_squeeze(self):
