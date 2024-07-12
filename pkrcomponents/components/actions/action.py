@@ -92,12 +92,16 @@ class Action:
         Updates the hand statistics of the player according to the action
         """
         if self.is_all_in:
+            self.player.flag_street_went_all_in = True
             self.hand_stats.all_in_street = self.table.street
         if not any(player.flag_street_first_to_talk for player in self.table.players_in_game):
             self.player.flag_street_first_to_talk = True
         if self.player.is_facing_covering_bet:
             self.hand_stats.face_covering_bet_street = self.table.street
             self.hand_stats.facing_covering_bet_move = self.move
+        if self.player.is_facing_all_in:
+            self.hand_stats.face_all_in_street = self.table.street
+            self.hand_stats.facing_all_in_move = self.move
         match self.table.street:
             case Street.PREFLOP:
                 self.hand_stats.flag_voluntary_all_in_preflop = self.value >= self.player.effective_stack

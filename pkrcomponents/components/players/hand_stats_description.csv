@@ -201,9 +201,9 @@ amount_won,0,The amount the player won in the hand,float
 amount_expected_won,0,The amount the player is expected to win in the hand when all combos are revealed (EV),float
 total_bet_amount,0,The total amount the player bet in the hand,float
 facing_covering_bet_move,,The move the player did when facing a covering bet,ActionMove
-facing_allin_move,,The move the player did when facing an all-in,ActionMove
+facing_all_in_move,,The move the player did when facing an all-in,ActionMove
 fold_street,,The street the player folded,Street
 all_in_street,,The street the player went all-in,Street
 face_covering_bet_street,,The street the player faced a covering bet,Street
-face_allin_street,,The street the player faced an all-in,Street
+face_all_in_street,,The street the player faced an all-in,Street
 combo,,The combo the player had,Combo

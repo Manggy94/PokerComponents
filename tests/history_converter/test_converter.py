@@ -569,6 +569,12 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertIsNone(villain_stats.fold_street)
         self.assertIsNone(hero_stats.all_in_street)
         self.assertIsNone(villain_stats.all_in_street)
+        self.assertIsNone(hero_stats.face_all_in_street)
+        self.assertIsNone(villain_stats.face_all_in_street)
+        self.assertIsNone(hero_stats.facing_all_in_move)
+        self.assertIsNone(villain_stats.facing_all_in_move)
+        self.assertEqual(hero_stats.amount_won, 0)
+        self.assertEqual(villain_stats.amount_won, 7575)
 
 
 class TestHandHistoryConverter2(unittest.TestCase):

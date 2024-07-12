@@ -48,7 +48,7 @@ FACING_COVERING_BET_MOVE = field(
     metadata={
         'description': 'The move the player did when facing a covering bet',
         'type': 'ActionMove'})
-FACING_ALLIN_MOVE = field(
+FACING_ALL_IN_MOVE = field(
     default=None, validator=[optional(instance_of(ActionMove))],
     metadata={
         'description': 'The move the player did when facing an all-in',
@@ -69,7 +69,7 @@ FACE_COVERING_BET_STREET = field(
     metadata={
         'description': 'The street the player faced a covering bet',
         'type': 'Street'})
-FACE_ALLIN_STREET = field(
+FACE_ALL_IN_STREET = field(
     default=None, validator=[optional(instance_of(Street))],
     metadata={
         'description': 'The street the player faced an all-in',

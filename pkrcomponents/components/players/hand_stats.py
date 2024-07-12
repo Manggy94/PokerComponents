@@ -241,9 +241,9 @@ class HandStats:
     fold_street = general.FOLD_STREET
     all_in_street = general.ALL_IN_STREET
     face_covering_bet_street = general.FACE_COVERING_BET_STREET
-    face_allin_street = general.FACE_ALLIN_STREET
+    face_all_in_street = general.FACE_ALL_IN_STREET
     facing_covering_bet_move = general.FACING_COVERING_BET_MOVE
-    facing_allin_move = general.FACING_ALLIN_MOVE
+    facing_all_in_move = general.FACING_ALL_IN_MOVE
 
     def reset(self):
         """
@@ -255,27 +255,27 @@ class HandStats:
             else:
                 setattr(self, attribute.name, attribute.default.factory())
 
-#     @classmethod
-#     def generate_description_file(cls):
-#         """
-#         Generate a csv file to describe data from class
-#         """
-#         with open('hand_stats_description.csv', 'w', newline='') as csvfile:
-#             fieldnames = ['name', 'default', 'description', 'type']
-#             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-#
-#             writer.writeheader()
-#             for attribute in cls.__attrs_attrs__:
-#                 row = {
-#                     'name': attribute.name,
-#                     'default': attribute.default if not isinstance(attribute.default, Factory)
-#                     else attribute.default.factory(),
-#                     'description': attribute.metadata.get('description', 'No description'),
-#                     'type': attribute.metadata.get('type', 'No type')
-#                 }
-#                 writer.writerow(row)
-#         print("CSV file 'class_description.csv' generated successfully.")
-#
-#
-# if __name__ == '__main__':
-#     HandStats.generate_description_file()
+    @classmethod
+    def generate_description_file(cls):
+        """
+        Generate a csv file to describe data from class
+        """
+        with open('hand_stats_description.csv', 'w', newline='') as csvfile:
+            fieldnames = ['name', 'default', 'description', 'type']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+            writer.writeheader()
+            for attribute in cls.__attrs_attrs__:
+                row = {
+                    'name': attribute.name,
+                    'default': attribute.default if not isinstance(attribute.default, Factory)
+                    else attribute.default.factory(),
+                    'description': attribute.metadata.get('description', 'No description'),
+                    'type': attribute.metadata.get('type', 'No type')
+                }
+                writer.writerow(row)
+        print("CSV file 'class_description.csv' generated successfully.")
+
+
+if __name__ == '__main__':
+    HandStats.generate_description_file()

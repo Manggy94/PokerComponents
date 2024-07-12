@@ -22,6 +22,7 @@ class TablePlayer:
         combo (Combo): The combo of the player
         current_bet (float): The current bet of the player
         flag_street_first_to_talk (bool): The flag indicating if the player is the first to talk on the street
+        flag_street_went_all_in (bool): The flag indicating if the player went all-in on the street
         flag_street_cbet (bool): The flag indicating if the player has made a cbet on the street
         flag_street_donk_bet (bool): The flag indicating if the player has made a donk bet on the street
         folded (bool): Whether the player has folded
@@ -114,6 +115,7 @@ class TablePlayer:
     hand_stats = field(default=Factory(HandStats), validator=instance_of(HandStats))
     has_initiative = field(default=False, validator=instance_of(bool))
     flag_street_first_to_talk = field(default=False, validator=instance_of(bool))
+    flag_street_went_all_in = field(default=False, validator=instance_of(bool))
     flag_street_cbet = field(default=False, validator=instance_of(bool))
     flag_street_donk_bet = field(default=False, validator=instance_of(bool))
     went_to_showdown = field(default=False, validator=instance_of(bool))
@@ -332,6 +334,7 @@ class TablePlayer:
         self.played = False
         self.current_bet = 0
         self.flag_street_first_to_talk = False
+        self.flag_street_went_all_in = False
         self.flag_street_cbet = False
         self.flag_street_donk_bet = False
 
@@ -367,6 +370,7 @@ class TablePlayer:
             amount (float): The amount to win
         """
         self.stack += amount
+        self.hand_stats.amount_won = amount
 
     @property
     def preflop_bet_amounts(self) -> list:
@@ -521,3 +525,8 @@ class TablePlayer:
     def is_facing_covering_bet(self):
         """Boolean indicating if player is facing a covering bet"""
         return self.to_call >= self.stack
+
+    @property
+    def is_facing_all_in(self):
+        """Boolean indicating if player is facing an all-in"""
+        return any([player.flag_street_went_all_in for player in self.table.players_involved])
