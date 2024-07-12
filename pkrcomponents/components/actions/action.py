@@ -387,10 +387,14 @@ class BetAction(Action):
                 self.hand_stats.amount_bet_made_turn = self.value
                 self.hand_stats.ratio_bet_made_turn = self.value / self.table.pot_value
                 self.hand_stats.flag_turn_bet = True
+                if self.player.can_open:
+                    self.hand_stats.flag_turn_open = True
             case Street.RIVER:
                 self.hand_stats.amount_bet_made_river = self.value
                 self.hand_stats.ratio_bet_made_river = self.value / self.table.pot_value
                 self.hand_stats.flag_river_bet = True
+                if self.player.can_open:
+                    self.hand_stats.flag_river_open = True
 
 
 class RaiseAction(Action):
