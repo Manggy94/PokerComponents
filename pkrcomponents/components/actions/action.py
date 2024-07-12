@@ -495,6 +495,8 @@ class RaiseAction(Action):
                     self.hand_stats.ratio_second_raise_made_turn = self.value / self.table.pot_value
                 if self.hand_stats.turn_actions_sequence.symbol == "XR":
                     self.hand_stats.flag_turn_check_raise = True
+                if self.player.can_first_raise:
+                    self.hand_stats.flag_turn_first_raise = True
                 self.hand_stats.count_turn_player_raises += 1
             case Street.RIVER:
                 self.hand_stats.flag_river_bet = True
@@ -506,4 +508,6 @@ class RaiseAction(Action):
                     self.hand_stats.ratio_second_raise_made_river = self.value / self.table.pot_value
                 if self.hand_stats.river_actions_sequence.symbol == "XR":
                     self.hand_stats.flag_river_check_raise = True
+                if self.player.can_first_raise:
+                    self.hand_stats.flag_river_first_raise = True
                 self.hand_stats.count_river_player_raises += 1
