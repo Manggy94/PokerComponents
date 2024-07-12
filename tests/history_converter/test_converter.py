@@ -351,7 +351,8 @@ class TestHandHistoryConverter(unittest.TestCase):
         # Flags
         self.assertFalse(hero_stats.flag_saw_turn)
         self.assertTrue(villain_stats.flag_saw_turn)
-
+        self.assertFalse(hero_stats.flag_turn_first_to_talk)
+        self.assertTrue(villain_stats.flag_turn_first_to_talk)
 
 
 class TestHandHistoryConverter2(unittest.TestCase):

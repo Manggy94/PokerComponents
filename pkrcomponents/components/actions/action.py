@@ -135,6 +135,8 @@ class Action:
             case Street.FLOP:
                 self.hand_stats.flag_saw_flop = True
                 self.hand_stats.flop_actions_sequence = self.player.actions_history.flop
+                self.hand_stats.total_flop_bet_amount = sum(
+                    [action.value for action in self.hand_stats.flop_actions_sequence.actions])
                 if self.hand_stats.amount_flop_effective_stack == 0:
                     self.hand_stats.amount_flop_effective_stack = self.player.effective_stack
                 if not any(player.hand_stats.flag_flop_first_to_talk for player in self.table.players_in_game):
@@ -178,6 +180,8 @@ class Action:
             case Street.TURN:
                 self.hand_stats.flag_saw_turn = True
                 self.hand_stats.turn_actions_sequence = self.player.actions_history.turn
+                self.hand_stats.total_turn_bet_amount = sum(
+                    [action.value for action in self.hand_stats.turn_actions_sequence.actions])
                 if self.hand_stats.amount_turn_effective_stack == 0:
                     self.hand_stats.amount_turn_effective_stack = self.player.effective_stack
                 if self.player.is_facing_cbet:
@@ -207,6 +211,8 @@ class Action:
             case Street.RIVER:
                 self.hand_stats.flag_saw_river = True
                 self.hand_stats.river_actions_sequence = self.player.actions_history.river
+                self.hand_stats.total_river_bet_amount = sum(
+                    [action.value for action in self.hand_stats.river_actions_sequence.actions])
                 if self.hand_stats.amount_river_effective_stack == 0:
                     self.hand_stats.amount_river_effective_stack = self.player.effective_stack
                 if self.player.is_facing_cbet:
