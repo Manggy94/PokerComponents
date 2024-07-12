@@ -270,9 +270,9 @@ class FoldAction(Action):
         super().__init__(player=player, move=ActionMove.FOLD)
 
     def execute(self):
-
         self.player.folded = True
         super().execute()
+        self.player.has_initiative = False
 
     def update_hand_stats(self):
         super().update_hand_stats()
@@ -296,6 +296,10 @@ class CheckAction(Action):
     """
     def __init__(self, player: TablePlayer):
         super().__init__(player=player, move=ActionMove.CHECK)
+
+    def execute(self):
+        super().execute()
+        self.player.has_initiative = False
 
     def update_hand_stats(self):
         super().update_hand_stats()
