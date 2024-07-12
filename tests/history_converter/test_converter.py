@@ -367,6 +367,12 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertFalse(villain_stats.flag_turn_cbet)
         self.assertFalse(hero_stats.flag_turn_face_cbet)
         self.assertFalse(villain_stats.flag_turn_face_cbet)
+        self.assertFalse(hero_stats.flag_turn_donk_bet_opportunity)
+        self.assertFalse(villain_stats.flag_turn_donk_bet_opportunity)
+        self.assertFalse(hero_stats.flag_turn_donk_bet)
+        self.assertFalse(villain_stats.flag_turn_donk_bet)
+        self.assertFalse(hero_stats.flag_turn_face_donk_bet)
+        self.assertFalse(villain_stats.flag_turn_face_donk_bet)
 
 
 class TestHandHistoryConverter2(unittest.TestCase):

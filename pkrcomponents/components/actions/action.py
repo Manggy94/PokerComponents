@@ -395,9 +395,9 @@ class BetAction(Action):
                 self.hand_stats.flag_flop_bet = True
                 if self.player.can_open:
                     self.hand_stats.flag_flop_open = True
-                if self.player.has_initiative:
+                if self.player.can_cbet:
                     self.hand_stats.flag_flop_cbet = True
-                else:
+                if self.player.can_donk_bet:
                     self.hand_stats.flag_flop_donk_bet = True
             case Street.TURN:
                 self.hand_stats.amount_bet_made_turn = self.value
@@ -405,12 +405,20 @@ class BetAction(Action):
                 self.hand_stats.flag_turn_bet = True
                 if self.player.can_open:
                     self.hand_stats.flag_turn_open = True
+                if self.player.can_cbet:
+                    self.hand_stats.flag_turn_cbet = True
+                if self.player.can_donk_bet:
+                    self.hand_stats.flag_turn_donk_bet = True
             case Street.RIVER:
                 self.hand_stats.amount_bet_made_river = self.value
                 self.hand_stats.ratio_bet_made_river = self.value / self.table.pot_value
                 self.hand_stats.flag_river_bet = True
                 if self.player.can_open:
                     self.hand_stats.flag_river_open = True
+                if self.player.can_cbet:
+                    self.hand_stats.flag_river_cbet = True
+                if self.player.can_donk_bet:
+                    self.hand_stats.flag_river_donk_bet = True
 
 
 class RaiseAction(Action):
