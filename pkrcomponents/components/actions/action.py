@@ -482,9 +482,9 @@ class RaiseAction(Action):
                     self.hand_stats.ratio_second_raise_made_flop = self.value / self.table.pot_value
                 if self.player.can_first_raise:
                     self.hand_stats.flag_flop_first_raise = True
-                if self.table.cnt_bets == 2:
+                if self.player.can_3bet:
                     self.hand_stats.flag_flop_3bet = True
-                if self.table.cnt_bets >= 3:
+                if self.player.can_4bet:
                     self.hand_stats.flag_flop_4bet = True
                 if self.hand_stats.flop_actions_sequence.symbol == "XR":
                     self.hand_stats.flag_flop_check_raise = True
@@ -502,6 +502,10 @@ class RaiseAction(Action):
                 if self.player.can_first_raise:
                     self.hand_stats.flag_turn_first_raise = True
                 self.hand_stats.count_turn_player_raises += 1
+                if self.player.can_3bet:
+                    self.hand_stats.flag_turn_3bet = True
+                if self.player.can_4bet:
+                    self.hand_stats.flag_turn_4bet = True
             case Street.RIVER:
                 self.hand_stats.flag_river_bet = True
                 if self.hand_stats.count_river_player_raises == 0:
@@ -515,3 +519,7 @@ class RaiseAction(Action):
                 if self.player.can_first_raise:
                     self.hand_stats.flag_river_first_raise = True
                 self.hand_stats.count_river_player_raises += 1
+                if self.player.can_3bet:
+                    self.hand_stats.flag_river_3bet = True
+                if self.player.can_4bet:
+                    self.hand_stats.flag_river_4bet = True
