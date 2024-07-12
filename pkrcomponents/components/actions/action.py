@@ -163,6 +163,8 @@ class Action:
                     self.hand_stats.flag_flop_donk_bet_opportunity = True
                 if self.player.can_3bet:
                     self.hand_stats.flag_flop_3bet_opportunity = True
+                if self.player.can_4bet:
+                    self.hand_stats.flag_flop_4bet_opportunity = True
             case Street.TURN:
                 self.hand_stats.turn_actions_sequence = self.player.actions_history.turn
             case Street.RIVER:
