@@ -130,7 +130,6 @@ class Action:
                     self.hand_stats.ratio_to_call_facing_preflop_4bet = self.player.to_call / self.table.pot_value
                 if self.player.can_3bet:
                     self.hand_stats.flag_preflop_3bet_opportunity = True
-
                 if self.player.can_4bet:
                     self.hand_stats.flag_preflop_4bet_opportunity = True
             case Street.FLOP:
@@ -144,6 +143,8 @@ class Action:
                 if self.player.is_facing_donk_bet:
                     self.hand_stats.flag_flop_face_donk_bet = True
                     self.hand_stats.move_facing_donk_bet = self.move
+                if self.player.is_facing_raise:
+                    self.hand_stats.flag_flop_face_raise = True
                 if self.player.can_open:
                     self.hand_stats.flag_flop_open_opportunity = True
                 if self.player.can_cbet:
