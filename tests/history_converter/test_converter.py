@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 
 from pkrcomponents.components.actions.action_move import ActionMove
+from pkrcomponents.components.actions.street import Street
 from pkrcomponents.components.cards.board import Board
 from pkrcomponents.components.cards.combo import Combo
 from pkrcomponents.components.players.hand_stats import HandStats
@@ -564,6 +565,10 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertIsNone(villain_stats.face_covering_bet_street)
         self.assertIsNone(hero_stats.facing_covering_bet_move)
         self.assertIsNone(villain_stats.facing_covering_bet_move)
+        self.assertEqual(hero_stats.fold_street, Street.PREFLOP)
+        self.assertIsNone(villain_stats.fold_street)
+        self.assertIsNone(hero_stats.all_in_street)
+        self.assertIsNone(villain_stats.all_in_street)
 
 
 class TestHandHistoryConverter2(unittest.TestCase):

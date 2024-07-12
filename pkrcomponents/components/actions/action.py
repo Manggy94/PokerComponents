@@ -59,6 +59,13 @@ class Action:
         """
         return max(2 * self.value - self.table.pot.highest_bet, self.table.min_bet)
 
+    @property
+    def is_all_in(self):
+        """
+        Returns True if the player is all in
+        """
+        return self.value >= self.player.stack
+
     def execute(self):
         """
         Executes the action
@@ -84,6 +91,8 @@ class Action:
         """
         Updates the hand statistics of the player according to the action
         """
+        if self.is_all_in:
+            self.hand_stats.all_in_street = self.table.street
         if not any(player.flag_street_first_to_talk for player in self.table.players_in_game):
             self.player.flag_street_first_to_talk = True
         if self.player.is_facing_covering_bet:
@@ -307,6 +316,7 @@ class FoldAction(Action):
 
     def update_hand_stats(self):
         super().update_hand_stats()
+        self.hand_stats.fold_street = self.table.street
         match self.table.street:
             case Street.PREFLOP:
                 self.hand_stats.flag_preflop_fold = True
