@@ -148,13 +148,21 @@ class Action:
                 if self.player.is_facing_raise:
                     self.hand_stats.flag_flop_face_raise = True
                 if self.player.is_facing_1bet:
+                    self.hand_stats.amount_to_call_facing_flop_bet = self.player.to_call
+                    self.hand_stats.ratio_to_call_facing_flop_bet = self.player.to_call / self.table.pot_value
                     self.hand_stats.move_facing_flop_1bet = self.move
                 if self.player.is_facing_2bet:
+                    self.hand_stats.amount_to_call_facing_flop_2bet = self.player.to_call
+                    self.hand_stats.ratio_to_call_facing_flop_2bet = self.player.to_call / self.table.pot_value
                     self.hand_stats.move_facing_flop_2bet = self.move
                 if self.player.is_facing_3bet:
+                    self.hand_stats.amount_to_call_facing_flop_3bet = self.player.to_call
+                    self.hand_stats.ratio_to_call_facing_flop_3bet = self.player.to_call / self.table.pot_value
                     self.hand_stats.flag_flop_face_3bet = True
                     self.hand_stats.move_facing_flop_3bet = self.move
                 if self.player.is_facing_4bet:
+                    self.hand_stats.amount_to_call_facing_flop_4bet = self.player.to_call
+                    self.hand_stats.ratio_to_call_facing_flop_4bet = self.player.to_call / self.table.pot_value
                     self.hand_stats.flag_flop_face_4bet = True
                     self.hand_stats.move_facing_flop_4bet = self.move
                 if self.player.can_open:
@@ -171,10 +179,47 @@ class Action:
                 self.hand_stats.turn_actions_sequence = self.player.actions_history.turn
                 if self.hand_stats.amount_turn_effective_stack == 0:
                     self.hand_stats.amount_turn_effective_stack = self.player.effective_stack
+                if self.player.is_facing_1bet:
+                    self.hand_stats.amount_to_call_facing_turn_bet = self.player.to_call
+                    self.hand_stats.ratio_to_call_facing_turn_bet = self.player.to_call / self.table.pot_value
+                    self.hand_stats.move_facing_turn_bet = self.move
+                if self.player.is_facing_2bet:
+                    self.hand_stats.amount_to_call_facing_turn_2bet = self.player.to_call
+                    self.hand_stats.ratio_to_call_facing_turn_2bet = self.player.to_call / self.table.pot_value
+                    self.hand_stats.move_facing_turn_2bet = self.move
+                if self.player.is_facing_3bet:
+                    self.hand_stats.amount_to_call_facing_turn_3bet = self.player.to_call
+                    self.hand_stats.ratio_to_call_facing_turn_3bet = self.player.to_call / self.table.pot_value
+                    self.hand_stats.flag_turn_face_3bet = True
+                    self.hand_stats.move_facing_turn_3bet = self.move
+                if self.player.is_facing_4bet:
+                    self.hand_stats.amount_to_call_facing_turn_4bet = self.player.to_call
+                    self.hand_stats.ratio_to_call_facing_turn_4bet = self.player.to_call / self.table.pot_value
+                    self.hand_stats.flag_turn_face_4bet = True
+                    self.hand_stats.move_facing_turn_4bet = self.move
             case Street.RIVER:
                 self.hand_stats.river_actions_sequence = self.player.actions_history.river
                 if self.hand_stats.amount_river_effective_stack == 0:
                     self.hand_stats.amount_river_effective_stack = self.player.effective_stack
+                if self.player.is_facing_1bet:
+                    self.hand_stats.amount_to_call_facing_river_bet = self.player.to_call
+                    self.hand_stats.ratio_to_call_facing_river_bet = self.player.to_call / self.table.pot_value
+                    self.hand_stats.move_facing_river_bet = self.move
+                if self.player.is_facing_2bet:
+                    self.hand_stats.amount_to_call_facing_river_2bet = self.player.to_call
+                    self.hand_stats.ratio_to_call_facing_river_2bet = self.player.to_call / self.table.pot_value
+                    self.hand_stats.move_facing_river_2bet = self.move
+                if self.player.is_facing_3bet:
+                    self.hand_stats.amount_to_call_facing_river_3bet = self.player.to_call
+                    self.hand_stats.ratio_to_call_facing_river_3bet = self.player.to_call / self.table.pot_value
+                    self.hand_stats.flag_river_face_3bet = True
+                    self.hand_stats.move_facing_river_3bet = self.move
+                if self.player.is_facing_4bet:
+                    self.hand_stats.amount_to_call_facing_river_4bet = self.player.to_call
+                    self.hand_stats.ratio_to_call_facing_river_4bet = self.player.to_call / self.table.pot_value
+                    self.hand_stats.flag_river_face_4bet = True
+                    self.hand_stats.move_facing_river_4bet = self.move
+
 
     def add_to_history(self):
         """
