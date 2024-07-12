@@ -556,6 +556,8 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertIsNone(villain_stats.combo)
         self.assertEqual(hero_stats.starting_stack, 19175)
         self.assertEqual(villain_stats.starting_stack, 26609)
+        self.assertEqual(hero_stats.total_bet_amount, 0)
+        self.assertEqual(villain_stats.total_bet_amount, 4325)
 
 
 class TestHandHistoryConverter2(unittest.TestCase):

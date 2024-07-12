@@ -269,6 +269,10 @@ class Action:
                     self.hand_stats.flag_river_3bet_opportunity = True
                 if self.player.can_4bet:
                     self.hand_stats.flag_river_4bet_opportunity = True
+        self.hand_stats.total_bet_amount = sum((self.hand_stats.total_preflop_bet_amount,
+                                               self.hand_stats.total_flop_bet_amount,
+                                               self.hand_stats.total_turn_bet_amount,
+                                               self.hand_stats.total_river_bet_amount))
 
 
     def add_to_history(self):
