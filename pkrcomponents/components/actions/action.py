@@ -342,11 +342,11 @@ class RaiseAction(Action):
                     self.hand_stats.flag_flop_3bet = True
                 if self.table.cnt_bets >= 3:
                     self.hand_stats.flag_flop_4bet = True
-                if self.hand_stats.flop_actions_sequence.symbol =="X":
+                if self.hand_stats.flop_actions_sequence.symbol == "XR":
                     self.hand_stats.flag_flop_check_raise = True
             case Street.TURN:
-                if self.hand_stats.turn_actions_sequence.symbol == "X":
+                if self.hand_stats.turn_actions_sequence.symbol == "XR":
                     self.hand_stats.flag_turn_check_raise = True
             case Street.RIVER:
-                if self.hand_stats.river_actions_sequence.symbol == "X":
+                if self.hand_stats.river_actions_sequence.symbol == "XR":
                     self.hand_stats.flag_river_check_raise = True
