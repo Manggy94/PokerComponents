@@ -193,6 +193,10 @@ class FoldAction(Action):
                     self.hand_stats.flag_fold_to_steal_attempt = True
             case Street.FLOP:
                 self.hand_stats.flag_flop_fold = True
+            case Street.TURN:
+                self.hand_stats.flag_turn_fold = True
+            case Street.RIVER:
+                self.hand_stats.flag_river_fold = True
 
 
 
