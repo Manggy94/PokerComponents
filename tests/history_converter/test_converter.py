@@ -321,7 +321,6 @@ class TestHandHistoryConverter(unittest.TestCase):
 
 
 
-
 class TestHandHistoryConverter2(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example02.json')
