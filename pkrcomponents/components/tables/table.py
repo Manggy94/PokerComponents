@@ -536,6 +536,8 @@ class Table:
 
     def distribute_rewards(self):
         """Distribute rewards between players"""
+        hand_winner = self.rewards_table[0]["player"]
+        hand_winner.hand_stats.flag_won_hand = True
         for reward_dict in self.rewards_table:
             player = reward_dict["player"]
             reward = reward_dict["reward"]

@@ -575,6 +575,8 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertIsNone(villain_stats.facing_all_in_move)
         self.assertEqual(hero_stats.amount_won, 0)
         self.assertEqual(villain_stats.amount_won, 7575)
+        self.assertFalse(hero_stats.flag_won_hand)
+        self.assertTrue(villain_stats.flag_won_hand)
 
 
 class TestHandHistoryConverter2(unittest.TestCase):
