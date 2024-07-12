@@ -255,27 +255,27 @@ class HandStats:
             else:
                 setattr(self, attribute.name, attribute.default.factory())
 
-    @classmethod
-    def generate_description_file(cls):
-        """
-        Generate a csv file to describe data from class
-        """
-        with open('hand_stats_description.csv', 'w', newline='') as csvfile:
-            fieldnames = ['name', 'default', 'description', 'type']
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-            writer.writeheader()
-            for attribute in cls.__attrs_attrs__:
-                row = {
-                    'name': attribute.name,
-                    'default': attribute.default if not isinstance(attribute.default, Factory)
-                    else attribute.default.factory(),
-                    'description': attribute.metadata.get('description', 'No description'),
-                    'type': attribute.metadata.get('type', 'No type')
-                }
-                writer.writerow(row)
-        print("CSV file 'class_description.csv' generated successfully.")
-
-
-if __name__ == '__main__':
-    HandStats.generate_description_file()
+#     @classmethod
+#     def generate_description_file(cls):
+#         """
+#         Generate a csv file to describe data from class
+#         """
+#         with open('hand_stats_description.csv', 'w', newline='') as csvfile:
+#             fieldnames = ['name', 'default', 'description', 'type']
+#             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+#
+#             writer.writeheader()
+#             for attribute in cls.__attrs_attrs__:
+#                 row = {
+#                     'name': attribute.name,
+#                     'default': attribute.default if not isinstance(attribute.default, Factory)
+#                     else attribute.default.factory(),
+#                     'description': attribute.metadata.get('description', 'No description'),
+#                     'type': attribute.metadata.get('type', 'No type')
+#                 }
+#                 writer.writerow(row)
+#         print("CSV file 'class_description.csv' generated successfully.")
+#
+#
+# if __name__ == '__main__':
+#     HandStats.generate_description_file()

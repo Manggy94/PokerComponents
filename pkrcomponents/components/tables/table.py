@@ -86,6 +86,7 @@ class Table:
     def __attrs_post_init__(self):
         self.deck.shuffle()
         self.postings = list()
+        self.rewards_table = list()
 
     def __repr__(self):
         return f"Table(max_players={self.max_players}), Tournament={self.tournament})"
@@ -489,21 +490,22 @@ class Table:
         """Returns True if the winners can be parsed"""
         return self.hand_ended and self.nb_unrevealed == 0 or self.nb_involved == 1
 
-    @property
-    def winners(self) -> dict[int, list]:
+
+    def get_winners(self) -> dict[int, list]:
         """Current status of winners with associated scores"""
         if not self.can_parse_winners:
             raise CannotParseWinnersError
-        if self.nb_involved == 1:
+        elif self.nb_involved == 1:
             return {1: [self.players_involved[0]]}
-        winners = {}
-        for player in self.players_involved:
-            pl_score = player.hand_score
-            if not winners.get(pl_score):
-                winners[pl_score] = [player]
-            else:
-                winners[pl_score].append(player)
-        return winners
+        else:
+            winners = {}
+            for player in self.players_involved:
+                pl_score = player.hand_score
+                if not winners.get(pl_score):
+                    winners[pl_score] = [player]
+                else:
+                    winners[pl_score].append(player)
+            return winners
 
     def split_pot(self, winning_players: list):
         """
@@ -512,15 +514,16 @@ class Table:
         Args:
             winning_players (list): The list of players to split the pot between
         """
-        while len(winning_players) > 0 and self.pot.value > 0:
-            remaining_players_minimum_reward = min([player.max_reward for player in winning_players])
-            max_reward_from_pot = self.pot.value/len(winning_players)
+        winning_players_copy = winning_players.copy()
+        while len(winning_players_copy) > 0 and self.pot.value > 0:
+            remaining_players_minimum_reward = min([player.max_reward for player in winning_players_copy])
+            max_reward_from_pot = self.pot.value/len(winning_players_copy)
             reward_given_to_each_player = min(remaining_players_minimum_reward, max_reward_from_pot)
-            for player in winning_players:
-                player.reward += reward_given_to_each_player
-                if player.reward >= player.max_reward or player.reward >= self.pot.value:
-                    reward_dict = {"player": player, "reward": player.reward}
-                    winning_players.remove(player)
+            for player in winning_players_copy:
+                player.hand_reward += reward_given_to_each_player
+                if player.hand_reward >= player.max_reward or player.hand_reward >= self.pot.value:
+                    reward_dict = {"player": player, "reward": player.hand_reward}
+                    winning_players_copy.remove(player)
                     self.rewards_table.append(reward_dict)
                     self.pot.value -= reward_given_to_each_player
 
@@ -528,10 +531,11 @@ class Table:
         """
         Calculate rewards for each player
         """
-        scores = [score for score in self.winners.keys()]
+        winners = self.get_winners()
+        scores = [score for score in winners.keys()]
         scores.sort()
         for score in scores:
-            winning_players = self.winners[score]
+            winning_players = winners[score]
             self.split_pot(winning_players)
 
     def distribute_rewards(self):
@@ -557,6 +561,7 @@ class Table:
         self.players.hand_reset()
         self.reset_postings()
         self.hand_has_started = False
+        self.rewards_table = []
 
     def advance_to_next_hand(self):
         """Advance to the next hand"""

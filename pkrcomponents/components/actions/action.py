@@ -78,7 +78,6 @@ class Action:
         self.table.update_min_bet(self.new_min_bet)
         self.table.pot.update_highest_bet(self.player.current_bet)
 
-
     def play(self):
         """
         Plays the action on the table and advances the seat playing
@@ -290,7 +289,6 @@ class Action:
                                                self.hand_stats.total_turn_bet_amount,
                                                self.hand_stats.total_river_bet_amount))
 
-
     def add_to_history(self):
         """
         Adds the action to the history
@@ -332,7 +330,6 @@ class FoldAction(Action):
                 self.hand_stats.flag_turn_fold = True
             case Street.RIVER:
                 self.hand_stats.flag_river_fold = True
-
 
 
 class CheckAction(Action):

@@ -33,7 +33,7 @@ class TablePlayer:
         name (str): The name of the player
         position (Position): The position of the player
         played (bool): Whether the player has played
-        reward (int): The reward of the player
+        hand_reward (int): The reward of the player
         seat (int): The seat number of the player
         stack (float): The current stack of the player
         table (Table): The table the player is on
@@ -110,7 +110,7 @@ class TablePlayer:
     played = field(default=False, validator=instance_of(bool))
     is_hero = field(default=False, validator=instance_of(bool))
     current_bet = field(default=0, validator=[ge(0), instance_of(float)], converter=float)
-    reward = field(default=0, validator=optional([ge(0), instance_of((int, float))]))
+    hand_reward = field(default=0, validator=optional([ge(0), instance_of((int, float))]))
     actions_history = field(default=Factory(lambda: ActionsHistory()), validator=instance_of(ActionsHistory))
     hand_stats = field(default=Factory(HandStats), validator=instance_of(HandStats))
     has_initiative = field(default=False, validator=instance_of(bool))
