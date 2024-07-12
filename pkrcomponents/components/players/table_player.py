@@ -494,4 +494,14 @@ class TablePlayer:
         """Boolean indicating if player is defending blinds"""
         return self.is_facing_raise and self.position.is_blind and self.table.street.is_preflop
 
+    @property
+    def is_facing_cbet(self):
+        """Boolean indicating if player is facing a cbet"""
+        return self.is_facing_1bet and any([player.hand_stats.flag_cbet for player in self.table.players_involved])
+
+    @property
+    def is_facing_donk_bet(self):
+        """Boolean indicating if player is facing a donk bet"""
+        return self.is_facing_1bet and any([player.hand_stats.flag_donk_bet for player in self.table.players_involved])
+
 

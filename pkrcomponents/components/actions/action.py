@@ -138,14 +138,18 @@ class Action:
                 self.hand_stats.flop_actions_sequence = self.player.actions_history.flop
                 if not any(player.hand_stats.flag_flop_first_to_talk for player in self.table.players_in_game):
                     self.hand_stats.flag_flop_first_to_talk = True
+                if self.player.is_facing_cbet:
+                    self.hand_stats.flag_flop_face_cbet = True
+                    self.hand_stats.move_facing_cbet = self.move
+                if self.player.is_facing_donk_bet:
+                    self.hand_stats.flag_flop_face_donk_bet = True
+                    self.hand_stats.move_facing_donk_bet = self.move
                 if self.player.can_open:
                     self.hand_stats.flag_flop_open_opportunity = True
                 if self.player.can_cbet:
                     self.hand_stats.flag_flop_cbet_opportunity = True
                 if self.player.can_donk_bet:
                     self.hand_stats.flag_flop_donk_bet_opportunity = True
-                if self.player.is_facing_raise:
-                    self.hand_stats.flag_flop_first_raise = True
                 if self.player.can_3bet:
                     self.hand_stats.flag_flop_3bet_opportunity = True
             case Street.TURN:
