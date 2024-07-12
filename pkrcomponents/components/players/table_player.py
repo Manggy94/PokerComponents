@@ -21,6 +21,7 @@ class TablePlayer:
         bounty (float): The bounty of the player
         combo (Combo): The combo of the player
         current_bet (float): The current bet of the player
+        flag_street_first_to_talk (bool): The flag indicating if the player is the first to talk on the street
         flag_street_cbet (bool): The flag indicating if the player has made a cbet on the street
         flag_street_donk_bet (bool): The flag indicating if the player has made a donk bet on the street
         folded (bool): Whether the player has folded
@@ -112,6 +113,7 @@ class TablePlayer:
     actions_history = field(default=Factory(lambda: ActionsHistory()), validator=instance_of(ActionsHistory))
     hand_stats = field(default=Factory(HandStats), validator=instance_of(HandStats))
     has_initiative = field(default=False, validator=instance_of(bool))
+    flag_street_first_to_talk = field(default=False, validator=instance_of(bool))
     flag_street_cbet = field(default=False, validator=instance_of(bool))
     flag_street_donk_bet = field(default=False, validator=instance_of(bool))
     went_to_showdown = field(default=False, validator=instance_of(bool))
@@ -326,6 +328,7 @@ class TablePlayer:
         """Reset street status"""
         self.played = False
         self.current_bet = 0
+        self.flag_street_first_to_talk = False
         self.flag_street_cbet = False
         self.flag_street_donk_bet = False
 
@@ -429,7 +432,8 @@ class TablePlayer:
     @property
     def can_donk_bet(self):
         """Boolean indicating if player can donk bet"""
-        return not self.has_initiative and self.can_open
+        return not self.has_initiative and self.can_open and any([player.has_initiative
+                                                                  for player in self.table.players_waiting])
 
     @property
     def can_raise(self):

@@ -84,6 +84,8 @@ class Action:
         """
         Updates the hand statistics of the player according to the action
         """
+        if not any(player.flag_street_first_to_talk for player in self.table.players_in_game):
+            self.player.flag_street_first_to_talk = True
         match self.table.street:
             case Street.PREFLOP:
                 self.hand_stats.flag_voluntary_all_in_preflop = self.value >= self.player.effective_stack
@@ -139,7 +141,7 @@ class Action:
                     [action.value for action in self.hand_stats.flop_actions_sequence.actions])
                 if self.hand_stats.amount_flop_effective_stack == 0:
                     self.hand_stats.amount_flop_effective_stack = self.player.effective_stack
-                if not any(player.hand_stats.flag_flop_first_to_talk for player in self.table.players_in_game):
+                if self.player.flag_street_first_to_talk:
                     self.hand_stats.flag_flop_first_to_talk = True
                 if self.player.is_facing_cbet:
                     self.hand_stats.flag_flop_face_cbet = True
@@ -184,7 +186,7 @@ class Action:
                     [action.value for action in self.hand_stats.turn_actions_sequence.actions])
                 if self.hand_stats.amount_turn_effective_stack == 0:
                     self.hand_stats.amount_turn_effective_stack = self.player.effective_stack
-                if not any(player.hand_stats.flag_turn_first_to_talk for player in self.table.players_in_game):
+                if self.player.flag_street_first_to_talk:
                     self.hand_stats.flag_turn_first_to_talk = True
                 if self.player.is_facing_cbet:
                     self.hand_stats.flag_turn_face_cbet = True
@@ -217,7 +219,7 @@ class Action:
                     [action.value for action in self.hand_stats.river_actions_sequence.actions])
                 if self.hand_stats.amount_river_effective_stack == 0:
                     self.hand_stats.amount_river_effective_stack = self.player.effective_stack
-                if not any(player.hand_stats.flag_river_first_to_talk for player in self.table.players_in_game):
+                if self.player.flag_street_first_to_talk:
                     self.hand_stats.flag_river_first_to_talk = True
                 if self.player.is_facing_cbet:
                     self.hand_stats.flag_river_face_cbet = True
