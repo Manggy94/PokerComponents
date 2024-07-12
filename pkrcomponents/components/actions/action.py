@@ -346,6 +346,10 @@ class BetAction(Action):
 
     def update_hand_stats(self):
         super().update_hand_stats()
+        if self.player.has_initiative:
+            self.player.flag_street_cbet = True
+        else:
+            self.player.flag_street_donk_bet = True
         match self.table.street:
             case Street.FLOP:
                 self.hand_stats.amount_bet_made_flop = self.value

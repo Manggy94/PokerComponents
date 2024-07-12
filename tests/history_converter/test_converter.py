@@ -334,6 +334,23 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertEqual(villain_stats.ratio_second_raise_made_flop, 0)
         self.assertEqual(hero_stats.total_flop_bet_amount, 0)
         self.assertEqual(villain_stats.total_flop_bet_amount, 0)
+        # moves
+        self.assertIsNone(hero_stats.move_facing_flop_bet)
+        self.assertIsNone(villain_stats.move_facing_flop_bet)
+        self.assertIsNone(hero_stats.move_facing_flop_2bet)
+        self.assertIsNone(villain_stats.move_facing_flop_2bet)
+        self.assertIsNone(hero_stats.move_facing_flop_3bet)
+        self.assertIsNone(villain_stats.move_facing_flop_3bet)
+        self.assertIsNone(hero_stats.move_facing_flop_4bet)
+        self.assertIsNone(villain_stats.move_facing_flop_4bet)
+        self.assertIsNone(hero_stats.move_facing_flop_cbet)
+        self.assertIsNone(villain_stats.move_facing_flop_cbet)
+        self.assertIsNone(hero_stats.move_facing_flop_donk_bet)
+        self.assertIsNone(villain_stats.move_facing_flop_donk_bet)
+        # Turn
+        # Flags
+        self.assertFalse(hero_stats.flag_saw_turn)
+        self.assertTrue(villain_stats.flag_saw_turn)
 
 
 

@@ -21,6 +21,8 @@ class TablePlayer:
         bounty (float): The bounty of the player
         combo (Combo): The combo of the player
         current_bet (float): The current bet of the player
+        flag_street_cbet (bool): The flag indicating if the player has made a cbet on the street
+        flag_street_donk_bet (bool): The flag indicating if the player has made a donk bet on the street
         folded (bool): Whether the player has folded
         hand_stats (HandStats): The hand statistics of the player
         has_initiative (bool): Whether the player has initiative
@@ -110,6 +112,8 @@ class TablePlayer:
     actions_history = field(default=Factory(lambda: ActionsHistory()), validator=instance_of(ActionsHistory))
     hand_stats = field(default=Factory(HandStats), validator=instance_of(HandStats))
     has_initiative = field(default=False, validator=instance_of(bool))
+    flag_street_cbet = field(default=False, validator=instance_of(bool))
+    flag_street_donk_bet = field(default=False, validator=instance_of(bool))
     went_to_showdown = field(default=False, validator=instance_of(bool))
 
     def __repr__(self):
@@ -322,7 +326,8 @@ class TablePlayer:
         """Reset street status"""
         self.played = False
         self.current_bet = 0
-
+        self.flag_street_cbet = False
+        self.flag_street_donk_bet = False
 
     def reset_actions(self):
         """Reset actions"""
@@ -497,11 +502,11 @@ class TablePlayer:
     @property
     def is_facing_cbet(self):
         """Boolean indicating if player is facing a cbet"""
-        return self.is_facing_1bet and any([player.hand_stats.flag_cbet for player in self.table.players_involved])
+        return self.is_facing_1bet and any([player.flag_street_cbet for player in self.table.players_involved])
 
     @property
     def is_facing_donk_bet(self):
         """Boolean indicating if player is facing a donk bet"""
-        return self.is_facing_1bet and any([player.hand_stats.flag_donk_bet for player in self.table.players_involved])
+        return self.is_facing_1bet and any([player.flag_street_donk_bet for player in self.table.players_involved])
 
 
