@@ -176,6 +176,7 @@ class Action:
                 if self.player.can_4bet:
                     self.hand_stats.flag_flop_4bet_opportunity = True
             case Street.TURN:
+                self.hand_stats.flag_saw_turn = True
                 self.hand_stats.turn_actions_sequence = self.player.actions_history.turn
                 if self.hand_stats.amount_turn_effective_stack == 0:
                     self.hand_stats.amount_turn_effective_stack = self.player.effective_stack
@@ -204,6 +205,7 @@ class Action:
                     self.hand_stats.flag_turn_face_4bet = True
                     self.hand_stats.move_facing_turn_4bet = self.move
             case Street.RIVER:
+                self.hand_stats.flag_saw_river = True
                 self.hand_stats.river_actions_sequence = self.player.actions_history.river
                 if self.hand_stats.amount_river_effective_stack == 0:
                     self.hand_stats.amount_river_effective_stack = self.player.effective_stack
