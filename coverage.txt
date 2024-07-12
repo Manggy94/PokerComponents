@@ -3,7 +3,7 @@ Name                                                             Stmts   Miss  C
 pkrcomponents/__init__.py                                            0      0   100%
 pkrcomponents/components/__init__.py                                 0      0   100%
 pkrcomponents/components/actions/__init__.py                         0      0   100%
-pkrcomponents/components/actions/action.py                         120      0   100%
+pkrcomponents/components/actions/action.py                         106      2    98%
 pkrcomponents/components/actions/action_move.py                     32      0   100%
 pkrcomponents/components/actions/actions_history.py                 14      0   100%
 pkrcomponents/components/actions/actions_sequence.py                21      3    86%
@@ -33,10 +33,10 @@ pkrcomponents/components/players/players.py                        138      3   
 pkrcomponents/components/players/position.py                        62      0   100%
 pkrcomponents/components/players/positions_map.py                   20      0   100%
 pkrcomponents/components/players/street_hand_stats/__init__.py       0      0   100%
-pkrcomponents/components/players/street_hand_stats/general.py       23      1    96%
-pkrcomponents/components/players/street_hand_stats/postflop.py     148     16    89%
+pkrcomponents/components/players/street_hand_stats/general.py       37      3    92%
+pkrcomponents/components/players/street_hand_stats/postflop.py     148     18    88%
 pkrcomponents/components/players/street_hand_stats/preflop.py      158      5    97%
-pkrcomponents/components/players/table_player.py                   267      3    99%
+pkrcomponents/components/players/table_player.py                   270      3    99%
 pkrcomponents/components/tables/__init__.py                          0      0   100%
 pkrcomponents/components/tables/pot.py                              18      0   100%
 pkrcomponents/components/tables/table.py                           318      2    99%
@@ -63,4 +63,4 @@ pkrcomponents/history_converter/converter.py                       210     17   
 pkrcomponents/history_converter/utils/__init__.py                    0      0   100%
 pkrcomponents/history_converter/utils/exceptions.py                  4      0   100%
 ------------------------------------------------------------------------------------
-TOTAL                                                             2831     58    98%
+TOTAL                                                             2834     64    98%

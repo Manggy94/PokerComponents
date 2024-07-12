@@ -404,6 +404,11 @@ class TablePlayer:
             player.has_initiative = False
         self.has_initiative = True
 
+    def set_first_to_talk(self):
+        """Sets the first to talk flag to True if player is the first to talk"""
+        if not any([player.flag_street_first_to_talk for player in self.table.players_in_game]):
+            self.flag_street_first_to_talk = True
+
     @property
     def is_in_position(self):
         """

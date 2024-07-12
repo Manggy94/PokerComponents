@@ -73,6 +73,7 @@ class Action:
 
         self.player.pay(self.value)
         self.add_to_history()
+        self.player.set_first_to_talk()
         self.update_hand_stats()
         self.player.current_bet += self.value
         self.table.update_min_bet(self.new_min_bet)
@@ -104,26 +105,8 @@ class Action:
         """
         Updates the hand statistics of the player according to the action
         """
-        if self.is_all_in:
-            self.player.flag_street_went_all_in = True
-            self.hand_stats.general.all_in_street = self.table.street
-        if not any(player.flag_street_first_to_talk for player in self.table.players_in_game):
-            self.player.flag_street_first_to_talk = True
-        if self.player.is_facing_covering_bet:
-            self.hand_stats.general.face_covering_bet_street = self.table.street
-            self.hand_stats.general.facing_covering_bet_move = self.move
-        if self.player.is_facing_all_in:
-            self.hand_stats.general.face_all_in_street = self.table.street
-            self.hand_stats.general.facing_all_in_move = self.move
-        if self.move == ActionMove.FOLD:
-            self.hand_stats.general.fold_street = self.table.street
         self.update_street_hand_stats()
-        self.hand_stats.general.total_bet_amount = sum(
-            (
-                self.hand_stats.preflop.total_bet_amount,
-                self.hand_stats.flop.total_bet_amount,
-                self.hand_stats.turn.total_bet_amount,
-                self.hand_stats.river.total_bet_amount))
+        self.player.hand_stats.general.update_hand_stats(self)
 
     def add_to_history(self):
         """
@@ -191,9 +174,6 @@ class BetAction(Action):
         super().execute()
         self.table.cnt_bets += 1
         self.player.take_initiative()
-
-    def update_hand_stats(self):
-        super().update_hand_stats()
         if self.player.has_initiative:
             self.player.flag_street_cbet = True
         else:
