@@ -290,6 +290,7 @@ class TablePlayer:
         self.table.deck.draw(combo.first)
         self.table.deck.draw(combo.second)
         self.combo = combo
+        self.hand_stats.combo = combo
 
     def shows(self, combo: (Combo, str)):
         """
@@ -301,6 +302,7 @@ class TablePlayer:
         if self.table.street != Street.SHOWDOWN:
             raise ShowdownNotReachedError()
         self.combo = Combo(combo)
+        self.hand_stats.combo = self.combo
         self.went_to_showdown = True
         if self.has_table and not self.is_hero:
             self.table.deck.draw(self.combo.first)
