@@ -8,8 +8,8 @@ from pkrcomponents.components.tables.table import Table, Board, Players, Pot, To
 from pkrcomponents.components.actions.street import Street
 from pkrcomponents.components.cards.deck import Deck
 from pkrcomponents.components.players.table_player import TablePlayer
-from pkrcomponents.components.utils.exceptions import NotSufficientRaiseError, ShowdownNotReachedError, NotSufficientBetError, \
-    CannotParseWinnersError
+from pkrcomponents.components.utils.exceptions import (NotSufficientRaiseError, ShowdownNotReachedError,
+                                                       NotSufficientBetError, CannotParseWinnersError)
 
 
 class TableTest(unittest.TestCase):
@@ -256,7 +256,7 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.pot.value, 900)
         self.assertEqual(table.pot.highest_bet, 400)
         self.assertTrue(table.players[3].is_current_player)
-        self.assertFalse(table.players[3].hand_stats.flag_vpip)
+        self.assertFalse(table.players[3].hand_stats.preflop.flag_vpip)
         self.assertFalse(table.players[3].has_initiative)
         action = FoldAction(table.current_player)
         action.play()
@@ -269,7 +269,7 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.pot.value, 900)
         self.assertEqual(table.pot.highest_bet, 400)
         self.assertFalse(table.players[3].is_current_player)
-        self.assertFalse(table.players[3].hand_stats.flag_vpip)
+        self.assertFalse(table.players[3].hand_stats.preflop.flag_vpip)
 
     def test_action_call(self):
         table = Table()
@@ -289,7 +289,7 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.pot.value, 900)
         self.assertEqual(table.pot.highest_bet, 400)
         self.assertTrue(table.players[3].is_current_player)
-        self.assertFalse(table.players[3].hand_stats.flag_vpip)
+        self.assertFalse(table.players[3].hand_stats.preflop.flag_vpip)
         self.assertFalse(table.players[3].has_initiative)
         action = CallAction(table.current_player)
         action.play()
@@ -304,7 +304,7 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.pot.value, 1300)
         self.assertEqual(table.pot.highest_bet, 400)
         self.assertFalse(table.players[3].is_current_player)
-        self.assertTrue(table.players[3].hand_stats.flag_vpip)
+        self.assertTrue(table.players[3].hand_stats.preflop.flag_vpip)
         self.assertFalse(table.players[3].has_initiative)
 
     def test_action_raise(self):
@@ -325,7 +325,7 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.pot.value, 900)
         self.assertEqual(table.pot.highest_bet, 400)
         self.assertTrue(table.players[3].is_current_player)
-        self.assertFalse(table.players[3].hand_stats.flag_vpip)
+        self.assertFalse(table.players[3].hand_stats.preflop.flag_vpip)
         self.assertFalse(table.players[3].has_initiative)
         self.assertEqual(table.min_bet, 800)
         self.assertEqual(table.players[3].min_raise, 400)
@@ -347,7 +347,7 @@ class TableTest(unittest.TestCase):
         self.assertEqual(table.pot.value, 2350)
         self.assertEqual(table.pot.highest_bet, 1450)
         self.assertFalse(table.players[3].is_current_player)
-        self.assertTrue(table.players[3].hand_stats.flag_vpip)
+        self.assertTrue(table.players[3].hand_stats.preflop.flag_vpip)
         self.assertTrue(table.players[3].has_initiative)
         self.assertTrue(table.players[4].is_current_player)
         with self.assertRaises(NotSufficientRaiseError):

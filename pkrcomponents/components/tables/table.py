@@ -334,7 +334,7 @@ class Table:
         for p in self.players:
             p.is_hero = False
         player.is_hero = True
-        player.hand_stats.flag_is_hero = True
+        player.hand_stats.general.flag_is_hero = True
 
     def distribute_hero_cards(self, player_name: str, card1: (str, Card), card2: (str, Card)):
         """
@@ -541,7 +541,7 @@ class Table:
     def distribute_rewards(self):
         """Distribute rewards between players"""
         hand_winner = self.rewards_table[0]["player"]
-        hand_winner.hand_stats.flag_won_hand = True
+        hand_winner.hand_stats.general.flag_won_hand = True
         for reward_dict in self.rewards_table:
             player = reward_dict["player"]
             reward = reward_dict["reward"]

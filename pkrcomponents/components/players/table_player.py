@@ -145,7 +145,7 @@ class TablePlayer:
     @property
     def effective_stack(self) -> float:
         """Player's effective stack"""
-        return min(self.stack, max([pl.stack for pl in self.table.players_in_game if pl != self]))
+        return min(self.stack, max([pl.stack for pl in self.table.players_involved if pl != self]))
 
     @property
     def stack_enables_raise(self) -> bool:
@@ -292,7 +292,7 @@ class TablePlayer:
         self.table.deck.draw(combo.first)
         self.table.deck.draw(combo.second)
         self.combo = combo
-        self.hand_stats.combo = combo
+        self.hand_stats.general.combo = combo
 
     def shows(self, combo: (Combo, str)):
         """
@@ -304,9 +304,9 @@ class TablePlayer:
         if self.table.street != Street.SHOWDOWN:
             raise ShowdownNotReachedError()
         self.combo = Combo(combo)
-        self.hand_stats.combo = self.combo
+        self.hand_stats.general.combo = self.combo
         self.went_to_showdown = True
-        self.hand_stats.flag_went_to_showdown = True
+        self.hand_stats.general.flag_went_to_showdown = True
         if self.has_table and not self.is_hero:
             self.table.deck.draw(self.combo.first)
             self.table.deck.draw(self.combo.second)
@@ -323,11 +323,11 @@ class TablePlayer:
         if self.is_in_position:
             match self.table.street:
                 case Street.FLOP:
-                    self.hand_stats.flag_flop_has_position = True
+                    self.hand_stats.flop.flag_has_position = True
                 case Street.TURN:
-                    self.hand_stats.flag_turn_has_position = True
+                    self.hand_stats.turn.flag_has_position = True
                 case Street.RIVER:
-                    self.hand_stats.flag_river_has_position = True
+                    self.hand_stats.river.flag_has_position = True
 
     def reset_street_status(self):
         """Reset street status"""
@@ -370,7 +370,7 @@ class TablePlayer:
             amount (float): The amount to win
         """
         self.stack += amount
-        self.hand_stats.amount_won = amount
+        self.hand_stats.general.amount_won = amount
 
     @property
     def preflop_bet_amounts(self) -> list:
@@ -497,13 +497,15 @@ class TablePlayer:
     @property
     def is_facing_squeeze(self):
         """Boolean indicating if player is facing a squeeze"""
-        return (self.is_facing_3bet and any([player.hand_stats.flag_squeeze for player in self.table.players_involved])
+        return (self.is_facing_3bet and any([player.hand_stats.preflop.flag_squeeze for player in self.table.players_involved])
                 and self.table.street.is_preflop)
 
     @property
     def is_facing_steal(self):
         """Boolean indicating if player is facing a steal"""
-        return (self.is_facing_2bet and any([player.hand_stats.flag_steal_attempt for player in self.table.players_involved])
+        return (
+                self.is_facing_2bet
+                and any([player.hand_stats.preflop.flag_steal_attempt for player in self.table.players_involved])
                 and self.table.street.is_preflop)
 
     @property
