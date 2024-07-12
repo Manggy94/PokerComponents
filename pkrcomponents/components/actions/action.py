@@ -135,6 +135,8 @@ class Action:
             case Street.FLOP:
                 self.hand_stats.flag_saw_flop = True
                 self.hand_stats.flop_actions_sequence = self.player.actions_history.flop
+                if self.hand_stats.amount_flop_effective_stack == 0:
+                    self.hand_stats.amount_flop_effective_stack = self.player.effective_stack
                 if not any(player.hand_stats.flag_flop_first_to_talk for player in self.table.players_in_game):
                     self.hand_stats.flag_flop_first_to_talk = True
                 if self.player.is_facing_cbet:
@@ -167,8 +169,12 @@ class Action:
                     self.hand_stats.flag_flop_4bet_opportunity = True
             case Street.TURN:
                 self.hand_stats.turn_actions_sequence = self.player.actions_history.turn
+                if self.hand_stats.amount_turn_effective_stack == 0:
+                    self.hand_stats.amount_turn_effective_stack = self.player.effective_stack
             case Street.RIVER:
                 self.hand_stats.river_actions_sequence = self.player.actions_history.river
+                if self.hand_stats.amount_river_effective_stack == 0:
+                    self.hand_stats.amount_river_effective_stack = self.player.effective_stack
 
     def add_to_history(self):
         """
@@ -346,7 +352,6 @@ class RaiseAction(Action):
                 if self.player.can_4bet:
                     self.hand_stats.flag_preflop_4bet = True
                 self.hand_stats.count_preflop_player_raises += 1
-
             case Street.FLOP:
                 self.hand_stats.flag_flop_bet = True
                 if self.player.can_first_raise:
