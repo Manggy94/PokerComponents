@@ -214,6 +214,14 @@ class Action:
                     self.hand_stats.move_facing_turn_4bet = self.move
                 if self.player.can_open:
                     self.hand_stats.flag_turn_open_opportunity = True
+                if self.player.can_cbet:
+                    self.hand_stats.flag_turn_cbet_opportunity = True
+                if self.player.can_donk_bet:
+                    self.hand_stats.flag_turn_donk_bet_opportunity = True
+                if self.player.can_3bet:
+                    self.hand_stats.flag_turn_3bet_opportunity = True
+                if self.player.can_4bet:
+                    self.hand_stats.flag_turn_4bet_opportunity = True
             case Street.RIVER:
                 self.hand_stats.flag_saw_river = True
                 self.hand_stats.river_actions_sequence = self.player.actions_history.river
@@ -249,6 +257,14 @@ class Action:
                     self.hand_stats.move_facing_river_4bet = self.move
                 if self.player.can_open:
                     self.hand_stats.flag_river_open_opportunity = True
+                if self.player.can_cbet:
+                    self.hand_stats.flag_river_cbet_opportunity = True
+                if self.player.can_donk_bet:
+                    self.hand_stats.flag_river_donk_bet_opportunity = True
+                if self.player.can_3bet:
+                    self.hand_stats.flag_river_3bet_opportunity = True
+                if self.player.can_4bet:
+                    self.hand_stats.flag_river_4bet_opportunity = True
 
 
     def add_to_history(self):
