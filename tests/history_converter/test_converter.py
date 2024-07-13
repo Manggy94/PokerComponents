@@ -300,7 +300,7 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertEqual(villain_stats.flop.count_player_raises, 0)
         self.assertEqual(villain_stats.flop.count_player_calls, 0)
         # sequences
-        self.assertEqual(hero_stats.flop.actions_sequence.symbol, "")
+        self.assertIsNone(hero_stats.flop.actions_sequence)
         self.assertEqual(villain_stats.flop.actions_sequence.symbol, "X")
         # amounts
         self.assertEqual(hero_stats.flop.amount_effective_stack, 0)
@@ -402,7 +402,7 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertEqual(villain_stats.turn.count_player_raises, 0)
         self.assertEqual(villain_stats.turn.count_player_calls, 0)
         # sequences
-        self.assertEqual(hero_stats.turn.actions_sequence.symbol, "")
+        self.assertIsNone(hero_stats.turn.actions_sequence)
         self.assertEqual(villain_stats.turn.actions_sequence.symbol, "B")
         # amounts
         self.assertEqual(hero_stats.turn.amount_effective_stack, 0)
@@ -504,7 +504,7 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertEqual(villain_stats.river.count_player_raises, 0)
         self.assertEqual(villain_stats.river.count_player_calls, 0)
         # sequences
-        self.assertEqual(hero_stats.river.actions_sequence.symbol, "")
+        self.assertIsNone(hero_stats.river.actions_sequence)
         self.assertEqual(villain_stats.river.actions_sequence.symbol, "B")
         # amounts
         self.assertEqual(hero_stats.river.amount_effective_stack, 0)

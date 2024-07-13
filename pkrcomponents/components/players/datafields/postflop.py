@@ -84,7 +84,7 @@ COUNT_PLAYER_CALLS = field(
     metadata={'description': 'The number of calls the player made ', 'type': 'int'})
 # 3. Sequences
 ACTIONS_SEQUENCE = field(
-    default=Factory(lambda: ActionsSequence()), validator=optional(instance_of(ActionsSequence)),
+    default=None, validator=optional(instance_of(ActionsSequence)),
     metadata={'description': 'The sequence of actions the player made ', 'type': 'ActionsSequence'})
 # 4. Amounts
 AMOUNT_EFFECTIVE_STACK = field(

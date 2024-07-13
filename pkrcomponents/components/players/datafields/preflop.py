@@ -100,8 +100,8 @@ COUNT_FACED_LIMPS = field(
     default=0, validator=instance_of(int),
     metadata={'description': 'The number of limps the player faced preflop', 'type': 'int'})
 # 3. Sequences
-PREFLOP_ACTIONS_SEQUENCE = field(
-    default=Factory(lambda: ActionsSequence()), validator=instance_of(ActionsSequence),
+ACTIONS_SEQUENCE = field(
+    default=None, validator=optional(instance_of(ActionsSequence)),
     metadata={'description': 'The sequence of actions the player made preflop', 'type': 'ActionsSequence'})
 # 4. Amounts
 AMOUNT_PREFLOP_EFFECTIVE_STACK = field(

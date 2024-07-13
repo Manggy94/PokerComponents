@@ -40,7 +40,7 @@ class PreflopPlayerHandStats(StreetHandStatsBase):
     count_player_calls = preflop.COUNT_PREFLOP_PLAYER_CALLS
     count_faced_limps = preflop.COUNT_FACED_LIMPS
     # 3. Sequences
-    actions_sequence = preflop.PREFLOP_ACTIONS_SEQUENCE
+    actions_sequence = preflop.ACTIONS_SEQUENCE
     # 4. Amounts
     amount_effective_stack = preflop.AMOUNT_PREFLOP_EFFECTIVE_STACK
     amount_to_call_facing_bet = preflop.AMOUNT_TO_CALL_FACING_PREFLOP_BB

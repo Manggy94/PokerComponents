@@ -228,3 +228,5 @@ Bpkrcomponents/components/players/player_hand_stats_description.csv,4\d\4d95174
 \pkrcomponents/components/players/street_hand_stats/general_player_hand_stats_description.csv,5\8\582c861a6e381b8496593d75139b26a3b4b362e5
 ç
 ]pkrcomponents/components/players/street_hand_stats/postflop_player_hand_stats_description.csv,7\2\72346115f3a4c7f02fb542d6813209410bd10d7c
+å
+\pkrcomponents/components/players/street_hand_stats/preflop_player_hand_stats_description.csv,b\e\be82e343b07eb9c25e43cac9b202c6990accd850
