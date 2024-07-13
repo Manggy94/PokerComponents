@@ -1,8 +1,8 @@
-from pkrcomponents.components.utils.common import PokerEnum, _ReprMixin
+from pkrcomponents.components.utils.common import PokerEnum, ReprMixin
 from itertools import combinations
 
 
-class Position(_ReprMixin, PokerEnum):
+class Position(ReprMixin, PokerEnum):
     """Class describing the table position"""
     UTG = "UTG", 1, 3, "under the gun"
     UTG1 = "UTG1", 2, 4, "utg+1", "utg + 1"

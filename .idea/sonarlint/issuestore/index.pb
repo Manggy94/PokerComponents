@@ -214,3 +214,7 @@ a
 1tests/history_converter/json_files/example06.json,8\d\8df22ff2c078156f1d0c9eafb41e8745fd95cc1a
 a
 1tests/history_converter/json_files/example10.json,0\f\0fba86302e7d990c6b9cc7c266de3b5cdfa3aed3
+a
+1pkrcomponents/components/players/positions_map.py,5\1\5196de7610354ce023b8ae5e5b0063ef0aebb20c
+e
+5pkrcomponents/components/players/player_hand_stats.py,3\0\308713c349bfad9388de939c2f8e446e06dbfdfe

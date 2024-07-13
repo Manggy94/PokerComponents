@@ -5,7 +5,7 @@ from pkrcomponents.components.players.street_hand_stats import preflop, postflop
 
 
 @define
-class HandStats:
+class PlayerHandStats:
     """
     This class represents the statistics of a player's hand in a poker game
 
@@ -15,23 +15,23 @@ class HandStats:
     # A. Preflop stats
     preflop = field(
         default=Factory(preflop.PreflopPlayerHandStats),
-        metadata={'description': 'Preflop stats'},
+        metadata={'description': 'Preflop player stats for a hand'},
         validator=instance_of(preflop.PreflopPlayerHandStats))
     flop = field(
         default=Factory(postflop.PostflopPlayerHandStats),
-        metadata={'description': 'Flop stats'},
+        metadata={'description': 'Flop player stats for a hand'},
         validator=instance_of(postflop.PostflopPlayerHandStats))
     turn = field(
         default=Factory(postflop.PostflopPlayerHandStats),
-        metadata={'description': 'Turn stats'},
+        metadata={'description': 'Turn player stats for a hand'},
         validator=instance_of(postflop.PostflopPlayerHandStats))
     river = field(
         default=Factory(postflop.PostflopPlayerHandStats),
-        metadata={'description': 'River stats'},
+        metadata={'description': 'River player stats for a hand'},
         validator=instance_of(postflop.PostflopPlayerHandStats))
     general = field(
         default=Factory(general.GeneralPlayerHandStats),
-        metadata={'description': 'General stats'},
+        metadata={'description': 'General player stats for a hand'},
         validator=instance_of(general.GeneralPlayerHandStats))
 
     def __attrs_post_init__(self):
@@ -46,10 +46,12 @@ class HandStats:
         Resets the statistics
         """
         for attribute in self.__attrs_attrs__:
-            if not isinstance(attribute.default, Factory):
-                setattr(self, attribute.name, attribute.default)
-            else:
+            # noinspection PyTypeChecker
+            if isinstance(attribute.default, Factory):
+                # noinspection PyUnresolvedReferences
                 setattr(self, attribute.name, attribute.default.factory())
+            else:
+                setattr(self, attribute.name, attribute.default)
 
 #     @classmethod
 #     def generate_description_file(cls):

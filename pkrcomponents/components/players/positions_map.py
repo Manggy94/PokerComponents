@@ -1,9 +1,9 @@
 from pkrcomponents.components.players.position import Position
-from pkrcomponents.components.utils.common import _ReprMixin
+from pkrcomponents.components.utils.common import ReprMixin
 from pkrcomponents.components.utils.meta.positions_map_meta import PositionsMapMeta
 
 
-class PositionsMap(_ReprMixin, metaclass=PositionsMapMeta):
+class PositionsMap(ReprMixin, metaclass=PositionsMapMeta):
     def __init__(self, positions_list: list[Position]):
         self.positions = positions_list
 

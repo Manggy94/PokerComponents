@@ -4,7 +4,7 @@ from attrs.validators import instance_of, ge, le, optional, max_len, min_len
 from pkrcomponents.components.actions.actions_history import ActionsHistory
 from pkrcomponents.components.actions.street import Street
 from pkrcomponents.components.cards.combo import Combo
-from pkrcomponents.components.players.hand_stats import HandStats
+from pkrcomponents.components.players.player_hand_stats import PlayerHandStats
 from pkrcomponents.components.players.position import Position
 from pkrcomponents.components.tables.table import Table
 from pkrcomponents.components.utils.converters import convert_to_position
@@ -26,7 +26,7 @@ class TablePlayer:
         flag_street_cbet (bool): The flag indicating if the player has made a cbet on the street
         flag_street_donk_bet (bool): The flag indicating if the player has made a donk bet on the street
         folded (bool): Whether the player has folded
-        hand_stats (HandStats): The hand statistics of the player
+        hand_stats (PlayerHandStats): The hand statistics of the player
         has_initiative (bool): Whether the player has initiative
         init_stack (float): The initial stack of the player at the beginning of the hand
         is_hero (bool): Whether the player is the hero
@@ -112,7 +112,7 @@ class TablePlayer:
     current_bet = field(default=0, validator=[ge(0), instance_of(float)], converter=float)
     hand_reward = field(default=0, validator=optional([ge(0), instance_of((int, float))]))
     actions_history = field(default=Factory(lambda: ActionsHistory()), validator=instance_of(ActionsHistory))
-    hand_stats = field(default=Factory(HandStats), validator=instance_of(HandStats))
+    hand_stats = field(default=Factory(PlayerHandStats), validator=instance_of(PlayerHandStats))
     has_initiative = field(default=False, validator=instance_of(bool))
     flag_street_first_to_talk = field(default=False, validator=instance_of(bool))
     flag_street_went_all_in = field(default=False, validator=instance_of(bool))
@@ -410,103 +410,103 @@ class TablePlayer:
             self.flag_street_first_to_talk = True
 
     @property
-    def is_in_position(self):
+    def is_in_position(self) -> bool:
         """
         Boolean indicating if player is in position
         """
         return self.table.players_in_game[-1] == self
 
-
     @property
-    def can_1bet(self):
+    def can_1bet(self) -> bool:
         """Boolean indicating if player can 1bet"""
         return self.table.cnt_bets == 0 and self.stack_enables_raise
 
     @property
-    def can_2bet(self):
+    def can_2bet(self) -> bool:
         """Boolean indicating if player can 2bet"""
         return self.table.cnt_bets == 1 and self.stack_enables_raise
 
     @property
-    def can_3bet(self):
+    def can_3bet(self) -> bool:
         """Boolean indicating if player can 3bet"""
         return self.table.cnt_bets == 2 and self.stack_enables_raise
 
     @property
-    def can_4bet(self):
+    def can_4bet(self) -> bool:
         """Boolean indicating if player can 4bet"""
         return self.table.cnt_bets >= 3 and self.stack_enables_raise
 
     @property
-    def can_cbet(self):
+    def can_cbet(self) -> bool:
         """Boolean indicating if player can cbet"""
         return self.has_initiative and self.can_open
 
     @property
-    def can_donk_bet(self):
+    def can_donk_bet(self) -> bool:
         """Boolean indicating if player can donk bet"""
         return not self.has_initiative and self.can_open and any([player.has_initiative
                                                                   for player in self.table.players_waiting])
 
     @property
-    def can_raise(self):
+    def can_raise(self) -> bool:
         """Boolean indicating if player can raise"""
         return self.table.cnt_bets >= 1 and self.stack_enables_raise
 
     @property
-    def can_first_raise(self):
+    def can_first_raise(self) -> bool:
         """Boolean indicating if player can make the first raise"""
         return self.is_facing_1bet and self.stack_enables_raise
 
     @property
-    def can_open(self):
+    def can_open(self) -> bool:
         """Boolean indicating if player can open"""
         return ((self.table.street.is_preflop and not self.table.is_opened)
                 or (not self.table.street.is_preflop and self.table.cnt_bets == 0))
 
     @property
-    def can_squeeze(self):
+    def can_squeeze(self) -> bool:
         """Boolean indicating if player can squeeze"""
         return self.can_3bet and self.table.cnt_cold_calls > 0 and self.table.street.is_preflop
 
     @property
-    def can_steal(self):
+    def can_steal(self) -> bool:
         """Boolean indicating if player can steal"""
         return self.can_open and self.position.is_steal and self.table.street.is_preflop
 
     @property
-    def is_facing_raise(self):
+    def is_facing_raise(self) -> bool:
         """Boolean indicating if player faces a raise"""
         return self.table.cnt_bets >= 2
 
     @property
-    def is_facing_1bet(self):
+    def is_facing_1bet(self) -> bool:
         """Boolean indicating if player is facing a 1bet"""
         return self.table.cnt_bets == 1
 
     @property
-    def is_facing_2bet(self):
+    def is_facing_2bet(self) -> bool:
         """Boolean indicating if player is facing a 2bet"""
         return self.table.cnt_bets == 2
 
     @property
-    def is_facing_3bet(self):
+    def is_facing_3bet(self) -> bool:
         """Boolean indicating if player is facing a 3bet"""
         return self.table.cnt_bets == 3
 
     @property
-    def is_facing_4bet(self):
+    def is_facing_4bet(self) -> bool:
         """Boolean indicating if player is facing a 4bet"""
         return self.table.cnt_bets >= 4
 
     @property
-    def is_facing_squeeze(self):
+    def is_facing_squeeze(self) -> bool:
         """Boolean indicating if player is facing a squeeze"""
-        return (self.is_facing_3bet and any([player.hand_stats.preflop.flag_squeeze for player in self.table.players_involved])
+        return (self.is_facing_3bet
+                and any([player.hand_stats.preflop.flag_squeeze for player in self.table.players_involved])
                 and self.table.street.is_preflop)
 
     @property
-    def is_facing_steal(self):
+    def is_facing_steal(self) -> bool:
         """Boolean indicating if player is facing a steal"""
         return (
                 self.is_facing_2bet
@@ -514,26 +514,26 @@ class TablePlayer:
                 and self.table.street.is_preflop)
 
     @property
-    def is_defending_blinds(self):
+    def is_defending_blinds(self) -> bool:
         """Boolean indicating if player is defending blinds"""
         return self.is_facing_raise and self.position.is_blind and self.table.street.is_preflop
 
     @property
-    def is_facing_cbet(self):
+    def is_facing_cbet(self) -> bool:
         """Boolean indicating if player is facing a cbet"""
         return self.is_facing_1bet and any([player.flag_street_cbet for player in self.table.players_involved])
 
     @property
-    def is_facing_donk_bet(self):
+    def is_facing_donk_bet(self) -> bool:
         """Boolean indicating if player is facing a donk bet"""
         return self.is_facing_1bet and any([player.flag_street_donk_bet for player in self.table.players_involved])
 
     @property
-    def is_facing_covering_bet(self):
+    def is_facing_covering_bet(self) -> bool:
         """Boolean indicating if player is facing a covering bet"""
         return self.to_call >= self.stack
 
     @property
-    def is_facing_all_in(self):
+    def is_facing_all_in(self) -> bool:
         """Boolean indicating if player is facing an all-in"""
         return any([player.flag_street_went_all_in for player in self.table.players_involved])

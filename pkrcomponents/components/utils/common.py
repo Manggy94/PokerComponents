@@ -82,7 +82,7 @@ class PokerEnum(_OrderableMixin, enum.Enum, metaclass=_PokerEnumMeta):
         return self._value_[0]
 
 
-class _ReprMixin:
+class ReprMixin:
     def __repr__(self):
         return f"{self.__class__.__name__}('{self}')"
 

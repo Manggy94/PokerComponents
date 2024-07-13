@@ -6,7 +6,7 @@ from pkrcomponents.components.actions.action_move import ActionMove
 from pkrcomponents.components.actions.street import Street
 from pkrcomponents.components.cards.board import Board
 from pkrcomponents.components.cards.combo import Combo
-from pkrcomponents.components.players.hand_stats import HandStats
+from pkrcomponents.components.players.player_hand_stats import PlayerHandStats
 from pkrcomponents.components.players.players import Players
 from pkrcomponents.components.players.position import Position
 from pkrcomponents.components.tables.table import Table
@@ -135,7 +135,7 @@ class TestHandHistoryConverter(unittest.TestCase):
         hero_player = table.players["manggy94"]
         self.assertTrue(hero_player.is_hero)
         hero_stats = hero_player.hand_stats
-        self.assertIsInstance(hero_stats, HandStats)
+        self.assertIsInstance(hero_stats, PlayerHandStats)
         # Preflop
         # Flags
         self.assertFalse(hero_stats.preflop.flag_vpip)

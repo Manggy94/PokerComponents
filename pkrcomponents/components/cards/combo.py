@@ -1,5 +1,5 @@
 from functools import total_ordering
-from pkrcomponents.components.utils.common import _ReprMixin
+from pkrcomponents.components.utils.common import ReprMixin
 from pkrcomponents.components.cards.card import Card
 from pkrcomponents.components.cards.hand import Hand
 from pkrcomponents.components.cards.rank import Rank
@@ -9,7 +9,7 @@ from pkrcomponents.components.utils.meta.combo_meta import ComboMeta
 
 
 @total_ordering
-class Combo(_ReprMixin, metaclass=ComboMeta):
+class Combo(ReprMixin, metaclass=ComboMeta):
     """Hand combination, made of two cards"""
 
     _shape: Shape

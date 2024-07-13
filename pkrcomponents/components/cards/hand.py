@@ -1,6 +1,6 @@
 import random
 from functools import total_ordering
-from pkrcomponents.components.utils.common import _ReprMixin
+from pkrcomponents.components.utils.common import ReprMixin
 from pkrcomponents.components.cards.rank import Rank, FACE_RANKS, BROADWAY_RANKS
 
 __all__ = [
@@ -12,7 +12,7 @@ from pkrcomponents.components.utils.meta.hand_meta import HandMeta
 
 
 @total_ordering
-class Hand(_ReprMixin, metaclass=HandMeta):
+class Hand(ReprMixin, metaclass=HandMeta):
     """General hand without a precise suit. Only knows about two ranks and shape."""
 
     _shape: Shape

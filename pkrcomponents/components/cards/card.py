@@ -1,7 +1,7 @@
 """This module contains the Card class, which represents a playing card."""
 from functools import total_ordering
 
-from pkrcomponents.components.utils.common import _ReprMixin
+from pkrcomponents.components.utils.common import ReprMixin
 from pkrcomponents.components.cards.rank import Rank
 from pkrcomponents.components.cards.suit import Suit
 from pkrcomponents.components.utils.meta.card_meta import CardMeta
@@ -10,7 +10,7 @@ __all__ = ["Card"]
 
 
 @total_ordering
-class Card(_ReprMixin, metaclass=CardMeta):
+class Card(ReprMixin, metaclass=CardMeta):
     """
     Represents a Card, which consists a Rank and a Suit.
 
