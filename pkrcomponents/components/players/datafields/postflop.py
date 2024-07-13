@@ -78,10 +78,10 @@ FLAG_FACE_4BET = field(
 # 2. Counts
 COUNT_PLAYER_RAISES = field(
     default=0, validator=instance_of(int),
-    metadata={'description': 'The number of raises the player made ', 'type': 'int'})
+    metadata={'description': 'The number of raises the player made ', 'type': 'tiny_int+'})
 COUNT_PLAYER_CALLS = field(
     default=0, validator=instance_of(int),
-    metadata={'description': 'The number of calls the player made ', 'type': 'int'})
+    metadata={'description': 'The number of calls the player made ', 'type': 'tiny_int+'})
 # 3. Sequences
 ACTIONS_SEQUENCE = field(
     default=None, validator=optional(instance_of(ActionsSequence)),
@@ -89,28 +89,28 @@ ACTIONS_SEQUENCE = field(
 # 4. Amounts
 AMOUNT_EFFECTIVE_STACK = field(
     default=0, validator=instance_of(float), converter=float,
-    metadata={'description': 'The effective stack the player had ', 'type': 'float'})
+    metadata={'description': 'The effective stack the player had ', 'type': 'decimal_15_2'})
 AMOUNT_TO_CALL_FACING_BET = field(
     default=0, validator=instance_of(float), converter=float,
-    metadata={'description': 'The amount the player had to call facing the street bet', 'type': 'float'})
+    metadata={'description': 'The amount the player had to call facing the street bet', 'type': 'decimal_15_2'})
 AMOUNT_TO_CALL_FACING_2BET = field(
     default=0, validator=instance_of(float), converter=float,
-    metadata={'description': 'The amount the player had to call facing the street 2bet', 'type': 'float'})
+    metadata={'description': 'The amount the player had to call facing the street 2bet', 'type': 'decimal_15_2'})
 AMOUNT_TO_CALL_FACING_3BET = field(
     default=0, validator=instance_of(float), converter=float,
-    metadata={'description': 'The amount the player had to call facing the street 3bet', 'type': 'float'})
+    metadata={'description': 'The amount the player had to call facing the street 3bet', 'type': 'decimal_15_2'})
 AMOUNT_TO_CALL_FACING_4BET = field(
     default=0, validator=instance_of(float), converter=float,
-    metadata={'description': 'The amount the player had to call facing the street 4bet', 'type': 'float'})
+    metadata={'description': 'The amount the player had to call facing the street 4bet', 'type': 'decimal_15_2'})
 AMOUNT_BET_MADE = field(
     default=0, validator=instance_of(float), converter=float,
-    metadata={'description': 'The amount the player used to bet ', 'type': 'float'})
+    metadata={'description': 'The amount the player used to bet ', 'type': 'decimal_15_2'})
 AMOUNT_FIRST_RAISE_MADE = field(
     default=0, validator=instance_of(float), converter=float,
-    metadata={'description': 'The amount the player used on his first raise ', 'type': 'float'})
+    metadata={'description': 'The amount the player used on his first raise ', 'type': 'decimal_15_2'})
 AMOUNT_SECOND_RAISE_MADE = field(
     default=0, validator=instance_of(float), converter=float,
-    metadata={'description': 'The amount the player used on his second raise ', 'type': 'float'})
+    metadata={'description': 'The amount the player used on his second raise ', 'type': 'decimal_15_2'})
 RATIO_TO_CALL_FACING_BET = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={'description': 'The ratio of the pot the player had to call facing the street bet', 'type': 'float'})
@@ -134,7 +134,7 @@ RATIO_SECOND_RAISE_MADE = field(
     metadata={'description': 'The ratio of the pot the player used on his second raise ', 'type': 'float'})
 TOTAL_BET_AMOUNT = field(
     default=0, validator=instance_of(float), converter=float,
-    metadata={'description': 'The total amount the player bet ', 'type': 'float'})
+    metadata={'description': 'The total amount the player bet ', 'type': 'decimal_15_2'})
 # 5. Moves
 MOVE_FACING_BET = field(
     default=None, validator=optional(instance_of(ActionMove)),

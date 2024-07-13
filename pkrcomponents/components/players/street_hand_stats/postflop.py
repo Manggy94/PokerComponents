@@ -1,4 +1,4 @@
-from attrs import define, Factory
+from attrs import define
 
 from pkrcomponents.components.actions.action_move import ActionMove
 from pkrcomponents.components.actions.actions_sequence import ActionsSequence
@@ -167,6 +167,7 @@ class PostflopPlayerHandStats(StreetHandStatsBase):
                 self.bet_action_update(action)
             case ActionMove.RAISE:
                 self.raise_action_update(action)
+
 
 if __name__ == '__main__':
     PostflopPlayerHandStats.generate_description_file()

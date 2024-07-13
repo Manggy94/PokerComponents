@@ -17,16 +17,16 @@ FLAG_WON_HAND = field(
 # 2. Amounts
 STARTING_STACK = field(
     default=0, validator=[ge(0), instance_of(float)], converter=float,
-    metadata={'description': 'The starting stack of the player at the beginning of the hand', 'type': 'float'})
+    metadata={'description': 'The starting stack of the player at the beginning of the hand', 'type': 'decimal_15_2'})
 AMOUNT_WON = field(
     default=0, validator=[ge(0), instance_of(float)], converter=float,
-    metadata={'description': 'The amount the player won ', 'type': 'float'})
+    metadata={'description': 'The amount the player won ', 'type': 'decimal_15_2'})
 AMOUNT_EXPECTED_WON = field(
     default=0, validator=[ge(0), instance_of(float)], converter=float,
-    metadata={'description': 'The amount the player is expected to win after showdown (EV)', 'type': 'float'})
+    metadata={'description': 'The amount the player is expected to win after showdown (EV)', 'type': 'decimal_15_2'})
 TOTAL_BET_AMOUNT = field(
     default=0, validator=[ge(0), instance_of(float)], converter=float,
-    metadata={'description': 'The total amount the player bet ', 'type': 'float'})
+    metadata={'description': 'The total amount the player bet ', 'type': 'decimal_15_2'})
 # 3. Moves
 FACING_COVERING_BET_MOVE = field(
     default=None, validator=[optional(instance_of(ActionMove))],
