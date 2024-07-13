@@ -1,0 +1,49 @@
+name,default,description,type
+flag_saw,False,Whether player saw the street,bool
+flag_first_to_talk,False,Whether player was the first to talk ,bool
+flag_has_position,False,Whether player had position ,bool
+flag_bet,False,Whether player bet ,bool
+flag_open_opportunity,False,Whether player had the opportunity to open ,bool
+flag_open,False,Whether player opened ,bool
+flag_cbet_opportunity,False,Whether player had the opportunity to make a c-bet ,bool
+flag_cbet,False,Whether player made a continuation bet ,bool
+flag_face_cbet,False,Whether player faced a continuation bet ,bool
+flag_donk_bet_opportunity,False,Whether player had the opportunity to make a donk bet ,bool
+flag_donk_bet,False,Whether player made a donk bet ,bool
+flag_face_donk_bet,False,Whether player faced a donk bet ,bool
+flag_first_raise,False,Whether player made the first raise ,bool
+flag_fold,False,Whether player folded ,bool
+flag_check,False,Whether player checked ,bool
+flag_check_raise,False,Whether player check-raised ,bool
+flag_face_raise,False,Whether player faced a raise ,bool
+flag_3bet_opportunity,False,Whether player had the opportunity to 3bet ,bool
+flag_3bet,False,Whether player 3bet ,bool
+flag_face_3bet,False,Whether player faced a 3bet ,bool
+flag_4bet_opportunity,False,Whether player had the opportunity to 4+bet ,bool
+flag_4bet,False,Whether player 4+bet ,bool
+flag_face_4bet,False,Whether player faced a 4+bet ,bool
+count_player_raises,0,The number of raises the player made ,int
+count_player_calls,0,The number of calls the player made ,int
+actions_sequence,,The sequence of actions the player made ,ActionsSequence
+amount_effective_stack,0,The effective stack the player had ,float
+amount_to_call_facing_bet,0,The amount the player had to call facing the street bet,float
+amount_to_call_facing_2bet,0,The amount the player had to call facing the street 2bet,float
+amount_to_call_facing_3bet,0,The amount the player had to call facing the street 3bet,float
+amount_to_call_facing_4bet,0,The amount the player had to call facing the street 4bet,float
+amount_bet_made,0,The amount the player used to bet ,float
+amount_first_raise_made,0,The amount the player used on his first raise ,float
+amount_second_raise_made,0,The amount the player used on his second raise ,float
+ratio_to_call_facing_bet,0,The ratio of the pot the player had to call facing the street bet,float
+ratio_to_call_facing_2bet,0,The ratio of the pot the player had to call facing the street 2bet,float
+ratio_to_call_facing_3bet,0,The ratio of the pot the player had to call facing the street 3bet,float
+ratio_to_call_facing_4bet,0,The ratio of the pot the player had to call facing the street 4bet,float
+ratio_bet_made,0,The ratio of the pot the player used to bet ,float
+ratio_first_raise_made,0,The ratio of the pot the player used on his first raise ,float
+ratio_second_raise_made,0,The ratio of the pot the player used on his second raise ,float
+total_bet_amount,0,The total amount the player bet ,float
+move_facing_bet,,The move the player did when facing the street bet,ActionMove
+move_facing_2bet,,The move the player did when facing the street 2bet,ActionMove
+move_facing_3bet,,The move the player did when facing the street 3bet,ActionMove
+move_facing_4bet,,The move the player did when facing the street 4bet,ActionMove
+move_facing_cbet,,The move the player did when facing the street cbet,ActionMove
+move_facing_donk_bet,,The move the player did when facing the street donk bet,ActionMove

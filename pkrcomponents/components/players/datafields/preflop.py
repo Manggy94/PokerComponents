@@ -162,3 +162,6 @@ MOVE_FACING_SQUEEZE = field(
 MOVE_FACING_STEAL_ATTEMPT = field(
     default=None, validator=optional(instance_of(ActionMove)),
     metadata={'description': 'The move the player did when facing a preflop steal attempt', 'type': 'ActionMove'})
+
+PREFLOP_FIELDS = list({"field_name": field_name, "field_var": field_var}
+                      for field_name, field_var in locals().items() if field_name.isupper())

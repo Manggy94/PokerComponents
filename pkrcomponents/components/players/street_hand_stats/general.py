@@ -2,10 +2,11 @@ from attrs import define, Factory
 
 from pkrcomponents.components.actions.action_move import ActionMove
 from pkrcomponents.components.players.datafields import general
+from pkrcomponents.components.players.street_hand_stats.base import StreetHandStatsBase
 
 
 @define
-class GeneralPlayerHandStats:
+class GeneralPlayerHandStats(StreetHandStatsBase):
 
     combo = general.COMBO
     starting_stack = general.STARTING_STACK
@@ -40,12 +41,5 @@ class GeneralPlayerHandStats:
         self.total_bet_amount = sum((stats.preflop.total_bet_amount, stats.flop.total_bet_amount,
                                      stats.turn.total_bet_amount, stats.river.total_bet_amount))
 
-    def reset(self):
-        """
-        Resets the statistics
-        """
-        for attribute in self.__attrs_attrs__:
-            if not isinstance(attribute.default, Factory):
-                setattr(self, attribute.name, attribute.default)
-            else:
-                setattr(self, attribute.name, attribute.default.factory())
+if __name__ == '__main__':
+    GeneralPlayerHandStats.generate_description_file()

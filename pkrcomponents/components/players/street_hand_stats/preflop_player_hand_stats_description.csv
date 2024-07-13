@@ -1,0 +1,51 @@
+name,default,description,type
+flag_vpip,False,Whether the player voluntarily put money in the pot,bool
+flag_open_opportunity,False,Whether the player had the opportunity to open preflop,bool
+flag_open,False,Whether the player opened preflop,bool
+flag_first_raise,False,Whether the player made the first raise preflop,bool
+flag_fold,False,Whether the player folded preflop,bool
+flag_limp,False,Whether the player limped preflop,bool
+flag_cold_called,False,Whether the player cold called preflop,bool
+flag_raise,False,Whether the player raised preflop,bool
+flag_raise_opportunity,False,Whether the player had the opportunity to raise preflop,bool
+flag_face_raise,False,Whether the player faced a raise preflop,bool
+flag_3bet_opportunity,False,Whether the player had the opportunity to 3bet preflop,bool
+flag_3bet,False,Whether the player 3bet preflop,bool
+flag_face_3bet,False,Whether the player faced a 3bet preflop,bool
+flag_4bet_opportunity,False,Whether the player had the opportunity to 4+bet preflop,bool
+flag_4bet,False,Whether the player 4+bet preflop,bool
+flag_face_4bet,False,Whether the player faced a 4+bet preflop,bool
+flag_squeeze_opportunity,False,Whether the player had the opportunity to squeeze preflop,bool
+flag_squeeze,False,Whether the player squeezed preflop,bool
+flag_face_squeeze,False,Whether the player faced a squeeze preflop,bool
+flag_steal_opportunity,False,Whether the player had the opportunity to steal preflop,bool
+flag_steal_attempt,False,Whether the player attempted to steal preflop,bool
+flag_face_steal_attempt,False,Whether the player faced a steal attempt preflop,bool
+flag_fold_to_steal_attempt,False,Whether the player folded to a steal attempt preflop,bool
+flag_blind_defense_opportunity,False,Whether the player had the opportunity to defend the blinds preflop,bool
+flag_blind_defense,False,Whether the player defended the blinds preflop,bool
+flag_open_shove,False,Whether the player open shoved preflop,bool
+flag_voluntary_all_in,False,Whether the player voluntarily went all in preflop,bool
+count_player_raises,0,The number of raises the player made preflop,int
+count_player_calls,0,The number of calls the player made preflop,int
+count_faced_limps,0,The number of limps the player faced preflop,int
+actions_sequence,,The sequence of actions the player made preflop,ActionsSequence
+amount_effective_stack,0,The effective stack the player had preflop,float
+amount_to_call_facing_bet,0,The amount the player had to call facing the preflop big blind,float
+amount_to_call_facing_2bet,0,The amount the player had to call facing the preflop 2bet,float
+amount_to_call_facing_3bet,0,The amount the player had to call facing the preflop 3bet,float
+amount_to_call_facing_4bet,0,The amount the player had to call facing the preflop 4bet,float
+amount_first_raise_made,0,The amount the player used on his first raise preflop,float
+amount_second_raise_made,0,The amount the player used on his second raise preflop,float
+ratio_to_call_facing_bet,0,The ratio of the pot the player had to call facing the bb,float
+ratio_to_call_facing_2bet,0,The ratio of the pot the player had to call facing the preflop 2bet,float
+ratio_to_call_facing_3bet,0,The ratio of the pot the player had to call facing the preflop 3bet,float
+ratio_to_call_facing_4bet,0,The ratio of the pot the player had to call facing the preflop 4bet,float
+ratio_first_raise_made,0,The ratio of the pot the player used on his first raise preflop,float
+ratio_second_raise_made,0,The ratio of the pot the player used on his second raise preflop,float
+total_bet_amount,0,The total amount the player bet preflop,float
+move_facing_2bet,,The move the player did when facing a preflop 2bet,ActionMove
+move_facing_3bet,,The move the player did when facing a preflop 3bet,ActionMove
+move_facing_4bet,,The move the player did when facing a preflop 4bet,ActionMove
+move_facing_squeeze,,The move the player did when facing a preflop squeeze,ActionMove
+move_facing_steal_attempt,,The move the player did when facing a preflop steal attempt,ActionMove

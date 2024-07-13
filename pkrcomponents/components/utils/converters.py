@@ -1,3 +1,4 @@
+import re
 from pkrcomponents.components.actions.street import Street
 from pkrcomponents.components.cards.card import Card
 from pkrcomponents.components.players.position import Position
@@ -28,3 +29,10 @@ def convert_to_card(value: (str, Card, None)) -> (Card, None):
         return value
     else:
         return None
+
+    import re
+
+
+def pascal_to_snake_case(pascal_str):
+    snake_str = re.sub(r'(?<!^)(?=[A-Z])', '_', pascal_str)
+    return snake_str.lower()

@@ -51,3 +51,10 @@ FACE_ALL_IN_STREET = field(
 COMBO = field(
     default=None, validator=[optional(instance_of(Combo))],
     metadata={'description': 'The combo the player had', 'type': 'Combo'})
+
+GENERAL_FIELDS = list({"field_name": field_name, "field_var": field_var}
+                      for field_name, field_var in locals().items() if field_name.isupper())
+
+# Print all fields from this module
+if __name__ == '__main__':
+    print(GENERAL_FIELDS)

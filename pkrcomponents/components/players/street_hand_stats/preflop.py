@@ -1,12 +1,13 @@
-from attrs import define, Factory
+from attrs import define
 
 from pkrcomponents.components.actions.action_move import ActionMove
 from pkrcomponents.components.actions.actions_sequence import ActionsSequence
 from pkrcomponents.components.players.datafields import preflop
+from pkrcomponents.components.players.street_hand_stats.base import StreetHandStatsBase
 
 
 @define
-class PreflopPlayerHandStats:
+class PreflopPlayerHandStats(StreetHandStatsBase):
     flag_vpip = preflop.FLAG_VPIP
     flag_open_opportunity = preflop.FLAG_PREFLOP_OPEN_OPPORTUNITY
     flag_open = preflop.FLAG_PREFLOP_OPEN
@@ -165,14 +166,6 @@ class PreflopPlayerHandStats:
             case ActionMove.RAISE:
                 self.raise_action_update(action)
 
-    def reset(self):
-        """
-        Resets the statistics
-        """
-        for attribute in self.__attrs_attrs__:
-            # noinspection PyTypeChecker
-            if isinstance(attribute.default, Factory):
-                # noinspection PyUnresolvedReferences
-                setattr(self, attribute.name, attribute.default.factory())
-            else:
-                setattr(self, attribute.name, attribute.default)
+
+if __name__ == '__main__':
+    PreflopPlayerHandStats.generate_description_file()

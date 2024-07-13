@@ -154,3 +154,6 @@ MOVE_FACING_CBET = field(
 MOVE_FACING_DONK_BET = field(
     default=None, validator=optional(instance_of(ActionMove)),
     metadata={'description': 'The move the player did when facing the street donk bet', 'type': 'ActionMove'})
+
+POSTFLOP_FIELDS = list({"field_name": field_name, "field_var": field_var}
+                      for field_name, field_var in locals().items() if field_name.isupper())

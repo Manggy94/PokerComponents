@@ -3,10 +3,15 @@ from attrs import define, Factory
 from pkrcomponents.components.actions.action_move import ActionMove
 from pkrcomponents.components.actions.actions_sequence import ActionsSequence
 from pkrcomponents.components.players.datafields import postflop
+from pkrcomponents.components.players.street_hand_stats.base import StreetHandStatsBase
 
 
 @define
-class PostflopPlayerHandStats:
+class PostflopPlayerHandStats(StreetHandStatsBase):
+    """
+    This class represents the statistics of a player's hand in a poker game postflop
+    """
+    # 1. Flags
     flag_saw = postflop.FLAG_SAW
     flag_first_to_talk = postflop.FLAG_FIRST_TO_TALK
     flag_has_position = postflop.FLAG_HAS_POSITION
@@ -65,15 +70,19 @@ class PostflopPlayerHandStats:
         self.actions_sequence = ActionsSequence()
 
     def fold_action_update(self):
+        """ Updates the statistics when the player folds """
         self.flag_fold = True
 
     def check_action_update(self):
+        """ Updates the statistics when the player checks """
         self.flag_check = True
 
     def call_action_update(self):
+        """Updates the statistics when the player calls"""
         self.count_player_calls += 1
 
     def bet_action_update(self, action):
+        """Updates the statistics when the player bets"""
         self.amount_bet_made = action.value
         self.ratio_bet_made = action.value / action.table.pot_value
         self.flag_bet = True
@@ -85,6 +94,7 @@ class PostflopPlayerHandStats:
             self.flag_donk_bet = True
 
     def raise_action_update(self, action):
+        """Updates the statistics when the player raises"""
         self.flag_bet = True
         if self.count_player_raises == 0:
             self.amount_first_raise_made = action.value
@@ -103,6 +113,7 @@ class PostflopPlayerHandStats:
         self.count_player_raises += 1
 
     def update_hand_stats(self, action):
+        """ Updates the statistics of the player's hand according to the action"""
         self.flag_saw = True
         if self.amount_effective_stack == 0:
             self.amount_effective_stack = action.player.effective_stack
@@ -157,14 +168,5 @@ class PostflopPlayerHandStats:
             case ActionMove.RAISE:
                 self.raise_action_update(action)
 
-    def reset(self):
-        """
-        Resets the statistics
-        """
-        for attribute in self.__attrs_attrs__:
-            # noinspection PyTypeChecker
-            if isinstance(attribute.default, Factory):
-                # noinspection PyUnresolvedReferences
-                setattr(self, attribute.name, attribute.default.factory())
-            else:
-                setattr(self, attribute.name, attribute.default)
+if __name__ == '__main__':
+    PostflopPlayerHandStats.generate_description_file()
