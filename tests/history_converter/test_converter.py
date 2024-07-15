@@ -173,7 +173,7 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertEqual(hero_stats.preflop.actions_sequence.symbol, "F")
         # amounts
         self.assertEqual(hero_stats.preflop.amount_effective_stack, 18950)
-        self.assertEqual(hero_stats.preflop.amount_to_call_facing_bet, 0)
+        self.assertEqual(hero_stats.preflop.amount_to_call_facing_1bet, 0)
         self.assertEqual(hero_stats.preflop.amount_to_call_facing_2bet, 700)
         self.assertEqual(hero_stats.preflop.amount_to_call_facing_3bet, 0)
         self.assertEqual(hero_stats.preflop.amount_to_call_facing_4bet, 0)
@@ -229,7 +229,7 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertEqual(villain_stats.preflop.actions_sequence.symbol, "R")
         # amounts
         self.assertEqual(villain_stats.preflop.amount_effective_stack, 21605)
-        self.assertEqual(villain_stats.preflop.amount_to_call_facing_bet, 100)
+        self.assertEqual(villain_stats.preflop.amount_to_call_facing_1bet, 100)
         self.assertEqual(villain_stats.preflop.amount_to_call_facing_2bet, 0)
         self.assertEqual(villain_stats.preflop.amount_to_call_facing_3bet, 0)
         self.assertEqual(villain_stats.preflop.amount_to_call_facing_4bet, 0)
@@ -305,8 +305,8 @@ class TestHandHistoryConverter(unittest.TestCase):
         # amounts
         self.assertEqual(hero_stats.flop.amount_effective_stack, 0)
         self.assertEqual(villain_stats.flop.amount_effective_stack, 20905)
-        self.assertEqual(hero_stats.flop.amount_to_call_facing_bet, 0)
-        self.assertEqual(villain_stats.flop.amount_to_call_facing_bet, 0)
+        self.assertEqual(hero_stats.flop.amount_to_call_facing_1bet, 0)
+        self.assertEqual(villain_stats.flop.amount_to_call_facing_1bet, 0)
         self.assertEqual(hero_stats.flop.amount_to_call_facing_2bet, 0)
         self.assertEqual(villain_stats.flop.amount_to_call_facing_2bet, 0)
         self.assertEqual(hero_stats.flop.amount_to_call_facing_3bet, 0)
@@ -407,8 +407,8 @@ class TestHandHistoryConverter(unittest.TestCase):
         # amounts
         self.assertEqual(hero_stats.turn.amount_effective_stack, 0)
         self.assertEqual(villain_stats.turn.amount_effective_stack, 20905)
-        self.assertEqual(hero_stats.turn.amount_to_call_facing_bet, 0)
-        self.assertEqual(villain_stats.turn.amount_to_call_facing_bet, 0)
+        self.assertEqual(hero_stats.turn.amount_to_call_facing_1bet, 0)
+        self.assertEqual(villain_stats.turn.amount_to_call_facing_1bet, 0)
         self.assertEqual(hero_stats.turn.amount_to_call_facing_2bet, 0)
         self.assertEqual(villain_stats.turn.amount_to_call_facing_2bet, 0)
         self.assertEqual(hero_stats.turn.amount_to_call_facing_3bet, 0)
@@ -509,8 +509,8 @@ class TestHandHistoryConverter(unittest.TestCase):
         # amounts
         self.assertEqual(hero_stats.river.amount_effective_stack, 0)
         self.assertEqual(villain_stats.river.amount_effective_stack, 16623)
-        self.assertEqual(hero_stats.river.amount_to_call_facing_bet, 0)
-        self.assertEqual(villain_stats.river.amount_to_call_facing_bet, 0)
+        self.assertEqual(hero_stats.river.amount_to_call_facing_1bet, 0)
+        self.assertEqual(villain_stats.river.amount_to_call_facing_1bet, 0)
         self.assertEqual(hero_stats.river.amount_to_call_facing_2bet, 0)
         self.assertEqual(villain_stats.river.amount_to_call_facing_2bet, 0)
         self.assertEqual(hero_stats.river.amount_to_call_facing_3bet, 0)

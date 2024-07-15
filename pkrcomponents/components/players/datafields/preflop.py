@@ -107,7 +107,7 @@ ACTIONS_SEQUENCE = field(
 AMOUNT_EFFECTIVE_STACK = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={'description': 'The effective stack the player had ', 'type': 'decimal_15_2'})
-AMOUNT_TO_CALL_FACING_BB = field(
+AMOUNT_TO_CALL_FACING_1BET = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={'description': 'The amount the player had to call facing the  big blind', 'type': 'decimal_15_2'})
 AMOUNT_TO_CALL_FACING_2BET = field(

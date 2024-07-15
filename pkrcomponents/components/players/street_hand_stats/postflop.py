@@ -42,7 +42,7 @@ class PostflopPlayerHandStats(StreetHandStatsBase):
     actions_sequence = postflop.ACTIONS_SEQUENCE
     # 4. Amounts
     amount_effective_stack = postflop.AMOUNT_EFFECTIVE_STACK
-    amount_to_call_facing_bet = postflop.AMOUNT_TO_CALL_FACING_BET
+    amount_to_call_facing_1bet = postflop.AMOUNT_TO_CALL_FACING_BET
     amount_to_call_facing_2bet = postflop.AMOUNT_TO_CALL_FACING_2BET
     amount_to_call_facing_3bet = postflop.AMOUNT_TO_CALL_FACING_3BET
     amount_to_call_facing_4bet = postflop.AMOUNT_TO_CALL_FACING_4BET
@@ -127,7 +127,7 @@ class PostflopPlayerHandStats(StreetHandStatsBase):
         if action.player.is_facing_raise:
             self.flag_face_raise = True
         if action.player.is_facing_1bet:
-            self.amount_to_call_facing_bet = action.player.to_call
+            self.amount_to_call_facing_1bet = action.player.to_call
             self.ratio_to_call_facing_bet = action.player.to_call / action.table.pot_value
             self.move_facing_bet = action.move
         if action.player.is_facing_2bet:
