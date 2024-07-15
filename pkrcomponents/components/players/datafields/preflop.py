@@ -125,7 +125,7 @@ AMOUNT_FIRST_RAISE_MADE = field(
 AMOUNT_SECOND_RAISE_MADE = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={'description': 'The amount the player used on his second raise ', 'type': 'decimal_15_2'})
-RATIO_TO_CALL_FACING_BB = field(
+RATIO_TO_CALL_FACING_1BET = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={'description': 'The ratio of the pot the player had to call facing the bb', 'type': 'decimal_10_5'})
 RATIO_TO_CALL_FACING_2BET = field(
