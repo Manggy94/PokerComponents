@@ -9,21 +9,21 @@ from pkrcomponents.components.players.street_hand_stats.base import StreetHandSt
 @define
 class PreflopPlayerHandStats(StreetHandStatsBase):
     flag_vpip = preflop.FLAG_VPIP
-    flag_open_opportunity = preflop.FLAG_PREFLOP_OPEN_OPPORTUNITY
-    flag_open = preflop.FLAG_PREFLOP_OPEN
-    flag_first_raise = preflop.FLAG_PREFLOP_FIRST_RAISE
-    flag_fold = preflop.FLAG_PREFLOP_FOLD
-    flag_limp = preflop.FLAG_PREFLOP_LIMP
-    flag_cold_called = preflop.FLAG_PREFLOP_COLD_CALLED
-    flag_raise_opportunity = preflop.FLAG_PREFLOP_RAISE_OPPORTUNITY
-    flag_raise = preflop.FLAG_PREFLOP_RAISE
-    flag_face_raise = preflop.FLAG_PREFLOP_FACE_RAISE
-    flag_3bet_opportunity = preflop.FLAG_PREFLOP_3BET_OPPORTUNITY
-    flag_3bet = preflop.FLAG_PREFLOP_3BET
-    flag_face_3bet = preflop.FLAG_PREFLOP_FACE_3BET
-    flag_4bet_opportunity = preflop.FLAG_PREFLOP_4BET_OPPORTUNITY
-    flag_4bet = preflop.FLAG_PREFLOP_4BET
-    flag_face_4bet = preflop.FLAG_PREFLOP_FACE_4BET
+    flag_open_opportunity = preflop.FLAG_OPEN_OPPORTUNITY
+    flag_open = preflop.FLAG_OPEN
+    flag_first_raise = preflop.FLAG_FIRST_RAISE
+    flag_fold = preflop.FLAG_FOLD
+    flag_limp = preflop.FLAG_LIMP
+    flag_cold_called = preflop.FLAG_COLD_CALLED
+    flag_raise_opportunity = preflop.FLAG_RAISE_OPPORTUNITY
+    flag_raise = preflop.FLAG_RAISE
+    flag_face_raise = preflop.FLAG_FACE_RAISE
+    flag_3bet_opportunity = preflop.FLAG_3BET_OPPORTUNITY
+    flag_3bet = preflop.FLAG_3BET
+    flag_face_3bet = preflop.FLAG_FACE_3BET
+    flag_4bet_opportunity = preflop.FLAG_4BET_OPPORTUNITY
+    flag_4bet = preflop.FLAG_4BET
+    flag_face_4bet = preflop.FLAG_FACE_4BET
     flag_squeeze_opportunity = preflop.FLAG_SQUEEZE_OPPORTUNITY
     flag_squeeze = preflop.FLAG_SQUEEZE
     flag_face_squeeze = preflop.FLAG_FACE_SQUEEZE
@@ -34,32 +34,32 @@ class PreflopPlayerHandStats(StreetHandStatsBase):
     flag_blind_defense_opportunity = preflop.FLAG_BLIND_DEFENSE_OPPORTUNITY
     flag_blind_defense = preflop.FLAG_BLIND_DEFENSE
     flag_open_shove = preflop.FLAG_OPEN_SHOVE
-    flag_voluntary_all_in = preflop.FLAG_VOLUNTARY_ALL_IN_PREFLOP
+    flag_voluntary_all_in = preflop.FLAG_VOLUNTARY_ALL_IN
     # 2. Counts
-    count_player_raises = preflop.COUNT_PREFLOP_PLAYER_RAISES
-    count_player_calls = preflop.COUNT_PREFLOP_PLAYER_CALLS
+    count_player_raises = preflop.COUNT_PLAYER_RAISES
+    count_player_calls = preflop.COUNT_PLAYER_CALLS
     count_faced_limps = preflop.COUNT_FACED_LIMPS
     # 3. Sequences
     actions_sequence = preflop.ACTIONS_SEQUENCE
     # 4. Amounts
-    amount_effective_stack = preflop.AMOUNT_PREFLOP_EFFECTIVE_STACK
-    amount_to_call_facing_bet = preflop.AMOUNT_TO_CALL_FACING_PREFLOP_BB
-    amount_to_call_facing_2bet = preflop.AMOUNT_TO_CALL_FACING_PREFLOP_2BET
-    amount_to_call_facing_3bet = preflop.AMOUNT_TO_CALL_FACING_PREFLOP_3BET
-    amount_to_call_facing_4bet = preflop.AMOUNT_TO_CALL_FACING_PREFLOP_4BET
-    amount_first_raise_made = preflop.AMOUNT_FIRST_RAISE_MADE_PREFLOP
-    amount_second_raise_made = preflop.AMOUNT_SECOND_RAISE_MADE_PREFLOP
-    ratio_to_call_facing_bet = preflop.RATIO_TO_CALL_FACING_PREFLOP_BB
-    ratio_to_call_facing_2bet = preflop.RATIO_TO_CALL_FACING_PREFLOP_2BET
-    ratio_to_call_facing_3bet = preflop.RATIO_TO_CALL_FACING_PREFLOP_3BET
-    ratio_to_call_facing_4bet = preflop.RATIO_TO_CALL_FACING_PREFLOP_4BET
-    ratio_first_raise_made = preflop.RATIO_FIRST_RAISE_MADE_PREFLOP
-    ratio_second_raise_made = preflop.RATIO_SECOND_RAISE_MADE_PREFLOP
-    total_bet_amount = preflop.TOTAL_PREFLOP_BET_AMOUNT
+    amount_effective_stack = preflop.AMOUNT_EFFECTIVE_STACK
+    amount_to_call_facing_bet = preflop.AMOUNT_TO_CALL_FACING_BB
+    amount_to_call_facing_2bet = preflop.AMOUNT_TO_CALL_FACING_2BET
+    amount_to_call_facing_3bet = preflop.AMOUNT_TO_CALL_FACING_3BET
+    amount_to_call_facing_4bet = preflop.AMOUNT_TO_CALL_FACING_4BET
+    amount_first_raise_made = preflop.AMOUNT_FIRST_RAISE_MADE
+    amount_second_raise_made = preflop.AMOUNT_SECOND_RAISE_MADE
+    ratio_to_call_facing_bet = preflop.RATIO_TO_CALL_FACING_BB
+    ratio_to_call_facing_2bet = preflop.RATIO_TO_CALL_FACING_2BET
+    ratio_to_call_facing_3bet = preflop.RATIO_TO_CALL_FACING_3BET
+    ratio_to_call_facing_4bet = preflop.RATIO_TO_CALL_FACING_4BET
+    ratio_first_raise_made = preflop.RATIO_FIRST_RAISE_MADE
+    ratio_second_raise_made = preflop.RATIO_SECOND_RAISE_MADE
+    total_bet_amount = preflop.TOTAL_BET_AMOUNT
     # 5. Moves
-    move_facing_2bet = preflop.MOVE_FACING_PREFLOP_2BET
-    move_facing_3bet = preflop.MOVE_FACING_PREFLOP_3BET
-    move_facing_4bet = preflop.MOVE_FACING_PREFLOP_4BET
+    move_facing_2bet = preflop.MOVE_FACING_2BET
+    move_facing_3bet = preflop.MOVE_FACING_3BET
+    move_facing_4bet = preflop.MOVE_FACING_4BET
     move_facing_squeeze = preflop.MOVE_FACING_SQUEEZE
     move_facing_steal_attempt = preflop.MOVE_FACING_STEAL_ATTEMPT
 

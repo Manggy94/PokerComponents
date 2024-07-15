@@ -10,50 +10,50 @@ from pkrcomponents.components.actions.actions_sequence import ActionsSequence
 FLAG_VPIP = field(
     default=False, validator=instance_of(bool),
     metadata={'description': 'Whether the player voluntarily put money in the pot', 'type': 'bool'})
-FLAG_PREFLOP_OPEN_OPPORTUNITY = field(
+FLAG_OPEN_OPPORTUNITY = field(
     default=False, validator=instance_of(bool),
     metadata={'description': 'Whether the player had the opportunity to open ', 'type': 'bool'})
-FLAG_PREFLOP_OPEN = field(
+FLAG_OPEN = field(
     default=False, validator=instance_of(bool),
     metadata={'description': 'Whether the player opened ', 'type': 'bool'})
-FLAG_PREFLOP_FIRST_RAISE = field(
+FLAG_FIRST_RAISE = field(
     default=False, validator=instance_of(bool),
     metadata={'description': 'Whether the player made the first raise ', 'type': 'bool'})
-FLAG_PREFLOP_FOLD = field(
+FLAG_FOLD = field(
     default=False, validator=instance_of(bool),
     metadata={
         'description': 'Whether the player folded ', 'type': 'bool'})
-FLAG_PREFLOP_LIMP = field(
+FLAG_LIMP = field(
     default=False, validator=instance_of(bool),
     metadata={'description': 'Whether the player limped ', 'type': 'bool'})
-FLAG_PREFLOP_COLD_CALLED = field(
+FLAG_COLD_CALLED = field(
     default=False, validator=instance_of(bool),
     metadata={'description': 'Whether the player cold called ', 'type': 'bool'})
-FLAG_PREFLOP_RAISE = field(
+FLAG_RAISE = field(
     default=False, validator=instance_of(bool),
     metadata={'description': 'Whether the player raised ', 'type': 'bool'})
-FLAG_PREFLOP_RAISE_OPPORTUNITY = field(
+FLAG_RAISE_OPPORTUNITY = field(
     default=False, validator=instance_of(bool),
     metadata={'description': 'Whether the player had the opportunity to raise ', 'type': 'bool'})
-FLAG_PREFLOP_FACE_RAISE = field(
+FLAG_FACE_RAISE = field(
     default=False, validator=instance_of(bool),
     metadata={'description': 'Whether the player faced a raise ', 'type': 'bool'})
-FLAG_PREFLOP_3BET_OPPORTUNITY = field(
+FLAG_3BET_OPPORTUNITY = field(
     default=False, validator=instance_of(bool),
     metadata={'description': 'Whether the player had the opportunity to 3bet ', 'type': 'bool'})
-FLAG_PREFLOP_3BET = field(
+FLAG_3BET = field(
     default=False, validator=instance_of(bool),
     metadata={'description': 'Whether the player 3bet ', 'type': 'bool'})
-FLAG_PREFLOP_FACE_3BET = field(
+FLAG_FACE_3BET = field(
     default=False, validator=instance_of(bool),
     metadata={'description': 'Whether the player faced a 3bet ', 'type': 'bool'})
-FLAG_PREFLOP_4BET_OPPORTUNITY = field(
+FLAG_4BET_OPPORTUNITY = field(
     default=False, validator=instance_of(bool),
     metadata={'description': 'Whether the player had the opportunity to 4+bet ', 'type': 'bool'})
-FLAG_PREFLOP_4BET = field(
+FLAG_4BET = field(
     default=False, validator=instance_of(bool),
     metadata={'description': 'Whether the player 4+bet ', 'type': 'bool'})
-FLAG_PREFLOP_FACE_4BET = field(
+FLAG_FACE_4BET = field(
     default=False, validator=instance_of(bool),
     metadata={'description': 'Whether the player faced a 4+bet ', 'type': 'bool'})
 FLAG_SQUEEZE_OPPORTUNITY = field(
@@ -86,14 +86,14 @@ FLAG_BLIND_DEFENSE = field(
 FLAG_OPEN_SHOVE = field(
     default=False, validator=instance_of(bool),
     metadata={'description': 'Whether the player open shoved ', 'type': 'bool'})
-FLAG_VOLUNTARY_ALL_IN_PREFLOP = field(
+FLAG_VOLUNTARY_ALL_IN = field(
     default=False, validator=instance_of(bool),
     metadata={'description': 'Whether the player voluntarily went all in ', 'type': 'bool'})
 # 2. Counts
-COUNT_PREFLOP_PLAYER_RAISES = field(
+COUNT_PLAYER_RAISES = field(
     default=0, validator=instance_of(int),
     metadata={'description': 'The number of raises the player made ', 'type': 'tiny_int+'})
-COUNT_PREFLOP_PLAYER_CALLS = field(
+COUNT_PLAYER_CALLS = field(
     default=0, validator=instance_of(int),
     metadata={'description': 'The number of calls the player made ', 'type': 'tiny_int+'})
 COUNT_FACED_LIMPS = field(
@@ -104,56 +104,56 @@ ACTIONS_SEQUENCE = field(
     default=None, validator=optional(instance_of(ActionsSequence)),
     metadata={'description': 'The sequence of actions the player made ', 'type': 'ActionsSequence'})
 # 4. Amounts
-AMOUNT_PREFLOP_EFFECTIVE_STACK = field(
+AMOUNT_EFFECTIVE_STACK = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={'description': 'The effective stack the player had ', 'type': 'decimal_15_2'})
-AMOUNT_TO_CALL_FACING_PREFLOP_BB = field(
+AMOUNT_TO_CALL_FACING_BB = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={'description': 'The amount the player had to call facing the  big blind', 'type': 'decimal_15_2'})
-AMOUNT_TO_CALL_FACING_PREFLOP_2BET = field(
+AMOUNT_TO_CALL_FACING_2BET = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={'description': 'The amount the player had to call facing the  2bet', 'type': 'decimal_15_2'})
-AMOUNT_TO_CALL_FACING_PREFLOP_3BET = field(
+AMOUNT_TO_CALL_FACING_3BET = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={'description': 'The amount the player had to call facing the  3bet', 'type': 'decimal_15_2'})
-AMOUNT_TO_CALL_FACING_PREFLOP_4BET = field(
+AMOUNT_TO_CALL_FACING_4BET = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={'description': 'The amount the player had to call facing the  4bet', 'type': 'decimal_15_2'})
-AMOUNT_FIRST_RAISE_MADE_PREFLOP = field(
+AMOUNT_FIRST_RAISE_MADE = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={'description': 'The amount the player used on his first raise ', 'type': 'decimal_15_2'})
-AMOUNT_SECOND_RAISE_MADE_PREFLOP = field(
+AMOUNT_SECOND_RAISE_MADE = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={'description': 'The amount the player used on his second raise ', 'type': 'decimal_15_2'})
-RATIO_TO_CALL_FACING_PREFLOP_BB = field(
+RATIO_TO_CALL_FACING_BB = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={'description': 'The ratio of the pot the player had to call facing the bb', 'type': 'decimal_10_5'})
-RATIO_TO_CALL_FACING_PREFLOP_2BET = field(
+RATIO_TO_CALL_FACING_2BET = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={'description': 'The ratio of the pot the player had to call facing the  2bet', 'type': 'decimal_10_5'})
-RATIO_TO_CALL_FACING_PREFLOP_3BET = field(
+RATIO_TO_CALL_FACING_3BET = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={'description': 'The ratio of the pot the player had to call facing the  3bet', 'type': 'decimal_10_5'})
-RATIO_TO_CALL_FACING_PREFLOP_4BET = field(
+RATIO_TO_CALL_FACING_4BET = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={'description': 'The ratio of the pot the player had to call facing the  4bet', 'type': 'decimal_10_5'})
-RATIO_FIRST_RAISE_MADE_PREFLOP = field(
+RATIO_FIRST_RAISE_MADE = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={'description': 'The ratio of the pot the player used on his first raise ', 'type': 'decimal_10_5'})
-RATIO_SECOND_RAISE_MADE_PREFLOP = field(
+RATIO_SECOND_RAISE_MADE = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={'description': 'The ratio of the pot the player used on his second raise ', 'type': 'decimal_10_5'})
-TOTAL_PREFLOP_BET_AMOUNT = field(
+TOTAL_BET_AMOUNT = field(
     default=0, validator=instance_of(float), converter=float,
     metadata={'description': 'The total amount the player bet ', 'type': 'decimal_15_2'})
 # 5. Moves
-MOVE_FACING_PREFLOP_2BET = field(
+MOVE_FACING_2BET = field(
     default=None, validator=optional(instance_of(ActionMove)),
     metadata={'description': 'The move the player did when facing a 2bet', 'type': 'ActionMove'})
-MOVE_FACING_PREFLOP_3BET = field(
+MOVE_FACING_3BET = field(
     default=None, validator=optional(instance_of(ActionMove)),
     metadata={'description': 'The move the player did when facing a 3bet', 'type': 'ActionMove'})
-MOVE_FACING_PREFLOP_4BET = field(
+MOVE_FACING_4BET = field(
     default=None, validator=optional(instance_of(ActionMove)),
     metadata={'description': 'The move the player did when facing a 4bet', 'type': 'ActionMove'})
 MOVE_FACING_SQUEEZE = field(
