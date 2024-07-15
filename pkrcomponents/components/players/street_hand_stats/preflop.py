@@ -49,7 +49,7 @@ class PreflopPlayerHandStats(StreetHandStatsBase):
     amount_to_call_facing_4bet = preflop.AMOUNT_TO_CALL_FACING_4BET
     amount_first_raise_made = preflop.AMOUNT_FIRST_RAISE_MADE
     amount_second_raise_made = preflop.AMOUNT_SECOND_RAISE_MADE
-    ratio_to_call_facing_bet = preflop.RATIO_TO_CALL_FACING_BB
+    ratio_to_call_facing_1bet = preflop.RATIO_TO_CALL_FACING_BB
     ratio_to_call_facing_2bet = preflop.RATIO_TO_CALL_FACING_2BET
     ratio_to_call_facing_3bet = preflop.RATIO_TO_CALL_FACING_3BET
     ratio_to_call_facing_4bet = preflop.RATIO_TO_CALL_FACING_4BET
@@ -139,7 +139,7 @@ class PreflopPlayerHandStats(StreetHandStatsBase):
             self.flag_blind_defense_opportunity = True
         if action.player.is_facing_1bet:
             self.amount_to_call_facing_1bet = action.player.to_call
-            self.ratio_to_call_facing_bet = action.player.to_call / action.table.pot_value
+            self.ratio_to_call_facing_1bet = action.player.to_call / action.table.pot_value
         if action.player.is_facing_2bet:
             self.move_facing_2bet = action.move
             self.amount_to_call_facing_2bet = action.player.to_call

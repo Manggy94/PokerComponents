@@ -22,26 +22,26 @@ flag_face_3bet,False,Whether player faced a 3bet ,bool
 flag_4bet_opportunity,False,Whether player had the opportunity to 4+bet ,bool
 flag_4bet,False,Whether player 4+bet ,bool
 flag_face_4bet,False,Whether player faced a 4+bet ,bool
-count_player_raises,0,The number of raises the player made ,int
-count_player_calls,0,The number of calls the player made ,int
+count_player_raises,0,The number of raises the player made ,tiny_int+
+count_player_calls,0,The number of calls the player made ,tiny_int+
 actions_sequence,,The sequence of actions the player made ,ActionsSequence
-amount_effective_stack,0,The effective stack the player had ,float
-amount_to_call_facing_bet,0,The amount the player had to call facing the street bet,float
-amount_to_call_facing_2bet,0,The amount the player had to call facing the street 2bet,float
-amount_to_call_facing_3bet,0,The amount the player had to call facing the street 3bet,float
-amount_to_call_facing_4bet,0,The amount the player had to call facing the street 4bet,float
-amount_bet_made,0,The amount the player used to bet ,float
-amount_first_raise_made,0,The amount the player used on his first raise ,float
-amount_second_raise_made,0,The amount the player used on his second raise ,float
-ratio_to_call_facing_bet,0,The ratio of the pot the player had to call facing the street bet,float
+amount_effective_stack,0,The effective stack the player had ,decimal_15_2
+amount_to_call_facing_1bet,0,The amount the player had to call facing the street bet,decimal_15_2
+amount_to_call_facing_2bet,0,The amount the player had to call facing the street 2bet,decimal_15_2
+amount_to_call_facing_3bet,0,The amount the player had to call facing the street 3bet,decimal_15_2
+amount_to_call_facing_4bet,0,The amount the player had to call facing the street 4bet,decimal_15_2
+amount_bet_made,0,The amount the player used to bet ,decimal_15_2
+amount_first_raise_made,0,The amount the player used on his first raise ,decimal_15_2
+amount_second_raise_made,0,The amount the player used on his second raise ,decimal_15_2
+ratio_to_call_facing_1bet,0,The ratio of the pot the player had to call facing the street bet,float
 ratio_to_call_facing_2bet,0,The ratio of the pot the player had to call facing the street 2bet,float
 ratio_to_call_facing_3bet,0,The ratio of the pot the player had to call facing the street 3bet,float
 ratio_to_call_facing_4bet,0,The ratio of the pot the player had to call facing the street 4bet,float
 ratio_bet_made,0,The ratio of the pot the player used to bet ,float
 ratio_first_raise_made,0,The ratio of the pot the player used on his first raise ,float
 ratio_second_raise_made,0,The ratio of the pot the player used on his second raise ,float
-total_bet_amount,0,The total amount the player bet ,float
-move_facing_bet,,The move the player did when facing the street bet,ActionMove
+total_bet_amount,0,The total amount the player bet ,decimal_15_2
+move_facing_1bet,,The move the player did when facing the street bet,ActionMove
 move_facing_2bet,,The move the player did when facing the street 2bet,ActionMove
 move_facing_3bet,,The move the player did when facing the street 3bet,ActionMove
 move_facing_4bet,,The move the player did when facing the street 4bet,ActionMove

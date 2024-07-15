@@ -42,14 +42,14 @@ class PostflopPlayerHandStats(StreetHandStatsBase):
     actions_sequence = postflop.ACTIONS_SEQUENCE
     # 4. Amounts
     amount_effective_stack = postflop.AMOUNT_EFFECTIVE_STACK
-    amount_to_call_facing_1bet = postflop.AMOUNT_TO_CALL_FACING_BET
+    amount_to_call_facing_1bet = postflop.AMOUNT_TO_CALL_FACING_1BET
     amount_to_call_facing_2bet = postflop.AMOUNT_TO_CALL_FACING_2BET
     amount_to_call_facing_3bet = postflop.AMOUNT_TO_CALL_FACING_3BET
     amount_to_call_facing_4bet = postflop.AMOUNT_TO_CALL_FACING_4BET
     amount_bet_made = postflop.AMOUNT_BET_MADE
     amount_first_raise_made = postflop.AMOUNT_FIRST_RAISE_MADE
     amount_second_raise_made = postflop.AMOUNT_SECOND_RAISE_MADE
-    ratio_to_call_facing_bet = postflop.RATIO_TO_CALL_FACING_BET
+    ratio_to_call_facing_1bet = postflop.RATIO_TO_CALL_FACING_1BET
     ratio_to_call_facing_2bet = postflop.RATIO_TO_CALL_FACING_2BET
     ratio_to_call_facing_3bet = postflop.RATIO_TO_CALL_FACING_3BET
     ratio_to_call_facing_4bet = postflop.RATIO_TO_CALL_FACING_4BET
@@ -58,7 +58,7 @@ class PostflopPlayerHandStats(StreetHandStatsBase):
     ratio_second_raise_made = postflop.RATIO_SECOND_RAISE_MADE
     total_bet_amount = postflop.TOTAL_BET_AMOUNT
     # 5. Moves
-    move_facing_bet = postflop.MOVE_FACING_BET
+    move_facing_1bet = postflop.MOVE_FACING_1BET
     move_facing_2bet = postflop.MOVE_FACING_2BET
     move_facing_3bet = postflop.MOVE_FACING_3BET
     move_facing_4bet = postflop.MOVE_FACING_4BET
@@ -128,8 +128,8 @@ class PostflopPlayerHandStats(StreetHandStatsBase):
             self.flag_face_raise = True
         if action.player.is_facing_1bet:
             self.amount_to_call_facing_1bet = action.player.to_call
-            self.ratio_to_call_facing_bet = action.player.to_call / action.table.pot_value
-            self.move_facing_bet = action.move
+            self.ratio_to_call_facing_1bet = action.player.to_call / action.table.pot_value
+            self.move_facing_1bet = action.move
         if action.player.is_facing_2bet:
             self.amount_to_call_facing_2bet = action.player.to_call
             self.ratio_to_call_facing_2bet = action.player.to_call / action.table.pot_value

@@ -2,10 +2,10 @@ name,default,description,type
 flag_went_to_showdown,False,Whether the player went to showdown,bool
 flag_is_hero,False,Whether the player is the hero,bool
 flag_won_hand,False,Whether the player won the hand,bool
-starting_stack,0,The starting stack of the player at the beginning of the hand,float
-amount_won,0,The amount the player won ,float
-amount_expected_won,0,The amount the player is expected to win after showdown (EV),float
-total_bet_amount,0,The total amount the player bet ,float
+starting_stack,0,The starting stack of the player at the beginning of the hand,decimal_15_2
+amount_won,0,The amount the player won ,decimal_15_2
+amount_expected_won,0,The amount the player is expected to win after showdown (EV),decimal_15_2
+total_bet_amount,0,The total amount the player bet ,decimal_15_2
 facing_covering_bet_move,,The move the player did when facing a covering bet,ActionMove
 facing_all_in_move,,The move the player did when facing an all-in,ActionMove
 fold_street,,The street the player folded,Street
