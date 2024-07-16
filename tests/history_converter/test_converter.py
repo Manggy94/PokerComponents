@@ -818,5 +818,14 @@ class TestHandHistoryConverter10(unittest.TestCase):
         self.converter.get_data(self.history_path)
 
     def test_convert_history(self):
-        #with self.assertRaises(HandConversionError):
+        self.converter.convert_history(self.history_path)
+
+
+class TestHandHistoryConverter11(unittest.TestCase):
+    def setUp(self):
+        self.history_path = os.path.join(FILES_DIR, 'example11.json')
+        self.converter = HandHistoryConverter()
+        self.converter.get_data(self.history_path)
+
+    def test_convert_history(self):
         self.converter.convert_history(self.history_path)

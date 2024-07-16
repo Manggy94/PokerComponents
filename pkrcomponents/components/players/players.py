@@ -167,7 +167,20 @@ class Players:
         try:
             button_index = self.occupied_seats.index(self.button_seat)
         except ValueError:
-            raise EmptyButtonSeatError
+            print(f"Button seat: {self.button_seat} not in occupied seats")
+            print("Occupied seats: ")
+            print(self.occupied_seats)
+            print("Calculating new button seat")
+            if button_seat < self.occupied_seats[0]:
+                button_index = -1
+            elif button_seat > self.occupied_seats[-1]:
+                button_index = 0
+            else:
+                i = 1
+                while button_seat > self.occupied_seats[i]:
+                    i += 1
+                button_index = i - 1
+            print(f"New button seat: {self.occupied_seats[button_index]}")
         bb_index = button_index
         for _ in range(advance):
             bb_index += 1
