@@ -229,6 +229,7 @@ class HandHistoryConverter:
             bb_seat = self.table.players.get_bb_seat_from_button(button_seat)
             self.table.set_bb_seat(bb_seat)
             self.table.players.distribute_positions()
+            self.table.players.delete_inactive_players()
         except EmptyButtonSeatError:
             print("Error converting players data: Empty button seat")
             raise HandConversionError
@@ -245,8 +246,8 @@ class HandHistoryConverter:
         name = player_dict.get("name")
         init_stack = player_dict.get("init_stack")
         bounty = player_dict.get("bounty")
-        player = TablePlayer(name=name, seat=seat, init_stack=init_stack, bounty=bounty)
-        # self.table.add_player(player)
+        entered_hand = player_dict.get("entered_hand")
+        player = TablePlayer(name=name, seat=seat, init_stack=init_stack, bounty=bounty, entered_hand=entered_hand)
         player.sit(self.table)
 
     def get_hero(self):

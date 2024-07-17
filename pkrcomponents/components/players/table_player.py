@@ -119,6 +119,7 @@ class TablePlayer:
     flag_street_cbet = field(default=False, validator=instance_of(bool))
     flag_street_donk_bet = field(default=False, validator=instance_of(bool))
     went_to_showdown = field(default=False, validator=instance_of(bool))
+    entered_hand = field(default=True, validator=instance_of(bool))
 
     def __repr__(self):
         return (f"TablePlayer(name: '{self.name}', "
@@ -204,6 +205,16 @@ class TablePlayer:
     def can_play(self):
         """Boolean indicating if the player can still play in this street"""
         return not (self.is_all_in or (self.to_call == 0 and self.played) or self.folded)
+
+    @property
+    def is_waiting(self):
+        """Boolean indicating if the player is waiting his turn to play"""
+        return self.can_play and not self.is_ready_for_next_street
+
+    @property
+    def is_ready_for_next_street(self):
+        """Boolean indicating if the player is ready for the next street"""
+        return not self.can_play and self.to_call == 0 and self.played
 
     @property
     def in_game(self):
@@ -445,7 +456,7 @@ class TablePlayer:
     def can_donk_bet(self) -> bool:
         """Boolean indicating if player can donk bet"""
         return not self.has_initiative and self.can_open and any([player.has_initiative
-                                                                  for player in self.table.players_waiting])
+                                                                  for player in self.table.players_able_to_play])
 
     @property
     def can_raise(self) -> bool:

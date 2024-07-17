@@ -428,37 +428,43 @@
             "seat": 1,
             "name": "ezeckk19",
             "init_stack": 2880.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": false
         },
         "2": {
             "seat": 2,
             "name": "Deeddoo",
             "init_stack": 2500.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "3": {
             "seat": 3,
             "name": "ptibud34",
             "init_stack": 2990.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "4": {
             "seat": 4,
             "name": "manggy94",
             "init_stack": 6492.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "5": {
             "seat": 5,
             "name": "toubilou",
             "init_stack": 3000.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "6": {
             "seat": 6,
             "name": "Nikita111",
             "init_stack": 880.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": false
         }
     },
     "hero_hand": {

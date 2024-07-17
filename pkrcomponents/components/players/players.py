@@ -125,6 +125,12 @@ class Players:
             pl = self.seat_dict[seat]
             pl.position = pos
 
+    def delete_inactive_players(self):
+        """Deletes all players with 0 stack"""
+        for player in self.pl_list:
+            if not player.entered_hand:
+                self.remove_player(player)
+
     @property
     def postflop_ordered_seats(self):
         """Returns the list of the indexes of players on the table, with postflop playing order"""

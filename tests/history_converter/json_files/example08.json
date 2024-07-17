@@ -14,9 +14,9 @@
         "bb": 120.0
     },
     "tournament_info": {
-        "tournament_name": null,
-        "tournament_id": null,
-        "table_number": null,
+        "tournament_name": "Qualif. Ticket 5Z",
+        "tournament_id": "128223395",
+        "table_number": "000",
         "prize_pool": 81.0,
         "registered_players": 90,
         "speed": "normal",
@@ -428,55 +428,64 @@
             "seat": 1,
             "name": "carlitouam",
             "init_stack": 3135.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "2": {
             "seat": 2,
             "name": "manggy94",
             "init_stack": 3000.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "3": {
             "seat": 3,
             "name": "LeCavSeRebif",
             "init_stack": 2670.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "4": {
             "seat": 4,
             "name": "ashalama",
             "init_stack": 5297.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "5": {
             "seat": 5,
             "name": "legrandtote",
             "init_stack": 2810.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "6": {
             "seat": 6,
             "name": "SHOVE&TILT",
             "init_stack": 1633.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "7": {
             "seat": 7,
             "name": "Ussidio",
             "init_stack": 1848.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "8": {
             "seat": 8,
             "name": "CASUAL_17",
             "init_stack": 6140.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "9": {
             "seat": 9,
             "name": "InUrAss",
             "init_stack": 2840.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         }
     },
     "hero_hand": {

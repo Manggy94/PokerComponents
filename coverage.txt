@@ -29,18 +29,18 @@ pkrcomponents/components/players/datafields/general.py              22      1   
 pkrcomponents/components/players/datafields/postflop.py             53      0   100%
 pkrcomponents/components/players/datafields/preflop.py              55      0   100%
 pkrcomponents/components/players/player_hand_stats.py               20      1    95%
-pkrcomponents/components/players/players.py                        145      7    95%
+pkrcomponents/components/players/players.py                        149     10    93%
 pkrcomponents/components/players/position.py                        62      0   100%
 pkrcomponents/components/players/positions_map.py                   20      0   100%
 pkrcomponents/components/players/street_hand_stats/__init__.py       0      0   100%
 pkrcomponents/components/players/street_hand_stats/base.py          21      9    57%
 pkrcomponents/components/players/street_hand_stats/general.py       35      3    91%
-pkrcomponents/components/players/street_hand_stats/postflop.py     146     19    87%
-pkrcomponents/components/players/street_hand_stats/preflop.py      156      6    96%
-pkrcomponents/components/players/table_player.py                   270      3    99%
+pkrcomponents/components/players/street_hand_stats/postflop.py     146     17    88%
+pkrcomponents/components/players/street_hand_stats/preflop.py      156     10    94%
+pkrcomponents/components/players/table_player.py                   277      3    99%
 pkrcomponents/components/tables/__init__.py                          0      0   100%
 pkrcomponents/components/tables/pot.py                              18      0   100%
-pkrcomponents/components/tables/table.py                           318      2    99%
+pkrcomponents/components/tables/table.py                           327      2    99%
 pkrcomponents/components/tournaments/__init__.py                     0      0   100%
 pkrcomponents/components/tournaments/buy_in.py                      14      0   100%
 pkrcomponents/components/tournaments/level.py                       15      0   100%
@@ -60,8 +60,8 @@ pkrcomponents/components/utils/meta/hand_meta.py                    26      0   
 pkrcomponents/components/utils/meta/positions_map_meta.py           10      0   100%
 pkrcomponents/components/utils/validators.py                         7      0   100%
 pkrcomponents/history_converter/__init__.py                          0      0   100%
-pkrcomponents/history_converter/converter.py                       210     17    92%
+pkrcomponents/history_converter/converter.py                       212     29    86%
 pkrcomponents/history_converter/utils/__init__.py                    0      0   100%
-pkrcomponents/history_converter/utils/exceptions.py                  4      0   100%
+pkrcomponents/history_converter/utils/exceptions.py                  4      2    50%
 ------------------------------------------------------------------------------------
-TOTAL                                                             2862     82    97%
+TOTAL                                                             2884    101    96%

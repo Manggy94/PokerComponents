@@ -428,55 +428,64 @@
             "seat": 1,
             "name": "manggy94",
             "init_stack": 7270.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "2": {
             "seat": 2,
             "name": "NAS11.43",
             "init_stack": 14590.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "3": {
             "seat": 3,
             "name": "philblues",
             "init_stack": 8040.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "4": {
             "seat": 4,
             "name": "Dyeounnet",
             "init_stack": 3010.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "5": {
             "seat": 5,
             "name": "Yanismix",
             "init_stack": 3420.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "6": {
             "seat": 6,
             "name": "kevinmessi02",
             "init_stack": 2790.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "7": {
             "seat": 7,
             "name": "ChaMr-ixe",
             "init_stack": 2740.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "8": {
             "seat": 8,
             "name": "THESEE",
             "init_stack": 11280.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         },
         "9": {
             "seat": 9,
             "name": "frankilolo",
             "init_stack": 2745.0,
-            "bounty": 0.0
+            "bounty": 0.0,
+            "entered_hand": true
         }
     },
     "hero_hand": {
