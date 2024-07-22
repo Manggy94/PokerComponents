@@ -13,7 +13,7 @@ from pkrcomponents.components.tournaments.tournament import Tournament
 from pkrcomponents.components.utils.exceptions import (ShowdownNotReachedError, CannotParseWinnersError,
                                                        NotSufficientBetError, NotSufficientRaiseError,
                                                        EmptyButtonSeatError)
-
+from pkrcomponents.history_converter.data_loader import LocalDataLoader, S3DataLoader
 from pkrcomponents.history_converter.utils.exceptions import HandConversionError
 
 
@@ -22,6 +22,7 @@ class HandHistoryConverter:
     Class to convert a hand history into a table object
 
     Attributes:
+        data_loader (DataLoader): Data loader object
         data (dict): Data from the hand history file
         table (Table): Table object to set the data to
 
@@ -57,8 +58,13 @@ class HandHistoryConverter:
 
     data: dict
 
-    def __init__(self):
+    def __init__(self, s3=False):
         self.table = Table()
+        self.data_loader = S3DataLoader() if s3 else LocalDataLoader()
+
+    @property
+    def parsed_histories(self):
+        return self.data_loader.get_files_list()
 
     def get_data(self, file_path: str):
         """
@@ -67,9 +73,7 @@ class HandHistoryConverter:
         Args:
             file_path (str): Path to the hand history file
         """
-        with open(file_path, 'r') as file:
-            data = json.load(file)
-        self.data = data
+        self.data = self.data_loader.get_data(file_path)
 
     def get_max_players(self):
         """Get the max players from the data and set it to the table object"""

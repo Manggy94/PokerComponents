@@ -15,6 +15,8 @@ from pkrcomponents.components.tournaments.level import Level
 from pkrcomponents.components.tournaments.speed import TourSpeed
 
 from pkrcomponents.history_converter.converter import HandHistoryConverter
+from pkrcomponents.history_converter.data_loader import S3DataLoader, LocalDataLoader
+from pkrcomponents.history_converter.directories import BUCKET_NAME
 from pkrcomponents.history_converter.utils.exceptions import HandConversionError
 
 FILES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "json_files")
@@ -833,6 +835,47 @@ class TestHandHistoryConverter12(unittest.TestCase):
         self.history_path = os.path.join(FILES_DIR, 'example12.json')
         self.converter = HandHistoryConverter()
         self.converter.get_data(self.history_path)
+
+    def test_convert_history(self):
+        self.converter.convert_history(self.history_path)
+
+
+class TestS3Loader(unittest.TestCase):
+    def setUp(self):
+        self.loader = S3DataLoader(bucket_name=BUCKET_NAME)
+
+    def test_get_files_list(self):
+
+        files = self.loader.get_files_list()
+        self.assertIsInstance(files, list)
+        self.assertTrue(files)
+
+
+class TestLocalLoader(unittest.TestCase):
+    def setUp(self):
+        self.loader = LocalDataLoader()
+        self.loader.data_dir = os.path.join(self.loader.data_dir, 'histories', 'parsed', '2015')
+
+    def test_get_files_list(self):
+        files = self.loader.get_files_list()
+        self.assertIsInstance(files, list)
+        self.assertTrue(files)
+
+
+class TestLocalConverter(unittest.TestCase):
+    def setUp(self):
+        self.converter = HandHistoryConverter(s3=False)
+        self.converter.data_loader.data_dir = os.path.join(self.converter.data_loader.data_dir, 'histories', 'parsed', '2024', '01')
+        self.history_path = self.converter.parsed_histories[0]
+
+    def test_convert_history(self):
+        self.converter.convert_history(self.history_path)
+
+
+class TestS3Converter(unittest.TestCase):
+    def setUp(self):
+        self.converter = HandHistoryConverter(s3=True)
+        self.history_path = self.converter.parsed_histories[0]
 
     def test_convert_history(self):
         self.converter.convert_history(self.history_path)

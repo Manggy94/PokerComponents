@@ -224,3 +224,11 @@ a
 1tests/history_converter/json_files/example11.json,7\b\7bb34036a27ef7f9a49af20f60504e641d34535c
 a
 1tests/history_converter/json_files/example12.json,b\a\ba440a0400fa4faec3d94be386a208a9c372323f
+_
+/pkrcomponents/history_converter/s3_converter.py,d\b\dbacd40417d894be23960e011ef47df26ac6558b
+^
+.pkrcomponents/history_converter/data_loader.py,d\2\d20740d5f7033827b2d874970d6b208baee93cc2
+4
+.env,3\c\3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
+^
+.pkrcomponents/history_converter/directories.py,8\9\8942db4abd22c692eb5d004d87e62b99e2ff6ce5
