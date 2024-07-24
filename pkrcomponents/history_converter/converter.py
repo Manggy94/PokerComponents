@@ -15,6 +15,7 @@ from pkrcomponents.components.utils.exceptions import (ShowdownNotReachedError, 
                                                        EmptyButtonSeatError)
 from pkrcomponents.history_converter.data_loader import LocalDataLoader, S3DataLoader
 from pkrcomponents.history_converter.utils.exceptions import HandConversionError
+from pkrcomponents.history_converter.directories import BUCKET_NAME, LOCAL_DATA_DIR
 
 
 class HandHistoryConverter:
@@ -58,9 +59,9 @@ class HandHistoryConverter:
 
     data: dict
 
-    def __init__(self, s3=False):
+    def __init__(self, s3: bool = False, data_dir: str = LOCAL_DATA_DIR, bucket_name: str = BUCKET_NAME):
         self.table = Table()
-        self.data_loader = S3DataLoader() if s3 else LocalDataLoader()
+        self.data_loader = S3DataLoader(bucket_name=bucket_name) if s3 else LocalDataLoader(data_dir=data_dir)
 
     @property
     def parsed_histories(self):
