@@ -61,9 +61,9 @@ pkrcomponents/components/utils/meta/positions_map_meta.py           10      0   
 pkrcomponents/components/utils/validators.py                         7      0   100%
 pkrcomponents/history_converter/__init__.py                          0      0   100%
 pkrcomponents/history_converter/converter.py                       216     29    87%
-pkrcomponents/history_converter/data_loader.py                      32      0   100%
+pkrcomponents/history_converter/data_loader.py                      61     21    66%
 pkrcomponents/history_converter/directories.py                       5      0   100%
 pkrcomponents/history_converter/utils/__init__.py                    0      0   100%
 pkrcomponents/history_converter/utils/exceptions.py                  4      2    50%
 ------------------------------------------------------------------------------------
-TOTAL                                                             2925    101    97%
+TOTAL                                                             2954    122    96%
