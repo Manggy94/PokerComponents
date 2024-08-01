@@ -48,7 +48,7 @@ nav:
       - Utils:
         - Common: components/utils/common.md
         - Constants: components/utils/constants.md
-        - Converters: components/utils/converters.md
+        - Converters: components/utils/history_converter.md
         - Exceptions: components/utils/exceptions.md
         - Validators: components/utils/validators.md
 

@@ -13,22 +13,30 @@ from pkrcomponents.components.tables.table import Table
 from pkrcomponents.components.tournaments.buy_in import BuyIn
 from pkrcomponents.components.tournaments.level import Level
 from pkrcomponents.components.tournaments.speed import TourSpeed
+from pkrcomponents.converters.history_converter.local import LocalHandHistoryConverter
 
-from pkrcomponents.history_converter.converter import HandHistoryConverter
-from pkrcomponents.history_converter.data_loader import S3DataLoader, LocalDataLoader
-from pkrcomponents.history_converter.directories import BUCKET_NAME
-from pkrcomponents.history_converter.utils.exceptions import HandConversionError
+# from pkrcomponents.converters.converter import LocalHandHistoryConverter
+# from pkrcomponents.converters.data_loader import S3DataLoader, LocalDataLoader
+from pkrcomponents.converters.settings import BUCKET_NAME, LOCAL_DATA_DIR, TEST_DATA_DIR
+from pkrcomponents.converters.utils.exceptions import HandConversionError
 
 FILES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "json_files")
 
+class TestS3Converter(unittest.TestCase):
+    def setUp(self):
+        self.converter = LocalHandHistoryConverter(data_dir=TEST_DATA_DIR)
+        self.history_path = self.converter.list_parsed_histories_keys()[0]
 
-class TestHandHistoryConverter(unittest.TestCase):
+    def test_convert_history(self):
+        self.converter.convert_history(self.history_path)
+
+class TestLocalHandHistoryConverter(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example01.json')
-        self.converter = HandHistoryConverter()
-        self.converter.get_data(self.history_path)
+        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
 
-    def test_get_data(self):
+    def test_get_parsed_data(self):
         self.assertIsInstance(self.converter.data, dict)
 
     def test_get_max_players(self):
@@ -581,13 +589,13 @@ class TestHandHistoryConverter(unittest.TestCase):
         self.assertTrue(villain_stats.general.flag_won_hand)
 
 
-class TestHandHistoryConverter2(unittest.TestCase):
+class TestLocalHandHistoryConverter2(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example02.json')
-        self.converter = HandHistoryConverter()
-        self.converter.get_data(self.history_path)
+        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
 
-    def test_get_data(self):
+    def test_get_parsed_data(self):
         self.assertIsInstance(self.converter.data, dict)
 
     def test_get_max_players(self):
@@ -660,13 +668,13 @@ class TestHandHistoryConverter2(unittest.TestCase):
         self.assertIsInstance(table, Table)
 
 
-class TestHandHistoryConverter3(unittest.TestCase):
+class TestLocalHandHistoryConverter3(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example03.json')
-        self.converter = HandHistoryConverter()
-        self.converter.get_data(self.history_path)
+        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
 
-    def test_get_data(self):
+    def test_get_parsed_data(self):
         self.assertIsInstance(self.converter.data, dict)
 
     def test_get_max_players(self):
@@ -746,11 +754,11 @@ class TestHandHistoryConverter3(unittest.TestCase):
         self.assertIsInstance(table, Table)
 
 
-class TestHandHistoryConverter4(unittest.TestCase):
+class TestLocalHandHistoryConverter4(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example04.json')
-        self.converter = HandHistoryConverter()
-        self.converter.get_data(self.history_path)
+        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
 
     def test_convert_history(self):
         table = self.converter.convert_history(self.history_path)
@@ -758,11 +766,11 @@ class TestHandHistoryConverter4(unittest.TestCase):
         self.assertIsInstance(table, Table)
 
 
-class TestHandHistoryConverter5(unittest.TestCase):
+class TestLocalHandHistoryConverter5(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example05.json')
-        self.converter = HandHistoryConverter()
-        self.converter.get_data(self.history_path)
+        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
 
     def test_convert_history(self):
         table = self.converter.convert_history(self.history_path)
@@ -770,112 +778,82 @@ class TestHandHistoryConverter5(unittest.TestCase):
         self.assertIsInstance(table, Table)
 
 
-class TestHandHistoryConverter6(unittest.TestCase):
+class TestLocalHandHistoryConverter6(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example06.json')
-        self.converter = HandHistoryConverter()
-        self.converter.get_data(self.history_path)
+        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
 
     def test_convert_history(self):
         self.converter.convert_history(self.history_path)
 
 
-class TestHandHistoryConverter7(unittest.TestCase):
+class TestLocalHandHistoryConverter7(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example07.json')
-        self.converter = HandHistoryConverter()
-        self.converter.get_data(self.history_path)
+        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
 
     def test_convert_history(self):
         self.converter.convert_history(self.history_path)
 
 
-class TestHandHistoryConverter8(unittest.TestCase):
+class TestLocalHandHistoryConverter8(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example08.json')
-        self.converter = HandHistoryConverter()
-        self.converter.get_data(self.history_path)
+        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
 
     def test_convert_history(self):
         self.converter.convert_history(self.history_path)
 
 
-class TestHandHistoryConverter9(unittest.TestCase):
+class TestLocalHandHistoryConverter9(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example09.json')
-        self.converter = HandHistoryConverter()
-        self.converter.get_data(self.history_path)
+        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
 
     def test_convert_history(self):
         self.converter.convert_history(self.history_path)
 
 
-class TestHandHistoryConverter10(unittest.TestCase):
+class TestLocalHandHistoryConverter10(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example10.json')
-        self.converter = HandHistoryConverter()
-        self.converter.get_data(self.history_path)
+        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
 
     def test_convert_history(self):
         self.converter.convert_history(self.history_path)
 
 
-class TestHandHistoryConverter11(unittest.TestCase):
+class TestLocalHandHistoryConverter11(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example11.json')
-        self.converter = HandHistoryConverter()
-        self.converter.get_data(self.history_path)
+        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
 
     def test_convert_history(self):
         self.converter.convert_history(self.history_path)
 
 
-class TestHandHistoryConverter12(unittest.TestCase):
+class TestLocalHandHistoryConverter12(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example12.json')
-        self.converter = HandHistoryConverter()
-        self.converter.get_data(self.history_path)
+        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
 
     def test_convert_history(self):
         self.converter.convert_history(self.history_path)
-
-
-class TestS3Loader(unittest.TestCase):
-    def setUp(self):
-        self.loader = S3DataLoader(bucket_name=BUCKET_NAME)
-
-    def test_get_files_list(self):
-
-        files = self.loader.get_files_list()
-        self.assertIsInstance(files, list)
-        self.assertTrue(files)
-
-
-class TestLocalLoader(unittest.TestCase):
-    def setUp(self):
-        self.loader = LocalDataLoader()
-        self.loader.data_dir = os.path.join(self.loader.data_dir, 'histories', 'parsed', '2015')
-
-    def test_get_files_list(self):
-        files = self.loader.get_files_list()
-        self.assertIsInstance(files, list)
-        self.assertTrue(files)
 
 
 class TestLocalConverter(unittest.TestCase):
     def setUp(self):
-        self.converter = HandHistoryConverter(s3=False)
-        self.converter.data_loader.data_dir = os.path.join(self.converter.data_loader.data_dir, 'histories', 'parsed', '2024', '01')
-        self.history_path = self.converter.parsed_histories[0]
+        self.converter = LocalHandHistoryConverter(data_dir=TEST_DATA_DIR)
+        self.history_path = self.converter.list_parsed_histories_keys()[0]
 
     def test_convert_history(self):
         self.converter.convert_history(self.history_path)
 
 
-class TestS3Converter(unittest.TestCase):
-    def setUp(self):
-        self.converter = HandHistoryConverter(s3=True)
-        self.history_path = self.converter.parsed_histories[0]
-
-    def test_convert_history(self):
-        self.converter.convert_history(self.history_path)

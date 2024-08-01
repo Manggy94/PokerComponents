@@ -324,10 +324,12 @@ class TablePlayer:
 
     def delete_combo(self):
         """Deletes a player's combo"""
-        if self.has_combo:
+
+        if self.has_table and self.has_combo:
             self.table.deck.replace(self.combo.first)
             self.table.deck.replace(self.combo.second)
-            self.combo = None
+        self.combo = None
+
 
     def update_has_position_stat(self):
         """Update has position stat"""

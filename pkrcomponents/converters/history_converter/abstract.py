@@ -1,80 +1,81 @@
 import json
+
+from abc import ABC, abstractmethod
 from datetime import datetime
-from pkrcomponents.components.actions.action import CallAction, BetAction, RaiseAction, FoldAction, CheckAction
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+from pkrcomponents.components.actions.action import BetAction, CallAction, CheckAction, FoldAction, RaiseAction
 from pkrcomponents.components.actions.action_move import ActionMove
 from pkrcomponents.components.actions.street import Street
 from pkrcomponents.components.cards.combo import Combo
+from pkrcomponents.components.players.position import Position
 from pkrcomponents.components.players.table_player import TablePlayer
 from pkrcomponents.components.tables.table import Table
 from pkrcomponents.components.tournaments.buy_in import BuyIn
 from pkrcomponents.components.tournaments.level import Level
 from pkrcomponents.components.tournaments.speed import TourSpeed
 from pkrcomponents.components.tournaments.tournament import Tournament
-from pkrcomponents.components.utils.exceptions import (ShowdownNotReachedError, CannotParseWinnersError,
-                                                       NotSufficientBetError, NotSufficientRaiseError,
-                                                       EmptyButtonSeatError)
-from pkrcomponents.history_converter.data_loader import LocalDataLoader, S3DataLoader
-from pkrcomponents.history_converter.utils.exceptions import HandConversionError
-from pkrcomponents.history_converter.directories import BUCKET_NAME, LOCAL_DATA_DIR
+from pkrcomponents.components.utils.exceptions import EmptyButtonSeatError, NotSufficientBetError, \
+    NotSufficientRaiseError, ShowdownNotReachedError, CannotParseWinnersError
+from pkrcomponents.converters.utils.exceptions import HandConversionError
 
 
-class HandHistoryConverter:
-    """
-    Class to convert a hand history into a table object
-
-    Attributes:
-        data_loader (DataLoader): Data loader object
-        data (dict): Data from the hand history file
-        table (Table): Table object to set the data to
-
-    Methods:
-        get_data: Get the data from a hand history file
-        get_max_players: Get the max players from the data and set it to the table object
-        get_buy_in: Get the buy in from the data and return a BuyIn object to set the tournament object
-        get_level: Get the level  and blinds from the data and set it to set the tournament object
-        get_tournament_name: Get the tournament name from the data and set it to set the tournament object
-        get_tournament_id: Get the tournament id from the data and set it to the set tournament object
-        get_table_number: Get the table number from the data and set it to the set tournament object
-        get_tournament: Get the tournament data and set it to the set table object
-        get_hand_id: Get the hand id from the data and set it to the set table object
-        get_datetime: Get the datetime from the data and set it to the set table object
-        get_game_type: Get the game type from the data and set it to the set table object
-        get_button_seat: Get the button seat from the data and set it to the set table object
-        get_players: Get the players from the data and set them to the set table object
-        get_player: Get a player from the data and set it to the set table object
-        get_postings: Get the postings from the data and set them to the set table object
-        get_actions: Get the actions from the data and set them to the table object
-        get_street_actions: Get the actions from a street from the data and set them to the table object
-        get_action: Get an action from the data and set it to the table object
-        get_flop: Get the flop cards from the data and set them to the table object
-        get_turn: Get the turn card from the data and set it to the table object
-        get_river: Get the river card from the data and set it to the table object
-        get_showdown: Get the showdown data from the data and set it to the table object
-        get_winners: Get the winners data from the data and set it to the table object
-        advance_street: Advance to the next street
-        convert_history: Convert a hand history file into a table object
-
-
-    """
+class AbstractHandHistoryConverter(ABC):
 
     data: dict
+    table: Table
 
-    def __init__(self, s3: bool = False, data_dir: str = LOCAL_DATA_DIR, bucket_name: str = BUCKET_NAME):
-        self.table = Table()
-        self.data_loader = S3DataLoader(bucket_name=bucket_name) if s3 else LocalDataLoader(data_dir=data_dir)
-
-    @property
-    def parsed_histories(self):
-        return self.data_loader.get_files_list()
-
-    def get_data(self, file_path: str):
+    @abstractmethod
+    def list_parsed_histories_keys(self) -> list:
         """
-        Get the data from a hand history file
+        Lists the keys of the parsed histories
+        Returns:
+            keys (list): The keys of the parsed histories
+        """
+        pass
 
+    @abstractmethod
+    def read_data_text(self, parsed_key: str) -> str:
+        """
+        Reads the data of a parsed history
         Args:
-            file_path (str): Path to the hand history file
+            parsed_key (str): The key of the parsed history
+        Returns:
+            data_text (str): The data text of the parsed history
         """
-        self.data = self.data_loader.get_data(file_path)
+        pass
+
+    def get_parsed_data(self, parsed_key: str):
+        """
+        Gets the data of a parsed history and stores it in the data attribute
+        Args:
+            parsed_key (str): The key of the parsed history
+        """
+        data_text = self.read_data_text(parsed_key)
+        self.data = json.loads(data_text)
+
+    @staticmethod
+    def get_split_key(file_key: str) -> str:
+        """
+        Returns the key of the split history file from the parsed history file key
+        """
+        split_key = file_key.replace("parsed", "split").replace(".json", ".txt")
+        return split_key
+
+    @abstractmethod
+    def send_to_corrections(self, file_key: str):
+        """
+        Moves the file to the corrections directory
+        """
+        pass
+
+    def move_to_correction_dir(self, parsed_key: str):
+        """
+        Moves the parsed history file and the associated split file to the corrections directory
+        """
+        split_key = self.get_split_key(parsed_key)
+        self.send_to_corrections(parsed_key)
+        self.send_to_corrections(split_key)
 
     def get_max_players(self):
         """Get the max players from the data and set it to the table object"""
@@ -267,7 +268,24 @@ class HandHistoryConverter:
         """
         Get the postings from the data and set them to the table object
         """
+        postings_list = self.data.get("postings")
+        print(self.table.players.seat_dict)
+        self.adapt_positions(postings_list)
+        print(self.table.players.seat_dict)
         self.table.start_hand()
+
+    def adapt_positions(self, postings_list: list):
+        """
+        Adapt the positions of the players according to the postings
+        """
+        for posting in postings_list:
+            player = self.table.players[posting.get("name")]
+            if posting.get("blind_type") == "big blind":
+                self.table.players.bb_seat = player.seat
+        self.table.players.delete_inactive_players()
+        self.table.players.distribute_positions()
+
+
 
     def get_actions(self):
         """
@@ -394,18 +412,27 @@ class HandHistoryConverter:
         self.get_hand_id()
         self.get_datetime()
 
-    def convert_history(self, file_path: str) -> Table:
+    def reset_table(self):
+        """
+        Reset the table object
+        """
+        del self.table
+        table = Table()
+        self.table = table
+
+    def convert_history(self, file_key: str) -> Table:
         """
         Convert a hand history file into a table object
 
         Args:
-            file_path (str): Path to the hand history file
+            file_key (str): Path to the hand history file
 
         Returns:
             (Table): Table object
         """
+        print(f"Converting file {file_key}")
         try:
-            self.get_data(file_path)
+            self.get_parsed_data(file_key)
             self.get_table_info()
             self.get_tournament()
             self.get_max_players()
@@ -417,11 +444,25 @@ class HandHistoryConverter:
             self.get_winners()
             return self.table
         except HandConversionError:
-            print(f" Hand Conversion Error for file {file_path}")
+            print(f" Hand Conversion Error for file {file_key}")
+            #self.move_to_correction_dir(file_key)
             raise HandConversionError
         except ValueError:
-            print(f"Error for file {file_path}")
+            print(f"Error for file {file_key}")
             raise ValueError
         except TypeError:
-            print(f"Error for file {file_path}")
+            print(f"Error for file {file_key}")
             raise TypeError
+
+    def convert_histories(self):
+        parsed_keys = self.list_parsed_histories_keys()
+        for parsed_key in parsed_keys:
+            self.convert_history(parsed_key)
+            self.reset_table()
+
+    # def convert_histories(self):
+    #     parsed_keys = self.list_parsed_histories_keys()
+    #     with ThreadPoolExecutor(max_workers=10) as executor:
+    #         futures = [executor.submit(self.convert_history, parsed_key) for parsed_key in parsed_keys]
+    #         for future in as_completed(futures):
+    #             future.result()

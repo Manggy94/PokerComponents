@@ -21,7 +21,11 @@ class Players:
 
     def __getitem__(self, item):
         if isinstance(item, str):
-            return self.name_dict[item]
+            try:
+                return self.name_dict[item]
+            except KeyError:
+                print(self.name_dict.keys())
+                raise ValueError(f"Player {item} is not on the table")
         elif isinstance(item, int):
             return self.seat_dict[item]
         else:
@@ -97,8 +101,11 @@ class Players:
     @property
     def preflop_ordered_seats(self):
         """Returns the list of the indexes of players on the table, with preflop playing order"""
-        cut = self.occupied_seats.index(self.bb_seat) + 1
-        return self.occupied_seats[cut:] + self.occupied_seats[:cut]
+        try:
+            cut = self.occupied_seats.index(self.bb_seat) + 1
+            return self.occupied_seats[cut:] + self.occupied_seats[:cut]
+        except ValueError:
+            raise ValueError
 
     @property
     def positions_mapper(self):

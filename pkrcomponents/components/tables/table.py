@@ -223,6 +223,7 @@ class Table:
             card3 (str, Card): The third card to draw
         """
         if len(self.board) > 0:
+            print(self.board.cards)
             raise ValueError("Board must be empty before we can draw a flop")
         card1 = self.deck.draw(card1)
         card2 = self.deck.draw(card2)
