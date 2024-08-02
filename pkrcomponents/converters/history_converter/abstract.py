@@ -17,7 +17,7 @@ from pkrcomponents.components.tournaments.level import Level
 from pkrcomponents.components.tournaments.speed import TourSpeed
 from pkrcomponents.components.tournaments.tournament import Tournament
 from pkrcomponents.components.utils.exceptions import EmptyButtonSeatError, NotSufficientBetError, \
-    NotSufficientRaiseError, ShowdownNotReachedError, CannotParseWinnersError
+    NotSufficientRaiseError, ShowdownNotReachedError, CannotParseWinnersError, SeatTakenError
 from pkrcomponents.converters.utils.exceptions import HandConversionError
 
 
@@ -223,7 +223,10 @@ class AbstractHandHistoryConverter(ABC):
         bounty = player_dict.get("bounty")
         entered_hand = player_dict.get("entered_hand")
         player = TablePlayer(name=name, seat=seat, init_stack=init_stack, bounty=bounty, entered_hand=entered_hand)
-        player.sit(self.table)
+        try:
+            player.sit(self.table)
+        except SeatTakenError:
+            player.replace(self.table)
 
     def get_hero(self):
         """Get the hero from the data and set it to the table object"""
@@ -417,6 +420,7 @@ class AbstractHandHistoryConverter(ABC):
             (Table): Table object
         """
         print(f"Converting file {file_key}")
+        self.reset_table()
         try:
             self.get_parsed_data(file_key)
             self.get_table_info()
@@ -431,7 +435,6 @@ class AbstractHandHistoryConverter(ABC):
             return self.table
         except HandConversionError:
             print(f" Hand Conversion Error for file {file_key}")
-            #self.move_to_correction_dir(file_key)
             raise HandConversionError
         except ValueError:
             print(f"Error for file {file_key}")

@@ -3,10 +3,10 @@ Name                                                             Stmts   Miss  C
 pkrcomponents/__init__.py                                            0      0   100%
 pkrcomponents/components/__init__.py                                 0      0   100%
 pkrcomponents/components/actions/__init__.py                         0      0   100%
-pkrcomponents/components/actions/action.py                         113      2    98%
+pkrcomponents/components/actions/action.py                         106      2    98%
 pkrcomponents/components/actions/action_move.py                     32      0   100%
 pkrcomponents/components/actions/actions_history.py                 14      0   100%
-pkrcomponents/components/actions/actions_sequence.py                21      2    90%
+pkrcomponents/components/actions/actions_sequence.py                21      3    86%
 pkrcomponents/components/actions/blind_type.py                      11      0   100%
 pkrcomponents/components/actions/posting.py                         31      0   100%
 pkrcomponents/components/actions/street.py                          22      0   100%
@@ -37,10 +37,10 @@ pkrcomponents/components/players/street_hand_stats/base.py          21      9   
 pkrcomponents/components/players/street_hand_stats/general.py       35      3    91%
 pkrcomponents/components/players/street_hand_stats/postflop.py     146     17    88%
 pkrcomponents/components/players/street_hand_stats/preflop.py      156     10    94%
-pkrcomponents/components/players/table_player.py                   277      3    99%
+pkrcomponents/components/players/table_player.py                   284      8    97%
 pkrcomponents/components/tables/__init__.py                          0      0   100%
 pkrcomponents/components/tables/pot.py                              18      0   100%
-pkrcomponents/components/tables/table.py                           339      3    99%
+pkrcomponents/components/tables/table.py                           340      3    99%
 pkrcomponents/components/tournaments/__init__.py                     0      0   100%
 pkrcomponents/components/tournaments/buy_in.py                      14      0   100%
 pkrcomponents/components/tournaments/level.py                       15      0   100%
@@ -52,7 +52,7 @@ pkrcomponents/components/utils/__init__.py                           0      0   
 pkrcomponents/components/utils/common.py                            48      0   100%
 pkrcomponents/components/utils/constants.py                         34      0   100%
 pkrcomponents/components/utils/converters.py                        24      5    79%
-pkrcomponents/components/utils/exceptions.py                        27      4    85%
+pkrcomponents/components/utils/exceptions.py                        39     10    74%
 pkrcomponents/components/utils/meta/__init__.py                      0      0   100%
 pkrcomponents/components/utils/meta/card_meta.py                    12      0   100%
 pkrcomponents/components/utils/meta/combo_meta.py                   11      0   100%
@@ -62,7 +62,7 @@ pkrcomponents/components/utils/meta/positions_map_meta.py           10      0   
 pkrcomponents/components/utils/validators.py                         7      0   100%
 pkrcomponents/converters/__init__.py                                 0      0   100%
 pkrcomponents/converters/history_converter/__init__.py               0      0   100%
-pkrcomponents/converters/history_converter/abstract.py             255     48    81%
+pkrcomponents/converters/history_converter/abstract.py             258     47    82%
 pkrcomponents/converters/history_converter/local.py                 26      5    81%
 pkrcomponents/converters/history_converter/s3.py                    24     24     0%
 pkrcomponents/converters/runs/__init__.py                            0      0   100%
@@ -76,6 +76,6 @@ pkrcomponents/converters/summary_converter/abstract.py              70     14   
 pkrcomponents/converters/summary_converter/local.py                 26      7    73%
 pkrcomponents/converters/summary_converter/s3.py                     0      0   100%
 pkrcomponents/converters/utils/__init__.py                           0      0   100%
-pkrcomponents/converters/utils/exceptions.py                         4      2    50%
+pkrcomponents/converters/utils/exceptions.py                         8      4    50%
 ------------------------------------------------------------------------------------
-TOTAL                                                             3119    183    94%
+TOTAL                                                             3139    196    94%

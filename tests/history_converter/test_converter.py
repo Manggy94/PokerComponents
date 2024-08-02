@@ -13,7 +13,7 @@ from pkrcomponents.components.tables.table import Table
 from pkrcomponents.components.tournaments.buy_in import BuyIn
 from pkrcomponents.components.tournaments.level import Level
 from pkrcomponents.converters.history_converter.local import LocalHandHistoryConverter
-from pkrcomponents.converters.settings import BUCKET_NAME, LOCAL_DATA_DIR, TEST_DATA_DIR
+from pkrcomponents.converters.settings import BUCKET_NAME, DATA_DIR, TEST_DATA_DIR
 
 FILES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "json_files")
 
@@ -29,7 +29,7 @@ class TestS3Converter(unittest.TestCase):
 class TestLocalHandHistoryConverter(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example01.json')
-        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
         self.converter.get_parsed_data(self.history_path)
 
     def test_get_parsed_data(self):
@@ -579,7 +579,7 @@ class TestLocalHandHistoryConverter(unittest.TestCase):
 class TestLocalHandHistoryConverter2(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example02.json')
-        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
         self.converter.get_parsed_data(self.history_path)
 
     def test_get_parsed_data(self):
@@ -654,7 +654,7 @@ class TestLocalHandHistoryConverter2(unittest.TestCase):
 class TestLocalHandHistoryConverter3(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example03.json')
-        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
         self.converter.get_parsed_data(self.history_path)
 
     def test_get_parsed_data(self):
@@ -739,7 +739,7 @@ class TestLocalHandHistoryConverter3(unittest.TestCase):
 class TestLocalHandHistoryConverter4(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example04.json')
-        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
         self.converter.get_parsed_data(self.history_path)
 
     def test_convert_history(self):
@@ -751,7 +751,7 @@ class TestLocalHandHistoryConverter4(unittest.TestCase):
 class TestLocalHandHistoryConverter5(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example05.json')
-        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
         self.converter.get_parsed_data(self.history_path)
 
     def test_convert_history(self):
@@ -763,7 +763,7 @@ class TestLocalHandHistoryConverter5(unittest.TestCase):
 class TestLocalHandHistoryConverter6(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example06.json')
-        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
         self.converter.get_parsed_data(self.history_path)
 
     def test_convert_history(self):
@@ -773,7 +773,7 @@ class TestLocalHandHistoryConverter6(unittest.TestCase):
 class TestLocalHandHistoryConverter7(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example07.json')
-        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
         self.converter.get_parsed_data(self.history_path)
 
     def test_convert_history(self):
@@ -783,7 +783,7 @@ class TestLocalHandHistoryConverter7(unittest.TestCase):
 class TestLocalHandHistoryConverter8(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example08.json')
-        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
         self.converter.get_parsed_data(self.history_path)
 
     def test_convert_history(self):
@@ -793,7 +793,7 @@ class TestLocalHandHistoryConverter8(unittest.TestCase):
 class TestLocalHandHistoryConverter9(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example09.json')
-        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
         self.converter.get_parsed_data(self.history_path)
 
     def test_convert_history(self):
@@ -803,7 +803,7 @@ class TestLocalHandHistoryConverter9(unittest.TestCase):
 class TestLocalHandHistoryConverter10(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example10.json')
-        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
         self.converter.get_parsed_data(self.history_path)
 
     def test_convert_history(self):
@@ -813,7 +813,7 @@ class TestLocalHandHistoryConverter10(unittest.TestCase):
 class TestLocalHandHistoryConverter11(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example11.json')
-        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
         self.converter.get_parsed_data(self.history_path)
 
     def test_convert_history(self):
@@ -823,7 +823,7 @@ class TestLocalHandHistoryConverter11(unittest.TestCase):
 class TestLocalHandHistoryConverter12(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example12.json')
-        self.converter = LocalHandHistoryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
         self.converter.get_parsed_data(self.history_path)
 
     def test_convert_history(self):

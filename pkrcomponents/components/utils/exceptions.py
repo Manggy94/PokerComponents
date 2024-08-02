@@ -56,3 +56,21 @@ class EmptyButtonSeatError(Exception):
     def __init__(self, message="The button seat is not a valid seat"):
         self.message = message
         super().__init__(self.message)
+
+
+class SeatTakenError(Exception):
+    def __init__(self):
+        self.message = "Seat already taken"
+        super().__init__(self.message)
+
+
+class FullTableError(Exception):
+    def __init__(self):
+        self.message = "Table is full"
+        super().__init__(self.message)
+
+
+class BoardNotEmptyError(Exception):
+    def __init__(self):
+        self.message = "Board is not empty"
+        super().__init__(self.message)

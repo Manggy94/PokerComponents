@@ -5,7 +5,7 @@ from datetime import datetime
 from pkrcomponents.components.tournaments.buy_in import BuyIn
 from pkrcomponents.components.tournaments.level import Level
 from pkrcomponents.components.tournaments.speed import TourSpeed
-from pkrcomponents.converters.settings import BUCKET_NAME, LOCAL_DATA_DIR, TEST_DATA_DIR
+from pkrcomponents.converters.settings import BUCKET_NAME, DATA_DIR, TEST_DATA_DIR
 from pkrcomponents.converters.summary_converter.local import LocalSummaryConverter
 
 FILES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "json_files")
@@ -14,7 +14,7 @@ FILES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "json_files
 class TestLocalSummaryConverter(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example01.json')
-        self.converter = LocalSummaryConverter(data_dir=LOCAL_DATA_DIR)
+        self.converter = LocalSummaryConverter(data_dir=DATA_DIR)
         self.converter.get_parsed_data(self.history_path)
 
     def test_get_tournament_name(self):

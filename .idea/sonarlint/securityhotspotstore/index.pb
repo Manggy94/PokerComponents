@@ -266,3 +266,9 @@ h
 8pkrcomponents/components/tournaments/levels_structure.py,1\8\18c106e4bf85f7ede555c8a3bcb501162c1c8351
 ^
 .pkrcomponents/components/actions/blind_type.py,1\b\1b3ed3ceafbe7c87e529315888cfde4c67957ad3
+C
+tests/speed_test.py,3\0\3043a89f0dd71f4d44718da62ae9ea45311810d9
+T
+$pkrcomponents/converters/settings.py,7\b\7b3009fedad1445300cc254ac297687dc863fa4d
+\
+,pkrcomponents/converters/utils/exceptions.py,9\c\9cbd7897545e174cbe3573cf33339930443185a2

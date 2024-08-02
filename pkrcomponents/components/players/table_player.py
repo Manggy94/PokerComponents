@@ -8,7 +8,7 @@ from pkrcomponents.components.players.player_hand_stats import PlayerHandStats
 from pkrcomponents.components.players.position import Position
 from pkrcomponents.components.tables.table import Table
 from pkrcomponents.components.utils.converters import convert_to_position
-from pkrcomponents.components.utils.exceptions import ShowdownNotReachedError
+from pkrcomponents.components.utils.exceptions import ShowdownNotReachedError, FullTableError, SeatTakenError
 
 
 @define(repr=False)
@@ -275,7 +275,11 @@ class TablePlayer:
         Args:
             table (Table): The table to sit the player on
         """
-        if table.players.len < table.max_players and table.players.seat_dict.get(self.seat) is None:
+        if table.players.seat_dict.get(self.seat) is not None:
+            raise SeatTakenError
+        elif table.players.len > table.max_players:
+            raise FullTableError
+        else:
             self.table = table
             table.players.add_player(self)
             self.reset_street_status()
@@ -285,6 +289,12 @@ class TablePlayer:
         self.reset_street_status()
         self.table.players.remove_player(self)
         delattr(self, "table")
+
+    def replace(self, table: Table):
+        """Replace a player on the table"""
+        player_to_replace = table.players.seat_dict.get(self.seat)
+        player_to_replace.sit_out()
+        self.sit(table)
 
     def reset_init_stack(self):
         """Reset player's initial stack"""
