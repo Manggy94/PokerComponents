@@ -1,5 +1,5 @@
 from attrs import define, field, Factory
-from attrs.validators import instance_of, gt, optional
+from attrs.validators import instance_of, gt, ge, optional
 from datetime import datetime
 from pkrcomponents.components.utils.constants import MoneyType
 from pkrcomponents.components.tournaments.level import Level
@@ -29,16 +29,19 @@ class Tournament:
     """
     id = field(default='0000', validator=[instance_of(str)])
     name = field(default='Kill The Fish', validator=[instance_of(str)])
-    buy_in = field(default=Factory(BuyIn), validator=[instance_of(BuyIn)])
+    buy_in = field(default=Factory(lambda: BuyIn()), validator=[instance_of(BuyIn)])
     is_ko = field(default=True, validator=[instance_of(bool)])
     money_type = field(default=MoneyType.REAL, validator=[instance_of(MoneyType)], converter=MoneyType)
-    level = field(default=Factory(Level), validator=[instance_of(Level)])
+    level = field(default=Factory(Level), validator=optional(instance_of(Level)))
     payouts = field(default=Factory(Payouts), validator=[instance_of(Payouts)])
     total_players = field(default=2, validator=[gt(1), instance_of(int)])
     players_remaining = field(default=2, validator=validate_players_remaining)
     speed = field(default=TourSpeed.REGULAR, validator=optional(instance_of(TourSpeed)), converter=convert_to_speed)
     start_date = field(default=datetime.now(), validator=[instance_of(datetime)])
     starting_stack = field(default=20000.0, validator=[gt(0), instance_of(float)], converter=float)
+    amount_won = field(default=0.0, validator=[ge(0), instance_of(float)], converter=float)
+    nb_entries = field(default=1, validator=[ge(1), instance_of(int)])
+    final_position = field(default=None, validator=optional([instance_of(int), ge(1)]))
 
     def __str__(self):
         return f"Name: {self.name}\nId: {self.id}\nBuy-in: {self.buy_in}\nMoney: {self.money_type}"
@@ -71,11 +74,18 @@ class Tournament:
     def players_to_next_tier(self):
         return self.players_remaining - self.payouts.closest_payout(self.players_remaining).tier
 
+    @property
+    def has_level(self) -> bool:
+        return self.level is not None
+
     def estimated_players_remaining(self, average_stack: float) -> int:
         """
         Estimate the number of players remaining in the tournament based on the average stack of the remaining players
         """
         return min(round(self.total_chips / average_stack), self.total_players)
+
+    def set_level(self, level: Level):
+        self.level = level
 
     def to_json(self):
         return {

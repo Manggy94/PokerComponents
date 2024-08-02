@@ -185,7 +185,6 @@ class RaiseAction(Action):
     This class represents a raise action made by a player in a poker game
     """
     def __init__(self, player: TablePlayer, value: float):
-
         total_value = value + player.to_call
         if value < player.min_raise and total_value != player.stack:
             raise NotSufficientRaiseError(value, player)

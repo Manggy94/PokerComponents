@@ -40,7 +40,6 @@ class Table:
         players(Players): The players on the table
         pot(Pot): The pot of the table
         rewards_table (list): The rewards table
-
         seat_playing(int): The seat of the player currently playing
         street(Street): The current street of the table
         tournament(Tournament): The tournament associated with the table
@@ -81,6 +80,7 @@ class Table:
     hand_date = field(default=None, validator=optional(instance_of(datetime)))
     street = field(default=None, validator=optional(instance_of(Street)), converter=convert_to_street)
     tournament = field(default=None, validator=optional(instance_of(Tournament)))
+    total_buy_in = field(default=0, validator=[instance_of(float), ge(0)], converter=float)
     rewards_table = field(default=[], validator=instance_of(list))
 
     def __attrs_post_init__(self):
@@ -205,12 +205,18 @@ class Table:
         """Returns True if the hand can start"""
         return self.cnt_players >= 2 and not self.hand_has_started
 
-    def start_hand(self):
-        """Starts a new hand"""
+    def set_starting_status(self):
+        """Set the starting status of the table"""
         self.hand_has_started = True
         self.street = Street.PREFLOP
         self.is_opened = False
         self.street_reset()
+        for player in self.players:
+            player.hand_stats.general.starting_stack = player.init_stack
+
+    def start_hand(self):
+        """Starts a new hand"""
+        self.set_starting_status()
         self.post_pregame()
 
     def draw_flop(self, card1: (str, Card) = None, card2: (str, Card) = None, card3: (str, Card) = None):
@@ -223,7 +229,6 @@ class Table:
             card3 (str, Card): The third card to draw
         """
         if len(self.board) > 0:
-            print(self.board.cards)
             raise ValueError("Board must be empty before we can draw a flop")
         card1 = self.deck.draw(card1)
         card2 = self.deck.draw(card2)
@@ -313,7 +318,11 @@ class Table:
             tournament (Tournament): The tournament to associate with the table
         """
         self.tournament = tournament
-        self.level = tournament.level
+        if self.tournament.has_level:
+            self.set_level(tournament.level)
+        else:
+            self.tournament.set_level(self.level)
+        self.set_total_buy_in(tournament.buy_in.total)
         self.is_mtt = True
 
     def add_player(self, player):
@@ -351,6 +360,24 @@ class Table:
             p.is_hero = False
         player.is_hero = True
         player.hand_stats.general.flag_is_hero = True
+
+    def set_level(self, level: Level):
+        """
+        Set the level of the table
+
+        Args:
+            level (Level): The level to set
+        """
+        self.level = level
+
+    def set_total_buy_in(self, total_buy_in: float):
+        """
+        Set the total buy-in for the table
+
+        Args:
+            total_buy_in (float): The total buy-in
+        """
+        self.total_buy_in = total_buy_in
 
     def distribute_hero_cards(self, player_name: str, card1: (str, Card), card2: (str, Card)):
         """

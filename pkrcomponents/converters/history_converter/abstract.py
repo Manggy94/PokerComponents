@@ -6,12 +6,13 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from pkrcomponents.components.actions.action import BetAction, CallAction, CheckAction, FoldAction, RaiseAction
 from pkrcomponents.components.actions.action_move import ActionMove
+from pkrcomponents.components.actions.blind_type import BlindType
+from pkrcomponents.components.actions.posting import AntePosting, BBPosting, SBPosting
 from pkrcomponents.components.actions.street import Street
 from pkrcomponents.components.cards.combo import Combo
 from pkrcomponents.components.players.position import Position
 from pkrcomponents.components.players.table_player import TablePlayer
 from pkrcomponents.components.tables.table import Table
-from pkrcomponents.components.tournaments.buy_in import BuyIn
 from pkrcomponents.components.tournaments.level import Level
 from pkrcomponents.components.tournaments.speed import TourSpeed
 from pkrcomponents.components.tournaments.tournament import Tournament
@@ -84,27 +85,21 @@ class AbstractHandHistoryConverter(ABC):
 
     def get_buy_in(self):
         """
-        Get the buy in from the data and return a BuyIn object to set the tournament object
+        Get the total buy_in value from data and returns it
 
         Returns:
-            buy_in (BuyIn): BuyIn object
+            buy_in (float): The total_buy_in amount
         """
-        freeze = self.data.get("buy_in").get("prize_pool_contribution")
-        ko = self.data.get("buy_in").get("bounty")
-        rake = self.data.get("buy_in").get("rake")
-        buy_in = BuyIn(prize_pool=freeze, bounty=ko, rake=rake)
-        return buy_in
+        buy_in = self.data.get("buy_in")
+        self.table.set_total_buy_in(buy_in)
 
-    def get_level(self) -> Level:
+    def get_level(self):
         """
         Get the level  and blinds from the data and set it to set the tournament object
-
-        Returns:
-            level (Level): Level object
         """
         level_data = self.data.get("level")
         level = Level(value=level_data.get("value"), bb=level_data.get("bb"), ante=level_data.get("ante"))
-        return level
+        self.table.set_level(level)
 
     def get_tournament_name(self) -> str:
         """
@@ -136,6 +131,19 @@ class AbstractHandHistoryConverter(ABC):
         table_number = self.data.get("tournament_info").get("table_number")
         return table_number
 
+    def get_pregame_info(self):
+        """
+        Get the pregame info from the data and set it to the set table object
+        """
+        self.get_level()
+        tournament_name = self.get_tournament_name()
+        tournament_id = self.get_tournament_id()
+        tournament = Tournament(name=tournament_name, id=tournament_id, level=self.table.level)
+        self.table.add_tournament(tournament)
+        self.get_table_number()
+        self.get_max_players()
+        self.get_buy_in()
+
     def get_tournament(self):
         """
         Get the tournament data and set it to the set table object
@@ -144,12 +152,7 @@ class AbstractHandHistoryConverter(ABC):
             tournament_name = self.get_tournament_name()
             tournament_id = self.get_tournament_id()
             buy_in = self.get_buy_in()
-            level = self.get_level()
-            speed = self.get_tournament_speed()
-            total_players = self.get_registered_players()
-            start_date = self.get_tournament_start_date()
-            tournament = Tournament(name=tournament_name, id=tournament_id, buy_in=buy_in, level=level, speed=speed,
-                                    total_players=total_players, start_date=start_date)
+            tournament = Tournament(name=tournament_name, id=tournament_id, buy_in=buy_in)
             self.table.add_tournament(tournament)
         except TypeError:
             print("Error converting tournament info data")
@@ -170,40 +173,6 @@ class AbstractHandHistoryConverter(ABC):
         hand_datetime = datetime.strptime(hand_date_str, date_format)
         self.table.hand_date = hand_datetime
 
-    def get_tournament_speed(self) -> str:
-        """
-        Get the tournament speed from the data and set it to the table object
-
-        Returns:
-            speed (str): Tournament speed
-        """
-        try:
-            speed = TourSpeed(self.data.get("tournament_info").get("speed"))
-        except ValueError:
-            speed = TourSpeed.REGULAR
-        return speed
-
-    def get_registered_players(self) -> int:
-        """
-        Get the registered players from the data and set it to the set table object
-
-        Returns:
-            registered_players (int): Nb of registered players
-        """
-        registered_players = self.data.get("tournament_info").get("registered_players")
-        return registered_players
-
-    def get_tournament_start_date(self):
-        """
-        Get the tournament start date from the data and set it to the set table object
-
-        Returns:
-            start_date (str): Tournament start date
-        """
-        start_date_string = self.data.get("tournament_info").get("start_date")
-        date_format = "%Y/%m/%d %H:%M:%S %Z"
-        start_date = datetime.strptime(start_date_string, date_format)
-        return start_date
 
     def get_game_type(self) -> str:
         """
@@ -269,10 +238,22 @@ class AbstractHandHistoryConverter(ABC):
         Get the postings from the data and set them to the table object
         """
         postings_list = self.data.get("postings")
-        print(self.table.players.seat_dict)
+
         self.adapt_positions(postings_list)
-        print(self.table.players.seat_dict)
-        self.table.start_hand()
+        self.table.set_starting_status()
+        for posting in postings_list:
+            player = self.table.players[posting.get("name")]
+            amount = posting.get("amount")
+            blind_type = BlindType(posting.get("blind_type"))
+            match blind_type:
+                case BlindType.ANTE:
+                    posting = AntePosting(player_name=player.name, value=amount)
+                case BlindType.SMALL_BLIND:
+                    posting = SBPosting(player_name=player.name, value=amount)
+                case BlindType.BIG_BLIND:
+                    posting = BBPosting(player_name=player.name, value=amount)
+            posting.execute(player)
+
 
     def adapt_positions(self, postings_list: list):
         """
@@ -316,21 +297,23 @@ class AbstractHandHistoryConverter(ABC):
         Args:
             action_dict (dict): Action data
         """
+
         try:
             player = self.table.players[action_dict.get("player")]
             move = ActionMove(action_dict.get("action"))
-            if move == ActionMove.FOLD:
-                action = FoldAction(player)
-            elif move == ActionMove.CHECK:
-                action = CheckAction(player)
-            elif move == ActionMove.CALL:
-                action = CallAction(player)
-            elif move == ActionMove.BET:
-                amount = action_dict.get("amount")
-                action = BetAction(player, amount)
-            else:
-                amount = action_dict.get("amount")
-                action = RaiseAction(player, amount)
+            match move:
+                case ActionMove.FOLD:
+                    action = FoldAction(player)
+                case ActionMove.CHECK:
+                    action = CheckAction(player)
+                case ActionMove.CALL:
+                    action = CallAction(player)
+                case ActionMove.BET:
+                    amount = action_dict.get("amount")
+                    action = BetAction(player, amount)
+                case ActionMove.RAISE:
+                    amount = action_dict.get("amount")
+                    action = RaiseAction(player, amount)
             action.play()
         except (NotSufficientBetError, NotSufficientRaiseError):
             print("Error converting actions data: Not sufficient bet or raise")
@@ -396,14 +379,17 @@ class AbstractHandHistoryConverter(ABC):
         """
         Advance to the next street
         """
-        if self.table.street == Street.PREFLOP:
-            self.get_flop()
-        elif self.table.street == Street.FLOP:
-            self.get_turn()
-        elif self.table.street == Street.TURN:
-            self.get_river()
-        else:
-            self.table.advance_to_showdown()
+        match self.table.street:
+            case Street.PREFLOP:
+                self.get_flop()
+            case Street.FLOP:
+                self.get_turn()
+            case Street.TURN:
+                self.get_river()
+            case Street.RIVER:
+                self.table.advance_to_showdown()
+
+
 
     def get_table_info(self):
         """
@@ -434,7 +420,7 @@ class AbstractHandHistoryConverter(ABC):
         try:
             self.get_parsed_data(file_key)
             self.get_table_info()
-            self.get_tournament()
+            self.get_pregame_info()
             self.get_max_players()
             self.get_players()
             self.get_hero()
