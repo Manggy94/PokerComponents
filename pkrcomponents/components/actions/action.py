@@ -46,13 +46,6 @@ class Action:
         return self.player.table
 
     @property
-    def hand_stats(self):
-        """
-        Returns the hand statistics of the player
-        """
-        return self.player.hand_stats
-
-    @property
     def new_min_bet(self):
         """
         Returns the new minimum bet after the action

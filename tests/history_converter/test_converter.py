@@ -838,4 +838,8 @@ class TestLocalConverter(unittest.TestCase):
     def test_convert_history(self):
         self.converter.convert_history(self.history_path)
 
+    def test_list_parsed_histories_keys(self):
+        keys = self.converter.list_parsed_histories_keys()
+        self.assertIsInstance(keys, list)
+
 

@@ -39,7 +39,7 @@ class HandEndedError(Exception):
 
 class ShowdownNotReachedError(Exception):
     """Raised when trying to show a combo hand before the showdown"""
-    def __init__(self, message="A player cannot show a combo hand before the showdown"):
+    def __init__(self, message="Error converting showdown data: Showdown not reached"):
         self.message = message
         super().__init__(self.message)
 
@@ -73,4 +73,16 @@ class FullTableError(Exception):
 class BoardNotEmptyError(Exception):
     def __init__(self):
         self.message = "Board is not empty"
+        super().__init__(self.message)
+
+
+class PlayerAlreadyFoldedError(Exception):
+    def __init__(self):
+        self.message = "Player has already folded"
+        super().__init__(self.message)
+
+
+class PlayerNotOnTableError(Exception):
+    def __init__(self, name_item):
+        self.message = f"Player {name_item} is not on the table"
         super().__init__(self.message)

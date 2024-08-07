@@ -17,6 +17,10 @@ class TestLocalSummaryConverter(unittest.TestCase):
         self.converter = LocalSummaryConverter(data_dir=DATA_DIR)
         self.converter.get_parsed_data(self.history_path)
 
+    def test_list_parsed_summaries_keys(self):
+        keys = self.converter.list_parsed_summaries_keys()
+        self.assertIsInstance(keys, list)
+
     def test_get_tournament_name(self):
         self.converter.get_tournament_name()
         tournament_name = self.converter.tournament.name

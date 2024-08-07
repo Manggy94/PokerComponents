@@ -277,7 +277,7 @@ class TablePlayer:
         """
         if table.players.seat_dict.get(self.seat) is not None:
             raise SeatTakenError
-        elif table.players.len > table.max_players:
+        elif table.players.len >= table.max_players:
             raise FullTableError
         else:
             self.table = table

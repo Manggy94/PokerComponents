@@ -14,10 +14,10 @@ from pkrcomponents.components.players.position import Position
 from pkrcomponents.components.players.table_player import TablePlayer
 from pkrcomponents.components.tables.table import Table
 from pkrcomponents.components.tournaments.level import Level
-from pkrcomponents.components.tournaments.speed import TourSpeed
 from pkrcomponents.components.tournaments.tournament import Tournament
 from pkrcomponents.components.utils.exceptions import EmptyButtonSeatError, NotSufficientBetError, \
-    NotSufficientRaiseError, ShowdownNotReachedError, CannotParseWinnersError, SeatTakenError
+    NotSufficientRaiseError, ShowdownNotReachedError, CannotParseWinnersError, SeatTakenError, PlayerAlreadyFoldedError, \
+    PlayerNotOnTableError
 from pkrcomponents.converters.utils.exceptions import HandConversionError
 
 
@@ -144,20 +144,6 @@ class AbstractHandHistoryConverter(ABC):
         self.get_max_players()
         self.get_buy_in()
 
-    def get_tournament(self):
-        """
-        Get the tournament data and set it to the set table object
-        """
-        try:
-            tournament_name = self.get_tournament_name()
-            tournament_id = self.get_tournament_id()
-            buy_in = self.get_buy_in()
-            tournament = Tournament(name=tournament_name, id=tournament_id, buy_in=buy_in)
-            self.table.add_tournament(tournament)
-        except TypeError:
-            print("Error converting tournament info data")
-            raise HandConversionError
-
     def get_hand_id(self):
         """
         Get the hand id from the data and set it to the table object
@@ -172,7 +158,6 @@ class AbstractHandHistoryConverter(ABC):
         date_format = "%d-%m-%Y %H:%M:%S"
         hand_datetime = datetime.strptime(hand_date_str, date_format)
         self.table.hand_date = hand_datetime
-
 
     def get_game_type(self) -> str:
         """
@@ -196,18 +181,15 @@ class AbstractHandHistoryConverter(ABC):
 
     def get_players(self):
         """Get the players from the data and set them to the set table object"""
-        try:
-            players_dict = self.data.get("players")
-            for seat, player_dict in players_dict.items():
-                self.get_player(player_dict)
-            button_seat = self.get_button_seat()
-            bb_seat = self.table.players.get_bb_seat_from_button(button_seat)
-            self.table.set_bb_seat(bb_seat)
-            self.table.players.distribute_positions()
-            self.table.players.delete_inactive_players()
-        except EmptyButtonSeatError:
-            print("Error converting players data: Empty button seat")
-            raise HandConversionError
+        players_dict = self.data.get("players")
+        for seat, player_dict in players_dict.items():
+            self.get_player(player_dict)
+        button_seat = self.get_button_seat()
+        bb_seat = self.table.players.get_bb_seat_from_button(button_seat)
+        self.table.set_bb_seat(bb_seat)
+        self.table.players.distribute_positions()
+        self.table.players.delete_inactive_players()
+
 
     def get_player(self, player_dict: dict):
         """
@@ -257,7 +239,6 @@ class AbstractHandHistoryConverter(ABC):
                     posting = BBPosting(player_name=player.name, value=amount)
             posting.execute(player)
 
-
     def adapt_positions(self, postings_list: list):
         """
         Adapt the positions of the players according to the postings
@@ -268,8 +249,6 @@ class AbstractHandHistoryConverter(ABC):
                 self.table.players.bb_seat = player.seat
         self.table.players.delete_inactive_players()
         self.table.players.distribute_positions()
-
-
 
     def get_actions(self):
         """
@@ -300,27 +279,25 @@ class AbstractHandHistoryConverter(ABC):
         Args:
             action_dict (dict): Action data
         """
+        player = self.table.players[action_dict.get("player")]
+        if player.folded:
+            raise PlayerAlreadyFoldedError
+        move = ActionMove(action_dict.get("action"))
+        match move:
+            case ActionMove.FOLD:
+                action = FoldAction(player)
+            case ActionMove.CHECK:
+                action = CheckAction(player)
+            case ActionMove.CALL:
+                action = CallAction(player)
+            case ActionMove.BET:
+                amount = action_dict.get("amount")
+                action = BetAction(player, amount)
+            case ActionMove.RAISE:
+                amount = action_dict.get("amount")
+                action = RaiseAction(player, amount)
+        action.play()
 
-        try:
-            player = self.table.players[action_dict.get("player")]
-            move = ActionMove(action_dict.get("action"))
-            match move:
-                case ActionMove.FOLD:
-                    action = FoldAction(player)
-                case ActionMove.CHECK:
-                    action = CheckAction(player)
-                case ActionMove.CALL:
-                    action = CallAction(player)
-                case ActionMove.BET:
-                    amount = action_dict.get("amount")
-                    action = BetAction(player, amount)
-                case ActionMove.RAISE:
-                    amount = action_dict.get("amount")
-                    action = RaiseAction(player, amount)
-            action.play()
-        except (NotSufficientBetError, NotSufficientRaiseError):
-            print("Error converting actions data: Not sufficient bet or raise")
-            raise HandConversionError
 
     def get_flop(self):
         """
@@ -354,29 +331,18 @@ class AbstractHandHistoryConverter(ABC):
 
         """
         showdown_dict = self.data.get("showdown")
-        try:
-            for player_name, hand_dict in showdown_dict.items():
-                player = self.table.players[player_name]
-                first_card = hand_dict.get("first_card")
-                second_card = hand_dict.get("second_card")
-                combo = Combo.from_cards(first_card, second_card)
-                player.shows(combo)
-        except ShowdownNotReachedError:
-            print("Error converting showdown data: Showdown not reached")
-            raise HandConversionError
-        except KeyError:
-            print("Error converting showdown data: Key error")
-            raise HandConversionError
+        for player_name, hand_dict in showdown_dict.items():
+            player = self.table.players[player_name]
+            first_card = hand_dict.get("first_card")
+            second_card = hand_dict.get("second_card")
+            combo = Combo.from_cards(first_card, second_card)
+            player.shows(combo)
 
     def get_winners(self):
         """
         Get the winners data from the data and set it to the table object
         """
-        try:
-            self.table.calculate_and_distribute_rewards()
-        except (CannotParseWinnersError, ValueError):
-            print("Error converting winners data: Cannot parse winners")
-            raise HandConversionError
+        self.table.calculate_and_distribute_rewards()
 
     def advance_street(self):
         """
@@ -391,8 +357,6 @@ class AbstractHandHistoryConverter(ABC):
                 self.get_river()
             case Street.RIVER:
                 self.table.advance_to_showdown()
-
-
 
     def get_table_info(self):
         """
@@ -425,7 +389,6 @@ class AbstractHandHistoryConverter(ABC):
             self.get_parsed_data(file_key)
             self.get_table_info()
             self.get_pregame_info()
-            self.get_max_players()
             self.get_players()
             self.get_hero()
             self.get_postings()
@@ -433,25 +396,13 @@ class AbstractHandHistoryConverter(ABC):
             self.get_showdown()
             self.get_winners()
             return self.table
-        except HandConversionError:
-            print(f" Hand Conversion Error for file {file_key}")
-            raise HandConversionError
-        except ValueError:
-            print(f"Error for file {file_key}")
-            raise ValueError
-        except TypeError:
-            print(f"Error for file {file_key}")
-            raise TypeError
+        except (HandConversionError, NotSufficientBetError, NotSufficientRaiseError, PlayerNotOnTableError, ValueError,
+                KeyError, ShowdownNotReachedError, CannotParseWinnersError):
+            raise HandConversionError(file_key)
 
     def convert_histories(self):
         parsed_keys = self.list_parsed_histories_keys()
-        for parsed_key in parsed_keys:
-            self.convert_history(parsed_key)
-            self.reset_table()
-
-    # def convert_histories(self):
-    #     parsed_keys = self.list_parsed_histories_keys()
-    #     with ThreadPoolExecutor(max_workers=10) as executor:
-    #         futures = [executor.submit(self.convert_history, parsed_key) for parsed_key in parsed_keys]
-    #         for future in as_completed(futures):
-    #             future.result()
+        with ThreadPoolExecutor(max_workers=10) as executor:
+            futures = [executor.submit(self.convert_history, parsed_key) for parsed_key in parsed_keys]
+            for future in as_completed(futures):
+                future.result()

@@ -1,6 +1,6 @@
 class HandConversionError(Exception):
-    def __init__(self):
-        self.message = "Error converting hand history"
+    def __init__(self, file_key: str):
+        self.message = f"Hand Conversion Error for file {file_key}"
         super().__init__(self.message)
 
 

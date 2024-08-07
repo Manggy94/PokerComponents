@@ -1,6 +1,6 @@
 from pkrcomponents.components.actions.posting import AntePosting, SBPosting, BBPosting
 from pkrcomponents.components.players.position import Position
-from pkrcomponents.components.utils.exceptions import EmptyButtonSeatError
+from pkrcomponents.components.utils.exceptions import PlayerNotOnTableError
 
 
 class Players:
@@ -24,8 +24,7 @@ class Players:
             try:
                 return self.name_dict[item]
             except KeyError:
-                print(self.name_dict.keys())
-                raise ValueError(f"Player {item} is not on the table")
+                raise PlayerNotOnTableError(item)
         elif isinstance(item, int):
             return self.seat_dict[item]
         else:
@@ -101,11 +100,8 @@ class Players:
     @property
     def preflop_ordered_seats(self):
         """Returns the list of the indexes of players on the table, with preflop playing order"""
-        try:
-            cut = self.occupied_seats.index(self.bb_seat) + 1
-            return self.occupied_seats[cut:] + self.occupied_seats[:cut]
-        except ValueError:
-            raise ValueError
+        cut = self.occupied_seats.index(self.bb_seat) + 1
+        return self.occupied_seats[cut:] + self.occupied_seats[:cut]
 
     @property
     def positions_mapper(self):
@@ -208,7 +204,6 @@ class Players:
         """Post antes for all players"""
         for seat in self.preflop_ordered_seats:
             player = self[seat]
-            # player.hand_stats.general.starting_stack = player.init_stack
             posting = AntePosting(player_name=player.name, value=player.table.level.ante)
             posting.execute(player)
 

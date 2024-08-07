@@ -172,8 +172,6 @@ U
 %tests/components/tables/test_table.py,4\d\4d55cb80814e54908befeef08c666ee8dbed7303
 \
 ,pkrcomponents/components/utils/exceptions.py,8\f\8f3f818f999b6a7f854c7ce7156ec5012a4de2e7
-c
-3pkrcomponents/history_converter/utils/exceptions.py,3\0\30736e5f3e02ec340247c45bf3da8a467209699b
 a
 1tests/history_converter/json_files/example08.json,8\7\877f36c68a5b099da1f73e03a82f78e994333b61
 a
@@ -224,18 +222,6 @@ a
 1tests/history_converter/json_files/example12.json,b\a\ba440a0400fa4faec3d94be386a208a9c372323f
 4
 .env,3\c\3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
-f
-6pkrcomponents/history_converter/converters/abstract.py,3\0\306fb80139a84aef1463856e9d6fe99ffc1c72da
-c
-3pkrcomponents/history_converter/converters/local.py,2\6\26352a5656dab7441d6b2b2800755acdd1cd6057
-`
-0pkrcomponents/history_converter/converters/s3.py,f\1\f1ee44413c61d3deb49b3dcff0a35b2ad3f3d7b0
-[
-+pkrcomponents/history_converter/settings.py,8\4\8413f90b6a9a815eb90337dee0ac85831eedc9f5
-l
-<pkrcomponents/history_converter/runs/s3/convert_histories.py,0\9\09c5612910856cc42db79678d9b5736ab982c8bc
-o
-?pkrcomponents/history_converter/runs/local/convert_histories.py,d\5\d502e0d5c4c8fc007e7650344a53880552ec5afa
 W
 'pkrcomponents/components/cards/board.py,1\7\17a3ff3770645c574601d9586195e923e5c86572
 V
@@ -272,3 +258,13 @@ T
 $pkrcomponents/converters/settings.py,7\b\7b3009fedad1445300cc254ac297687dc863fa4d
 \
 ,pkrcomponents/converters/utils/exceptions.py,9\c\9cbd7897545e174cbe3573cf33339930443185a2
+O
+tests/errors/test_exceptions.py,f\b\fbf7582d65ed8198dfce719695c625a6debd10f1
+V
+&tests/errors/json_files/example01.json,e\0\e039f1e6040d01d41995a1b0a7d5f9199f3f161e
+V
+&tests/errors/json_files/example02.json,4\0\406c2d70ec7a5dd187e51d3f6ecd25a5cb52ec3f
+V
+&tests/errors/json_files/example03.json,7\4\74786372a53a38e7e0d215c242741ca1783241a9
+T
+$tests/errors/json_files/example.json,1\2\122799b173847a99cdd3ccab5e5dd8d3d3ceeaee
