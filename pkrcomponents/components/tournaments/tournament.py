@@ -2,10 +2,11 @@ from attrs import define, field, Factory
 from attrs.validators import instance_of, gt, ge, optional
 from datetime import datetime
 from pkrcomponents.components.utils.constants import MoneyType
+from pkrcomponents.components.tournaments.buy_in import BuyIn
 from pkrcomponents.components.tournaments.level import Level
 from pkrcomponents.components.tournaments.payout import Payouts
-from pkrcomponents.components.tournaments.buy_in import BuyIn
 from pkrcomponents.components.tournaments.speed import TourSpeed
+from pkrcomponents.components.tournaments.tournament_type import TournamentType
 from pkrcomponents.components.utils.validators import validate_players_remaining
 from pkrcomponents.components.utils.converters import convert_to_speed
 
@@ -26,6 +27,11 @@ class Tournament:
         total_players(int): The total number of players in the tournament
         players_remaining(int): The number of players remaining in the tournament
         starting_stack(float): The starting stack for each player in the tournament
+        amount_won(float): The amount won by the player
+        nb_entries(int): The number of entries in the tournament
+        final_position(int): The final position of the player in the tournament
+        prize_pool(float): The prize pool of the tournament
+        tournament_type(TournamentType): The type of tournament
     """
     id = field(default='0000', validator=[instance_of(str)])
     name = field(default='Kill The Fish', validator=[instance_of(str)])
@@ -40,8 +46,10 @@ class Tournament:
     start_date = field(default=datetime.now(), validator=[instance_of(datetime)])
     starting_stack = field(default=20000.0, validator=[gt(0), instance_of(float)], converter=float)
     amount_won = field(default=0.0, validator=[ge(0), instance_of(float)], converter=float)
-    nb_entries = field(default=1, validator=[ge(1), instance_of(int)])
+    nb_entries = field(default=1, validator=optional([ge(1), instance_of(int)]))
     final_position = field(default=None, validator=optional([instance_of(int), ge(1)]))
+    prize_pool = field(default=0.0, validator=[ge(0), instance_of(float)], converter=float)
+    tournament_type = field(default=TournamentType.CLASSIC, validator=[instance_of(TournamentType)], converter=TournamentType)
 
     def __str__(self):
         return f"Name: {self.name}\nId: {self.id}\nBuy-in: {self.buy_in}\nMoney: {self.money_type}"
@@ -86,6 +94,9 @@ class Tournament:
 
     def set_level(self, level: Level):
         self.level = level
+
+    def set_prize_pool(self, prize_pool: float):
+        self.prize_pool = prize_pool
 
     def to_json(self):
         return {

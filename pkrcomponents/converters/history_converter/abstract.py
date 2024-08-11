@@ -10,13 +10,12 @@ from pkrcomponents.components.actions.blind_type import BlindType
 from pkrcomponents.components.actions.posting import AntePosting, BBPosting, SBPosting
 from pkrcomponents.components.actions.street import Street
 from pkrcomponents.components.cards.combo import Combo
-from pkrcomponents.components.players.position import Position
 from pkrcomponents.components.players.table_player import TablePlayer
 from pkrcomponents.components.tables.table import Table
 from pkrcomponents.components.tournaments.level import Level
 from pkrcomponents.components.tournaments.tournament import Tournament
-from pkrcomponents.components.utils.exceptions import EmptyButtonSeatError, NotSufficientBetError, \
-    NotSufficientRaiseError, ShowdownNotReachedError, CannotParseWinnersError, SeatTakenError, PlayerAlreadyFoldedError, \
+from pkrcomponents.components.utils.exceptions import NotSufficientBetError, NotSufficientRaiseError, \
+    ShowdownNotReachedError, CannotParseWinnersError, SeatTakenError, PlayerAlreadyFoldedError, \
     PlayerNotOnTableError
 from pkrcomponents.converters.utils.exceptions import HandConversionError
 
@@ -190,7 +189,6 @@ class AbstractHandHistoryConverter(ABC):
         self.table.players.distribute_positions()
         self.table.players.delete_inactive_players()
 
-
     def get_player(self, player_dict: dict):
         """
         Get a player from the data and set it to the set table object
@@ -296,8 +294,9 @@ class AbstractHandHistoryConverter(ABC):
             case ActionMove.RAISE:
                 amount = action_dict.get("amount")
                 action = RaiseAction(player, amount)
+            case other:
+                raise ValueError(f"Invalid action: {other}")
         action.play()
-
 
     def get_flop(self):
         """

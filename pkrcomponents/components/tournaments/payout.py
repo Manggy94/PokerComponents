@@ -70,8 +70,6 @@ class Payouts(list):
             if payout.tier == tier:
                 self.remove(payout)
 
-
-
     def get_payout(self, rank: int) -> Payout:
         """
         A method to get the reward for a given finish rank

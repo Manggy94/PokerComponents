@@ -268,3 +268,17 @@ V
 &tests/errors/json_files/example03.json,7\4\74786372a53a38e7e0d215c242741ca1783241a9
 T
 $tests/errors/json_files/example.json,1\2\122799b173847a99cdd3ccab5e5dd8d3d3ceeaee
+`
+0pkrcomponents/converters/history_converter/s3.py,e\2\e2aac9ae14ffe7ef6a54c44a454b4da39a3bc3b8
+^
+.pkrcomponents/components/tournaments/payout.py,0\c\0cef018575aea91c5419f29a50c8b9363756c285
+[
++pkrcomponents/components/utils/constants.py,0\7\07b68218827a167b52845edcdbe62ac3a26b32bb
+e
+5pkrcomponents/converters/runs/s3/convert_histories.py,6\6\66a8b17860f9756abec1da28b3d19695ec212fe2
+h
+8pkrcomponents/converters/runs/local/convert_summaries.py,a\5\a5ced2e1cbab7618b30036935e5a059550e0e08c
+g
+7pkrcomponents/components/tournaments/tournament_type.py,7\7\770c7cbfb9046c988ad76b9d35689eaddde3f54b
+]
+-pkrcomponents/components/tournaments/speed.py,9\7\97de227590cce8153e278abbcb852238f3b3752d

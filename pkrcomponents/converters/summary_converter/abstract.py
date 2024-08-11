@@ -1,10 +1,13 @@
 import json
 from abc import ABC, abstractmethod
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 
 from pkrcomponents.components.tournaments.buy_in import BuyIn
 from pkrcomponents.components.tournaments.speed import TourSpeed
 from pkrcomponents.components.tournaments.tournament import Tournament
+from pkrcomponents.components.tournaments.tournament_type import TournamentType
+from pkrcomponents.converters.utils.exceptions import SummaryConversionError
 
 
 class AbstractSummaryConverter(ABC):
@@ -74,7 +77,7 @@ class AbstractSummaryConverter(ABC):
         tournament_name = self.data.get("tournament_name")
         self.tournament.name = tournament_name
 
-    def get_tournament_id(self) -> str:
+    def get_tournament_id(self):
         """
         Get the tournament id from the data and set it to the set tournament object
 
@@ -84,7 +87,7 @@ class AbstractSummaryConverter(ABC):
         tournament_id = self.data.get("tournament_id")
         self.tournament.id = tournament_id
 
-    def get_tournament_speed(self) -> str:
+    def get_tournament_speed(self):
         """
         Get the tournament speed from the data and set it to the table object
 
@@ -123,6 +126,32 @@ class AbstractSummaryConverter(ABC):
         amount_won = self.data.get("amount_won")
         self.tournament.amount_won = amount_won
 
+    def get_tournament_type(self):
+        """
+        Get the tournament type from the data and set it to the set table object
+        """
+        tournament_type = self.data.get("tournament_type")
+        tournament_type = TournamentType(tournament_type)
+        self.tournament.tournament_type = tournament_type
+
+    def get_prize_pool(self):
+        """
+        Get the prize pool from the data and set it to the set table object
+        """
+        prize_pool = self.data.get("prize_pool")
+        self.tournament.set_prize_pool(prize_pool)
+
+    def get_nb_entries(self):
+        """
+        Get the number of entries from the data and set it to the set table object
+        """
+        nb_entries = self.data.get("nb_entries")
+        self.tournament.nb_entries = nb_entries
+
+    def get_levels_structure(self):
+        # TODO: Implement this method taking a list of dictionaries and converting it to a LevelsStructure object
+        pass
+
     def get_tournament(self):
         """
         Get the tournament data and set it to the set table object
@@ -134,9 +163,18 @@ class AbstractSummaryConverter(ABC):
             self.get_tournament_speed()
             self.get_registered_players()
             self.get_tournament_start_date()
+            self.get_final_position()
+            self.get_amount_won()
+            self.get_tournament_type()
+            self.get_prize_pool()
+            self.get_nb_entries()
+            self.get_levels_structure()
         except TypeError:
             print("Error converting tournament info data")
             raise SummaryConversionError
+
+    def reset_tournament(self):
+        self.tournament = Tournament()
 
     def convert_summary(self, parsed_key: str) -> Tournament:
         self.get_parsed_data(parsed_key)
@@ -145,13 +183,7 @@ class AbstractSummaryConverter(ABC):
 
     def convert_summaries(self):
         parsed_keys = self.list_parsed_summaries_keys()
-        for parsed_key in parsed_keys:
-            self.convert_summary(parsed_key)
-            self.reset_tournament()
-
-    # def convert_summaries(self):
-    #     parsed_keys = self.list_parsed_summaries_keys()
-    #     with ThreadPoolExecutor(max_workers=10) as executor:
-    #         futures = [executor.submit(self.convert_summary, parsed_key) for parsed_key in parsed_keys]
-    #         for future in as_completed(futures):
-    #             future.result()
+        with ThreadPoolExecutor(max_workers=10) as executor:
+            futures = [executor.submit(self.convert_summary, parsed_key) for parsed_key in parsed_keys]
+            for future in as_completed(futures):
+                future.result()
