@@ -1,7 +1,6 @@
 import unittest
 import os
 from datetime import datetime
-
 from pkrcomponents.components.tournaments.buy_in import BuyIn
 from pkrcomponents.components.tournaments.level import Level
 from pkrcomponents.components.tournaments.speed import TourSpeed
@@ -42,7 +41,8 @@ class TestLocalSummaryConverter(unittest.TestCase):
         self.assertEqual(speed, TourSpeed.TURBO)
 
     def test_get_tournament_start_date(self):
-        start_date = self.converter.get_tournament_start_date()
+        self.converter.get_tournament_start_date()
+        start_date = self.converter.tournament.start_date
         date_format = "%d-%m-%Y %H:%M:%S"
         self.assertEqual(start_date, datetime.strptime("04-01-2023 17:30:01", date_format))
 

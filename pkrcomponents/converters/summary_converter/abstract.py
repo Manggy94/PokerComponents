@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 
+
 from pkrcomponents.components.tournaments.buy_in import BuyIn
 from pkrcomponents.components.tournaments.speed import TourSpeed
 from pkrcomponents.components.tournaments.tournament import Tournament
@@ -100,7 +101,7 @@ class AbstractSummaryConverter(ABC):
             speed = TourSpeed.REGULAR
         self.tournament.speed = speed
 
-    def get_tournament_start_date(self) -> datetime:
+    def get_tournament_start_date(self):
         """
         Get the tournament start date from the data and set it to the set table object
 
@@ -110,7 +111,7 @@ class AbstractSummaryConverter(ABC):
         start_date_string = self.data.get("start_date")
         date_format = "%Y/%m/%d %H:%M:%S %Z"
         start_date = datetime.strptime(start_date_string, date_format)
-        return start_date
+        self.tournament.start_date = start_date
 
     def get_final_position(self):
         """
