@@ -30,7 +30,8 @@ class LocalSummaryConverter(AbstractSummaryConverter):
             content = file.read()
         return content
 
-    def send_to_corrections(self, file_key: str):
+    @staticmethod
+    def send_to_corrections(file_key: str):
         correction_key = file_key.replace("data", "corrections")
         os.makedirs(os.path.dirname(correction_key), exist_ok=True)
         print(f"Moving {file_key} to {correction_key}")

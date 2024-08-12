@@ -282,3 +282,7 @@ g
 7pkrcomponents/components/tournaments/tournament_type.py,7\7\770c7cbfb9046c988ad76b9d35689eaddde3f54b
 ]
 -pkrcomponents/components/tournaments/speed.py,9\7\97de227590cce8153e278abbcb852238f3b3752d
+c
+3pkrcomponents/converters/summary_converter/cloud.py,5\6\56aa0f56f11450dcf5f2113d8a8f9db1bc480deb
+c
+3pkrcomponents/converters/history_converter/cloud.py,a\5\a5234645985ac47ec1afea67356c2329b92d1bb4

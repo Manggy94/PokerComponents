@@ -49,7 +49,8 @@ class Tournament:
     nb_entries = field(default=1, validator=optional([ge(1), instance_of(int)]))
     final_position = field(default=None, validator=optional([instance_of(int), ge(1)]))
     prize_pool = field(default=0.0, validator=[ge(0), instance_of(float)], converter=float)
-    tournament_type = field(default=TournamentType.CLASSIC, validator=[instance_of(TournamentType)], converter=TournamentType)
+    tournament_type = field(default=TournamentType.CLASSIC, validator=[instance_of(TournamentType)],
+                            converter=TournamentType)
 
     def __str__(self):
         return f"Name: {self.name}\nId: {self.id}\nBuy-in: {self.buy_in}\nMoney: {self.money_type}"
