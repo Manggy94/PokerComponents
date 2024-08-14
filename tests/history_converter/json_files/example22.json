@@ -1,0 +1,172 @@
+{
+    "tournament_info": {
+        "tournament_name": "Kill The Fish",
+        "tournament_id": "282656792",
+        "table_number": "004"
+    },
+    "buy_in": 5.0,
+    "hand_id": "1214001677632274437-61-1561210524",
+    "datetime": "22-06-2019 13:35:24",
+    "game_type": "Tournament",
+    "level": {
+        "value": 10,
+        "ante": 120.0,
+        "sb": 500.0,
+        "bb": 1000.0
+    },
+    "max_players": 8,
+    "button_seat": 5,
+    "players": {
+        "2": {
+            "seat": 2,
+            "name": "Boulimane2",
+            "init_stack": 15080.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "3": {
+            "seat": 3,
+            "name": "manggy94",
+            "init_stack": 35820.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "4": {
+            "seat": 4,
+            "name": "jAAiMtaFeMMe",
+            "init_stack": 19390.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "6": {
+            "seat": 6,
+            "name": "Gilbert 70",
+            "init_stack": 47260.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "7": {
+            "seat": 7,
+            "name": "Elfurio72",
+            "init_stack": 17134.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "8": {
+            "seat": 8,
+            "name": "CypherPonk",
+            "init_stack": 56745.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        }
+    },
+    "hero_hand": {
+        "hero": "manggy94",
+        "first_card": "3c",
+        "second_card": "6d"
+    },
+    "postings": [
+        {
+            "name": "Gilbert 70",
+            "amount": 120.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "Elfurio72",
+            "amount": 120.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "Boulimane2",
+            "amount": 120.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "manggy94",
+            "amount": 120.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "jAAiMtaFeMMe",
+            "amount": 120.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "CypherPonk",
+            "amount": 120.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "Gilbert 70",
+            "amount": 500.0,
+            "blind_type": "small blind"
+        },
+        {
+            "name": "Elfurio72",
+            "amount": 1000.0,
+            "blind_type": "big blind"
+        }
+    ],
+    "actions": {
+        "preflop": [
+            {
+                "player": "CypherPonk",
+                "action": "folds",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "Boulimane2",
+                "action": "folds",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "manggy94",
+                "action": "folds",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "jAAiMtaFeMMe",
+                "action": "raises",
+                "amount": 18270.0,
+                "raise_total": 19270.0,
+                "is_all_in": true
+            }
+        ],
+        "flop": [],
+        "turn": [],
+        "river": []
+    },
+    "flop": {
+        "flop_card_1": "Ac",
+        "flop_card_2": "2h",
+        "flop_card_3": "3h"
+    },
+    "turn": {
+        "turn_card": "9c"
+    },
+    "river": {
+        "river_card": "Ah"
+    },
+    "showdown": {
+        "Gilbert 70": {
+            "first_card": "Ks",
+            "second_card": "Jd"
+        },
+        "jAAiMtaFeMMe": {
+            "first_card": "As",
+            "second_card": "Ts"
+        }
+    },
+    "winners": {
+        "jAAiMtaFeMMe": {
+            "amount": 40380.0,
+            "pot_type": "pot"
+        }
+    }
+}

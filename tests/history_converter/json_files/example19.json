@@ -136,42 +136,58 @@
             {
                 "player": "geese92",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "Ragnar26",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "1JOUR1DESTIN",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "Seadog",
                 "action": "raises",
-                "amount": 1530.0
+                "amount": 1530.0,
+                "raise_total": 1600.0,
+                "is_all_in": false
             },
             {
                 "player": "ToxikFungus",
                 "action": "raises",
-                "amount": 700.0
+                "amount": 700.0,
+                "raise_total": 2300.0,
+                "is_all_in": true
             },
             {
                 "player": "st michel 81",
                 "action": "raises",
-                "amount": 800.0
+                "amount": 800.0,
+                "raise_total": 3100.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "Seadog",
                 "action": "calls",
-                "amount": 1015.0
+                "amount": 1015.0,
+                "raise_total": 0.0,
+                "is_all_in": true
             }
         ],
         "flop": [],

@@ -148,93 +148,127 @@
             {
                 "player": "kevinmessi02",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "ChaMr-ixe",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "THESEE",
                 "action": "raises",
-                "amount": 680.0
+                "amount": 680.0,
+                "raise_total": 880.0,
+                "is_all_in": false
             },
             {
                 "player": "frankilolo",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "NAS11.43",
                 "action": "calls",
-                "amount": 880.0
+                "amount": 880.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "philblues",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "Dyeounnet",
                 "action": "calls",
-                "amount": 780.0
+                "amount": 780.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "Yanismix",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "flop": [
             {
                 "player": "Dyeounnet",
                 "action": "bets",
-                "amount": 2110.0
+                "amount": 2110.0,
+                "raise_total": 0.0,
+                "is_all_in": true
             },
             {
                 "player": "THESEE",
                 "action": "calls",
-                "amount": 2110.0
+                "amount": 2110.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "NAS11.43",
                 "action": "calls",
-                "amount": 2110.0
+                "amount": 2110.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "turn": [
             {
                 "player": "THESEE",
                 "action": "bets",
-                "amount": 1400.0
+                "amount": 1400.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "NAS11.43",
                 "action": "calls",
-                "amount": 1400.0
+                "amount": 1400.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "river": [
             {
                 "player": "THESEE",
                 "action": "bets",
-                "amount": 1500.0
+                "amount": 1500.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "NAS11.43",
                 "action": "raises",
-                "amount": 8680.0
+                "amount": 8680.0,
+                "raise_total": 10180.0,
+                "is_all_in": true
             },
             {
                 "player": "THESEE",
                 "action": "calls",
-                "amount": 5370.0
+                "amount": 5370.0,
+                "raise_total": 0.0,
+                "is_all_in": true
             }
         ]
     },

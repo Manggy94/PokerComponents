@@ -75,44 +75,60 @@
             {
                 "player": "bryanleskin",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "klopp62570",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "calls",
-                "amount": 60.0
+                "amount": 60.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "elodie26100",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "LEGION1831",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "flop": [
             {
                 "player": "LEGION1831",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "bets",
-                "amount": 150.0
+                "amount": 150.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "LEGION1831",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "turn": [],

@@ -112,83 +112,113 @@
             {
                 "player": "Romain miklo",
                 "action": "raises",
-                "amount": 300.0
+                "amount": 300.0,
+                "raise_total": 500.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "LASYLVE34",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "NotBadRiverr",
                 "action": "calls",
-                "amount": 500.0
+                "amount": 500.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "Sofia1712",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "KassRM",
                 "action": "calls",
-                "amount": 300.0
+                "amount": 300.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "flop": [
             {
                 "player": "KassRM",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "Romain miklo",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "NotBadRiverr",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "turn": [
             {
                 "player": "KassRM",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "Romain miklo",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "NotBadRiverr",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "river": [
             {
                 "player": "KassRM",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "Romain miklo",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "NotBadRiverr",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ]
     },

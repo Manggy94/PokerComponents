@@ -131,71 +131,97 @@
             {
                 "player": "FLOPS77",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "MisterWeed88",
                 "action": "calls",
-                "amount": 9877.0
+                "amount": 9877.0,
+                "raise_total": 0.0,
+                "is_all_in": true
             },
             {
                 "player": "NASTAKASS",
                 "action": "calls",
-                "amount": 12000.0
+                "amount": 12000.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "manix69 69",
                 "action": "calls",
-                "amount": 12000.0
+                "amount": 12000.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "vb051963",
                 "action": "calls",
-                "amount": 6000.0
+                "amount": 6000.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "flop": [
             {
                 "player": "vb051963",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "NASTAKASS",
                 "action": "bets",
-                "amount": 12000.0
+                "amount": 12000.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "manix69 69",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "vb051963",
                 "action": "raises",
-                "amount": 85207.0
+                "amount": 85207.0,
+                "raise_total": 97207.0,
+                "is_all_in": false
             },
             {
                 "player": "NASTAKASS",
                 "action": "calls",
-                "amount": 85207.0
+                "amount": 85207.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "turn": [
             {
                 "player": "vb051963",
                 "action": "bets",
-                "amount": 77971.0
+                "amount": 77971.0,
+                "raise_total": 0.0,
+                "is_all_in": true
             },
             {
                 "player": "NASTAKASS",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "river": []

@@ -103,68 +103,92 @@
             {
                 "player": "diablerouge3",
                 "action": "calls",
-                "amount": 30.0
+                "amount": 30.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "STAFFO59",
                 "action": "calls",
-                "amount": 30.0
+                "amount": 30.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "raises",
-                "amount": 120.0
+                "amount": 120.0,
+                "raise_total": 150.0,
+                "is_all_in": false
             },
             {
                 "player": "Zuly13110",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "diablerouge3",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "STAFFO59",
                 "action": "calls",
-                "amount": 120.0
+                "amount": 120.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "flop": [
             {
                 "player": "manggy94",
                 "action": "bets",
-                "amount": 360.0
+                "amount": 360.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "STAFFO59",
                 "action": "calls",
-                "amount": 360.0
+                "amount": 360.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "turn": [
             {
                 "player": "manggy94",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "STAFFO59",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "river": [
             {
                 "player": "manggy94",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "STAFFO59",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ]
     },

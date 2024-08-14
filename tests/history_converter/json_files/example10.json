@@ -112,42 +112,58 @@
             {
                 "player": "Alberto Vida",
                 "action": "calls",
-                "amount": 1200.0
+                "amount": 1200.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "Edlas",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "mica2110",
                 "action": "calls",
-                "amount": 1200.0
+                "amount": 1200.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "raises",
-                "amount": 14960.0
+                "amount": 14960.0,
+                "raise_total": 16160.0,
+                "is_all_in": true
             },
             {
                 "player": "ipon51",
                 "action": "calls",
-                "amount": 13292.0
+                "amount": 13292.0,
+                "raise_total": 0.0,
+                "is_all_in": true
             },
             {
                 "player": "Blob72",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "Alberto Vida",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "mica2110",
                 "action": "calls",
-                "amount": 14960.0
+                "amount": 14960.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "flop": [],

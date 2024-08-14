@@ -112,88 +112,120 @@
             {
                 "player": "FrenchAAAA",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "daifwa",
                 "action": "calls",
-                "amount": 200.0
+                "amount": 200.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "Roomxx",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "SB Warrior34",
                 "action": "calls",
-                "amount": 200.0
+                "amount": 200.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "GoToVG",
                 "action": "raises",
-                "amount": 700.0
+                "amount": 700.0,
+                "raise_total": 900.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "daifwa",
                 "action": "calls",
-                "amount": 700.0
+                "amount": 700.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "SB Warrior34",
                 "action": "calls",
-                "amount": 700.0
+                "amount": 700.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "flop": [
             {
                 "player": "GoToVG",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "daifwa",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "SB Warrior34",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "turn": [
             {
                 "player": "GoToVG",
                 "action": "bets",
-                "amount": 1000.0
+                "amount": 1000.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "daifwa",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "SB Warrior34",
                 "action": "calls",
-                "amount": 1000.0
+                "amount": 1000.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "river": [
             {
                 "player": "GoToVG",
                 "action": "bets",
-                "amount": 2525.0
+                "amount": 2525.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "SB Warrior34",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ]
     },

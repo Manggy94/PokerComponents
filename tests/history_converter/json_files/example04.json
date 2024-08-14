@@ -77,73 +77,99 @@
             {
                 "player": "SO56",
                 "action": "calls",
-                "amount": 30.0
+                "amount": 30.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "bryanleskin",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "dom97230",
                 "action": "calls",
-                "amount": 20.0
+                "amount": 20.0,
+                "raise_total": 0.0,
+                "is_all_in": true
             },
             {
                 "player": "klopp62570",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "flop": [
             {
                 "player": "manggy94",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "SO56",
                 "action": "bets",
-                "amount": 30.0
+                "amount": 30.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "calls",
-                "amount": 30.0
+                "amount": 30.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "turn": [
             {
                 "player": "manggy94",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "SO56",
                 "action": "bets",
-                "amount": 355.0
+                "amount": 355.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "calls",
-                "amount": 355.0
+                "amount": 355.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "river": [
             {
                 "player": "manggy94",
                 "action": "bets",
-                "amount": 850.0
+                "amount": 850.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "SO56",
                 "action": "calls",
-                "amount": 850.0
+                "amount": 850.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ]
     },

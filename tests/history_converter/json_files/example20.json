@@ -148,47 +148,65 @@
             {
                 "player": "dolef",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "fullnobeat",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "icekush",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "PoneyKlub",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "calls",
-                "amount": 1000.0
+                "amount": 1000.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "Rochefort10",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "kris2307",
                 "action": "raises",
-                "amount": 12317.0
+                "amount": 12317.0,
+                "raise_total": 13317.0,
+                "is_all_in": true
             },
             {
                 "player": "jahden 974",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "calls",
-                "amount": 12317.0
+                "amount": 12317.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "flop": [],

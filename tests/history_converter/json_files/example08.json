@@ -148,74 +148,102 @@
             {
                 "player": "manggy94",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "LeCavSeRebif",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "ashalama",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "legrandtote",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "SHOVE&TILT",
                 "action": "raises",
-                "amount": 120.0
+                "amount": 120.0,
+                "raise_total": 240.0,
+                "is_all_in": false
             },
             {
                 "player": "Ussidio",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "CASUAL_17",
                 "action": "calls",
-                "amount": 240.0
+                "amount": 240.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "InUrAss",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "carlitouam",
                 "action": "calls",
-                "amount": 120.0
+                "amount": 120.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "flop": [
             {
                 "player": "carlitouam",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "SHOVE&TILT",
                 "action": "bets",
-                "amount": 435.0
+                "amount": 435.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "CASUAL_17",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "carlitouam",
                 "action": "raises",
-                "amount": 1005.0
+                "amount": 1005.0,
+                "raise_total": 1440.0,
+                "is_all_in": false
             },
             {
                 "player": "SHOVE&TILT",
                 "action": "calls",
-                "amount": 948.0
+                "amount": 948.0,
+                "raise_total": 0.0,
+                "is_all_in": true
             }
         ],
         "turn": [],

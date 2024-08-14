@@ -136,32 +136,44 @@
             {
                 "player": "loeil_38",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "Baadoot",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "ol6980",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "KissMyAce59",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "YoPaps",
                 "action": "raises",
-                "amount": 1154.0
+                "amount": 1154.0,
+                "raise_total": 4313.0,
+                "is_all_in": true
             },
             {
                 "player": "TiAree",
                 "action": "calls",
-                "amount": 2313.0
+                "amount": 2313.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "flop": [],

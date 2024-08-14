@@ -112,81 +112,111 @@
             {
                 "player": "dameisolde",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "looser13127",
                 "action": "calls",
-                "amount": 300.0
+                "amount": 300.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "chachnaq",
                 "action": "raises",
-                "amount": 600.0
+                "amount": 600.0,
+                "raise_total": 900.0,
+                "is_all_in": false
             },
             {
                 "player": "Fredo extra",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "meca cruas",
                 "action": "calls",
-                "amount": 600.0
+                "amount": 600.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "looser13127",
                 "action": "calls",
-                "amount": 600.0
+                "amount": 600.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "flop": [
             {
                 "player": "meca cruas",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "looser13127",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "chachnaq",
                 "action": "bets",
-                "amount": 1530.0
+                "amount": 1530.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "meca cruas",
                 "action": "raises",
-                "amount": 3670.0
+                "amount": 3670.0,
+                "raise_total": 5200.0,
+                "is_all_in": false
             },
             {
                 "player": "looser13127",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "chachnaq",
                 "action": "calls",
-                "amount": 3670.0
+                "amount": 3670.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "turn": [
             {
                 "player": "meca cruas",
                 "action": "bets",
-                "amount": 287.0
+                "amount": 287.0,
+                "raise_total": 0.0,
+                "is_all_in": true
             },
             {
                 "player": "chachnaq",
                 "action": "calls",
-                "amount": 287.0
+                "amount": 287.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "river": []

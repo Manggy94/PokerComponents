@@ -1,6 +1,6 @@
 {
     "tournament_info": {
-        "tournament_name": "Déglingos",
+        "tournament_name": "D\u00e9glingos",
         "tournament_id": "154140538",
         "table_number": "004"
     },
@@ -61,17 +61,23 @@
             {
                 "player": "jaleo88",
                 "action": "raises",
-                "amount": 90.0
+                "amount": 90.0,
+                "raise_total": 120.0,
+                "is_all_in": false
             },
             {
                 "player": "Art&mus",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "flop": [],

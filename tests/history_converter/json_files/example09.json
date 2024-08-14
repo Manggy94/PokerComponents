@@ -82,83 +82,113 @@
             {
                 "player": "manggy94",
                 "action": "calls",
-                "amount": 80.0
+                "amount": 80.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "toubilou",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "Deeddoo",
                 "action": "raises",
-                "amount": 80.0
+                "amount": 80.0,
+                "raise_total": 160.0,
+                "is_all_in": false
             },
             {
                 "player": "ptibud34",
                 "action": "calls",
-                "amount": 80.0
+                "amount": 80.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "raises",
-                "amount": 480.0
+                "amount": 480.0,
+                "raise_total": 640.0,
+                "is_all_in": false
             },
             {
                 "player": "Deeddoo",
                 "action": "calls",
-                "amount": 480.0
+                "amount": 480.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "ptibud34",
                 "action": "folds",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "flop": [
             {
                 "player": "Deeddoo",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "turn": [
             {
                 "player": "Deeddoo",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "bets",
-                "amount": 1440.0
+                "amount": 1440.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "Deeddoo",
                 "action": "calls",
-                "amount": 1440.0
+                "amount": 1440.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "river": [
             {
                 "player": "Deeddoo",
                 "action": "checks",
-                "amount": 0.0
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "manggy94",
                 "action": "bets",
-                "amount": 4320.0
+                "amount": 4320.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             },
             {
                 "player": "Deeddoo",
                 "action": "calls",
-                "amount": 420.0
+                "amount": 420.0,
+                "raise_total": 0.0,
+                "is_all_in": true
             }
         ]
     },
