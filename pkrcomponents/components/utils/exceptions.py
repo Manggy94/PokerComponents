@@ -7,7 +7,7 @@ class NotSufficientBetError(Exception):
         message = (f"Bet value must be at least {player.table.min_bet} or player should go all-in.\n"
                    f"Current street: {player.table.street}\n"
                    f"Stack: {player.stack}\n"
-                   f"Bet Value: {value}")
+                   f"Bet Value: {value}\n")
         self.message = message
         super().__init__(self.message)
 
@@ -24,8 +24,8 @@ class NotSufficientRaiseError(Exception):
                    f"Player's current bet: {player.current_bet}\n"
                    f"Player's Min Raise: {player.min_raise}\n"
                    f"Raise Total Bet Value: {total_value}\n"
-                   f"Raise Value: {value}"
-                   f"Raise value must be at least {player.min_raise} or player should go all-in.")
+                   f"Raise Value: {value}\n"
+                   f"Raise value must be at least {player.min_raise} or player should go all-in.\n")
         self.message = message
         super().__init__(self.message)
 
