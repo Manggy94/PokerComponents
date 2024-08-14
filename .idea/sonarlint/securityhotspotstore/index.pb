@@ -238,8 +238,6 @@ f
 6pkrcomponents/converters/summary_converter/abstract.py,4\b\4b50edea5ca0d4a7f91ffdbb09d33255a0a15f2b
 c
 3pkrcomponents/converters/summary_converter/local.py,8\9\89096cc32e6f350a548a7011efcf38571e85733f
-`
-0pkrcomponents/converters/summary_converter/s3.py,b\0\b0c3cdb248c49e3a4dd804299c72991b27d0b1b5
 Y
 )tests/summary_converter/test_converter.py,7\a\7a54f97f85738dad31c27db89845a719bd0cfa1f
 a
@@ -268,14 +266,10 @@ V
 &tests/errors/json_files/example03.json,7\4\74786372a53a38e7e0d215c242741ca1783241a9
 T
 $tests/errors/json_files/example.json,1\2\122799b173847a99cdd3ccab5e5dd8d3d3ceeaee
-`
-0pkrcomponents/converters/history_converter/s3.py,e\2\e2aac9ae14ffe7ef6a54c44a454b4da39a3bc3b8
 ^
 .pkrcomponents/components/tournaments/payout.py,0\c\0cef018575aea91c5419f29a50c8b9363756c285
 [
 +pkrcomponents/components/utils/constants.py,0\7\07b68218827a167b52845edcdbe62ac3a26b32bb
-e
-5pkrcomponents/converters/runs/s3/convert_histories.py,6\6\66a8b17860f9756abec1da28b3d19695ec212fe2
 h
 8pkrcomponents/converters/runs/local/convert_summaries.py,a\5\a5ced2e1cbab7618b30036935e5a059550e0e08c
 g
@@ -292,3 +286,13 @@ a
 1tests/history_converter/json_files/example14.json,5\5\55e0d175d99138e83b734abc0f3eb3198db1657d
 a
 1tests/history_converter/json_files/example15.json,3\0\30d95ec421956947b200f2d8f5f5f9647bd08b50
+a
+1tests/history_converter/json_files/example16.json,f\5\f53e0719f6ea43adf939984bcc4bcd631c4e4914
+a
+1tests/history_converter/json_files/example17.json,7\9\7911db20e69980b0a286e9e9eba5c738c5915ed1
+a
+1tests/history_converter/json_files/example18.json,9\5\95606e56b7d96b78acdffd6e0e3df9ad90e6f6a2
+a
+1tests/history_converter/json_files/example19.json,f\0\f0f0d799eb64d7f2f95c724010e25869137bf967
+a
+1tests/history_converter/json_files/example20.json,d\a\da4f515f6e22d8b68af069810eb45f7ba9d1cfaf
