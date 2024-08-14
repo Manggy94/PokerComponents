@@ -179,6 +179,11 @@ class TablePlayer:
         return self.init_stack - self.stack
 
     @property
+    def is_biggest_investor(self):
+        """Boolean indicating if player is the biggest investor in the pot"""
+        return self.invested == max([player.invested for player in self.table.players])
+
+    @property
     def to_call(self) -> float:
         """The amount to call to continue on the table"""
         return self.max_bet(self.table.pot.highest_bet - self.current_bet)

@@ -197,8 +197,8 @@ class Table:
     @property
     def one_player_left(self) -> bool:
         """Returns True if there is only one player left in the game that can play and he has called"""
-        return (self.nb_able_to_play == 1 and self.nb_in_game == 1 and self.players_able_to_play[0].to_call == 0 and not
-                self.is_at_showdown)
+        return (self.nb_able_to_play == 1 and self.nb_in_game == 1 and self.players_able_to_play[0].is_biggest_investor
+                and not self.is_at_showdown)
 
     @property
     def hand_can_start(self) -> bool:
