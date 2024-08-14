@@ -179,7 +179,7 @@ class RaiseAction(Action):
     """
     def __init__(self, player: TablePlayer, value: float):
         total_value = value + player.to_call
-        if value < player.min_raise and total_value != player.stack:
+        if value < player.min_raise and player.max_bet(total_value) != player.stack:
             raise NotSufficientRaiseError(value, player)
         super().__init__(player=player, move=ActionMove.RAISE, value=total_value)
 
