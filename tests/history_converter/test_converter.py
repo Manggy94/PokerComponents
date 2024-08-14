@@ -850,6 +850,16 @@ class TestLocalHandHistoryConverter14(unittest.TestCase):
         self.converter.convert_history(self.history_path)
 
 
+class TestLocalHandHistoryConverter15(unittest.TestCase):
+    def setUp(self):
+        self.history_path = os.path.join(FILES_DIR, 'example15.json')
+        self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
+
+    def test_convert_history(self):
+        self.converter.convert_history(self.history_path)
+
+
 class TestLocalConverter(unittest.TestCase):
     def setUp(self):
         self.converter = LocalHandHistoryConverter(data_dir=TEST_DATA_DIR)

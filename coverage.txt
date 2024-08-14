@@ -29,7 +29,7 @@ pkrcomponents/components/players/datafields/general.py              22      1   
 pkrcomponents/components/players/datafields/postflop.py             53      0   100%
 pkrcomponents/components/players/datafields/preflop.py              55      0   100%
 pkrcomponents/components/players/player_hand_stats.py               20      1    95%
-pkrcomponents/components/players/players.py                        151     10    93%
+pkrcomponents/components/players/players.py                        151      7    95%
 pkrcomponents/components/players/position.py                        62      0   100%
 pkrcomponents/components/players/positions_map.py                   20      0   100%
 pkrcomponents/components/players/street_hand_stats/__init__.py       0      0   100%
@@ -80,4 +80,4 @@ pkrcomponents/converters/summary_converter/local.py                 27      5   
 pkrcomponents/converters/utils/__init__.py                           0      0   100%
 pkrcomponents/converters/utils/exceptions.py                         8      2    75%
 ------------------------------------------------------------------------------------
-TOTAL                                                             3172    172    95%
+TOTAL                                                             3172    169    95%

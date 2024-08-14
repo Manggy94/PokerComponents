@@ -275,7 +275,7 @@ class Table:
         if not (self.next_street_ready and self.street == Street.FLOP):
             raise ValueError("The FLOP must be ended before we can draw a turn")
         self.draw_turn(card)
-        self.street = "turn"
+        self.street = Street.TURN
         self.street_reset()
 
     def draw_river(self, card: (str, Card) = None):
@@ -300,7 +300,7 @@ class Table:
         if not (self.next_street_ready and self.street == Street.TURN):
             raise ValueError("The TURN must be ended before we can draw a river")
         self.draw_river(card)
-        self.street = "river"
+        self.street = Street.RIVER
         self.street_reset()
 
     def advance_to_showdown(self):
@@ -496,7 +496,6 @@ class Table:
                 player.update_has_position_stat()
 
         except IndexError:
-            # print("We cannot pass to next street due to lack of players in game")
             # raise IndexError
             pass
 

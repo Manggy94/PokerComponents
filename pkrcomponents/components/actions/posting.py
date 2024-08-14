@@ -29,7 +29,7 @@ class Posting:
         Executes the posting
         """
         player.pay(self.value)
-        player.table.pot.update_highest_bet(player.current_bet)
+        player.table.pot.update_highest_bet(player.table.level.bb)
         player.table.postings.append(self)
 
 

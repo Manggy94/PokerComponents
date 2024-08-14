@@ -1,0 +1,238 @@
+{
+    "tournament_info": {
+        "tournament_name": "Freeroll",
+        "tournament_id": "125721531",
+        "table_number": "408"
+    },
+    "buy_in": 0.0,
+    "hand_id": "539969864048050585-46-1439121236",
+    "datetime": "09-08-2015 11:53:56",
+    "game_type": "Tournament",
+    "level": {
+        "value": 27,
+        "ante": 1350.0,
+        "sb": 6000.0,
+        "bb": 12000.0
+    },
+    "max_players": 9,
+    "button_seat": 1,
+    "players": {
+        "2": {
+            "seat": 2,
+            "name": "bamboo_13",
+            "init_stack": 8775.0,
+            "bounty": 0.0,
+            "entered_hand": false
+        },
+        "3": {
+            "seat": 3,
+            "name": "vb051963",
+            "init_stack": 188528.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "4": {
+            "seat": 4,
+            "name": "tofbimbim77",
+            "init_stack": 7230.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "5": {
+            "seat": 5,
+            "name": "FLOPS77",
+            "init_stack": 58174.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "6": {
+            "seat": 6,
+            "name": "MisterWeed88",
+            "init_stack": 11227.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "7": {
+            "seat": 7,
+            "name": "NASTAKASS",
+            "init_stack": 225332.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "8": {
+            "seat": 8,
+            "name": "manggy94",
+            "init_stack": 18986.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "9": {
+            "seat": 9,
+            "name": "manix69 69",
+            "init_stack": 34868.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        }
+    },
+    "hero_hand": {
+        "hero": "manggy94",
+        "first_card": "6c",
+        "second_card": "Jh"
+    },
+    "postings": [
+        {
+            "name": "vb051963",
+            "amount": 1350.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "tofbimbim77",
+            "amount": 1350.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "FLOPS77",
+            "amount": 1350.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "MisterWeed88",
+            "amount": 1350.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "NASTAKASS",
+            "amount": 1350.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "manggy94",
+            "amount": 1350.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "manix69 69",
+            "amount": 1350.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "vb051963",
+            "amount": 6000.0,
+            "blind_type": "small blind"
+        },
+        {
+            "name": "tofbimbim77",
+            "amount": 5880.0,
+            "blind_type": "big blind"
+        }
+    ],
+    "actions": {
+        "preflop": [
+            {
+                "player": "FLOPS77",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "MisterWeed88",
+                "action": "calls",
+                "amount": 9877.0
+            },
+            {
+                "player": "NASTAKASS",
+                "action": "calls",
+                "amount": 12000.0
+            },
+            {
+                "player": "manggy94",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "manix69 69",
+                "action": "calls",
+                "amount": 12000.0
+            },
+            {
+                "player": "vb051963",
+                "action": "calls",
+                "amount": 6000.0
+            }
+        ],
+        "flop": [
+            {
+                "player": "vb051963",
+                "action": "checks",
+                "amount": 0.0
+            },
+            {
+                "player": "NASTAKASS",
+                "action": "bets",
+                "amount": 12000.0
+            },
+            {
+                "player": "manix69 69",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "vb051963",
+                "action": "raises",
+                "amount": 85207.0
+            },
+            {
+                "player": "NASTAKASS",
+                "action": "calls",
+                "amount": 85207.0
+            }
+        ],
+        "turn": [
+            {
+                "player": "vb051963",
+                "action": "bets",
+                "amount": 77971.0
+            },
+            {
+                "player": "NASTAKASS",
+                "action": "folds",
+                "amount": 0.0
+            }
+        ],
+        "river": []
+    },
+    "flop": {
+        "flop_card_1": "2c",
+        "flop_card_2": "7s",
+        "flop_card_3": "4c"
+    },
+    "turn": {
+        "turn_card": "8s"
+    },
+    "river": {
+        "river_card": "8d"
+    },
+    "showdown": {
+        "tofbimbim77": {
+            "first_card": "5h",
+            "second_card": "As"
+        },
+        "MisterWeed88": {
+            "first_card": "8h",
+            "second_card": "2h"
+        },
+        "vb051963": {
+            "first_card": "2d",
+            "second_card": "7h"
+        }
+    },
+    "winners": {
+        "vb051963": {
+            "amount": 278754.0,
+            "pot_type": "side pot 1"
+        },
+        "MisterWeed88": {
+            "amount": 54838.0,
+            "pot_type": "main pot"
+        }
+    }
+}
