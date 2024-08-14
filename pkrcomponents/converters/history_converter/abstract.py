@@ -1,8 +1,9 @@
 import json
 
 from abc import ABC, abstractmethod
-from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime
+from tqdm import tqdm
 
 from pkrcomponents.components.actions.action import BetAction, CallAction, CheckAction, FoldAction, RaiseAction
 from pkrcomponents.components.actions.action_move import ActionMove
@@ -182,12 +183,13 @@ class AbstractHandHistoryConverter(ABC):
         """Get the players from the data and set them to the set table object"""
         players_dict = self.data.get("players")
         for seat, player_dict in players_dict.items():
+            # print(player_dict)
             self.get_player(player_dict)
         button_seat = self.get_button_seat()
         bb_seat = self.table.players.get_bb_seat_from_button(button_seat)
         self.table.set_bb_seat(bb_seat)
         self.table.players.distribute_positions()
-        self.table.players.delete_inactive_players()
+        # self.table.players.delete_inactive_players()
 
     def get_player(self, player_dict: dict):
         """
@@ -204,7 +206,8 @@ class AbstractHandHistoryConverter(ABC):
         entered_hand = player_dict.get("entered_hand")
         player = TablePlayer(name=name, seat=seat, init_stack=init_stack, bounty=bounty, entered_hand=entered_hand)
         try:
-            player.sit(self.table)
+            if entered_hand:
+                player.sit(self.table)
         except SeatTakenError:
             player.replace(self.table)
 
@@ -245,7 +248,7 @@ class AbstractHandHistoryConverter(ABC):
             player = self.table.players[posting.get("name")]
             if posting.get("blind_type") == "big blind":
                 self.table.players.bb_seat = player.seat
-        self.table.players.delete_inactive_players()
+        # self.table.players.delete_inactive_players()
         self.table.players.distribute_positions()
 
     def get_actions(self):
@@ -398,6 +401,11 @@ class AbstractHandHistoryConverter(ABC):
         except (HandConversionError, NotSufficientBetError, NotSufficientRaiseError, PlayerNotOnTableError, ValueError,
                 KeyError, ShowdownNotReachedError, CannotParseWinnersError):
             raise HandConversionError(file_key)
+
+    def slow_convert_histories(self):
+        parsed_keys = self.list_parsed_histories_keys()[:50000]
+        for parsed_key in tqdm(parsed_keys):
+            self.convert_history(parsed_key)
 
     def convert_histories(self):
         parsed_keys = self.list_parsed_histories_keys()
