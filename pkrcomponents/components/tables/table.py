@@ -111,7 +111,8 @@ class Table:
         """Returns True if the big blind was forced into all-in"""
         bb_seat = self.players.bb_seat
         bb_player = self.players[bb_seat]
-        return bb_player.current_bet < self.level.bb and self.cnt_bets == 1 and self.street == Street.PREFLOP
+        return (bb_player.current_bet < self.level.bb and self.cnt_bets == 1 and self.street == Street.PREFLOP
+                and self.cnt_calls == 0)
 
     @property
     def playing_order(self) -> list[int]:
