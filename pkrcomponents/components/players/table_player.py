@@ -322,7 +322,7 @@ class TablePlayer:
         Args:
             combo (Combo, str): The combo to show
         """
-        if self.table.street != Street.SHOWDOWN:
+        if self.table.street != Street.SHOWDOWN and not self.table.hand_ended:
             raise ShowdownNotReachedError()
         self.combo = Combo(combo)
         self.hand_stats.general.combo = self.combo

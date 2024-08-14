@@ -1,0 +1,170 @@
+{
+    "tournament_info": {
+        "tournament_name": "Freeroll",
+        "tournament_id": "125561321",
+        "table_number": "437"
+    },
+    "buy_in": 0.0,
+    "hand_id": "539281767337558454-52-1438951219",
+    "datetime": "07-08-2015 12:40:19",
+    "game_type": "Tournament",
+    "level": {
+        "value": 14,
+        "ante": 70.0,
+        "sb": 300.0,
+        "bb": 600.0
+    },
+    "max_players": 6,
+    "button_seat": 3,
+    "players": {
+        "1": {
+            "seat": 1,
+            "name": "jackland",
+            "init_stack": 12312.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "2": {
+            "seat": 2,
+            "name": "Letyuna",
+            "init_stack": 11589.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "3": {
+            "seat": 3,
+            "name": "MINOUCHE23",
+            "init_stack": 2205.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "4": {
+            "seat": 4,
+            "name": "manggy94",
+            "init_stack": 5475.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "5": {
+            "seat": 5,
+            "name": "elodie26100",
+            "init_stack": 6570.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "6": {
+            "seat": 6,
+            "name": "edenpark524",
+            "init_stack": 5060.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        }
+    },
+    "hero_hand": {
+        "hero": "manggy94",
+        "first_card": "9c",
+        "second_card": "7d"
+    },
+    "postings": [
+        {
+            "name": "manggy94",
+            "amount": 70.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "elodie26100",
+            "amount": 70.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "jackland",
+            "amount": 70.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "Letyuna",
+            "amount": 70.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "MINOUCHE23",
+            "amount": 70.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "edenpark524",
+            "amount": 70.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "manggy94",
+            "amount": 300.0,
+            "blind_type": "small blind"
+        },
+        {
+            "name": "elodie26100",
+            "amount": 600.0,
+            "blind_type": "big blind"
+        }
+    ],
+    "actions": {
+        "preflop": [
+            {
+                "player": "edenpark524",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "jackland",
+                "action": "calls",
+                "amount": 600.0
+            },
+            {
+                "player": "Letyuna",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "MINOUCHE23",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "manggy94",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "elodie26100",
+                "action": "folds",
+                "amount": 0.0
+            }
+        ],
+        "flop": [],
+        "turn": [],
+        "river": []
+    },
+    "flop": {
+        "flop_card_1": null,
+        "flop_card_2": null,
+        "flop_card_3": null
+    },
+    "turn": {
+        "turn_card": null
+    },
+    "river": {
+        "river_card": null
+    },
+    "showdown": {
+        "jackland": {
+            "first_card": "As",
+            "second_card": "Jd"
+        }
+    },
+    "winners": {
+        "jackland": {
+            "amount": 1920.0,
+            "pot_type": "pot"
+        }
+    }
+}

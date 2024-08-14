@@ -286,3 +286,5 @@ c
 3pkrcomponents/converters/summary_converter/cloud.py,5\6\56aa0f56f11450dcf5f2113d8a8f9db1bc480deb
 c
 3pkrcomponents/converters/history_converter/cloud.py,a\5\a5234645985ac47ec1afea67356c2329b92d1bb4
+a
+1tests/history_converter/json_files/example13.json,0\4\0495d9db9d20db54c4da6fbce745bd3383ef0880
