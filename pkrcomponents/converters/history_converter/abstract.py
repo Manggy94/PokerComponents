@@ -269,6 +269,7 @@ class AbstractHandHistoryConverter(ABC):
         """
         actions = self.data.get("actions").get(street)
         for action_dict in actions:
+            print(action_dict)
             self.get_action(action_dict)
         if self.table.next_street_ready:
             self.advance_street()
