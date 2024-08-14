@@ -28,6 +28,7 @@ class Action:
     player = field(validator=[instance_of(TablePlayer)])
     move = field(default=ActionMove.CALL, validator=[instance_of(ActionMove)], converter=ActionMove)
     value = field(default=0, validator=[ge(0), instance_of(float)], converter=float)
+    # is_all_in = field(default=False, validator=instance_of(bool), converter=bool)
 
     def __str__(self) -> str:
         """
@@ -145,8 +146,11 @@ class CallAction(Action):
     """
     This class represents a call action made by a player in a poker game
     """
-    def __init__(self, player: TablePlayer):
-        super().__init__(player=player, move=ActionMove.CALL, value=player.to_call)
+    def __init__(self, player: TablePlayer, is_all_in: bool = False):
+        value = player.to_call
+        if is_all_in:
+            value = player.stack
+        super().__init__(player=player, move=ActionMove.CALL, value=value)
 
     def execute(self):
         super().execute()
@@ -158,7 +162,9 @@ class BetAction(Action):
     """
     This class represents a bet action made by a player in a poker game
     """
-    def __init__(self, player: TablePlayer, value: float):
+    def __init__(self, player: TablePlayer, value: float, is_all_in: bool = False):
+        if is_all_in:
+            value = player.stack
         if value < player.max_bet(player.table.min_bet):
             raise NotSufficientBetError(value, player)
         super().__init__(player=player, move=ActionMove.BET, value=value)
@@ -177,13 +183,15 @@ class RaiseAction(Action):
     """
     This class represents a raise action made by a player in a poker game
     """
-    def __init__(self, player: TablePlayer, value: float):
+    def __init__(self, player: TablePlayer, value: float, is_all_in: bool = False):
         table = player.table
         bb_seat = table.players.bb_seat
         bb_player = table.players[bb_seat]
         total_value = value + player.to_call
         if player.table.bb_forced_into_all_in:
             total_value = value + bb_player.current_bet
+        if is_all_in:
+            total_value = player.stack
         if value < player.min_raise and player.max_bet(total_value) != player.stack:
             raise NotSufficientRaiseError(value, player)
         super().__init__(player=player, move=ActionMove.RAISE, value=total_value)

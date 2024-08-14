@@ -266,9 +266,11 @@ class AbstractHandHistoryConverter(ABC):
         Args:
             street (Street): Street to get the actions from
         """
+        # print(self.table.street)
         actions = self.data.get("actions").get(street)
         for action_dict in actions:
             self.get_action(action_dict)
+            # print(action_dict)
         if self.table.next_street_ready:
             self.advance_street()
 
@@ -280,6 +282,7 @@ class AbstractHandHistoryConverter(ABC):
             action_dict (dict): Action data
         """
         player = self.table.players[action_dict.get("player")]
+        is_all_in = action_dict.get("is_all_in")
         if player.folded:
             raise PlayerAlreadyFoldedError
         move = ActionMove(action_dict.get("action"))
@@ -289,13 +292,13 @@ class AbstractHandHistoryConverter(ABC):
             case ActionMove.CHECK:
                 action = CheckAction(player)
             case ActionMove.CALL:
-                action = CallAction(player)
+                action = CallAction(player, is_all_in=is_all_in)
             case ActionMove.BET:
                 amount = action_dict.get("amount")
-                action = BetAction(player, amount)
+                action = BetAction(player, amount, is_all_in=is_all_in)
             case ActionMove.RAISE:
                 amount = action_dict.get("amount")
-                action = RaiseAction(player, amount)
+                action = RaiseAction(player, amount, is_all_in=is_all_in)
             case other:
                 raise ValueError(f"Invalid action: {other}")
         action.play()
