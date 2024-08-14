@@ -179,7 +179,7 @@ class TablePlayer:
         return self.init_stack - self.stack
 
     @property
-    def is_biggest_investor(self):
+    def is_biggest_investor(self) -> bool:
         """Boolean indicating if player is the biggest investor in the pot"""
         return self.invested == max([player.invested for player in self.table.players])
 
