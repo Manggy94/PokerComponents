@@ -159,7 +159,7 @@ class BetAction(Action):
     This class represents a bet action made by a player in a poker game
     """
     def __init__(self, player: TablePlayer, value: float):
-        if value < player.table.min_bet:
+        if value < player.max_bet(player.table.min_bet):
             raise NotSufficientBetError(value, player)
         super().__init__(player=player, move=ActionMove.BET, value=value)
 

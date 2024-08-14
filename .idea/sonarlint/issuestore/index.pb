@@ -288,3 +288,5 @@ c
 3pkrcomponents/converters/history_converter/cloud.py,a\5\a5234645985ac47ec1afea67356c2329b92d1bb4
 a
 1tests/history_converter/json_files/example13.json,0\4\0495d9db9d20db54c4da6fbce745bd3383ef0880
+a
+1tests/history_converter/json_files/example14.json,5\5\55e0d175d99138e83b734abc0f3eb3198db1657d
