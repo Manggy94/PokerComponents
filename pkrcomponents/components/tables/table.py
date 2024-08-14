@@ -107,6 +107,13 @@ class Table:
         return self.cnt_players == 0
 
     @property
+    def bb_forced_into_all_in(self) -> bool:
+        """Returns True if the big blind was forced into all-in"""
+        bb_seat = self.players.bb_seat
+        bb_player = self.players[bb_seat]
+        return bb_player.current_bet < self.level.bb and self.cnt_bets == 1 and self.street == Street.PREFLOP
+
+    @property
     def playing_order(self) -> list[int]:
         """Returns the list of the indexes of players on the table, with order depending on current street"""
         if self.street.is_preflop:

@@ -69,6 +69,7 @@ class Action:
         self.player.set_first_to_talk()
         self.update_hand_stats()
         self.player.current_bet += self.value
+        print(self.value)
         self.table.update_min_bet(self.new_min_bet)
         self.table.pot.update_highest_bet(self.player.current_bet)
 
@@ -178,7 +179,12 @@ class RaiseAction(Action):
     This class represents a raise action made by a player in a poker game
     """
     def __init__(self, player: TablePlayer, value: float):
+        table = player.table
+        bb_seat = table.players.bb_seat
+        bb_player = table.players[bb_seat]
         total_value = value + player.to_call
+        if player.table.bb_forced_into_all_in:
+            total_value = value + bb_player.current_bet
         if value < player.min_raise and player.max_bet(total_value) != player.stack:
             raise NotSufficientRaiseError(value, player)
         super().__init__(player=player, move=ActionMove.RAISE, value=total_value)

@@ -183,7 +183,6 @@ class AbstractHandHistoryConverter(ABC):
         """Get the players from the data and set them to the set table object"""
         players_dict = self.data.get("players")
         for seat, player_dict in players_dict.items():
-            # print(player_dict)
             self.get_player(player_dict)
         button_seat = self.get_button_seat()
         bb_seat = self.table.players.get_bb_seat_from_button(button_seat)
@@ -269,7 +268,6 @@ class AbstractHandHistoryConverter(ABC):
         """
         actions = self.data.get("actions").get(street)
         for action_dict in actions:
-            print(action_dict)
             self.get_action(action_dict)
         if self.table.next_street_ready:
             self.advance_street()
