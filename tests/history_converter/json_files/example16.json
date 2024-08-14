@@ -1,0 +1,198 @@
+{
+    "tournament_info": {
+        "tournament_name": "Freeroll",
+        "tournament_id": "125816897",
+        "table_number": "286"
+    },
+    "buy_in": 0.0,
+    "hand_id": "540379457899200799-1-1439202934",
+    "datetime": "10-08-2015 10:35:34",
+    "game_type": "Tournament",
+    "level": {
+        "value": 2,
+        "ante": 0.0,
+        "sb": 15.0,
+        "bb": 30.0
+    },
+    "max_players": 9,
+    "button_seat": 9,
+    "players": {
+        "1": {
+            "seat": 1,
+            "name": "manggy94",
+            "init_stack": 3290.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "2": {
+            "seat": 2,
+            "name": "Herve50300",
+            "init_stack": 2970.0,
+            "bounty": 0.0,
+            "entered_hand": false
+        },
+        "3": {
+            "seat": 3,
+            "name": "MagicDoooph",
+            "init_stack": 3000.0,
+            "bounty": 0.0,
+            "entered_hand": false
+        },
+        "4": {
+            "seat": 4,
+            "name": "jalien52",
+            "init_stack": 3000.0,
+            "bounty": 0.0,
+            "entered_hand": false
+        },
+        "5": {
+            "seat": 5,
+            "name": "elisabeth60",
+            "init_stack": 3000.0,
+            "bounty": 0.0,
+            "entered_hand": false
+        },
+        "6": {
+            "seat": 6,
+            "name": "Zuly13110",
+            "init_stack": 3000.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "7": {
+            "seat": 7,
+            "name": "diablerouge3",
+            "init_stack": 3000.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "8": {
+            "seat": 8,
+            "name": "chtimi1",
+            "init_stack": 3000.0,
+            "bounty": 0.0,
+            "entered_hand": false
+        },
+        "9": {
+            "seat": 9,
+            "name": "STAFFO59",
+            "init_stack": 3000.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        }
+    },
+    "hero_hand": {
+        "hero": "manggy94",
+        "first_card": "3c",
+        "second_card": "3h"
+    },
+    "postings": [
+        {
+            "name": "manggy94",
+            "amount": 15.0,
+            "blind_type": "small blind"
+        },
+        {
+            "name": "Zuly13110",
+            "amount": 30.0,
+            "blind_type": "big blind"
+        }
+    ],
+    "actions": {
+        "preflop": [
+            {
+                "player": "diablerouge3",
+                "action": "calls",
+                "amount": 30.0
+            },
+            {
+                "player": "STAFFO59",
+                "action": "calls",
+                "amount": 30.0
+            },
+            {
+                "player": "manggy94",
+                "action": "raises",
+                "amount": 120.0
+            },
+            {
+                "player": "Zuly13110",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "diablerouge3",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "STAFFO59",
+                "action": "calls",
+                "amount": 120.0
+            }
+        ],
+        "flop": [
+            {
+                "player": "manggy94",
+                "action": "bets",
+                "amount": 360.0
+            },
+            {
+                "player": "STAFFO59",
+                "action": "calls",
+                "amount": 360.0
+            }
+        ],
+        "turn": [
+            {
+                "player": "manggy94",
+                "action": "checks",
+                "amount": 0.0
+            },
+            {
+                "player": "STAFFO59",
+                "action": "checks",
+                "amount": 0.0
+            }
+        ],
+        "river": [
+            {
+                "player": "manggy94",
+                "action": "checks",
+                "amount": 0.0
+            },
+            {
+                "player": "STAFFO59",
+                "action": "checks",
+                "amount": 0.0
+            }
+        ]
+    },
+    "flop": {
+        "flop_card_1": "Kc",
+        "flop_card_2": "9d",
+        "flop_card_3": "Jd"
+    },
+    "turn": {
+        "turn_card": "4d"
+    },
+    "river": {
+        "river_card": "Qh"
+    },
+    "showdown": {
+        "manggy94": {
+            "first_card": "3c",
+            "second_card": "3h"
+        },
+        "STAFFO59": {
+            "first_card": "2c",
+            "second_card": "Qs"
+        }
+    },
+    "winners": {
+        "STAFFO59": {
+            "amount": 1080.0,
+            "pot_type": "pot"
+        }
+    }
+}

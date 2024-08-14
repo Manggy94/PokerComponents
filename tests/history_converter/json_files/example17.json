@@ -1,0 +1,210 @@
+{
+    "tournament_info": {
+        "tournament_name": "Freeroll",
+        "tournament_id": "149682857",
+        "table_number": "033"
+    },
+    "buy_in": 0,
+    "hand_id": "642882975586844706-59-1457192305",
+    "datetime": "05-03-2016 15:38:25",
+    "game_type": "Tournament",
+    "level": {
+        "value": 20,
+        "ante": 400.0,
+        "sb": 2000.0,
+        "bb": 4000.0
+    },
+    "max_players": 8,
+    "button_seat": 8,
+    "players": {
+        "1": {
+            "seat": 1,
+            "name": "TiAree",
+            "init_stack": 27652.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "2": {
+            "seat": 2,
+            "name": "manggy94",
+            "init_stack": 3559.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "3": {
+            "seat": 3,
+            "name": "loeil_38",
+            "init_stack": 15035.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "4": {
+            "seat": 4,
+            "name": "Baadoot",
+            "init_stack": 43817.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "5": {
+            "seat": 5,
+            "name": "jacQSOL",
+            "init_stack": 370.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "6": {
+            "seat": 6,
+            "name": "ol6980",
+            "init_stack": 24070.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "7": {
+            "seat": 7,
+            "name": "KissMyAce59",
+            "init_stack": 18135.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "8": {
+            "seat": 8,
+            "name": "YoPaps",
+            "init_stack": 4713.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        }
+    },
+    "hero_hand": {
+        "hero": "manggy94",
+        "first_card": "5d",
+        "second_card": "8h"
+    },
+    "postings": [
+        {
+            "name": "TiAree",
+            "amount": 400.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "manggy94",
+            "amount": 400.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "loeil_38",
+            "amount": 400.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "Baadoot",
+            "amount": 400.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "jacQSOL",
+            "amount": 370.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "ol6980",
+            "amount": 400.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "KissMyAce59",
+            "amount": 400.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "YoPaps",
+            "amount": 400.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "TiAree",
+            "amount": 2000.0,
+            "blind_type": "small blind"
+        },
+        {
+            "name": "manggy94",
+            "amount": 3159.0,
+            "blind_type": "big blind"
+        }
+    ],
+    "actions": {
+        "preflop": [
+            {
+                "player": "loeil_38",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "Baadoot",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "ol6980",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "KissMyAce59",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "YoPaps",
+                "action": "raises",
+                "amount": 1154.0
+            },
+            {
+                "player": "TiAree",
+                "action": "calls",
+                "amount": 2313.0
+            }
+        ],
+        "flop": [],
+        "turn": [],
+        "river": []
+    },
+    "flop": {
+        "flop_card_1": "7h",
+        "flop_card_2": "Ah",
+        "flop_card_3": "Kh"
+    },
+    "turn": {
+        "turn_card": "6d"
+    },
+    "river": {
+        "river_card": "7c"
+    },
+    "showdown": {
+        "manggy94": {
+            "first_card": "5d",
+            "second_card": "8h"
+        },
+        "jacQSOL": {
+            "first_card": "5c",
+            "second_card": "5h"
+        },
+        "TiAree": {
+            "first_card": "6c",
+            "second_card": "3s"
+        },
+        "YoPaps": {
+            "first_card": "4s",
+            "second_card": "6s"
+        }
+    },
+    "winners": {
+        "YoPaps": {
+            "amount": 7478.0,
+            "pot_type": "pot"
+        },
+        "TiAree": {
+            "amount": 7477.0,
+            "pot_type": "pot"
+        }
+    }
+}

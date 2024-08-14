@@ -1,0 +1,168 @@
+{
+    "tournament_info": {
+        "tournament_name": "Freeroll",
+        "tournament_id": "162372586",
+        "table_number": "050"
+    },
+    "buy_in": 0.0,
+    "hand_id": "697384946636947507-107-1467667578",
+    "datetime": "04-07-2016 21:26:18",
+    "game_type": "Tournament",
+    "level": {
+        "value": 22,
+        "ante": 400.0,
+        "sb": 2000.0,
+        "bb": 4000.0
+    },
+    "max_players": 6,
+    "button_seat": 2,
+    "players": {
+        "1": {
+            "seat": 1,
+            "name": "SaltyPlay",
+            "init_stack": 154475.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "2": {
+            "seat": 2,
+            "name": "Indy Bois",
+            "init_stack": 35450.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "3": {
+            "seat": 3,
+            "name": "TOIHA",
+            "init_stack": 20400.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "4": {
+            "seat": 4,
+            "name": "pepedilemoko",
+            "init_stack": 707.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "5": {
+            "seat": 5,
+            "name": "R.chel54",
+            "init_stack": 36801.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "6": {
+            "seat": 6,
+            "name": "manggy94",
+            "init_stack": 31150.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        }
+    },
+    "hero_hand": {
+        "hero": "manggy94",
+        "first_card": "6d",
+        "second_card": "7c"
+    },
+    "postings": [
+        {
+            "name": "TOIHA",
+            "amount": 400.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "pepedilemoko",
+            "amount": 400.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "SaltyPlay",
+            "amount": 400.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "Indy Bois",
+            "amount": 400.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "R.chel54",
+            "amount": 400.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "manggy94",
+            "amount": 400.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "TOIHA",
+            "amount": 2000.0,
+            "blind_type": "small blind"
+        },
+        {
+            "name": "pepedilemoko",
+            "amount": 307.0,
+            "blind_type": "big blind"
+        }
+    ],
+    "actions": {
+        "preflop": [
+            {
+                "player": "R.chel54",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "manggy94",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "SaltyPlay",
+                "action": "folds",
+                "amount": 0.0
+            },
+            {
+                "player": "Indy Bois",
+                "action": "folds",
+                "amount": 0.0
+            }
+        ],
+        "flop": [],
+        "turn": [],
+        "river": []
+    },
+    "flop": {
+        "flop_card_1": "Ts",
+        "flop_card_2": "4h",
+        "flop_card_3": "Ah"
+    },
+    "turn": {
+        "turn_card": "3s"
+    },
+    "river": {
+        "river_card": "Th"
+    },
+    "showdown": {
+        "TOIHA": {
+            "first_card": "7s",
+            "second_card": "9h"
+        },
+        "pepedilemoko": {
+            "first_card": "Kc",
+            "second_card": "Qd"
+        }
+    },
+    "winners": {
+        "pepedilemoko": {
+            "amount": 3014.0,
+            "pot_type": "main pot"
+        },
+        "TOIHA": {
+            "amount": 1693.0,
+            "pot_type": "side pot 1"
+        }
+    }
+}

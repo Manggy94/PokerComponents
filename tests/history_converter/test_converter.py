@@ -21,10 +21,13 @@ FILES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "json_files
 class TestS3Converter(unittest.TestCase):
     def setUp(self):
         self.converter = LocalHandHistoryConverter(data_dir=TEST_DATA_DIR)
-        self.history_path = self.converter.list_parsed_histories_keys()[0]
+
 
     def test_convert_history(self):
-        self.converter.convert_history(self.history_path)
+        history_keys = self.converter.list_parsed_histories_keys()
+        self.assertIsInstance(history_keys, list)
+        history_path = history_keys[0]
+        self.converter.convert_history(history_path)
 
 class TestLocalHandHistoryConverter(unittest.TestCase):
     def setUp(self):
@@ -860,16 +863,33 @@ class TestLocalHandHistoryConverter15(unittest.TestCase):
         self.converter.convert_history(self.history_path)
 
 
-class TestLocalConverter(unittest.TestCase):
+class TestLocalHandHistoryConverter16(unittest.TestCase):
     def setUp(self):
-        self.converter = LocalHandHistoryConverter(data_dir=TEST_DATA_DIR)
-        self.history_path = self.converter.list_parsed_histories_keys()[0]
+        self.history_path = os.path.join(FILES_DIR, 'example16.json')
+        self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
 
     def test_convert_history(self):
         self.converter.convert_history(self.history_path)
 
-    def test_list_parsed_histories_keys(self):
-        keys = self.converter.list_parsed_histories_keys()
-        self.assertIsInstance(keys, list)
+
+class TestLocalHandHistoryConverter17(unittest.TestCase):
+    def setUp(self):
+        self.history_path = os.path.join(FILES_DIR, 'example17.json')
+        self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
+
+    def test_convert_history(self):
+        self.converter.convert_history(self.history_path)
+
+
+class TestLocalHandHistoryConverter18(unittest.TestCase):
+    def setUp(self):
+        self.history_path = os.path.join(FILES_DIR, 'example18.json')
+        self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
+
+    def test_convert_history(self):
+        self.converter.convert_history(self.history_path)
 
 
