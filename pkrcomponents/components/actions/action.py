@@ -69,7 +69,6 @@ class Action:
         self.player.set_first_to_talk()
         self.update_hand_stats()
         self.player.current_bet += self.value
-        print(self.value)
         self.table.update_min_bet(self.new_min_bet)
         self.table.pot.update_highest_bet(self.player.current_bet)
 

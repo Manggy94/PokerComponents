@@ -296,3 +296,5 @@ a
 1tests/history_converter/json_files/example19.json,f\0\f0f0d799eb64d7f2f95c724010e25869137bf967
 a
 1tests/history_converter/json_files/example20.json,d\a\da4f515f6e22d8b68af069810eb45f7ba9d1cfaf
+a
+1tests/history_converter/json_files/example21.json,7\9\7921285735154d5fe8a39c2265d9ad98a174d04b
