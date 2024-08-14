@@ -893,3 +893,13 @@ class TestLocalHandHistoryConverter18(unittest.TestCase):
         self.converter.convert_history(self.history_path)
 
 
+class TestLocalHandHistoryConverter19(unittest.TestCase):
+    def setUp(self):
+        self.history_path = os.path.join(FILES_DIR, 'example19.json')
+        self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
+
+    def test_convert_history(self):
+        self.converter.convert_history(self.history_path)
+
+
