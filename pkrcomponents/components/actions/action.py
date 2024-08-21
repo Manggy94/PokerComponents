@@ -192,6 +192,7 @@ class RaiseAction(Action):
             total_value = value + bb_player.current_bet
         if is_all_in:
             total_value = player.stack
+        # print(total_value)
         if value < player.min_raise and player.max_bet(total_value) != player.stack:
             raise NotSufficientRaiseError(value, player)
         super().__init__(player=player, move=ActionMove.RAISE, value=total_value)

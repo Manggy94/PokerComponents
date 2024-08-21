@@ -38,6 +38,13 @@
             "bounty": 0.0,
             "entered_hand": true
         },
+        "5": {
+            "seat": 5,
+            "name": "jeanclaude88",
+            "init_stack": 98798.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
         "6": {
             "seat": 6,
             "name": "Gilbert 70",
@@ -92,6 +99,11 @@
             "blind_type": "ante"
         },
         {
+            "name": "jeanclaude88",
+            "amount": 120.0,
+            "blind_type": "ante"
+        },
+        {
             "name": "CypherPonk",
             "amount": 120.0,
             "blind_type": "ante"
@@ -136,6 +148,27 @@
                 "amount": 18270.0,
                 "raise_total": 19270.0,
                 "is_all_in": true
+            },
+            {
+                "player": "jeanclaude88",
+                "action": "folds",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "Gilbert 70",
+                "action": "calls",
+                "amount": 18770.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "Elfurio72",
+                "action": "folds",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
             }
         ],
         "flop": [],

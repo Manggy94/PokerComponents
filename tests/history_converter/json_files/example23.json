@@ -1,0 +1,282 @@
+{
+    "tournament_info": {
+        "tournament_name": "Freeroll",
+        "tournament_id": "408739556",
+        "table_number": "0069"
+    },
+    "buy_in": 0.0,
+    "hand_id": "1755523025601560646-72-1606855008",
+    "datetime": "01-12-2020 20:36:48",
+    "game_type": "Tournament",
+    "level": {
+        "value": 31,
+        "ante": 2500.0,
+        "sb": 10000.0,
+        "bb": 20000.0
+    },
+    "max_players": 8,
+    "button_seat": 8,
+    "players": {
+        "1": {
+            "seat": 1,
+            "name": "zazou1975",
+            "init_stack": 363642.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "2": {
+            "seat": 2,
+            "name": "La punaise p",
+            "init_stack": 273655.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "3": {
+            "seat": 3,
+            "name": "Ding 94",
+            "init_stack": 88902.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "4": {
+            "seat": 4,
+            "name": "Nicoluz",
+            "init_stack": 404301.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "5": {
+            "seat": 5,
+            "name": "blakadablaa",
+            "init_stack": 277254.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "6": {
+            "seat": 6,
+            "name": "ADEKAME",
+            "init_stack": 686781.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "7": {
+            "seat": 7,
+            "name": "zenlechat4",
+            "init_stack": 140409.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "8": {
+            "seat": 8,
+            "name": "manggy94",
+            "init_stack": 226226.0,
+            "bounty": 0.0,
+            "entered_hand": false
+        }
+    },
+    "hero_hand": {
+        "hero": "manggy94",
+        "first_card": null,
+        "second_card": null
+    },
+    "postings": [
+        {
+            "name": "zazou1975",
+            "amount": 2500.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "La punaise p",
+            "amount": 2500.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "Ding 94",
+            "amount": 2500.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "Nicoluz",
+            "amount": 2500.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "blakadablaa",
+            "amount": 2500.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "ADEKAME",
+            "amount": 2500.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "zenlechat4",
+            "amount": 2500.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "zazou1975",
+            "amount": 10000.0,
+            "blind_type": "small blind"
+        },
+        {
+            "name": "La punaise p",
+            "amount": 20000.0,
+            "blind_type": "big blind"
+        }
+    ],
+    "actions": {
+        "preflop": [
+            {
+                "player": "Ding 94",
+                "action": "folds",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "Nicoluz",
+                "action": "calls",
+                "amount": 20000.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "blakadablaa",
+                "action": "folds",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "ADEKAME",
+                "action": "folds",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "zenlechat4",
+                "action": "raises",
+                "amount": 20000.0,
+                "raise_total": 40000.0,
+                "is_all_in": false
+            },
+            {
+                "player": "zazou1975",
+                "action": "folds",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "La punaise p",
+                "action": "calls",
+                "amount": 20000.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "Nicoluz",
+                "action": "calls",
+                "amount": 20000.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            }
+        ],
+        "flop": [
+            {
+                "player": "La punaise p",
+                "action": "checks",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "Nicoluz",
+                "action": "checks",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "zenlechat4",
+                "action": "bets",
+                "amount": 50000.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "La punaise p",
+                "action": "calls",
+                "amount": 50000.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "Nicoluz",
+                "action": "calls",
+                "amount": 50000.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            }
+        ],
+        "turn": [
+            {
+                "player": "La punaise p",
+                "action": "checks",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "Nicoluz",
+                "action": "checks",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "zenlechat4",
+                "action": "bets",
+                "amount": 47909.0,
+                "raise_total": 0.0,
+                "is_all_in": true
+            },
+            {
+                "player": "La punaise p",
+                "action": "folds",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "Nicoluz",
+                "action": "folds",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            }
+        ],
+        "river": []
+    },
+    "flop": {
+        "flop_card_1": "6h",
+        "flop_card_2": "8d",
+        "flop_card_3": "Qs"
+    },
+    "turn": {
+        "turn_card": "2d"
+    },
+    "river": {
+        "river_card": null
+    },
+    "showdown": {},
+    "winners": {
+        "zenlechat4": {
+            "amount": 345409.0,
+            "pot_type": "pot"
+        }
+    }
+}

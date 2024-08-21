@@ -269,8 +269,10 @@ class AbstractHandHistoryConverter(ABC):
         # print(self.table.street)
         actions = self.data.get("actions").get(street)
         for action_dict in actions:
-            self.get_action(action_dict)
             # print(action_dict)
+            self.get_action(action_dict)
+        # print(self.table.street_ended)
+        # print(self.table.players)
         if self.table.next_street_ready:
             self.advance_street()
 
@@ -401,17 +403,31 @@ class AbstractHandHistoryConverter(ABC):
             self.get_winners()
             return self.table
         except (HandConversionError, NotSufficientBetError, NotSufficientRaiseError, PlayerNotOnTableError, ValueError,
-                KeyError, ShowdownNotReachedError, CannotParseWinnersError):
+                KeyError, ShowdownNotReachedError, CannotParseWinnersError, AttributeError):
             raise HandConversionError(file_key)
 
     def slow_convert_histories(self):
-        parsed_keys = self.list_parsed_histories_keys()[:50000]
+        parsed_keys = self.list_parsed_histories_keys()
         for parsed_key in tqdm(parsed_keys):
-            self.convert_history(parsed_key)
+            try:
+                self.convert_history(parsed_key)
+            except HandConversionError:
+                self.move_to_correction_dir(parsed_key)
 
+    # def convert_histories(self):
+    #     parsed_keys = self.list_parsed_histories_keys()
+    #     with ThreadPoolExecutor(max_workers=10) as executor:
+    #         futures = [executor.submit(self.convert_history, parsed_key) for parsed_key in parsed_keys]
+    #         for future in as_completed(futures):
+    #             future.result()
     def convert_histories(self):
         parsed_keys = self.list_parsed_histories_keys()
         with ThreadPoolExecutor(max_workers=10) as executor:
-            futures = [executor.submit(self.convert_history, parsed_key) for parsed_key in parsed_keys]
+            futures = {executor.submit(self.convert_history, parsed_key): parsed_key for parsed_key in parsed_keys}
             for future in as_completed(futures):
-                future.result()
+                parsed_key = futures[future]
+                try:
+                    future.result()
+                except HandConversionError as e:
+                    print(f"Error processing history {parsed_key}: {e}")
+                    self.move_to_correction_dir(parsed_key)

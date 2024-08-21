@@ -298,3 +298,11 @@ a
 1tests/history_converter/json_files/example20.json,d\a\da4f515f6e22d8b68af069810eb45f7ba9d1cfaf
 a
 1tests/history_converter/json_files/example21.json,7\9\7921285735154d5fe8a39c2265d9ad98a174d04b
+\
+,tests/history_converter/update_json_files.py,8\4\8468e741516754e1ef0f52ca261a83f31e1d5060
+a
+1tests/history_converter/json_files/example22.json,7\3\73037aadfb88006b2e1e7dada2231e43ffb86c6d
+a
+1tests/history_converter/json_files/example23.json,d\d\dd46cb2e2ef68aa6caa830ca62a72fa9457ceb75
+m
+=pkrcomponents/converters/runs/local/slow_convert_histories.py,a\0\a005d0744e69cf2feb529208da423331267b8286

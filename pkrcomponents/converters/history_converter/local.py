@@ -36,3 +36,6 @@ class LocalHandHistoryConverter(AbstractHandHistoryConverter):
         print(f"Moving {file_key} to {correction_key}")
         os.replace(file_key, correction_key)
         print("Corrupt history files have been moved to corrections directory")
+        # Write file_key to a correction file
+        # with open(os.path.join(self.data_dir, "parsed_to_correct.txt"), 'w') as file:
+        #     file.write(file_key + "\n")
