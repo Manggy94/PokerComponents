@@ -603,6 +603,8 @@ class Table:
         """Calculate and distribute rewards"""
         self.calculate_rewards()
         self.distribute_rewards()
+        for player in self.players:
+            player.hand_stats.general.chips_difference = - player.invested
 
     def hand_reset(self):
         """Reset the table for a new hand"""

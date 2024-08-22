@@ -1,4 +1,5 @@
 import csv
+import pandas as pd
 from attrs import define, Factory
 from pkrcomponents.components.utils.converters import pascal_to_snake_case
 
@@ -16,6 +17,15 @@ class StreetHandStatsBase:
                 setattr(self, attribute.name, attribute.default.factory())
             else:
                 setattr(self, attribute.name, attribute.default)
+
+    def to_dataframe(self):
+        """
+        Converts the object to a pandas DataFrame
+        """
+        columns = [attribute.name for attribute in self.__attrs_attrs__]
+        values = [getattr(self, column_name) for column_name in columns]
+        df = pd.DataFrame([values], columns=columns)
+        return df
 
     # @classmethod
     # def generate_description_file(cls):

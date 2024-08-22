@@ -21,6 +21,9 @@ STARTING_STACK = field(
 AMOUNT_WON = field(
     default=0, validator=[ge(0), instance_of(float)], converter=float,
     metadata={'description': 'The amount the player won ', 'type': 'decimal_15_2'})
+CHIPS_DIFFERENCE = field(
+    default=0, validator=[instance_of(float)], converter=float,
+    metadata={'description': 'The difference in chips the player has after rewarding', 'type': 'decimal_15_2'})
 AMOUNT_EXPECTED_WON = field(
     default=0, validator=[ge(0), instance_of(float)], converter=float,
     metadata={'description': 'The amount the player is expected to win after showdown (EV)', 'type': 'decimal_15_2'})

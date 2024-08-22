@@ -1,5 +1,7 @@
-import unittest
 import os
+import pandas as pd
+import unittest
+
 from datetime import datetime
 
 from pkrcomponents.components.actions.action_move import ActionMove
@@ -575,9 +577,25 @@ class TestLocalHandHistoryConverter(unittest.TestCase):
         self.assertIsNone(villain_stats.general.facing_all_in_move)
         self.assertEqual(hero_stats.general.amount_won, 0)
         self.assertEqual(villain_stats.general.amount_won, 7575)
+        self.assertEqual(hero_stats.general.chips_difference, -225)
+        self.assertEqual(villain_stats.general.chips_difference, 3125)
         self.assertFalse(hero_stats.general.flag_won_hand)
         self.assertTrue(villain_stats.general.flag_won_hand)
 
+    def test_stats_to_dataframe(self):
+        table = self.converter.convert_history(self.history_path)
+        self.assertIsInstance(table, Table)
+        hero_player = table.players["manggy94"]
+        self.assertTrue(hero_player.is_hero)
+        hero_stats = hero_player.hand_stats
+        self.assertIsInstance(hero_stats.general.to_dataframe(), pd.DataFrame)
+        self.assertIsInstance(hero_stats.preflop.to_dataframe(), pd.DataFrame)
+        self.assertIsInstance(hero_stats.flop.to_dataframe(), pd.DataFrame)
+        self.assertIsInstance(hero_stats.turn.to_dataframe(), pd.DataFrame)
+        self.assertIsInstance(hero_stats.river.to_dataframe(), pd.DataFrame)
+        self.assertIsInstance(hero_stats.to_dataframe(), pd.DataFrame)
+        for column in hero_stats.to_dataframe().columns:
+            print(column)
 
 class TestLocalHandHistoryConverter2(unittest.TestCase):
     def setUp(self):
