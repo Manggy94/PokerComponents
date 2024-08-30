@@ -2,17 +2,9 @@ from pathlib import Path
 from setuptools import setup, find_packages
 import json
 
-
-install_requires = [        
-    "parsedatetime",
-    "cached-property",
-    "numpy",
-    "pandas",
-    "pytest",
-    "coverage",
-    "pytest-cov",
-    "attrs",
-]
+with open("requirements.txt") as f:
+    content = f.read()
+install_requires = content.strip().split("\n")
 
 classifiers = [
     "Development Status :: 4 - Beta",

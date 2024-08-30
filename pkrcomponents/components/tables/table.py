@@ -1,3 +1,5 @@
+import pandas as pd
+
 from attrs import define, field, Factory
 from attrs.validators import instance_of, optional, ge, le
 from datetime import datetime
@@ -625,3 +627,12 @@ class Table:
     def reset_postings(self):
         """Reset the postings"""
         self.postings = list()
+
+    def to_dataframe(self):
+        """
+        Converts the object to a pandas DataFrame
+        """
+        columns = ["hand_id", "hand_date", "max_players", "cnt_players", "button_seat"]
+        values = [self.hand_id, self.hand_date, self.max_players, self.cnt_players, self.players.button_seat]
+        df = pd.DataFrame([values], columns=columns)
+        return df

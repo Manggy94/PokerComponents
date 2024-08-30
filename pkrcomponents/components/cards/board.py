@@ -84,3 +84,9 @@ class Board:
         Returns the board as a JSON
         """
         return self.cards.astype(str).to_dict()
+
+    def to_dataframe(self):
+        """
+        Returns the board as a DataFrame
+        """
+        return pd.DataFrame([self.cards])

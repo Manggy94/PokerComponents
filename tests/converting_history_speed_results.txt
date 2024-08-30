@@ -1,0 +1,3 @@
+Total time for 100 files: 2.63 seconds
+Average time: 0.03 seconds, or 26.3 milliseconds per file.
+Minimum time: 9.86 seconds with 1000 concurrent functions and 1 batch size

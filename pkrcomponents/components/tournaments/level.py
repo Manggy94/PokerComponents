@@ -1,4 +1,5 @@
 import attrs
+import pandas as pd
 from attrs import define, field, Factory, asdict
 from attrs.validators import instance_of, ge
 
@@ -45,3 +46,9 @@ class Level:
         level_dict = asdict(self)
         level_dict["sb"] = self.sb
         return level_dict
+
+    def to_dataframe(self) -> pd.DataFrame:
+        """
+        Converts the object to a pandas DataFrame
+        """
+        return pd.DataFrame(data=[self.to_json().values()], columns=self.to_json().keys())

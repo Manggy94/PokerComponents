@@ -1,3 +1,5 @@
+import pandas as pd
+
 from functools import total_ordering
 from pkrcomponents.components.utils.common import ReprMixin
 from pkrcomponents.components.cards.card import Card
@@ -152,3 +154,10 @@ class Combo(ReprMixin, metaclass=ComboMeta):
         else:
             combinations_function = Suit.get_suited_suit_combinations
         return tuple(Combo(f"{hand.first}{suit1}{hand.second}{suit2}") for suit1, suit2 in combinations_function())
+
+    def to_dataframe(self):
+        """Converts the Combo to a DataFrame"""
+        return pd.DataFrame(
+            data=[[self.first, self.second]],
+            columns=["first", "second"]
+        )

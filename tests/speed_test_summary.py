@@ -4,14 +4,11 @@ import os
 import pandas as pd
 import time
 from pkrcomponents.converters.settings import DATA_DIR
-from pkrcomponents.converters.history_converter.local import LocalHandHistoryConverter
 from pkrcomponents.converters.summary_converter.local import LocalSummaryConverter
 
 TEST_DIR = os.path.dirname(os.path.abspath(__file__))
-HISTORY_SPEED_RESULTS_PATH = os.path.join(TEST_DIR, "converting_history_speed_results.txt")
 SUMMARY_SPEED_RESULTS_PATH = os.path.join(TEST_DIR, "converting_summary_speed_results.txt")
 
-history_converter = LocalHandHistoryConverter(DATA_DIR)
 summary_converter = LocalSummaryConverter(DATA_DIR)
 
 
@@ -81,11 +78,6 @@ def speed_test(main_function, files_list, results_path):
 
 
 if __name__ == "__main__":
-    speed_test(
-        main_function=history_converter.convert_history,
-        files_list=history_converter.list_parsed_histories_keys(),
-        results_path=HISTORY_SPEED_RESULTS_PATH
-    )
     speed_test(
         main_function=summary_converter.convert_summary,
         files_list=summary_converter.list_parsed_summaries_keys(),
