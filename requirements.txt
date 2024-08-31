@@ -1,8 +1,7 @@
-attrs==21.1.0
-boto3==1.34.145
-pandas==2.2.2
-python-dotenv==1.0.1
-tqdm==4.66.5
-pip==23.2.1
-wheel>=0.41.2
-setuptools>=68.2.0
+attrs
+boto3
+pandas
+python-dotenv
+tqdm
+
+
