@@ -37,7 +37,7 @@ setup(
     author_email="alex.mangwa@gmail.com",
     url="https://github.com/manggy94/PokerComponents",
     license="MIT",
-    packages=find_packages(exclude=["tests/", ".venv", "venv", "venv.*"], include=["pkrcomponents/"]),
+    packages=find_packages(exclude=["tests", ".venv", "venv", "venv.*"]),
     install_requires=install_requires,
     tests_require=["pytest", "pytest-cov", "coverage", "coveralls"],
 )
