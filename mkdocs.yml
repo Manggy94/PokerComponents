@@ -51,6 +51,15 @@ nav:
         - Converters: components/utils/history_converter.md
         - Exceptions: components/utils/exceptions.md
         - Validators: components/utils/validators.md
+    - Converters:
+      - History:
+        - Abstract: converters/history/abstract.md
+        - Cloud: converters/history/cloud.md
+        - Local: converters/history/local.md
+      - Summary: 
+        - Abstract: converters/summary/abstract.md
+        - Cloud: converters/summary/cloud.md
+        - Local: converters/summary/local.md
 
 
 

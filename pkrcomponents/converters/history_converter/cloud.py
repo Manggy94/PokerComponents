@@ -5,6 +5,9 @@ from pkrcomponents.converters.history_converter.abstract import AbstractHandHist
 
 
 class CloudHandHistoryConverter(AbstractHandHistoryConverter):
+    """
+    A class that converts hand histories from a bucket to a table
+    """
     def __init__(self, bucket_name: str):
         self.s3 = boto3.client("s3")
         self.bucket_name = bucket_name

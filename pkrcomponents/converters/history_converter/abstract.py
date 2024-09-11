@@ -266,13 +266,9 @@ class AbstractHandHistoryConverter(ABC):
         Args:
             street (Street): Street to get the actions from
         """
-        # print(self.table.street)
         actions = self.data.get("actions").get(street)
         for action_dict in actions:
-            # print(action_dict)
             self.get_action(action_dict)
-        # print(self.table.street_ended)
-        # print(self.table.players)
         if self.table.next_street_ready:
             self.advance_street()
 
@@ -414,12 +410,6 @@ class AbstractHandHistoryConverter(ABC):
             except HandConversionError:
                 self.move_to_correction_dir(parsed_key)
 
-    # def convert_histories(self):
-    #     parsed_keys = self.list_parsed_histories_keys()
-    #     with ThreadPoolExecutor(max_workers=10) as executor:
-    #         futures = [executor.submit(self.convert_history, parsed_key) for parsed_key in parsed_keys]
-    #         for future in as_completed(futures):
-    #             future.result()
     def convert_histories(self):
         parsed_keys = self.list_parsed_histories_keys()
         with ThreadPoolExecutor(max_workers=10) as executor:

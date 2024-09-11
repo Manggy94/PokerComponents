@@ -12,7 +12,9 @@ from pkrcomponents.converters.utils.exceptions import SummaryConversionError
 
 
 class AbstractSummaryConverter(ABC):
-
+    """
+    Abstract class for the summary converters
+    """
     data: dict
     tournament: Tournament
 
@@ -33,6 +35,15 @@ class AbstractSummaryConverter(ABC):
             parsed_key (str): The key of the parsed history
         Returns:
             data_text (str): The data text of the parsed history
+        """
+        pass
+
+    @abstractmethod
+    def send_to_corrections(self, file_key: str):
+        """
+        Sends a file to the corrections directory
+        Args:
+            file_key (str): The key of the file to send to the corrections directory
         """
         pass
 
@@ -175,14 +186,27 @@ class AbstractSummaryConverter(ABC):
             raise SummaryConversionError
 
     def reset_tournament(self):
+        """
+        Reset the tournament object
+        """
         self.tournament = Tournament()
 
     def convert_summary(self, parsed_key: str) -> Tournament:
+        """
+        Convert a summary to a tournament object
+        Args:
+            parsed_key: The key of the parsed summary
+        Returns:
+            tournament (Tournament): The tournament object
+        """
         self.get_parsed_data(parsed_key)
         self.get_tournament()
         return self.tournament
 
     def convert_summaries(self):
+        """
+        Convert all the summaries to tournament objects
+        """
         parsed_keys = self.list_parsed_summaries_keys()
         with ThreadPoolExecutor(max_workers=10) as executor:
             futures = [executor.submit(self.convert_summary, parsed_key) for parsed_key in parsed_keys]

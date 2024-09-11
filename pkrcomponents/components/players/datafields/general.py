@@ -60,4 +60,5 @@ GENERAL_FIELDS = list({"field_name": field_name, "field_var": field_var}
 
 # Print all fields from this module
 if __name__ == '__main__':
-    print(GENERAL_FIELDS)
+    for field in GENERAL_FIELDS:
+        print(field)

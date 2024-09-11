@@ -1,4 +1,4 @@
-import os
+"""This script converts hand histories from the local directory to the database."""
 from pkrcomponents.converters.history_converter.local import LocalHandHistoryConverter
 from pkrcomponents.converters.settings import DATA_DIR
 

@@ -82,6 +82,9 @@ class Action:
         self.player.played = True
 
     def update_street_hand_stats(self):
+        """
+        Updates the hand statistics of the player according to the action
+        """
         match self.table.street:
             case Street.PREFLOP:
                 self.player.hand_stats.preflop.update_hand_stats(self)

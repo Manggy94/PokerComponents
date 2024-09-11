@@ -2,7 +2,7 @@ from pathlib import Path
 from setuptools import setup, find_packages
 import json
 
-with open("requirements.txt") as f:
+with open("config/app_requirements.txt") as f:
     content = f.read()
 install_requires = content.strip().split("\n")
 

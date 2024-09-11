@@ -1,11 +1,12 @@
 import json
 import os
 from datetime import datetime
-from dotenv import load_dotenv
+from pkrcomponents.converters.settings import DATA_DIR
 
-load_dotenv()
+
 FILES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "json_files")
-DATA_DIR = os.getenv("DATA_DIR")
+
+
 def get_n_parent(path, n):
     """
     Returns the n parent of a path
@@ -28,6 +29,7 @@ def get_origin_file(json_file):
         data["tournament_info"]["tournament_id"], f"{data['hand_id']}.json"
     )
 
+
 def replace_with_origin_file(json_file):
     """
     Replaces the json example file with the origin file
@@ -36,6 +38,7 @@ def replace_with_origin_file(json_file):
         data = json.load(f)
     with open(os.path.join(FILES_DIR, json_file), "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
+
 
 def replace_all_files():
     """

@@ -5,7 +5,9 @@ from pkrcomponents.converters.summary_converter.abstract import AbstractSummaryC
 
 
 class LocalSummaryConverter(AbstractSummaryConverter):
-    """"""
+    """
+    This class converts the parsed summaries from local dir to the format used by the pkrcomponents
+    """
     def __init__(self, data_dir: str):
         data_dir = self.correct_data_dir(data_dir)
         self.parsed_dir = os.path.join(data_dir, "summaries", "parsed")
@@ -13,6 +15,13 @@ class LocalSummaryConverter(AbstractSummaryConverter):
 
     @staticmethod
     def correct_data_dir(data_dir: str) -> str:
+        """
+        Corrects the data directory path for windows
+        Args:
+            data_dir: The data directory path
+        Returns:
+            data_dir: The corrected data directory path
+        """
         if not os.path.exists(data_dir):
             data_dir = data_dir.replace("C:/", "/mnt/c/")
         return data_dir
@@ -30,8 +39,7 @@ class LocalSummaryConverter(AbstractSummaryConverter):
             content = file.read()
         return content
 
-    @staticmethod
-    def send_to_corrections(file_key: str):
+    def send_to_corrections(self, file_key: str):
         correction_key = file_key.replace("data", "corrections")
         os.makedirs(os.path.dirname(correction_key), exist_ok=True)
         print(f"Moving {file_key} to {correction_key}")

@@ -5,6 +5,9 @@ from pkrcomponents.converters.summary_converter.abstract import AbstractSummaryC
 
 
 class CloudSummaryConverter(AbstractSummaryConverter):
+    """
+    This class converts the parsed summaries from the cloud to the format used by the pkrcomponents
+    """
     def __init__(self, bucket_name: str):
         self.s3 = boto3.client('s3')
         self.bucket_name = bucket_name

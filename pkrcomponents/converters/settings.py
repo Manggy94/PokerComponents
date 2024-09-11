@@ -1,8 +1,5 @@
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
-
-BUCKET_NAME = os.getenv("AWS_BUCKET_NAME")
-DATA_DIR = os.getenv("DATA_DIR")
-TEST_DATA_DIR = os.getenv("TEST_DATA_DIR")
+BUCKET_NAME = os.getenv("POKER_AWS_BUCKET_NAME")
+DATA_DIR = os.environ.get("POKER_DATA_DIR")
+TEST_DATA_DIR = os.getenv("POKER_TEST_DATA_DIR")

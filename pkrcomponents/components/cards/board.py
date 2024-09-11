@@ -9,12 +9,27 @@ from pkrcomponents.components.utils.converters import convert_to_card
 
 @define(eq=False)
 class Board:
+    """
+    This class represents a board in a poker game
+
+    Attributes:
+        flop (Flop): The flop of the board
+        turn (Card): The turn of the board
+        river (Card): The river of the board
+    """
     flop = field(default=Factory(Flop), validator=instance_of(Flop))
     turn = field(default=None, validator=optional(instance_of(Card)), converter=convert_to_card)
     river = field(default=None, validator=optional(instance_of(Card)), converter=convert_to_card)
 
     @classmethod
     def from_cards(cls, cards=None):
+        """
+        Creates a board from a list of cards
+        Args:
+            cards: A list of cards
+        Returns:
+            Board: A board with the cards
+        """
         if cards is None:
             cards = []
         if len(cards) not in [0, 3, 4, 5]:
@@ -38,6 +53,10 @@ class Board:
 
     @property
     def cards(self):
+        """
+        Returns:
+            pd.Series: The cards on the board as a Series
+        """
         return pd.Series(
             data=self.flop.cards + [self.turn, self.river],
             index=["flop_1", "flop_2", "flop_3", "turn", "river"],
@@ -47,13 +66,17 @@ class Board:
     @property
     def len(self):
         """
-        Returns the number of cards on the board
+        Returns:
+            int: The number of cards on the board
         """
         return self.__len__()
 
     def add(self, card: [str, Card]):
         """
         Add a card to the board
+
+        Args:
+            card (str, Card): The card to add to the board
         """
         card = Card(card)
         if len(self) == 5:

@@ -9,8 +9,16 @@ class BlindType(PokerEnum):
 
     @property
     def name(self):
+        """
+        Returns:
+            (str): The name of the action
+        """
         return self._name_
 
     @property
     def symbol(self):
+        """
+        Returns:
+            (str): The symbol of the action
+        """
         return self._value_[0]
