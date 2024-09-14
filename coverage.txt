@@ -47,7 +47,7 @@ pkrcomponents/components/tournaments/level.py                       18      0   
 pkrcomponents/components/tournaments/levels_structure.py             2      2     0%
 pkrcomponents/components/tournaments/payout.py                      37      0   100%
 pkrcomponents/components/tournaments/speed.py                       10      0   100%
-pkrcomponents/components/tournaments/tournament.py                  64      1    98%
+pkrcomponents/components/tournaments/tournament.py                  65      1    98%
 pkrcomponents/components/tournaments/tournament_type.py             17      1    94%
 pkrcomponents/components/utils/__init__.py                           0      0   100%
 pkrcomponents/components/utils/common.py                            48      0   100%
@@ -75,10 +75,10 @@ pkrcomponents/converters/runs/local/convert_summaries.py             5      5   
 pkrcomponents/converters/runs/local/slow_convert_histories.py        5      5     0%
 pkrcomponents/converters/settings.py                                 4      0   100%
 pkrcomponents/converters/summary_converter/__init__.py               0      0   100%
-pkrcomponents/converters/summary_converter/abstract.py              97     17    82%
+pkrcomponents/converters/summary_converter/abstract.py             101     17    83%
 pkrcomponents/converters/summary_converter/cloud.py                 24     24     0%
 pkrcomponents/converters/summary_converter/local.py                 26      5    81%
 pkrcomponents/converters/utils/__init__.py                           0      0   100%
 pkrcomponents/converters/utils/exceptions.py                         8      2    75%
 ------------------------------------------------------------------------------------
-TOTAL                                                             3237    176    95%
+TOTAL                                                             3242    176    95%
