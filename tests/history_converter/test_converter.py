@@ -597,7 +597,6 @@ class TestLocalHandHistoryConverter(unittest.TestCase):
         self.assertIsInstance(table.to_dataframe(), pd.DataFrame)
         self.assertIsInstance(table.board.to_dataframe(), pd.DataFrame)
         self.assertIsInstance(table.level.to_dataframe(), pd.DataFrame)
-        print(table.level.to_dataframe())
 
 class TestLocalHandHistoryConverter2(unittest.TestCase):
     def setUp(self):

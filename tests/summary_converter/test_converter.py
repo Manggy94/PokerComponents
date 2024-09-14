@@ -62,3 +62,59 @@ class TestLocalSummaryConverter(unittest.TestCase):
         self.converter.get_amount_won()
         amount_won = self.converter.tournament.amount_won
         self.assertEqual(amount_won, 0.0)
+
+    def test_get_nb_entries(self):
+        self.converter.get_nb_entries()
+        nb_entries = self.converter.tournament.nb_entries
+        self.assertEqual(nb_entries, 1)
+
+
+class TestLocalSummaryConverter2(unittest.TestCase):
+    def setUp(self):
+        self.history_path = os.path.join(FILES_DIR, 'example02.json')
+        self.converter = LocalSummaryConverter(data_dir=DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
+
+    def test_list_parsed_summaries_keys(self):
+        keys = self.converter.list_parsed_summaries_keys()
+        self.assertIsInstance(keys, list)
+
+    def test_get_tournament_name(self):
+        self.converter.get_tournament_name()
+        tournament_name = self.converter.tournament.name
+        self.assertEqual(tournament_name, "POUR LA DARONNE")
+
+    def test_get_registered_players(self):
+        self.converter.get_registered_players()
+        registered_players = self.converter.tournament.total_players
+        self.assertEqual(registered_players, 3618)
+
+    def test_get_buy_in(self):
+        self.converter.get_buy_in()
+        buy_in = self.converter.tournament.buy_in
+        self.assertEqual(BuyIn(prize_pool=4.5, bounty=0.0, rake=0.5), buy_in)
+
+    def test_get_tournament_speed(self):
+        self.converter.get_tournament_speed()
+        speed = self.converter.tournament.speed
+        self.assertEqual(speed, TourSpeed.TURBO)
+
+    def test_get_final_position(self):
+        self.converter.get_final_position()
+        final_position = self.converter.tournament.final_position
+        self.assertEqual(final_position, 1)
+
+    def test_get_amount_won(self):
+        self.converter.get_amount_won()
+        amount_won = self.converter.tournament.amount_won
+        self.assertEqual(amount_won, 1265.03)
+
+    def test_get_bounty_won(self):
+        self.converter.get_bounty_won()
+        bounty_won = self.converter.tournament.bounty_won
+        self.assertEqual(bounty_won, 0.0)
+
+    def test_get_nb_entries(self):
+        self.converter.get_nb_entries()
+        nb_entries = self.converter.tournament.nb_entries
+        self.assertEqual(nb_entries, 2)

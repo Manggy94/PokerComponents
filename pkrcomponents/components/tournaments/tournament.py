@@ -28,6 +28,7 @@ class Tournament:
         players_remaining(int): The number of players remaining in the tournament
         starting_stack(float): The starting stack for each player in the tournament
         amount_won(float): The amount won by the player
+        bounty_won(float): The amount of bounties won by the player
         nb_entries(int): The number of entries in the tournament
         final_position(int): The final position of the player in the tournament
         prize_pool(float): The prize pool of the tournament
@@ -46,6 +47,7 @@ class Tournament:
     start_date = field(default=datetime.now(), validator=[instance_of(datetime)])
     starting_stack = field(default=20000.0, validator=[gt(0), instance_of(float)], converter=float)
     amount_won = field(default=0.0, validator=[ge(0), instance_of(float)], converter=float)
+    bounty_won = field(default=0.0, validator=[ge(0), instance_of(float)], converter=float)
     nb_entries = field(default=1, validator=optional([ge(1), instance_of(int)]))
     final_position = field(default=None, validator=optional([instance_of(int), ge(1)]))
     prize_pool = field(default=0.0, validator=[ge(0), instance_of(float)], converter=float)

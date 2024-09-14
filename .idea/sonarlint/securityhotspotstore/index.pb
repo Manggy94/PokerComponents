@@ -322,3 +322,7 @@ Y
 )pkrcomponents/components/cards/bitcard.py,7\1\71f12511b01b523a8260c3d3e474774999abfcaf
 K
 config/app_requirements.txt,f\e\fe84a364d6afcbf2d01f815ae2afecef0a37ba44
+a
+1tests/summary_converter/json_files/example02.json,d\3\d3a7c650eb6fd9034574fe8411c0b2dcb522a2b3
+a
+1tests/summary_converter/json_files/example03.json,e\c\ec8c435c7dfb1691efd3d044747a8c684bd590a8

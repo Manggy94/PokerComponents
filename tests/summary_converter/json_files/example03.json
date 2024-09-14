@@ -1,12 +1,12 @@
 {
-    "amount_won": 0,
-    "bounty_won": 0,
+    "amount_won": 95.94,
+    "bounty_won": 57.5,
     "buy_in": {
-        "bounty": 2.25,
-        "prize_pool_contribution": 2.25,
+        "bounty": 1.5,
+        "prize_pool_contribution": 3.0,
         "rake": 0.5
     },
-    "final_position": 886,
+    "final_position": 32,
     "levels_structure": [
         {
             "ante": 25.0,
@@ -460,11 +460,11 @@
         }
     ],
     "nb_entries": 1,
-    "prize_pool": 7218.0,
-    "registered_players": 2525,
+    "prize_pool": 31746.0,
+    "registered_players": 4358,
     "speed": "semiturbo",
-    "start_date": "2023/01/04 17:30:01 UTC",
-    "tournament_id": "608341002",
-    "tournament_name": "GUERILLA",
+    "start_date": "2024/09/01 20:00:01 UTC",
+    "tournament_id": "827696740",
+    "tournament_name": "#30 - W SERIES - MYSTERY REBUY",
     "tournament_type": "knockout"
 }

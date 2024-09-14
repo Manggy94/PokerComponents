@@ -138,6 +138,13 @@ class AbstractSummaryConverter(ABC):
         amount_won = self.data.get("amount_won")
         self.tournament.amount_won = amount_won
 
+    def get_bounty_won(self):
+        """
+        Get the amount won by the player in bounties
+        """
+        bounty_won = self.data.get("bounty_won")
+        self.tournament.bounty_won = bounty_won
+
     def get_tournament_type(self):
         """
         Get the tournament type from the data and set it to the set table object
@@ -177,6 +184,7 @@ class AbstractSummaryConverter(ABC):
             self.get_tournament_start_date()
             self.get_final_position()
             self.get_amount_won()
+            self.get_bounty_won()
             self.get_tournament_type()
             self.get_prize_pool()
             self.get_nb_entries()

@@ -400,6 +400,7 @@ class TablePlayer:
         self.stack += amount
         self.hand_stats.general.amount_won = amount
 
+
     @property
     def preflop_bet_amounts(self) -> list:
         """Returns preflop bet amounts for the player"""
