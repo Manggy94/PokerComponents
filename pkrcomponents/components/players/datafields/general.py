@@ -3,6 +3,7 @@ from attrs.validators import instance_of, ge, optional
 from pkrcomponents.components.actions.action_move import ActionMove
 from pkrcomponents.components.actions.street import Street
 from pkrcomponents.components.cards.combo import Combo
+from pkrcomponents.components.players.position import Position
 
 # 1. Flags
 FLAG_WENT_TO_SHOWDOWN = field(
@@ -18,6 +19,9 @@ FLAG_WON_HAND = field(
 STARTING_STACK = field(
     default=0, validator=[ge(0), instance_of(float)], converter=float,
     metadata={'description': 'The starting stack of the player at the beginning of the hand', 'type': 'decimal_15_2'})
+BOUNTY = field(
+    default=0, validator=[ge(0), instance_of(float)], converter=float,
+    metadata={'description': 'The current bounty on the player', 'type': 'decimal_15_2'})
 AMOUNT_WON = field(
     default=0, validator=[ge(0), instance_of(float)], converter=float,
     metadata={'description': 'The amount the player won ', 'type': 'decimal_15_2'})
@@ -54,6 +58,12 @@ FACE_ALL_IN_STREET = field(
 COMBO = field(
     default=None, validator=[optional(instance_of(Combo))],
     metadata={'description': 'The combo the player had', 'type': 'Combo'})
+POSITION = field(
+    default=None, validator=[optional(instance_of(Position))],
+    metadata={'description': 'The position of the player', 'type': 'Position'})
+SEAT = field(
+    default=0, validator=[ge(0), instance_of(int)],
+    metadata={'description': 'The seat number of the player', 'type': 'tiny_int+'})
 
 GENERAL_FIELDS = list({"field_name": field_name, "field_var": field_var}
                       for field_name, field_var in locals().items() if field_name.isupper())

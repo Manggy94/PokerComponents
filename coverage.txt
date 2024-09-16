@@ -25,7 +25,7 @@ pkrcomponents/components/cards/shape.py                             14      0   
 pkrcomponents/components/cards/suit.py                              28      0   100%
 pkrcomponents/components/players/__init__.py                         0      0   100%
 pkrcomponents/components/players/datafields/__init__.py              0      0   100%
-pkrcomponents/components/players/datafields/general.py              24      2    92%
+pkrcomponents/components/players/datafields/general.py              28      2    93%
 pkrcomponents/components/players/datafields/postflop.py             53      0   100%
 pkrcomponents/components/players/datafields/preflop.py              55      0   100%
 pkrcomponents/components/players/player_hand_stats.py               27      1    96%
@@ -34,7 +34,7 @@ pkrcomponents/components/players/position.py                        62      0   
 pkrcomponents/components/players/positions_map.py                   20      0   100%
 pkrcomponents/components/players/street_hand_stats/__init__.py       0      0   100%
 pkrcomponents/components/players/street_hand_stats/base.py          16      0   100%
-pkrcomponents/components/players/street_hand_stats/general.py       37      3    92%
+pkrcomponents/components/players/street_hand_stats/general.py       40      3    92%
 pkrcomponents/components/players/street_hand_stats/postflop.py     146     16    89%
 pkrcomponents/components/players/street_hand_stats/preflop.py      156      4    97%
 pkrcomponents/components/players/table_player.py                   287      3    99%
@@ -81,4 +81,4 @@ pkrcomponents/converters/summary_converter/local.py                 26      5   
 pkrcomponents/converters/utils/__init__.py                           0      0   100%
 pkrcomponents/converters/utils/exceptions.py                         8      2    75%
 ------------------------------------------------------------------------------------
-TOTAL                                                             3242    176    95%
+TOTAL                                                             3249    176    95%

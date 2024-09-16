@@ -11,7 +11,10 @@ from pkrcomponents.components.players.street_hand_stats.base import StreetHandSt
 class GeneralPlayerHandStats(StreetHandStatsBase):
 
     combo = general.COMBO
+    position = general.POSITION
+    seat = general.SEAT
     starting_stack = general.STARTING_STACK
+    bounty = general.BOUNTY
     amount_won = general.AMOUNT_WON
     chips_difference = general.CHIPS_DIFFERENCE
     amount_expected_won = general.AMOUNT_EXPECTED_WON
@@ -43,16 +46,6 @@ class GeneralPlayerHandStats(StreetHandStatsBase):
             self.fold_street = action.table.street
         self.total_bet_amount = sum((stats.preflop.total_bet_amount, stats.flop.total_bet_amount,
                                      stats.turn.total_bet_amount, stats.river.total_bet_amount))
-
-    # def to_dataframe(self) -> pd.DataFrame:
-    #     """
-    #     Converts the object to a pandas DataFrame
-    #     """
-    #     # Get all the field_names and values of the class and return them as a dictionary
-    #     columns = [attribute.name for attribute in self.__attrs_attrs__]
-    #     values = [getattr(self, column_name) for column_name in columns]
-    #     df = pd.DataFrame([values], columns=columns)
-    #     return df
 
 if __name__ == '__main__':
     GeneralPlayerHandStats.generate_description_file()
