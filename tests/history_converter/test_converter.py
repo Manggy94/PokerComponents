@@ -24,12 +24,12 @@ class TestS3Converter(unittest.TestCase):
     def setUp(self):
         self.converter = LocalHandHistoryConverter(data_dir=TEST_DATA_DIR)
 
-
     def test_convert_history(self):
         history_keys = self.converter.list_parsed_histories_keys()
         self.assertIsInstance(history_keys, list)
         history_path = history_keys[0]
         self.converter.convert_history(history_path)
+
 
 class TestLocalHandHistoryConverter(unittest.TestCase):
     def setUp(self):
@@ -955,6 +955,26 @@ class TestLocalHandHistoryConverter22(unittest.TestCase):
 class TestLocalHandHistoryConverter23(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example23.json')
+        self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
+
+    def test_convert_history(self):
+        self.converter.convert_history(self.history_path)
+
+
+class TestLocalHandHistoryConverter24(unittest.TestCase):
+    def setUp(self):
+        self.history_path = os.path.join(FILES_DIR, 'example24.json')
+        self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
+        self.converter.get_parsed_data(self.history_path)
+
+    def test_convert_history(self):
+        self.converter.convert_history(self.history_path)
+
+
+class TestLocalHandHistoryConverter25(unittest.TestCase):
+    def setUp(self):
+        self.history_path = os.path.join(FILES_DIR, 'example25.json')
         self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
         self.converter.get_parsed_data(self.history_path)
 

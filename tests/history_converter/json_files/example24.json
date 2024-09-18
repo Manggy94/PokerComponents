@@ -1,0 +1,223 @@
+{
+    "tournament_info": {
+        "tournament_name": "Freeroll",
+        "tournament_id": "125561321",
+        "table_number": "112"
+    },
+    "buy_in": 0.0,
+    "hand_id": "539281767337558129-75-1438951489",
+    "datetime": "07-08-2015 12:44:49",
+    "game_type": "Tournament",
+    "level": {
+        "value": 15,
+        "ante": 80.0,
+        "sb": 400.0,
+        "bb": 800.0
+    },
+    "max_players": 6,
+    "button_seat": 5,
+    "players": {
+        "1": {
+            "seat": 1,
+            "name": "Tocitsa",
+            "init_stack": 11371.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "2": {
+            "seat": 2,
+            "name": "manggy94",
+            "init_stack": 5565.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "3": {
+            "seat": 3,
+            "name": "Coco62530",
+            "init_stack": 24671.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "4": {
+            "seat": 4,
+            "name": "gogo_76",
+            "init_stack": 1866.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "5": {
+            "seat": 5,
+            "name": "glisse",
+            "init_stack": 12793.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "6": {
+            "seat": 6,
+            "name": "jonhfour777",
+            "init_stack": 57208.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        }
+    },
+    "hero_hand": {
+        "hero": "manggy94",
+        "first_card": "7h",
+        "second_card": "Tc"
+    },
+    "postings": [
+        {
+            "name": "jonhfour777",
+            "amount": 80.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "Tocitsa",
+            "amount": 80.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "manggy94",
+            "amount": 80.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "Coco62530",
+            "amount": 80.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "gogo_76",
+            "amount": 80.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "glisse",
+            "amount": 80.0,
+            "blind_type": "ante"
+        },
+        {
+            "name": "jonhfour777",
+            "amount": 400.0,
+            "blind_type": "small blind"
+        },
+        {
+            "name": "Tocitsa",
+            "amount": 800.0,
+            "blind_type": "big blind"
+        }
+    ],
+    "actions": {
+        "preflop": [
+            {
+                "player": "manggy94",
+                "action": "folds",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "Coco62530",
+                "action": "folds",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "gogo_76",
+                "action": "folds",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "glisse",
+                "action": "folds",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "jonhfour777",
+                "action": "raises",
+                "amount": 800.0,
+                "raise_total": 1600.0,
+                "is_all_in": false
+            },
+            {
+                "player": "Tocitsa",
+                "action": "calls",
+                "amount": 800.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            }
+        ],
+        "flop": [
+            {
+                "player": "jonhfour777",
+                "action": "checks",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "Tocitsa",
+                "action": "checks",
+                "amount": 0.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            }
+        ],
+        "turn": [
+            {
+                "player": "jonhfour777",
+                "action": "bets",
+                "amount": 3680.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            },
+            {
+                "player": "Tocitsa",
+                "action": "raises",
+                "amount": 6011.0,
+                "raise_total": 9691.0,
+                "is_all_in": true
+            },
+            {
+                "player": "jonhfour777",
+                "action": "calls",
+                "amount": 6011.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            }
+        ],
+        "river": []
+    },
+    "flop": {
+        "flop_card_1": "9h",
+        "flop_card_2": "Ac",
+        "flop_card_3": "2d"
+    },
+    "turn": {
+        "turn_card": "Qh"
+    },
+    "river": {
+        "river_card": "5h"
+    },
+    "showdown": {
+        "jonhfour777": {
+            "first_card": "3c",
+            "second_card": "Ah"
+        },
+        "Tocitsa": {
+            "first_card": "Qs",
+            "second_card": "As"
+        }
+    },
+    "winners": {
+        "Tocitsa": {
+            "amount": 23062.0,
+            "pot_type": "pot"
+        }
+    }
+}

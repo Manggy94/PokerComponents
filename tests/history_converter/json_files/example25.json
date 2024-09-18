@@ -1,0 +1,107 @@
+{
+    "tournament_info": {
+        "tournament_name": "Expresso Nitro",
+        "tournament_id": "605811891",
+        "table_number": "0"
+    },
+    "buy_in": 0.25,
+    "hand_id": "2601942259372916737-10-1669654823",
+    "datetime": "28-11-2022 17:00:23",
+    "game_type": "Tournament",
+    "level": {
+        "value": 3,
+        "ante": 0.0,
+        "sb": 20.0,
+        "bb": 40.0
+    },
+    "max_players": 3,
+    "button_seat": 2,
+    "players": {
+        "1": {
+            "seat": 1,
+            "name": "manggy94",
+            "init_stack": 430.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        },
+        "2": {
+            "seat": 2,
+            "name": "L.Openda",
+            "init_stack": 470.0,
+            "bounty": 0.0,
+            "entered_hand": true
+        }
+    },
+    "hero_hand": {
+        "hero": "manggy94",
+        "first_card": "8d",
+        "second_card": "8s"
+    },
+    "postings": [
+        {
+            "name": "L.Openda",
+            "amount": 20.0,
+            "blind_type": "small blind"
+        },
+        {
+            "name": "manggy94",
+            "amount": 40.0,
+            "blind_type": "big blind"
+        }
+    ],
+    "actions": {
+        "preflop": [
+            {
+                "player": "L.Openda",
+                "action": "raises",
+                "amount": 40.0,
+                "raise_total": 80.0,
+                "is_all_in": false
+            },
+            {
+                "player": "manggy94",
+                "action": "raises",
+                "amount": 350.0,
+                "raise_total": 430.0,
+                "is_all_in": true
+            },
+            {
+                "player": "L.Openda",
+                "action": "calls",
+                "amount": 350.0,
+                "raise_total": 0.0,
+                "is_all_in": false
+            }
+        ],
+        "flop": [],
+        "turn": [],
+        "river": []
+    },
+    "flop": {
+        "flop_card_1": "Ac",
+        "flop_card_2": "4s",
+        "flop_card_3": "3d"
+    },
+    "turn": {
+        "turn_card": "Qd"
+    },
+    "river": {
+        "river_card": "8h"
+    },
+    "showdown": {
+        "L.Openda": {
+            "first_card": "9d",
+            "second_card": "Kc"
+        },
+        "manggy94": {
+            "first_card": "8d",
+            "second_card": "8s"
+        }
+    },
+    "winners": {
+        "manggy94": {
+            "amount": 860.0,
+            "pot_type": "pot"
+        }
+    }
+}

@@ -326,3 +326,7 @@ a
 1tests/summary_converter/json_files/example02.json,d\3\d3a7c650eb6fd9034574fe8411c0b2dcb522a2b3
 a
 1tests/summary_converter/json_files/example03.json,e\c\ec8c435c7dfb1691efd3d044747a8c684bd590a8
+a
+1tests/history_converter/json_files/example24.json,c\3\c394438fff885d3b298896efed241a959a386d19
+a
+1tests/history_converter/json_files/example25.json,0\a\0ad41f1251ef38200fdd320ff53680b4b34fb717

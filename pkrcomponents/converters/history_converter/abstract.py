@@ -399,8 +399,8 @@ class AbstractHandHistoryConverter(ABC):
             self.get_winners()
             return self.table
         except (HandConversionError, NotSufficientBetError, NotSufficientRaiseError, PlayerNotOnTableError, ValueError,
-                KeyError, ShowdownNotReachedError, CannotParseWinnersError, AttributeError):
-            raise HandConversionError(file_key)
+                KeyError, ShowdownNotReachedError, CannotParseWinnersError, AttributeError) as e:
+            raise HandConversionError(file_key, e)
 
     def slow_convert_histories(self):
         parsed_keys = self.list_parsed_histories_keys()
