@@ -4,7 +4,7 @@ from pkrcomponents.components.tables.table import Table
 from pkrcomponents.converters.history_converter.abstract import AbstractHandHistoryConverter
 
 
-class CloudHandHistoryConverter(AbstractHandHistoryConverter):
+class CloudHandHistoryConverter(AbstractHandHistoryConverter):  # pragma: no cover
     """
     A class that converts hand histories from a bucket to a table
     """

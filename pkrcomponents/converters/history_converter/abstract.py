@@ -375,17 +375,19 @@ class AbstractHandHistoryConverter(ABC):
         table = Table()
         self.table = table
 
-    def convert_history(self, file_key: str) -> Table:
+    def convert_history(self, file_key: str, verbose=0) -> Table:
         """
         Convert a hand history file into a table object
 
         Args:
             file_key (str): Path to the hand history file
+            verbose (int): Verbosity level
 
         Returns:
             (Table): Table object
         """
-        print(f"Converting file {file_key}")
+        if verbose:
+            print(f"Converting file {file_key}")
         self.reset_table()
         try:
             self.get_parsed_data(file_key)
@@ -409,6 +411,8 @@ class AbstractHandHistoryConverter(ABC):
                 self.convert_history(parsed_key)
             except HandConversionError:
                 self.move_to_correction_dir(parsed_key)
+
+
 
     def convert_histories(self):
         parsed_keys = self.list_parsed_histories_keys()

@@ -127,6 +127,7 @@ class Players:
         for seat, pos in self.positions_mapper.items():
             pl = self.seat_dict[seat]
             pl.position = pos
+            pl.hand_stats.general.position = pos
 
     # def delete_inactive_players(self):
     #     """Deletes all players with 0 stack"""

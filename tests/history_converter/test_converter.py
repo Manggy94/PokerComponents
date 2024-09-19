@@ -31,7 +31,7 @@ class TestS3Converter(unittest.TestCase):
         self.converter.convert_history(history_path)
 
 
-class TestLocalHandHistoryConverter(unittest.TestCase):
+class TestLocalHandHistoryConverter01(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example01.json')
         self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
@@ -581,6 +581,12 @@ class TestLocalHandHistoryConverter(unittest.TestCase):
         self.assertEqual(villain_stats.general.chips_difference, 3125)
         self.assertFalse(hero_stats.general.flag_won_hand)
         self.assertTrue(villain_stats.general.flag_won_hand)
+        self.assertEqual(hero_stats.general.bounty, 2.25)
+        self.assertEqual(villain_stats.general.bounty, 2.25)
+        self.assertEqual(hero_stats.general.seat, 6)
+        self.assertEqual(villain_stats.general.seat, 5)
+        self.assertEqual(hero_stats.general.position, Position.BB)
+        self.assertEqual(villain_stats.general.position, Position.SB)
 
     def test_stats_to_dataframe(self):
         table = self.converter.convert_history(self.history_path)
@@ -598,7 +604,7 @@ class TestLocalHandHistoryConverter(unittest.TestCase):
         self.assertIsInstance(table.board.to_dataframe(), pd.DataFrame)
         self.assertIsInstance(table.level.to_dataframe(), pd.DataFrame)
 
-class TestLocalHandHistoryConverter2(unittest.TestCase):
+class TestLocalHandHistoryConverter02(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example02.json')
         self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
@@ -673,7 +679,7 @@ class TestLocalHandHistoryConverter2(unittest.TestCase):
         self.assertIsInstance(table, Table)
 
 
-class TestLocalHandHistoryConverter3(unittest.TestCase):
+class TestLocalHandHistoryConverter03(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example03.json')
         self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
@@ -758,7 +764,7 @@ class TestLocalHandHistoryConverter3(unittest.TestCase):
         self.assertIsInstance(table, Table)
 
 
-class TestLocalHandHistoryConverter4(unittest.TestCase):
+class TestLocalHandHistoryConverter04(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example04.json')
         self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
@@ -770,7 +776,7 @@ class TestLocalHandHistoryConverter4(unittest.TestCase):
         self.assertIsInstance(table, Table)
 
 
-class TestLocalHandHistoryConverter5(unittest.TestCase):
+class TestLocalHandHistoryConverter05(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example05.json')
         self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
@@ -782,7 +788,7 @@ class TestLocalHandHistoryConverter5(unittest.TestCase):
         self.assertIsInstance(table, Table)
 
 
-class TestLocalHandHistoryConverter6(unittest.TestCase):
+class TestLocalHandHistoryConverter06(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example06.json')
         self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
@@ -792,7 +798,7 @@ class TestLocalHandHistoryConverter6(unittest.TestCase):
         self.converter.convert_history(self.history_path)
 
 
-class TestLocalHandHistoryConverter7(unittest.TestCase):
+class TestLocalHandHistoryConverter07(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example07.json')
         self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
@@ -802,7 +808,7 @@ class TestLocalHandHistoryConverter7(unittest.TestCase):
         self.converter.convert_history(self.history_path)
 
 
-class TestLocalHandHistoryConverter8(unittest.TestCase):
+class TestLocalHandHistoryConverter08(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example08.json')
         self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)
@@ -812,7 +818,7 @@ class TestLocalHandHistoryConverter8(unittest.TestCase):
         self.converter.convert_history(self.history_path)
 
 
-class TestLocalHandHistoryConverter9(unittest.TestCase):
+class TestLocalHandHistoryConverter09(unittest.TestCase):
     def setUp(self):
         self.history_path = os.path.join(FILES_DIR, 'example09.json')
         self.converter = LocalHandHistoryConverter(data_dir=DATA_DIR)

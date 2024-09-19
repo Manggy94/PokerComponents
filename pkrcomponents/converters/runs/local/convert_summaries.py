@@ -3,6 +3,6 @@ from pkrcomponents.converters.summary_converter.local import LocalSummaryConvert
 from pkrcomponents.converters.settings import DATA_DIR
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     converter = LocalSummaryConverter(data_dir=DATA_DIR)
     converter.convert_summaries()

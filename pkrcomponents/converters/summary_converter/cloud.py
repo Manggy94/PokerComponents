@@ -4,7 +4,7 @@ from pkrcomponents.components.tournaments.tournament import Tournament
 from pkrcomponents.converters.summary_converter.abstract import AbstractSummaryConverter
 
 
-class CloudSummaryConverter(AbstractSummaryConverter):
+class CloudSummaryConverter(AbstractSummaryConverter):  # pragma: no cover
     """
     This class converts the parsed summaries from the cloud to the format used by the pkrcomponents
     """

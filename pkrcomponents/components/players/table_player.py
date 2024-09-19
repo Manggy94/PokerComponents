@@ -130,6 +130,8 @@ class TablePlayer:
 
     def __attrs_post_init__(self):
         self.actions_history.reset()
+        self.hand_stats.general.seat = self.seat
+        self.hand_stats.general.bounty = self.bounty
 
     @property
     def stack_bb(self) -> float:

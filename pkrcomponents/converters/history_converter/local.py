@@ -1,5 +1,6 @@
 import os
 
+from tqdm import tqdm
 from pkrcomponents.components.tables.table import Table
 from pkrcomponents.converters.history_converter.abstract import AbstractHandHistoryConverter
 
@@ -24,6 +25,20 @@ class LocalHandHistoryConverter(AbstractHandHistoryConverter):
             for filename in filenames if filename.endswith('.json')
         ]
         return parsed_keys
+
+    def list_parsed_history_keys_to_correct(self) -> list:
+        correction_dir = self.parsed_dir.replace("data", "corrections")
+        parsed_keys = [
+            os.path.join(root, filename)
+            for root, _, filenames in os.walk(correction_dir)
+            for filename in filenames if filename.endswith('.json')
+        ]
+        return parsed_keys
+
+    def convert_correction_histories(self):
+        parsed_keys = self.list_parsed_history_keys_to_correct()
+        for parsed_key in tqdm(parsed_keys):
+            self.convert_history(parsed_key)
     
     def read_data_text(self, parsed_key: str) -> str:
         with open(parsed_key, 'r', encoding='utf-8') as file:
