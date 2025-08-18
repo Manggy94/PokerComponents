@@ -1,8 +1,8 @@
 import unittest
-from pkrcomponents.components.players.table_player import TablePlayer, Table
+from pkrcomponents.components.players import Position, TablePlayer
 from pkrcomponents.components.cards.combo import Combo
+from pkrcomponents.components.tables import Table
 from pkrcomponents.components.tournaments.level import Level
-from pkrcomponents.components.players.position import Position
 
 
 class MyPlayerTestCase(unittest.TestCase):

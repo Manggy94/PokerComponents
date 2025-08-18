@@ -1,5 +1,5 @@
 import unittest
-from pkrcomponents.components.tournaments.level import Level
+from pkrcomponents.components.tournaments import Level
 
 
 class LevelTest(unittest.TestCase):

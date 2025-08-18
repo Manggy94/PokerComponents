@@ -1,8 +1,6 @@
 import unittest
 
-from pkrcomponents.components.cards.combo import Combo
-from pkrcomponents.components.cards.hand import Hand
-from pkrcomponents.components.cards.card import Card
+from pkrcomponents.components.cards import Card, Combo, Hand
 
 
 class MyComboTestCase(unittest.TestCase):

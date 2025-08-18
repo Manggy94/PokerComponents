@@ -1,13 +1,10 @@
 import unittest
 import numpy as np
-from pkrcomponents.components.actions.action import FoldAction, CheckAction, CallAction, BetAction, RaiseAction
-from pkrcomponents.components.cards.card import Card
-from pkrcomponents.components.cards.flop import Flop
-from pkrcomponents.components.tournaments.buy_in import BuyIn
-from pkrcomponents.components.tables.table import Table, Board, Players, Pot, Tournament, Level
-from pkrcomponents.components.actions.street import Street
-from pkrcomponents.components.cards.deck import Deck
-from pkrcomponents.components.players.table_player import TablePlayer
+from pkrcomponents.components.actions import BetAction, CallAction, CheckAction, FoldAction, RaiseAction, Street
+from pkrcomponents.components.cards import Card, Deck, Flop
+from pkrcomponents.components.players import Players, TablePlayer
+from pkrcomponents.components.tournaments import BuyIn, Level, Tournament
+from pkrcomponents.components.tables import Board, Pot, Table
 from pkrcomponents.components.utils.exceptions import (NotSufficientRaiseError, ShowdownNotReachedError,
                                                        NotSufficientBetError, CannotParseWinnersError)
 

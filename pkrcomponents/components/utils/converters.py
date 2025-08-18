@@ -1,6 +1,6 @@
 import re
 from pkrcomponents.components.actions.street import Street
-from pkrcomponents.components.cards.card import Card
+from pkrcomponents.components.cards import Card
 from pkrcomponents.components.players.position import Position
 from pkrcomponents.components.tournaments.speed import TourSpeed
 
@@ -22,15 +22,6 @@ def convert_to_speed(value: (str, TourSpeed, None)) -> TourSpeed:
         return TourSpeed.REGULAR
 
 
-def convert_to_card(value: (str, Card, None)) -> (Card, None):
-    if isinstance(value, str):
-        return Card(value)
-    elif isinstance(value, Card):
-        return value
-    else:
-        return None
-
-    import re
 
 
 def pascal_to_snake_case(pascal_str):

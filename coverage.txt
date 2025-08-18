@@ -2,7 +2,7 @@ Name                                                                  Stmts   Mi
 -----------------------------------------------------------------------------------------
 pkrcomponents/__init__.py                                                 0      0   100%
 pkrcomponents/components/__init__.py                                      0      0   100%
-pkrcomponents/components/actions/__init__.py                              0      0   100%
+pkrcomponents/components/actions/__init__.py                              7      0   100%
 pkrcomponents/components/actions/action.py                              115      1    99%
 pkrcomponents/components/actions/action_move.py                          32      0   100%
 pkrcomponents/components/actions/actions_history.py                      14      0   100%
@@ -10,9 +10,8 @@ pkrcomponents/components/actions/actions_sequence.py                     21     
 pkrcomponents/components/actions/blind_type.py                           11      0   100%
 pkrcomponents/components/actions/posting.py                              31      0   100%
 pkrcomponents/components/actions/street.py                               22      0   100%
-pkrcomponents/components/cards/__init__.py                                0      0   100%
+pkrcomponents/components/cards/__init__.py                               11      0   100%
 pkrcomponents/components/cards/bitcard.py                                70      0   100%
-pkrcomponents/components/cards/board.py                                  61      0   100%
 pkrcomponents/components/cards/card.py                                   59      0   100%
 pkrcomponents/components/cards/combo.py                                 110      1    99%
 pkrcomponents/components/cards/deck.py                                   26      0   100%
@@ -23,7 +22,9 @@ pkrcomponents/components/cards/lookup_table.py                          112     
 pkrcomponents/components/cards/rank.py                                   47      0   100%
 pkrcomponents/components/cards/shape.py                                  14      0   100%
 pkrcomponents/components/cards/suit.py                                   28      0   100%
-pkrcomponents/components/players/__init__.py                              0      0   100%
+pkrcomponents/components/cards/utils/__init__.py                          0      0   100%
+pkrcomponents/components/cards/utils/converters.py                        7      1    86%
+pkrcomponents/components/players/__init__.py                              4      0   100%
 pkrcomponents/components/players/datafields/__init__.py                   0      0   100%
 pkrcomponents/components/players/datafields/general.py                   28      2    93%
 pkrcomponents/components/players/datafields/postflop.py                  53      0   100%
@@ -33,18 +34,19 @@ pkrcomponents/components/players/players.py                             148     
 pkrcomponents/components/players/position.py                             62      0   100%
 pkrcomponents/components/players/positions_map.py                        20      0   100%
 pkrcomponents/components/players/street_hand_stats/__init__.py            0      0   100%
-pkrcomponents/components/players/street_hand_stats/base.py               16      0   100%
+pkrcomponents/components/players/street_hand_stats/base.py               15      0   100%
 pkrcomponents/components/players/street_hand_stats/general.py            40      3    92%
 pkrcomponents/components/players/street_hand_stats/postflop.py          146     16    89%
 pkrcomponents/components/players/street_hand_stats/preflop.py           156      3    98%
 pkrcomponents/components/players/table_player.py                        289      3    99%
-pkrcomponents/components/tables/__init__.py                               0      0   100%
+pkrcomponents/components/tables/__init__.py                               3      0   100%
+pkrcomponents/components/tables/board.py                                 60      0   100%
 pkrcomponents/components/tables/pot.py                                   18      0   100%
-pkrcomponents/components/tables/table.py                                352      2    99%
-pkrcomponents/components/tournaments/__init__.py                          0      0   100%
+pkrcomponents/components/tables/table.py                                349      2    99%
+pkrcomponents/components/tournaments/__init__.py                          7      0   100%
 pkrcomponents/components/tournaments/buy_in.py                           14      0   100%
 pkrcomponents/components/tournaments/level.py                            18      0   100%
-pkrcomponents/components/tournaments/levels_structure.py                  2      2     0%
+pkrcomponents/components/tournaments/levels_structure.py                  2      0   100%
 pkrcomponents/components/tournaments/payout.py                           37      0   100%
 pkrcomponents/components/tournaments/speed.py                            10      0   100%
 pkrcomponents/components/tournaments/tournament.py                       65      1    98%
@@ -52,7 +54,7 @@ pkrcomponents/components/tournaments/tournament_type.py                  17     
 pkrcomponents/components/utils/__init__.py                                0      0   100%
 pkrcomponents/components/utils/common.py                                 48      0   100%
 pkrcomponents/components/utils/constants.py                              34      0   100%
-pkrcomponents/components/utils/converters.py                             24      5    79%
+pkrcomponents/components/utils/converters.py                             18      4    78%
 pkrcomponents/components/utils/exceptions.py                             47      8    83%
 pkrcomponents/components/utils/meta/__init__.py                           0      0   100%
 pkrcomponents/components/utils/meta/card_meta.py                         12      0   100%
@@ -79,7 +81,9 @@ pkrcomponents/converters/summary_converter/__init__.py                    0     
 pkrcomponents/converters/summary_converter/abstract.py                  101     17    83%
 pkrcomponents/converters/summary_converter/cloud.py                       3      3     0%
 pkrcomponents/converters/summary_converter/local.py                      26      5    81%
+pkrcomponents/converters/table_converter/__init__.py                      0      0   100%
+pkrcomponents/converters/table_converter/abstract.py                      9      9     0%
 pkrcomponents/converters/utils/__init__.py                                0      0   100%
 pkrcomponents/converters/utils/exceptions.py                             15      6    60%
 -----------------------------------------------------------------------------------------
-TOTAL                                                                  3220    137    96%
+TOTAL                                                                  3257    144    96%

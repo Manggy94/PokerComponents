@@ -1,11 +1,11 @@
 import unittest
-import pkrcomponents.components.cards.lookup_table as lookup
+from pkrcomponents.components.cards import LookupTable
 
 
 class MyTestCase(unittest.TestCase):
     def test_something(self):
-        lk_table = lookup.LookupTable()
-        self.assertIsInstance(lk_table, lookup.LookupTable)
+        lk_table = LookupTable()
+        self.assertIsInstance(lk_table, LookupTable)
 
 
 if __name__ == '__main__':

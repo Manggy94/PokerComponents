@@ -1,6 +1,5 @@
 import unittest
-from pkrcomponents.components.tournaments.payout import Payout, Payouts
-from pkrcomponents.components.tournaments.tournament import Tournament, BuyIn, Level
+from pkrcomponents.components.tournaments import Payout, Payouts, Tournament, BuyIn, Level
 from pkrcomponents.components.utils.constants import MoneyType
 
 

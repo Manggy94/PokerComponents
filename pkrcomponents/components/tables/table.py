@@ -3,13 +3,10 @@ import pandas as pd
 from attrs import define, field, Factory
 from attrs.validators import instance_of, optional, ge, le
 from datetime import datetime
-from pkrcomponents.components.cards.board import Board
-from pkrcomponents.components.cards.card import Card
-from pkrcomponents.components.cards.combo import Combo
-from pkrcomponents.components.cards.deck import Deck
-from pkrcomponents.components.cards.flop import Flop
+from pkrcomponents.components.cards import Card, Combo, Deck, Flop
 from pkrcomponents.components.actions.street import Street
 from pkrcomponents.components.players.players import Players
+from pkrcomponents.components.tables.board import Board
 from pkrcomponents.components.tables.pot import Pot
 from pkrcomponents.components.tournaments.tournament import Level, Tournament
 from pkrcomponents.components.cards.evaluator import Evaluator

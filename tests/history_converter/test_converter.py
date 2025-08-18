@@ -6,16 +6,15 @@ from datetime import datetime
 
 from pkrcomponents.components.actions.action_move import ActionMove
 from pkrcomponents.components.actions.street import Street
-from pkrcomponents.components.cards.board import Board
+from pkrcomponents.components.tables.board import Board
 from pkrcomponents.components.cards.combo import Combo
 from pkrcomponents.components.players.player_hand_stats import PlayerHandStats
 from pkrcomponents.components.players.players import Players
 from pkrcomponents.components.players.position import Position
 from pkrcomponents.components.tables.table import Table
-from pkrcomponents.components.tournaments.buy_in import BuyIn
 from pkrcomponents.components.tournaments.level import Level
 from pkrcomponents.converters.history_converter.local import LocalHandHistoryConverter
-from pkrcomponents.converters.settings import BUCKET_NAME, DATA_DIR, TEST_DATA_DIR
+from pkrcomponents.converters.settings import DATA_DIR, TEST_DATA_DIR
 
 FILES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "json_files")
 

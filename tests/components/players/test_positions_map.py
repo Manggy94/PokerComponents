@@ -1,6 +1,5 @@
 import unittest
-from pkrcomponents.components.players.positions_map import PositionsMap
-from pkrcomponents.components.players.position import Position
+from pkrcomponents.components.players import Position, PositionsMap
 
 
 class TestPositionsMap(unittest.TestCase):

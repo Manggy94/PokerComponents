@@ -1,7 +1,7 @@
 import csv
 import pandas as pd
 from attrs import define, Factory
-from pkrcomponents.components.utils.converters import pascal_to_snake_case
+#from pkrcomponents.components.utils.converters import pascal_to_snake_case
 
 @define
 class StreetHandStatsBase:

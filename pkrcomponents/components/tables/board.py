@@ -2,9 +2,8 @@ from attrs import define, field, Factory
 from attrs.validators import instance_of, optional
 import numpy as np
 import pandas as pd
-from pkrcomponents.components.cards.card import Card
-from pkrcomponents.components.cards.flop import Flop
-from pkrcomponents.components.utils.converters import convert_to_card
+from pkrcomponents.components.cards import Card, Flop
+from pkrcomponents.components.cards.utils.converters import convert_to_card
 
 
 @define(eq=False)

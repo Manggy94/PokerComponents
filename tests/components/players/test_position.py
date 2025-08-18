@@ -1,45 +1,45 @@
 import unittest
 
-from pkrcomponents.components.players.position import Position
+from pkrcomponents.components.players import Position
 
 
 class TestPosition(unittest.TestCase):
+    def setUp(self):
+        self.positions = [
+            Position.UTG,
+            Position.UTG1,
+            Position.UTG2,
+            Position.UTG3,
+            Position.LJ,
+            Position.HJ,
+            Position.CO,
+            Position.BTN,
+            Position.SB,
+            Position.BB
+        ]
+        self.position_names = ["UTG", "UTG1", "UTG2", "UTG3", "LJ", "HJ", "CO", "BTN","SB", "BB"]
+        self.position_short_names = ["UTG", "UTG1", "UTG2", "UTG3", "LJ", "HJ", "CO", "BTN", "SB", "BB"]
+        self.position_symbols = ["UTG", "UTG1", "UTG2", "UTG3", "LJ", "HJ", "CO", "BTN", "SB", "BB"]
+        self.position_preflop_order = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        self.position_postflop_order = [3, 4, 5, 6, 7, 8, 9, 10, 1, 2]
 
     def test_position_name(self):
-        self.assertEqual(Position.UTG.name, "UTG")
-        self.assertEqual(Position.UTG1.name, "UTG1")
-        self.assertEqual(Position.UTG2.name, "UTG2")
-        self.assertEqual(Position.UTG3.name, "UTG3")
-        self.assertEqual(Position.LJ.name, "LJ")
-        self.assertEqual(Position.HJ.name, "HJ")
-        self.assertEqual(Position.CO.name, "CO")
-        self.assertEqual(Position.BTN.name, "BTN")
-        self.assertEqual(Position.SB.name, "SB")
-        self.assertEqual(Position.BB.name, "BB")
+        test_dict = dict((zip(self.position_names, self.positions)))
+        for name, position in test_dict.items():
+            self.assertEqual(position.name, name)
+
 
     def test_position_short_name(self):
-        self.assertEqual(Position.UTG.short_name, "UTG")
-        self.assertEqual(Position.UTG1.short_name, "UTG1")
-        self.assertEqual(Position.UTG2.short_name, "UTG2")
-        self.assertEqual(Position.UTG3.short_name, "UTG3")
-        self.assertEqual(Position.LJ.short_name, "LJ")
-        self.assertEqual(Position.HJ.short_name, "HJ")
-        self.assertEqual(Position.CO.short_name, "CO")
-        self.assertEqual(Position.BTN.short_name, "BTN")
-        self.assertEqual(Position.SB.short_name, "SB")
-        self.assertEqual(Position.BB.short_name, "BB")
+        test_dict = dict((zip(self.position_short_names, self.positions)))
+        for short_name, position in test_dict.items():
+            self.assertEqual(position.short_name, short_name)
+
 
     def test_position_symbol(self):
-        self.assertEqual(Position.UTG.symbol, "UTG")
-        self.assertEqual(Position.UTG1.symbol, "UTG1")
-        self.assertEqual(Position.UTG2.symbol, "UTG2")
-        self.assertEqual(Position.UTG3.symbol, "UTG3")
-        self.assertEqual(Position.LJ.symbol, "LJ")
-        self.assertEqual(Position.HJ.symbol, "HJ")
-        self.assertEqual(Position.CO.symbol, "CO")
-        self.assertEqual(Position.BTN.symbol, "BTN")
-        self.assertEqual(Position.SB.symbol, "SB")
-        self.assertEqual(Position.BB.symbol, "BB")
+        test_dict = dict((zip(self.position_symbols, self.positions)))
+        for symbol, position in test_dict.items():
+            self.assertEqual(position.symbol, symbol)
+
 
     def test_position_is_early(self):
         self.assertTrue(Position.UTG.is_early)
@@ -90,25 +90,14 @@ class TestPosition(unittest.TestCase):
         self.assertTrue(Position.BB.is_blind)
 
     def test_position_preflop_order(self):
-        self.assertEqual(Position.UTG.preflop_order, 1)
-        self.assertEqual(Position.UTG1.preflop_order, 2)
-        self.assertEqual(Position.UTG2.preflop_order, 3)
-        self.assertEqual(Position.UTG3.preflop_order, 4)
-        self.assertEqual(Position.LJ.preflop_order, 5)
-        self.assertEqual(Position.HJ.preflop_order, 6)
-        self.assertEqual(Position.CO.preflop_order, 7)
-        self.assertEqual(Position.BTN.preflop_order, 8)
-        self.assertEqual(Position.SB.preflop_order, 9)
-        self.assertEqual(Position.BB.preflop_order, 10)
+        """Test preflop order of positions."""
+        test_dict = dict((zip(self.position_preflop_order, self.positions)))
+        for order, position in test_dict.items():
+            self.assertEqual(position.preflop_order, order)
+
 
     def test_position_postflop_order(self):
-        self.assertEqual(Position.UTG.postflop_order, 3)
-        self.assertEqual(Position.UTG1.postflop_order, 4)
-        self.assertEqual(Position.UTG2.postflop_order, 5)
-        self.assertEqual(Position.UTG3.postflop_order, 6)
-        self.assertEqual(Position.LJ.postflop_order, 7)
-        self.assertEqual(Position.HJ.postflop_order, 8)
-        self.assertEqual(Position.CO.postflop_order, 9)
-        self.assertEqual(Position.BTN.postflop_order, 10)
-        self.assertEqual(Position.SB.postflop_order, 1)
-        self.assertEqual(Position.BB.postflop_order, 2)
+        """Test postflop order of positions."""
+        test_dict = dict((zip(self.position_postflop_order, self.positions)))
+        for order, position in test_dict.items():
+            self.assertEqual(position.postflop_order, order)

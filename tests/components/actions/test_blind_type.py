@@ -1,5 +1,5 @@
 import unittest
-from pkrcomponents.components.actions.blind_type import BlindType
+from pkrcomponents.components.actions import BlindType
 
 
 class BlindTypeTest(unittest.TestCase):
