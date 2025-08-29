@@ -30,6 +30,8 @@ class TablePlayer:
         has_initiative (bool): Whether the player has initiative
         init_stack (float): The initial stack of the player at the beginning of the hand
         is_hero (bool): Whether the player is the hero
+        is_current_player(bool): Returns whether the player is the current player
+        can_play(): Returns whether the player can still play in this hand
         name (str): The name of the player
         position (Position): The position of the player
         played (bool): Whether the player has played
@@ -49,8 +51,6 @@ class TablePlayer:
         invested(): Returns the amount already invested by the player in the pot
         to_call(): Returns the amount to call to continue on the table
         to_call_bb(): Returns the amount to call to continue on the table in big blinds
-        is_current_player(): Returns whether the player is the current player
-        can_play(): Returns whether the player can still play in this hand
         in_game(): Returns whether the player can still make actions in this hand
         pot_odds(): Returns the pot odds
         req_equity(): Returns the minimum required equity for an EV+ call
